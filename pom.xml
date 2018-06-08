@@ -23,7 +23,7 @@
   <modelVersion>4.0.0</modelVersion>
   <packaging>war</packaging>
 
-  <name>quartz</name>
+  <name>spring_quartz</name>
   <groupId>com.cn.lk</groupId>
   <artifactId>Quartz</artifactId>
   <version>1.0-SNAPSHOT</version>

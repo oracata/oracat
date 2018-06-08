@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+    <!-- 1. 配置数据库配置文件 -->
+    <bean id = "property" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:database.properties</value>
+            </list>
+        </property>
+    </bean>
+    <!-- 2. 使用druid连接数据库 -->
+    <bean id = "dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method = "close">
+        <!-- 数据库基本信息配置 -->
+        <property name = "url" value = "${url}" />
+        <property name = "username" value = "${username}" />
+        <property name = "password" value = "${password}" />
+        <property name = "driverClassName" value = "${driverClassName}" />
+        <property name = "filters" value = "${filters}" />
+        <!-- 最大并发连接数 -->
+        <property name = "maxActive" value = "${maxActive}" />
+        <!-- 初始化连接数量 -->
+        <property name = "initialSize" value = "${initialSize}" />
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name = "maxWait" value = "${maxWait}" />
+        <!-- 最小空闲连接数 -->
+        <property name = "minIdle" value = "${minIdle}" />
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name = "timeBetweenEvictionRunsMillis" value ="${timeBetweenEvictionRunsMillis}" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name = "minEvictableIdleTimeMillis" value ="${minEvictableIdleTimeMillis}" />
+        <!-- 用来检测连接是否有效sql，要求是一个查询语句 -->
+        <property name = "validationQuery" value = "${validationQuery}" />
+        <!-- 建议配置为true，不影响性能，并且保证安全性 -->
+        <property name = "testWhileIdle" value = "${testWhileIdle}" />
+        <!-- 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能 -->
+        <property name = "testOnBorrow" value = "${testOnBorrow}" />
+        <!-- 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能 -->
+        <property name = "testOnReturn" value = "${testOnReturn}" />
+        <!-- 要启用PSCache，必须配置大于0 -->
+        <property name = "maxOpenPreparedStatements" value ="${maxOpenPreparedStatements}" />
+        <!-- 打开 removeAbandoned 功能 -->
+        <property name = "removeAbandoned" value = "${removeAbandoned}" />
+        <!-- 1800 秒，也就是 30 分钟 -->
+        <property name = "removeAbandonedTimeout" value ="${removeAbandonedTimeout}" />
+        <!-- 关闭 abanded 连接时输出错误日志 -->
+        <property name = "logAbandoned" value = "${logAbandoned}" />
+    </bean>
+
+    <!-- 3. 启用自动扫描 -->
+    <context:component-scan base-package="com.demo.*">
+        <!-- 排除注解为controller的类型 -->
+        <context:exclude-filter type="annotation"  expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+
+    <!-- 4. 配置和mybatis的整合 -->
+    <bean id = "sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定mybatis的全局文件位置 -->
+        <property name="configLocation" value="classpath:mybatis.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 指定mybatis的mapper文件 -->
+        <property name="mapperLocations">
+            <list>
+                <value>classpath:/mapper/*.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 5. 配置扫描器，将mybatis接口的实现加入到ioc容器中 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 扫描所有dao接口的实现，加入到 ioc容器中 -->
+        <property name="basePackage" value="com.demo.dao"/>
+    </bean>
+
+    <!-- 6. 事务控制 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- 控制住数据源 -->
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- 7. 开启基于注解的事务，使用xml配置形式的事务 -->
+    <aop:config>
+        <!-- 切入点表达式 -->
+        <aop:pointcut expression="execution(* com.demo.service..*(..))" id="txPoint"/>
+        <!-- 配置事务增强 -->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPoint"/>
+    </aop:config>
+
+    <!--  8. 配置事务增强，也就是事务如何切入 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- 所有的方法都是事务方法 -->
+            <tx:method name="*"/>
+            <!-- 以get开始的所有方法 -->
+            <tx:method name="get*" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <bean id = "springContextUtils" class="com.demo.common.utils.SpringContextUtils"/>
+     <!--9. Quartz定时任务动态配置 -->
+    <bean id = "schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"/>
+</beans>

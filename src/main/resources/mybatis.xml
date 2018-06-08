@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 1. 驼峰规则命名 -->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!-- 2. 别名 -->
+    <typeAliases>
+        <typeAlias type="com.demo.domain.ScheduleJob" alias="ScheduleJob"/>
+    </typeAliases>
+
+    <!-- 3. 引入分页插件,分页插件必须放在别名后面 -->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"/>
+    </plugins>
+
+</configuration>

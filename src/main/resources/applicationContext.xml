@@ -108,7 +108,9 @@
         </tx:attributes>
     </tx:advice>
 
+<!--
     <bean id = "springContextUtils" class="com.demo.common.utils.SpringContextUtils"/>
+-->
      <!--9. Quartz定时任务动态配置 -->
     <bean id = "schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"/>
 </beans>

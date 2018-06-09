@@ -32,7 +32,7 @@
 
     <!-- 根据主键查询定时任务 -->
     <select id = "getScheduleJobByPrimaryKey" resultMap="BaseResultMap">
-        SELECT * from schedule_job WHERE id = #{id}
+        SELECT <include refid="Base_Column_List" /> from schedule_job WHERE id = #{id}
     </select>
 
     <!-- 修改定时任务时间表达式 -->

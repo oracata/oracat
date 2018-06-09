@@ -47,5 +47,10 @@ public interface ScheduleJobService {
      */
     void updateCron(int id, String cronExpression);
 
+    /**
+     * 添加定时任务
+     * @param scheduleJob
+     * @throws Exception
+     */
     void addScheduleJob(ScheduleJob scheduleJob) throws Exception;
 }

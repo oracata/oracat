@@ -9,7 +9,7 @@ public class OverViewController {
  
     @RequestMapping("/overview")
     public String overView(Model model) {         
-        model.addAttribute("greeting", "Hello Spring MVC");         
-        return"main";         
+        model.addAttribute("greeting", "xxxxx");         
+        return"overview";         
     } 
 }

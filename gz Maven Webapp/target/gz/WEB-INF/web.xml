@@ -4,9 +4,9 @@
     id="WebApp_ID" version="3.0">
     <display-name>HelloWorldSpring</display-name>
 
-   <!-- springMVC核心配置 -->
+    <!-- springMVC核心配置 -->
     <servlet>
-        <servlet-name>OverViewServlet</servlet-name>
+        <servlet-name>dispatcherServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
@@ -17,7 +17,7 @@
     </servlet>
     <!-- 拦截设置 -->
     <servlet-mapping>
-        <servlet-name>OverViewServlet</servlet-name>
+        <servlet-name>dispatcherServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 

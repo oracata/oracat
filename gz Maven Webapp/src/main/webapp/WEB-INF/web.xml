@@ -22,13 +22,11 @@
     </servlet-mapping>
 
 
-    <!-- Other XML Configuration -->
-    <!-- Load by Spring ContextLoaderListener -->
+    <!-- 读取spring配置文件 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/root-context.xml</param-value>
+        <param-value>classpath:application.xml</param-value>
     </context-param>
-
 
     <!-- Spring ContextLoaderListener -->
     <listener>

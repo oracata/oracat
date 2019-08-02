@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class OverViewController {
  
     @RequestMapping("/overview")
-    public String hello(Model model) {         
+    public String overView(Model model) {         
         model.addAttribute("greeting", "Hello Spring MVC");         
-        return"helloworld";         
+        return"main";         
     } 
 }

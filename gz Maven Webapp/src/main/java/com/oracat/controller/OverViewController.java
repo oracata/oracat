@@ -7,6 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.oracat.model.User;
 import  com.oracat.service.UserService;
+import com.oracat.model.OverViewCatagory;
+import com.oracat.service.OverViewCatagoryService;
 
 
 
@@ -15,6 +17,7 @@ public class OverViewController {
 
     @Resource  
     private UserService userService; 
+    private OverViewCatagoryService overViewCatagoryService;
 
     @RequestMapping("/")    
     public ModelAndView getIndex(){      
@@ -37,8 +40,8 @@ public class OverViewController {
     @RequestMapping("/overview")    
     public ModelAndView getOverView(){      
         ModelAndView mav = new ModelAndView("overview"); 
-        User user = userService.selectUserById(1); 
-        mav.addObject("user", user); 
+        OverViewCatagory overViewCatagory = overViewCatagoryService.selectOverViewCatagory();
+        mav.addObject("overViewCatagory", overViewCatagory); 
         return mav; 
     }  
     

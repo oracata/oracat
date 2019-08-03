@@ -9,6 +9,14 @@
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
 <script type="text/javascript">
     FusionCharts.ready(function(){
+    
+    var list = ${overViewCatagory};//读取request里的liftTypeDicListJson对象
+    var     c1_company=$(list).[0].company;
+    var     c1_catagory=$(list).[0].catagory;
+    var     c2_company=$(list).[1].company;
+    var     c2_catagory=$(list).[1].catagory;
+ 
+    
     var fusioncharts = new FusionCharts({
     type: 'column2d',
     renderAt: 'chart-container',
@@ -18,38 +26,20 @@
     dataSource: {
         // Chart Configuration
         "chart": {
-            "caption": "Countries With Most Oil Reserves [2017-18]",
-            "subCaption": "In MMbbl = One Million barrels",
-            "xAxisName": "Country",
-            "yAxisName": "Reserves (MMbbl)",
-            "numberSuffix": "K",
+            "caption": "品种",
+            "subCaption": "各电商品种",
+            "xAxisName": "各电商品种",
+            "yAxisName": "各电商品种",
+            "numberSuffix": "个",
             "theme": "fusion",
         },
         // Chart Data
         "data": [{
-            "label": "Venezuela",
-            "value": "290"
+            "label": c1_company,
+            "value": c1_catagory
         }, {
-            "label": "Saudi",
-            "value": "260"
-        }, {
-            "label": "Canada",
-            "value": "180"
-        }, {
-            "label": "Iran",
-            "value": "140"
-        }, {
-            "label": "Russia",
-            "value": "115"
-        }, {
-            "label": "UAE",
-            "value": "100"
-        }, {
-            "label": "US",
-            "value": "30"
-        }, {
-            "label": "China",
-            "value": "30"
+            "label": c2_company,
+            "value": c2_catagory
         }]
     }
 });

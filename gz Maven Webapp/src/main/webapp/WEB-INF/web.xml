@@ -3,6 +3,9 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaeehttp://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
     id="WebApp_ID" version="3.0">
     <display-name>HelloWorldSpring</display-name>
+    
+    
+ 
 
     <!-- springMVC核心配置 -->
     <servlet>
@@ -18,6 +21,7 @@
     <!-- 拦截设置 -->
     <servlet-mapping>
         <servlet-name>dispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
 

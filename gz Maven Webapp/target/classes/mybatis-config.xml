@@ -2,8 +2,19 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">  
 <configuration>    
  
-    <mappers>
+
+    
+      
+	<settings>
+    <setting name="logImpl" value="SLF4J"/>
+    <setting name="logPrefix" value="dao."/>
+     </settings>
+     
+        <mappers>
         <mapper resource="/mapper/sql-mapper.xml" /> 
         <mapper resource="/mapper/overview-mapper.xml" />
-    </mappers>
+       </mappers>
+    
+    
+     
 </configuration>

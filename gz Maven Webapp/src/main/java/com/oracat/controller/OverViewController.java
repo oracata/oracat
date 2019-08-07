@@ -17,7 +17,9 @@ public class OverViewController {
 
     @Resource  
     private UserService userService; 
-
+    
+    @Resource
+    private OverViewCatagoryService overViewCatagoryService; 
 
     @RequestMapping("/")    
     public ModelAndView getIndex(){      
@@ -36,7 +38,8 @@ public class OverViewController {
         return mav; 
     }   
     
-    private OverViewCatagoryService overViewCatagoryService;    
+ 
+       
     @RequestMapping("/overview")    
     public ModelAndView getOverView(){      
         ModelAndView mav = new ModelAndView("overview"); 

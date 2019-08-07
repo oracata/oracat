@@ -6,7 +6,7 @@
 <ul>
 <li>
 <a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='yz_overview.do';  frame.location.reload(); " >
-menu
+${user.userName}
 </a>
 </li>
 </ul>

@@ -1,7 +1,9 @@
 package com.oracat.service;
 
+import java.util.List;
+
 import com.oracat.model.OverViewCatagory;;
 
 public interface OverViewCatagoryService {
-	OverViewCatagory selectOverViewCatagory();  
+	List<OverViewCatagory> selectOverViewCatagory();  
 }

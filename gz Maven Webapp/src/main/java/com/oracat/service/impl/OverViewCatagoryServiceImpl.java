@@ -14,7 +14,7 @@ public class OverViewCatagoryServiceImpl implements OverViewCatagoryService {
     @Autowired  
     private OverViewCatagoryDao overViewCatagoryDao;  
 
-    public OverViewCatagory selectOverViewCatagory() {  
+    public List<OverViewCatagory> selectOverViewCatagory() {  
         return overViewCatagoryDao.selectOverViewCatagory();
     }  
 }

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=gbk" pageEncoding="gbk"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@page import="java.util.*" %>
 <%@page import="com.oracat.util.FusionCharts" %>
 <%@page import="com.oracat.model.*" %>
@@ -16,12 +16,17 @@
     <script src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
 </head>
 <body>
+
+
+
+<!-- 柱图 -->
+
         <div id="chart"></div>
         <%
             // store chart config name-config value pair
             Map<String, String> chartConfig = new HashMap<String, String>();
             chartConfig.put("caption", "品种数量对比");
-            chartConfig.put("subCaption", "竞争对手的对比");
+            chartConfig.put("subCaption", "");
             chartConfig.put("xAxisName", "公司名称");
             chartConfig.put("yAxisName", "品种数量");
             chartConfig.put("formatNumberScale", "0");
@@ -81,5 +86,9 @@
             );
         %>
         <%= firstChart.render() %>
+        
+        
+        
+        
     </body>
 </html>

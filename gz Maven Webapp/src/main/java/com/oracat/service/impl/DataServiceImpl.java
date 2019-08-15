@@ -46,7 +46,7 @@ public class DataServiceImpl implements DataService{
 	@Override
 	public List<Goods> findDcGoods(Goods goods,PageModel pageModel) {
 		/** 当前需要分页的总数据条数  */
-		Map<String,Object> params = new HashMap<>();
+		Map<String,Object> params = new HashMap<String, Object>();
 		params.put("Goods", goods);
 		int recordCount = dcGoodsDao.count(params);
 		pageModel.setRecordCount(recordCount);

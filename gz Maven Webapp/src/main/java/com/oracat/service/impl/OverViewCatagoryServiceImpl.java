@@ -1,6 +1,10 @@
 package com.oracat.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +19,17 @@ public class OverViewCatagoryServiceImpl implements OverViewCatagoryService {
     private OverViewCatagoryDao overViewCatagoryDao;  
 
     public List<OverViewCatagory> selectOverViewCatagory() {  
-        return overViewCatagoryDao.selectOverViewCatagory();
-    }  
+       System.out.println(getTimeDay(-1));
+        return overViewCatagoryDao.selectOverViewCatagory(getTimeDay(-1));
+    }
+    
+    
+    public static String getTimeDay( int index){
+    	Calendar cal=Calendar.getInstance();
+        cal.add(Calendar.DATE,  index);
+    SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+    String date = fmt.format(cal.getTime());
+    return date;
+    	}
+    
 }

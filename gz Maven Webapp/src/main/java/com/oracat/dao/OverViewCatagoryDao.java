@@ -8,6 +8,6 @@ public interface OverViewCatagoryDao {
 	/**
      * @return OverViewCatagory
      */
-    public List<OverViewCatagory> selectOverViewCatagory();
+    public List<OverViewCatagory> selectOverViewCatagory(String date);
     
 }

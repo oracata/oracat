@@ -9,8 +9,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.oracat.model.User;
 import  com.oracat.service.UserService;
+import com.oracat.model.Goods;
 import com.oracat.model.OverViewCatagory;
 import com.oracat.service.OverViewCatagoryService;
+import com.oracat.service.DataService;
 
 
 
@@ -22,7 +24,10 @@ public class OverViewController {
     
     @Resource
     private OverViewCatagoryService overViewCatagoryService; 
-
+    
+    @Resource
+    private DataService dataService; 
+    
     @RequestMapping("/")    
     public ModelAndView getIndex(){      
         ModelAndView mav = new ModelAndView("index"); 
@@ -58,5 +63,12 @@ public class OverViewController {
         return mav; 
     }  
     
+    @RequestMapping("/dc_goods")    
+    public ModelAndView getDcGoodsView(){      
+        ModelAndView mav = new ModelAndView("dc_goods"); 
+        List<Goods> dc_goods =dataService.findAllDcGoods();
+        mav.addObject("dc_goods", dc_goods); 
+        return mav; 
+    }  
     
 }  

@@ -1,7 +1,10 @@
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://java.sun.com/xml/ns/javaee"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaeehttp://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-    id="WebApp_ID" version="3.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+	http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
+	id="WebApp_ID" version="3.1">
+    
     <display-name>HelloWorldSpring</display-name>
     
     
@@ -40,6 +43,18 @@
     </listener>
     
     
+      <jsp-config>
+      <jsp-property-group>
+    	 <!-- 配置拦截所有的jsp页面  -->
+      <url-pattern>*.jsp</url-pattern>
+       <!-- 可以使用el表达式  -->
+      <el-ignored>false</el-ignored>
+      <!-- 不能在页面使用java脚本 -->
+  <!--     <scripting-invalid>true</scripting-invalid> --> 
+      <!-- 给所有的jsp页面导入要依赖的库，tablib.jsp就是一个全局的标签库文件  -->
+      <include-prelude>/WEB-INF/view/taglib.jsp</include-prelude>
+    </jsp-property-group>
+  </jsp-config>
 
     
     

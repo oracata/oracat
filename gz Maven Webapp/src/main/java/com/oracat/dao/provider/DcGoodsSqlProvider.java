@@ -17,8 +17,10 @@ public class DcGoodsSqlProvider {
 					FROM(DCTABLE);
 					if(params.get("goods") != null){
 						Goods goods = (Goods) params.get("goods");
-						if(goods.getGoods_name() != null && !goods.getGoods_name().equals("")){
-							WHERE("  goods_name LIKE CONCAT ('%',#{goods.getGoods_name},'%') ");
+						System.out.println(goods.getDate());
+						System.out.println("1********************:"+goods.getDate());
+						if(goods.getDate() != null && !goods.getDate().equals("")){
+							WHERE("  date =#{goods.getDate() ");
 						}
 					}
 				}
@@ -38,8 +40,9 @@ public class DcGoodsSqlProvider {
 					FROM(DCTABLE);
 					if(params.get("goods") != null){
 						Goods goods = (Goods) params.get("goods");
-						if(goods.getGoods_name() != null && !goods.getGoods_name().equals("")){
-							WHERE("  name LIKE CONCAT ('%',#{goods.getGoods_name},'%') ");
+						System.out.println("2********************:"+goods.getDate());
+						if(goods.getDate() != null && !goods.getDate().equals("")){
+							WHERE("   date =#{goods.getDate() ");
 						}
 					}
 				}

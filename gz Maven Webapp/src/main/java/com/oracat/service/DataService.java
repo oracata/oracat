@@ -18,7 +18,7 @@ public interface DataService {
 	 * 获得所有部门
 	 * @return Dept对象的List集合
 	 * */
-	List<Goods> findAllDcGoods();
+	List<Goods> findAllDcGoods(String date);
 	
 	Goods findDcGoodById(Integer goods_id);
 }

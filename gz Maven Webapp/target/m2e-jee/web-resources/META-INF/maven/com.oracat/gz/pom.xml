@@ -115,21 +115,17 @@
   	</dependency>
   	
   	
-  	<dependency>
-            <groupId>javax.servlet.jsp.jstl</groupId>
-            <artifactId>jstl-api</artifactId>
-            <version>1.2</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>servlet-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>javax.servlet.jsp</groupId>
-                    <artifactId>jsp-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+<dependency> 
+   <groupId>javax.servlet</groupId> 
+    <artifactId>jstl</artifactId> 
+    <version>1.2</version> 
+    <scope>runtime</scope> 
+</dependency>
+<dependency>
+    <groupId>taglibs</groupId>
+    <artifactId>standard</artifactId>
+    <version>1.1.2</version>
+</dependency>
 
         <dependency>
             <groupId>org.glassfish.web</groupId>
@@ -151,8 +147,11 @@
             </exclusions>
         </dependency>
  
-  	
-  	
+  	   <dependency>
+  	<groupId>javax.servlet.jsp</groupId>
+	<artifactId>javax.servlet.jsp-api</artifactId>
+	<version>2.3.1</version>
+  	   </dependency>
   	
   </dependencies>
   <build>

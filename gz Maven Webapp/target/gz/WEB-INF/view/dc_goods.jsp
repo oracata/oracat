@@ -7,7 +7,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-	<title>人事管理系统 ——部门管理</title>
+	<title>东昌品种</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="pragma" content="no-cache" />
 	<meta http-equiv="cache-control" content="no-cache" />
@@ -73,9 +73,9 @@
 	<table width="100%" border="0" cellpadding="0" cellspacing="0">
 	  <tr><td height="10"></td></tr>
 	  <tr>
-	    <td width="15" height="32"><img src="${ctx}/images/main_locleft.gif" width="15" height="32"></td>
-		<td class="main_locbg font2"><img src="${ctx}/images/pointer.gif">&nbsp;&nbsp;&nbsp;当前位置：东昌品种 &gt; 品种查询</td>
-		<td width="15" height="32"><img src="${ctx}/images/main_locright.gif" width="15" height="32"></td>
+	    <td width="15" height="32"></td>
+		<td class="main_locbg font2">&nbsp;&nbsp;&nbsp;当前位置：东昌品种 &gt; 品种查询</td>
+		<td width="15" height="32"></td>
 	  </tr>
 	</table>
 	
@@ -86,13 +86,13 @@
 		  <table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
 		    <tr>
 			  <td class="fftd">
-			  	<form name="deptform" method="post" id="deptform" action="${ctx}/dept/selectDept">
+			  	<form name="deptform" method="post" id="dc_goodsform" action="dc_goods.do">
 				    <table width="100%" border="0" cellpadding="0" cellspacing="0">
 					  <tr>
 					    <td class="font3">
-					    	品种名称：<input type="text" name="name">
-					    	 <input type="submit" value="搜索"/>
-					    	<input id="delete" type="button" value="删除"/>
+					    	数据日期：<input type="text" name="date">
+					    	 <input type="submit" value="查询"/>
+					    	 
 					    </td>
 					  </tr>
 					</table>
@@ -108,19 +108,41 @@
 	    <td height="20">
 		  <table width="100%" border="1" cellpadding="5" cellspacing="0" style="border:#c2c6cc 1px solid; border-collapse:collapse;">
 		    <tr class="main_trbg_tit" align="center">
-			  <td><input type="checkbox" name="checkAll" id="checkAll"></td>
-			  <td>部门名称</td>
-			  <td>详细信息</td>
-			  <td align="center">操作</td>
+ 
+	        <td>日期</td>                    
+            <td>商品编码</td>
+            <td>商品名称</td>
+            <td>价格    </td>
+            <td>活动类型</td>
+            <td>活动详情</td>
+            <td>效期    </td>
+            <td>规格    </td>
+            <td>单位    </td>
+            <td>生产厂家</td>
+            <td>件装量  </td>
+            <td>销售单位</td>
+            <td>库存    </td>
+
+		 
 			</tr>
 			<c:forEach items="${requestScope.dc_goods}" var="dc_goods" varStatus="stat">
 				<tr id="data_${stat.index}" align="center" class="main_trbg" onMouseOver="move(this);" onMouseOut="out(this);">
-					<td><input type="checkbox" id="box_${stat.index}" value="${dc_goods.goods_id}"></td>
-					 <td>${dc_goods.goods_name }</td>
-					  <td>${dc_goods.spec }</td>
-					 <td align="center" width="40px;"><a href="${ctx}/dept/updateDept?flag=1&id=${dc_goods.goods_id}">
-							<img title="修改" src="${ctx}/images/update.gif"/></a>
-					  </td>
+				
+		    <td>${dc_goods.date              }</td>
+            <td>${dc_goods.goods_id          }</td>
+            <td>${dc_goods.goods_name        }</td>
+            <td>${dc_goods.price             }</td>
+            <td>${dc_goods.active_type       }</td>
+            <td>${dc_goods.active_name       }</td>
+            <td>${dc_goods.expire            }</td>
+            <td>${dc_goods.spec              }</td>
+            <td>${dc_goods.unit              }</td>
+            <td>${dc_goods.producer          }</td>
+            <td>${dc_goods.loads             }</td>
+            <td>${dc_goods.sale_unit         }</td>
+            <td>${dc_goods.stock             }</td>
+             
+
 				</tr>
 			</c:forEach>
 		  </table>
@@ -133,7 +155,7 @@
 	  	        pageSize="${requestScope.pageModel.pageSize}" 
 	  	        recordCount="${requestScope.pageModel.recordCount}" 
 	  	        style="digg"
-	  	        submitUrl="${ctx}/dept/selectDept?pageIndex={0}"/>
+	  	        submitUrl="${ctx}/dc_goods.do?pageIndex={0}"/>
 	  </td></tr>
 	</table>
 	<div style="height:10px;"></div>

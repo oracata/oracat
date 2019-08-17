@@ -36,9 +36,9 @@ public class DataServiceImpl implements DataService{
 	/*****************东昌服务接口实现*************************************/
 	@Transactional(readOnly=true)
 	@Override
-	public List<Goods> findAllDcGoods() {
+	public List<Goods> findAllDcGoods(String date) {
 		
-		return dcGoodsDao.selectAllGoods();
+		return dcGoodsDao.selectAllGoods(date);
 	}
 	
  

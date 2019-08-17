@@ -39,6 +39,13 @@
     <!-- 自动扫描注解的bean -->
     <context:component-scan base-package="com.oracat.service" />
     
-   
+   <!-- JDBC事务管理器 -->
+     <!-- 	<bean id="transactionManager" -->
+     <!-- 	class="org.springframework.jdbc.datasource.DataSourceTransactionManager"-->
+     <!-- 	<property name="dataSource" ref="dataSource"></property>	--> 
+      <!--    </bean> --> 
+	
+	<!-- 启用支持annotation注解方式事务管理 -->
+     <!-- 	<tx:annotation-driven transaction-manager="transactionManager"/>-->
 
 </beans>

@@ -13,6 +13,7 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$("#browser").treeview({
+		    //prerendered: true
 			toggle: function() {
 				console.log("%s was toggled.", $(this).find(">span").text());
 			}
@@ -40,7 +41,7 @@
 		
 		</span>
 			<ul>
-				<li><span class="folder">
+				<li class="closed"><span class="folder">
 				
 <a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='yz_overview.do';  frame.location.reload(); " >
 云中
@@ -57,7 +58,8 @@
 						</span></li>
 					</ul>
 				</li>
-				<li><span class="folder">
+				
+				<li class="closed"><span class="folder">
 				
 <a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='dc_overview.do';  frame.location.reload(); " >
 东昌
@@ -84,20 +86,24 @@
 						</li>
 					</ul>
 				</li>
-				<li class="closed"><span class="folder">Folder 3 (closed at start)</span>
-					<ul>
-						<li><span class="file">File 3.1</span></li>
-					</ul>
-				</li>
-				<li><span class="file">
-				
+				<li class="closed"><span class="folder">
 				
 <a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='price.do';  frame.location.reload(); " >
+对比分析
+</a>				
+				
+				</span>
+					<ul>
+						<li><span class="file">
+						
+<a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='price.do';  frame.location.reload(); " >
 价格对比
-</a>
-				
-				
-				</span></li>
+</a>						
+						
+						</span></li>
+					</ul>
+				</li>
+ 
 			</ul>
 		</li>
 	</ul>

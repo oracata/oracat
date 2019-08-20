@@ -16,7 +16,7 @@
       select '东昌' as company,count(*) as catagory from dc_puyao where date=#{date}
       union all 
       select '云中' as  company,count(*) as  catagory from yz_puyao where date=#{date}
-      union all 
-      select '佳能达' as  company,count(*) as  catagory from jnd_goods where date=#{date}
+      union all  
+      select '佳能达' as  company,count(*) as  catagory from jnd_goods where date=#{date} 
     </select>
 </mapper>

@@ -67,25 +67,18 @@
 				
 				</span>
 					<ul>
-						<li><span class="folder">Subfolder 2.1</span>
-							<ul id="folder21">
+
 								<li><span class="file">
 <a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='dc_goods.do';  frame.location.reload(); " >
 商品
 </a>
 								
 								</span></li>
-								<li><span class="file">File 2.1.2</span></li>
+							 
 							</ul>
 						</li>
-						<li><span class="folder">Subfolder 2.2</span>
-							<ul>
-								<li><span class="file">File 2.2.1</span></li>
-								<li><span class="file">File 2.2.2</span></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
+					 
+	
 				<li class="closed"><span class="folder">
 				
 <a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='price.do';  frame.location.reload(); " >

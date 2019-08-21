@@ -14,59 +14,73 @@
 	<meta http-equiv="expires" content="0" />    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
 	<meta http-equiv="description" content="This is my page" />
-	<link href="${ctx}/css/css.css" type="text/css" rel="stylesheet" />
-	<link rel="stylesheet" type="text/css" href="${ctx}/js/ligerUI/skins/Aqua/css/ligerui-dialog.css"/>
-	<link href="${ctx}/js/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="${ctx }/js/jquery-1.11.0.js"></script>
-    <script type="text/javascript" src="${ctx }/js/jquery-migrate-1.2.1.js"></script>
-	<script src="${ctx}/js/ligerUI/js/core/base.js" type="text/javascript"></script>
-	<script src="${ctx}/js/ligerUI/js/plugins/ligerDrag.js" type="text/javascript"></script> 
-	<script src="${ctx}/js/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
-	<script src="${ctx}/js/ligerUI/js/plugins/ligerResizable.jss" type="text/javascript"></script>
-	<link href="${ctx}/css/pager.css" type="text/css" rel="stylesheet" />
-	<script type="text/javascript">
-		$(function(){
-	 	   /** 获取上一次选中的部门数据 */
-	 	   var boxs  = $("input[type='checkbox'][id^='box_']");
-	 	   
-	 	  /** 给全选按钮绑定点击事件  */
-	    	$("#checkAll").click(function(){
-	    		// this是checkAll  this.checked是true
-	    		// 所有数据行的选中状态与全选的状态一致
-	    		boxs.attr("checked",this.checked);
-	    	})
-	    	
-	 	  /** 给数据行绑定鼠标覆盖以及鼠标移开事件  */
-	    	$("tr[id^='data_']").hover(function(){
-	    		$(this).css("backgroundColor","#eeccff");
-	    	},function(){
-	    		$(this).css("backgroundColor","#ffffff");
-	    	})
-	    	
-	    	
-	 	   /** 删除员工绑定点击事件 */
-	 	   $("#delete").click(function(){
-	 		   /** 获取到用户选中的复选框  */
-	 		   var checkedBoxs = boxs.filter(":checked");
-	 		   if(checkedBoxs.length < 1){
-	 			   $.ligerDialog.error("请选择一个需要删除的部门！");
-	 		   }else{
-	 			   /** 得到用户选中的所有的需要删除的ids */
-	 			   var ids = checkedBoxs.map(function(){
-	 				   return this.value;
-	 			   })
-	 			   
-	 			   $.ligerDialog.confirm("确认要删除吗?","删除部门",function(r){
-	 				   if(r){
-	 					   // alert("删除："+ids.get());
-	 					   // 发送请求
-	 					   window.location = "${ctx }/dept/removeDept?ids=" + ids.get();
-	 				   }
-	 			   });
-	 		   }
-	 	   })
-	    })
-	</script>
+	<link href="${ctx}/view/css/css.css" type="text/css" rel="stylesheet" />
+
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link href="${ctx}/view/css/pager.css" type="text/css" rel="stylesheet" />
+	
+<script  >
+$(function () {
+$("#begin_date").datepicker();
+$.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+});
+jQuery(function ($) {
+$.datepicker.regional['zh-CN'] = {
+closeText: '关闭',
+prevText: '<上月',
+nextText: '下月>',
+currentText: '今天',
+monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+'七月', '八月', '九月', '十月', '十一月', '十二月'],
+monthNamesShort: ['一', '二', '三', '四', '五', '六',
+'七', '八', '九', '十', '十一', '十二'],
+dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+weekHeader: '周',
+dateFormat: 'yy-mm-dd',
+firstDay: 1,
+isRTL: false,
+showMonthAfterYear: true,
+yearSuffix: '年'
+};
+$.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+});
+</script>
+
+
+<script >
+$(function () {
+$("#end_date").datepicker();
+$.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+});
+jQuery(function ($) {
+$.datepicker.regional['zh-CN'] = {
+closeText: '关闭',
+prevText: '<上月',
+nextText: '下月>',
+currentText: '今天',
+monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+'七月', '八月', '九月', '十月', '十一月', '十二月'],
+monthNamesShort: ['一', '二', '三', '四', '五', '六',
+'七', '八', '九', '十', '十一', '十二'],
+dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+weekHeader: '周',
+dateFormat: 'yy-mm-dd',
+firstDay: 1,
+isRTL: false,
+showMonthAfterYear: true,
+yearSuffix: '年'
+};
+$.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+});
+</script>
+
 </head>
 <body>
 	<!-- 导航 -->
@@ -90,7 +104,10 @@
 				    <table width="100%" border="0" cellpadding="0" cellspacing="0">
 					  <tr>
 					    <td class="font3">
-					    	数据日期：<input type="text" name="date">
+					    	开始日期：<input type="text" id="begin_date" name="begin_date">
+					    	结束日期：<input type="text" id="end_date"   name="end_date">
+					    	商品编码：<input type="text" name="goods_id">
+					    	商品名称：<input type="text" name="goods_name">
 					    	 <input type="submit" value="查询"/>
 					    	 
 					    </td>

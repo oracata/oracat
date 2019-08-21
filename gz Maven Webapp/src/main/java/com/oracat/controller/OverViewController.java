@@ -81,6 +81,14 @@ public class OverViewController {
 			pageModel.setPageIndex(pageIndex);
 		}
 		
+		
+		List<Goods> dc_goods =dataService.findDcGoods(goods, pageModel);
+   	    mav.addObject("dc_goods", dc_goods);
+   	    mav.addObject("pageModel", pageModel);
+   	 
+		
+		/*
+		
         if(goods.getDate()!= null )   {
         	List<Goods> dc_goods =dataService.findDcGoods(goods, pageModel);
         	 mav.addObject("dc_goods", dc_goods);
@@ -91,6 +99,7 @@ public class OverViewController {
         mav.addObject("dc_goods", dc_goods);
         }
          
+         */
         return mav; 
     }  
     

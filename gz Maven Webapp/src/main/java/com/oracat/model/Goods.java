@@ -1,6 +1,8 @@
 package com.oracat.model;
 
 public class Goods {
+    private String             begin_date         ;  
+    private String             end_date         ;  
     private String             date         ;  
     private String             goods_id     ;  
     private String             goods_name   ;  
@@ -14,6 +16,11 @@ public class Goods {
     private Integer             loads       ;  
     private Integer             sale_unit   ;  
     private Integer             stock       ;
+    
+    
+ 
+    
+    
 	public String getDate() {
 		return date;
 	}
@@ -91,6 +98,18 @@ public class Goods {
 	}
 	public void setStock(Integer stock) {
 		this.stock = stock;
+	}
+	public String getBegin_date() {
+		return begin_date;
+	}
+	public void setBegin_date(String begin_date) {
+		this.begin_date = begin_date;
+	}
+	public String getEnd_date() {
+		return end_date;
+	}
+	public void setEnd_date(String end_date) {
+		this.end_date = end_date;
 	}  
 
 

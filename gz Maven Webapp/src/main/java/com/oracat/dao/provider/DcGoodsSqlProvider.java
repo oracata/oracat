@@ -15,13 +15,33 @@ public class DcGoodsSqlProvider {
 				{
 					SELECT("*");
 					FROM(DCTABLE);
-					if(params.get("goods") != null){
-						Goods goods = (Goods) params.get("goods");
-						System.out.println(goods.getDate());
-						System.out.println("1********************:"+goods.getDate());
-						if(goods.getDate() != null && !goods.getDate().equals("")){
-							WHERE("  date =#{goods.getDate() ");
+					if(params.get("Goods") != null){
+						Goods goods = (Goods) params.get("Goods");
+						System.out.println(goods.getBegin_date());
+						System.out.println("********************begin_date:"+goods.getBegin_date());
+						System.out.println("********************end_date:"+goods.getEnd_date());
+
+						if(goods.getBegin_date() != null && !goods.getBegin_date().equals("")){
+							WHERE("  date  between   '" +goods.getBegin_date()+"'  and   '"+goods.getEnd_date()+"'");
+							                  
 						}
+						
+						if(goods.getGoods_name() != null && !goods.getGoods_name().equals("")){
+							WHERE(" goods_name like  '%"+goods.getGoods_name()+"%'");
+							                  
+						}
+						
+						
+						
+						if(goods.getGoods_id() != null && !goods.getGoods_id().equals("")){
+							WHERE(" goods_id='"+goods.getGoods_id()+"'");
+							                  
+						}
+						
+						
+						
+						
+						
 					}
 				}
 			}.toString();
@@ -38,12 +58,29 @@ public class DcGoodsSqlProvider {
 				{
 					SELECT("count(*)");
 					FROM(DCTABLE);
-					if(params.get("goods") != null){
-						Goods goods = (Goods) params.get("goods");
-						System.out.println("2********************:"+goods.getDate());
-						if(goods.getDate() != null && !goods.getDate().equals("")){
-							WHERE("   date =#{goods.getDate() ");
+					if(params.get("Goods") != null){
+						Goods goods = (Goods) params.get("Goods");
+						System.out.println("2********************:"+goods.getBegin_date());
+						if(goods.getBegin_date() != null && !goods.getBegin_date().equals("")){
+							WHERE("  date  between   '" +goods.getBegin_date()+"'  and   '"+goods.getEnd_date()+"'");
 						}
+						
+						
+						if(goods.getGoods_name() != null && !goods.getGoods_name().equals("")){
+							WHERE(" goods_name like  '%"+goods.getGoods_name()+"%'");
+							                  
+						}
+						
+						
+						
+						if(goods.getGoods_id() != null && !goods.getGoods_id().equals("")){
+							WHERE(" goods_id='"+goods.getGoods_id()+"'");
+							                  
+						}
+						
+						
+						
+						
 					}
 				}
 			}.toString();

@@ -55,7 +55,7 @@ public class DataServiceImpl implements DataService{
 	        /** 开始分页查询数据：查询第几页的数据 */
 		    params.put("pageModel", pageModel);
 	    }
-		
+		System.out.println("***********begindate:"+goods.getBegin_date());
 		List<Goods> dcgoods = dcGoodsDao.selectByPage(params);
 		 
 		return dcgoods;

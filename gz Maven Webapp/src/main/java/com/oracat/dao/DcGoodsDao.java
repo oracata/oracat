@@ -18,7 +18,7 @@ public interface DcGoodsDao {
 	@SelectProvider(type=DcGoodsSqlProvider.class,method="count")
 	Integer count(Map<String, Object> params);
 	
-	@Select("select * from "+DCTABLE+" where date=#{date} ")
+	@Select("select * from "+DCTABLE+" where date=#{begin_date} ")
 	List<Goods> selectAllGoods(String date);
 	
 	@Select("select * from "+DCTABLE+" where goods_id = #{goods_id}")

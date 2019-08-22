@@ -21,4 +21,10 @@ public interface DataService {
 	List<Goods> findAllDcGoods(String date);
 	
 	Goods findDcGoodById(Integer goods_id);
+	
+	
+	
+	List<Goods> findYzGoods(Goods goods,PageModel pageModel)  ;
+	
+	
 }

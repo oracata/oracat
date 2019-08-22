@@ -90,7 +90,7 @@ $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
 	  <tr><td height="10"></td></tr>
 	  <tr>
 	    <td width="15" height="32"></td>
-		<td class="main_locbg font2">&nbsp;&nbsp;&nbsp;当前位置：东昌品种 &gt; 品种查询</td>
+		<td class="main_locbg font2">&nbsp;&nbsp;&nbsp;当前位置：云中品种 &gt; 品种查询</td>
 		<td width="15" height="32"></td>
 	  </tr>
 	</table>
@@ -102,7 +102,7 @@ $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
 		  <table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
 		    <tr>
 			  <td class="fftd">
-			  	<form name="dcform" method="post" id="form" action="dc_goods.do">
+			  	<form name="dcform" method="post" id="form" action="yz_goods.do">
 				    <table width="100%" border="0" cellpadding="0" cellspacing="0">
 					  <tr>
 					    <td class="font3">
@@ -144,22 +144,22 @@ $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
 
 		 
 			</tr>
-			<c:forEach items="${requestScope.dc_goods}" var="dc_goods" varStatus="stat">
+			<c:forEach items="${requestScope.yz_goods}" var="yz_goods" varStatus="stat">
 				<tr id="data_${stat.index}" align="center" class="main_trbg" onMouseOver="move(this);" onMouseOut="out(this);">
 				
-		    <td>${dc_goods.date              }</td>
-            <td>${dc_goods.goods_id          }</td>
-            <td>${dc_goods.goods_name        }</td>
-            <td>${dc_goods.price             }</td>
-            <td>${dc_goods.active_type       }</td>
-            <td>${dc_goods.active_name       }</td>
-            <td>${dc_goods.expire            }</td>
-            <td>${dc_goods.spec              }</td>
-            <td>${dc_goods.unit              }</td>
-            <td>${dc_goods.producer          }</td>
-            <td>${dc_goods.loads             }</td>
-            <td>${dc_goods.sale_unit         }</td>
-            <td>${dc_goods.stock             }</td>
+		    <td>${yz_goods.date              }</td>
+            <td>${yz_goods.goods_id          }</td>
+            <td>${yz_goods.goods_name        }</td>
+            <td>${yz_goods.price             }</td>
+            <td>${yz_goods.active_type       }</td>
+            <td>${yz_goods.active_name       }</td>
+            <td>${yz_goods.expire            }</td>
+            <td>${yz_goods.spec              }</td>
+            <td>${yz_goods.unit              }</td>
+            <td>${yz_goods.producer          }</td>
+            <td>${yz_goods.loads             }</td>
+            <td>${yz_goods.sale_unit         }</td>
+            <td>${yz_goods.stock             }</td>
              
 
 				</tr>
@@ -174,7 +174,7 @@ $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
 	  	        pageSize="${requestScope.pageModel.pageSize}" 
 	  	        recordCount="${requestScope.pageModel.recordCount}" 
 	  	        style="digg"
-	  	        submitUrl="${ctx}/dc_goods.do?pageIndex"/>
+	  	        submitUrl="${ctx}/yz_goods.do?pageIndex"/>
 	  	        
 	  </td></tr>
 	  

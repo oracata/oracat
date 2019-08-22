@@ -51,7 +51,7 @@
 					<ul>
 						<li><span class="file">
 						
-<a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='yz_overview.do';  frame.location.reload(); " >
+<a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='yz_goods.do';  frame.location.reload(); " >
 商品
 </a>
 						

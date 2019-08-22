@@ -40,7 +40,7 @@ public class PagerTag extends SimpleTagSupport {
 			
 			/** 判断上一页或下一页需不需要加a标签 */
 			if (this.pageIndex == 1){ // 首页
-				str.append("<span class='disabled'>上一页</span>");
+				str.append("<span class='disabled'>上一页</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 				
 				/** 计算中间的页码 */
 				this.calcPage(str);
@@ -48,35 +48,40 @@ public class PagerTag extends SimpleTagSupport {
 				/** 下一页需不需要a标签 */
 				if (this.pageIndex == totalPage){
 					/** 只有一页 */
-					str.append("<span class='disabled'>下一页</span>");
+					str.append("<span class='disabled'>下一页</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 				}else{
+			
 					String tempUrl = this.submitUrl.replace(TAG, String.valueOf(pageIndex + 1));
-					str.append("<a href='"+ tempUrl +"'>下一页</a>");
+					System.out.println("******url:"+tempUrl);
+					//str.append("<a   href='"+ tempUrl +"'>下一页</a>");
+					str.append("<a  href=\"javascript:void(0);\" onclick=\"javascript:var form = document.getElementById('form'); form.action='"+this.submitUrl+"="+""+String.valueOf(pageIndex + 1)+"';form.submit();\">下一页</a>");
 				}
 			}else if (this.pageIndex == totalPage){ // 尾页
 				String tempUrl = this.submitUrl.replace(TAG, String.valueOf(pageIndex - 1));
-				str.append("<a href='"+ tempUrl +"'>上一页</a>");
-				
+				//str.append("<a href='"+ tempUrl +"'>上一页</a>");
+				str.append("<a  href=\"javascript:void(0);\" onclick=\"javascript:var form = document.getElementById('form'); form.action='"+this.submitUrl+"="+""+String.valueOf(pageIndex - 1)+"';form.submit();\">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 				/** 计算中间的页码 */
 				this.calcPage(str);
 				
 				str.append("<span class='disabled'>下一页</span>");
 			}else{ // 中间
 				String tempUrl = this.submitUrl.replace(TAG, String.valueOf(pageIndex - 1));
-				str.append("<a href='"+ tempUrl +"'>上一页</a>");
+			//	str.append("<a href='"+ tempUrl +"'>上一页</a>");
+				str.append("<a  href=\"javascript:void(0);\" onclick=\"javascript:var form = document.getElementById('form'); form.action='"+this.submitUrl+"="+""+String.valueOf(pageIndex - 1)+"';form.submit();\">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 				
 				/** 计算中间的页码 */
 				this.calcPage(str);
 				
 				tempUrl = this.submitUrl.replace(TAG, String.valueOf(pageIndex + 1));
-				str.append("<a href='"+ tempUrl +"'>下一页</a>");
+				//str.append("<a   href='"+ tempUrl +"'>下一页</a>");
+				str.append("<a  href=\"javascript:void(0);\" onclick=\"javascript:var form = document.getElementById('form'); form.action='"+this.submitUrl+"="+""+String.valueOf(pageIndex + 1)+"';form.submit();\">下一页</a>");
 			}
 			
 			/** 拼接其它的信息 */
 			res.append("<table width='100%' align='center' style='font-size:13px;' class='"+ style +"'>");
 			res.append("<tr><td style='COLOR: #0061de; MARGIN-RIGHT: 3px; PADDING-TOP: 2px; TEXT-DECORATION: none'>" + str.toString());
-			res.append("&nbsp;跳转到&nbsp;&nbsp;<input style='text-align: center;BORDER-RIGHT: #aaaadd 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #aaaadd 1px solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 2px; MARGIN: 2px; BORDER-LEFT: #aaaadd 1px solid; COLOR: #000099; PADDING-TOP: 2px; BORDER-BOTTOM: #aaaadd 1px solid; TEXT-DECORATION: none' type='text' size='2' id='pager_jump_page_size'/>");
-			res.append("&nbsp;<input type='button' style='text-align: center;BORDER-RIGHT: #dedfde 1px solid; PADDING-RIGHT: 6px; BACKGROUND-POSITION: 50% bottom; BORDER-TOP: #dedfde 1px solid; PADDING-LEFT: 6px; PADDING-BOTTOM: 2px; BORDER-LEFT: #dedfde 1px solid; COLOR: #0061de; MARGIN-RIGHT: 3px; PADDING-TOP: 2px; BORDER-BOTTOM: #dedfde 1px solid; TEXT-DECORATION: none' value='确定' id='pager_jump_btn'/>");
+			res.append("&nbsp;跳转到&nbsp;&nbsp;<input  type='text' size='2' id='pager_jump_page_size'/>");
+			res.append("&nbsp;<input type='button' value='确定' id='pager_jump_btn'/>");
 			res.append("</td></tr>");
 			res.append("<tr align='center'><td style='font-size:13px;'><tr><td style='COLOR: #0061de; MARGIN-RIGHT: 3px; PADDING-TOP: 2px; TEXT-DECORATION: none'>");
 			/** 开始条数 */
@@ -93,12 +98,18 @@ public class PagerTag extends SimpleTagSupport {
 			res.append("      if (!/^[1-9]\\d*$/.test(page_size) || page_size < 1 || page_size > "+ this.totalPage +"){");
 			res.append("          alert('请输入[1-"+ this.totalPage +"]之间的页码！');");
 			res.append("      }else{");
-			res.append("         var submit_url = '" + this.submitUrl + "';");
-			res.append("         window.location = submit_url.replace('"+ TAG +"', page_size);");
+		//	res.append("         var submit_url = '" + this.submitUrl + "';");
+		//	res.append("         window.location = submit_url.replace('"+ TAG +"', page_size);");
+			res.append("       alert(page_size);");
+			res.append("        var form = document.getElementById('form'); ");
+			res.append("       form.action='"+this.submitUrl+"=page_size';");
+			res.append("       form.submit();");
+
+
 			res.append("      }");
 			res.append("}");
 			res.append("</script>");
-			
+			System.out.println(res);
 			
 		}else{
 			res.append("<table align='center' style='font-size:13px;'><tr><td style='COLOR: #0061de; MARGIN-RIGHT: 3px; PADDING-TOP: 2px; TEXT-DECORATION: none'>总共<font color='red'>0</font>条记录，当前显示0-0条记录。</td></tr></table>");
@@ -115,10 +126,15 @@ public class PagerTag extends SimpleTagSupport {
 			for (int i = 1; i <= this.totalPage; i++){
 				if (this.pageIndex == i){
 					/** 当前页码 */
-					str.append("<span class='current'>"+ i +"</span>");
+					str.append("<span class='current'>"+ i +"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+					
+					//str.append("<a  href=\"javascript:void(0);\" onclick=\"javascript:var form = document.getElementById('form'); form.action='"+this.submitUrl+"="+"+i+"';form.submit();\">"+i+"</a>");	
+					
 				}else{
 					String tempUrl = this.submitUrl.replace(TAG, String.valueOf(i));
-					str.append("<a href='"+ tempUrl +"'>"+ i +"</a>");
+				//	str.append("<a href='"+ tempUrl +"'>"+ i +"</a>");
+					str.append("<a  href=\"javascript:void(0);\" onclick=\"javascript:var form = document.getElementById('form'); form.action='"+this.submitUrl+"="+""+i+"';form.submit();\">"+i+"</a>&nbsp;&nbsp;&nbsp;&nbsp;");		
+					
 				}
 			}
 		}else{
@@ -127,51 +143,63 @@ public class PagerTag extends SimpleTagSupport {
 				for (int i = 1; i <= 10; i++){
 					if (this.pageIndex == i){
 						/** 当前页码 */
-						str.append("<span class='current'>"+ i +"</span>");
+						str.append("<span class='current'>"+ i +"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+					//	str.append("<a  href=\"javascript:void(0);\" onclick=\"javascript:var form = document.getElementById('form'); form.action='"+this.submitUrl+"="+"+i+"';form.submit();\">"+i+"</a>&nbsp;&nbsp;&nbsp;&nbsp;");		
 					}else{
 						String tempUrl = this.submitUrl.replace(TAG, String.valueOf(i));
-						str.append("<a href='"+ tempUrl +"'>"+ i +"</a>");
+						//str.append("<a href='"+ tempUrl +"'>"+ i +"</a>");
+						str.append("<a  href=\"javascript:void(0);\" onclick=\"javascript:var form = document.getElementById('form'); form.action='"+this.submitUrl+"="+""+i+"';form.submit();\">"+i+"</a>&nbsp;&nbsp;&nbsp;&nbsp;");	
 					}
 				}
-				str.append("...");
+				str.append("...&nbsp;&nbsp;&nbsp;&nbsp;");
 				String tempUrl = this.submitUrl.replace(TAG, String.valueOf(this.totalPage));
-				str.append("<a href='"+ tempUrl +"'>"+ this.totalPage +"</a>");
+				//str.append("<a href='"+ tempUrl +"'>"+ this.totalPage +"</a>");
+				str.append("<a  href=\"javascript:void(0);\" onclick=\"javascript:var form = document.getElementById('form'); form.action='"+this.submitUrl+"="+""+this.totalPage+"';form.submit();\">"+this.totalPage+"</a>&nbsp;&nbsp;&nbsp;&nbsp;");	
 			}
 			/** 靠近尾页 */
 			else if (this.pageIndex + 8 >= this.totalPage){
 				String tempUrl = this.submitUrl.replace(TAG, String.valueOf(1));
-				str.append("<a href='"+ tempUrl +"'>1</a>");
+				//str.append("<a href='"+ tempUrl +"'>1</a>");
+				str.append("<a  href=\"javascript:void(0);\" onclick=\"javascript:var form = document.getElementById('form'); form.action='"+this.submitUrl+"="+"1';form.submit();\">1</a>&nbsp;&nbsp;&nbsp;&nbsp;");	
 				str.append("...");
 				
 				for (int i = this.totalPage - 10; i <= this.totalPage; i++){
 					if (this.pageIndex == i){
 						/** 当前页码 */
-						str.append("<span class='current'>"+ i +"</span>");
+						str.append("<span class='current'>"+ i +"</span>&nbsp;&nbsp;&nbsp;&nbsp;");
 					}else{
 						tempUrl = this.submitUrl.replace(TAG, String.valueOf(i));
 						str.append("<a href='"+ tempUrl +"'>"+ i +"</a>");
+						str.append("<a  href=\"javascript:void(0);\" onclick=\"javascript:var form = document.getElementById('form'); form.action='"+this.submitUrl+"="+""+i+"';form.submit();\">"+i+"</a>&nbsp;&nbsp;&nbsp;&nbsp;");		
+						
 					}
 				}
 			}
 			/** 在中间 */
 			else{
 				String tempUrl = this.submitUrl.replace(TAG, String.valueOf(1));
-				str.append("<a href='"+ tempUrl +"'>1</a>");
+			//	str.append("<a href='"+ tempUrl +"'>1</a>");
+				str.append("<a  href=\"javascript:void(0);\" onclick=\"javascript:var form = document.getElementById('form'); form.action='"+this.submitUrl+"="+"1';form.submit();\">1</a>&nbsp;&nbsp;&nbsp;&nbsp;");	
 				str.append("...");
 				
 				for (int i = this.pageIndex - 4; i <= this.pageIndex + 4; i++){
 					if (this.pageIndex == i){
 						/** 当前页码 */
-						str.append("<span class='current'>"+ i +"</span>");
+						str.append("<span class='current'>"+ i +"</span>&nbsp;&nbsp;&nbsp;&nbsp;");
 					}else{
 						tempUrl = this.submitUrl.replace(TAG, String.valueOf(i));
-						str.append("<a href='"+ tempUrl +"'>"+ i +"</a>");
+					//	str.append("<a href='"+ tempUrl +"'>"+ i +"</a>");
+						str.append("<a  href=\"javascript:void(0);\" onclick=\"javascript:var form = document.getElementById('form'); form.action='"+this.submitUrl+"="+""+i+"';form.submit();\">"+i+"</a>&nbsp;&nbsp;&nbsp;&nbsp;");		
+						
+						
 					}
 				}
 				
 				str.append("...");
 				tempUrl = this.submitUrl.replace(TAG, String.valueOf(this.totalPage));
-				str.append("<a href='"+ tempUrl +"'>"+ this.totalPage +"</a>");
+				//str.append("<a href='"+ tempUrl +"'>"+ this.totalPage +"</a>");
+				str.append("<a  href=\"javascript:void(0);\" onclick=\"javascript:var form = document.getElementById('form'); form.action='"+this.submitUrl+"="+""+this.totalPage+"';form.submit();\">"+this.totalPage+"</a>&nbsp;&nbsp;&nbsp;&nbsp;");	
+				
 			}
 		}
 	}

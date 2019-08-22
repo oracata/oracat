@@ -7,7 +7,7 @@ import java.util.Map;
  
  
 
-import com.oracat.dao.DcGoodsDao;
+import com.oracat.dao.*;
 import com.oracat.model.Goods;
 import com.oracat.service.DataService;
 import com.oracat.util.tag.PageModel;
@@ -29,6 +29,9 @@ public class DataServiceImpl implements DataService{
 	@Autowired
 	private DcGoodsDao dcGoodsDao;
 	
+	
+	@Autowired
+	private YzGoodsDao yzGoodsDao;
  
 	
 
@@ -75,6 +78,26 @@ public class DataServiceImpl implements DataService{
  
 
  
+	
+	@Transactional(readOnly=true)
+	@Override
+	public List<Goods> findYzGoods(Goods goods,PageModel pageModel) {
+		/** 当前需要分页的总数据条数  */
+		Map<String,Object> params = new HashMap<String, Object>();
+		params.put("Goods", goods);
+		int recordCount = yzGoodsDao.count(params);
+		pageModel.setRecordCount(recordCount);
+		
+		if(recordCount > 0){
+	        /** 开始分页查询数据：查询第几页的数据 */
+		    params.put("pageModel", pageModel);
+	    }
+		System.out.println("***********begindate:"+goods.getBegin_date());
+		List<Goods> yzgoods = yzGoodsDao.selectByPage(params);
+		 
+		return yzgoods;
+	}
+	
  
 
 	

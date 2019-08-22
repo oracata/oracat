@@ -85,6 +85,7 @@ public class OverViewController {
 		List<Goods> dc_goods =dataService.findDcGoods(goods, pageModel);
    	    mav.addObject("dc_goods", dc_goods);
    	    mav.addObject("pageModel", pageModel);
+   	    mav.addObject("goods_con", goods);   //回写查询条件
    	 
 		
 		/*

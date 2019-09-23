@@ -9,6 +9,7 @@ import java.util.Map;
 
 import com.oracat.dao.*;
 import com.oracat.model.Goods;
+import com.oracat.model.Goodsforgoods;
 import com.oracat.service.DataService;
 import com.oracat.util.tag.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,6 +101,27 @@ public class DataServiceImpl implements DataService{
 	
  
 
+	
+	
+	@Transactional(readOnly=true)
+	@Override
+	public List<Goods> findGoodsForGoods(Goodsforgoods goodsforgoods,PageModel pageModel) {
+		/** 当前需要分页的总数据条数  */
+		Map<String,Object> params = new HashMap<String, Object>();
+		params.put("Goodsforgoods", goodsforgoods);
+		int recordCount = GoodsForGoodsDao.count(params);
+		pageModel.setRecordCount(recordCount);
+		
+		if(recordCount > 0){
+	        /** 开始分页查询数据：查询第几页的数据 */
+		    params.put("pageModel", pageModel);
+	    }
+
+		List<Goods> yzgoods = GoodsForGoodsDao.selectByPage(params);
+		 
+		return yzgoods;
+	}
+	
 	
 
 

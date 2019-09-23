@@ -26,5 +26,7 @@ public interface DataService {
 	
 	List<Goods> findYzGoods(Goods goods,PageModel pageModel)  ;
 	
+	List<Goods> findGoodsForGoods(Goodsforgoods goodsforgoods,PageModel pageModel)  ;
+	
 	
 }

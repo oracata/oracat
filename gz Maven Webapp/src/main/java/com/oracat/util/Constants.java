@@ -8,6 +8,7 @@ public class Constants {
 	public static final String USERTABLE = "user_inf";
 	public static final String YZTABLE = "yz_puyao";
 	public static final String DCTABLE = "dc_puyao";
+	public static final String GFTABLE = "goods_for_goods";
 	public static final String JOBTABLE = "job_inf";
 	public static final String EMPLOYEETABLE = "employee_inf";
 	public static final String NOTICETABLE = "notice_inf";

@@ -94,8 +94,32 @@
 </a>						
 						
 						</span></li>
+						
+						
+
+
+						
 					</ul>
 				</li>
+				
+				
+		<li class="closed"><span class="folder">
+				
+<a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='yz_overview.do';  frame.location.reload(); " >
+配置
+</a>
+				
+				</span>
+					<ul>
+						<li><span class="file">
+						
+<a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='goods_for_goods.do';  frame.location.reload(); " >
+商品对应关系维护
+</a>
+						
+						</span></li>
+					</ul>
+				</li>			
  
 			</ul>
 		</li>

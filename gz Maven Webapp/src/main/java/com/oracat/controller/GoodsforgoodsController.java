@@ -41,7 +41,7 @@ public class GoodsforgoodsController {
 		List<Goods> dc_goods =dataService.findGoodsForGoods(goodsforgoods, pageModel);
    	    mav.addObject("yz_goods", dc_goods);
    	    mav.addObject("pageModel", pageModel);
-   	    mav.addObject("goods_con", goods);   //回写查询条件
+   	    mav.addObject("goods_condition", goodsforgoods);   //回写查询条件
    	 
 		
  

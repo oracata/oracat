@@ -10,7 +10,7 @@ import com.oracat.model.Goods;
 
 public class DcGoodsSqlProvider {
 	// 分页动态查询
-		public String selectWhitParam(Map<String, Object> params){
+		public String selectWhitParam(final Map<String, Object> params){
 			String sql =  new SQL(){
 				{
 					SELECT("*");
@@ -54,7 +54,7 @@ public class DcGoodsSqlProvider {
 			return sql;
 		}	
 		// 动态查询总数量
-		public String count(Map<String, Object> params){
+		public String count(final Map<String, Object> params){
 			return new SQL(){
 				{
 					SELECT("count(*)");

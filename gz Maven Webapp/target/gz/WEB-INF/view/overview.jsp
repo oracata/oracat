@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@page import="java.util.*" %>
 <%@page import="com.oracat.util.FusionCharts" %>
 <%@page import="com.oracat.model.*" %>
@@ -6,7 +7,7 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+    
     <title>FusionCharts | My First Chart</title>
 
  

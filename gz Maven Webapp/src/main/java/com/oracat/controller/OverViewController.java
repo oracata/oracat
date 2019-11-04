@@ -31,7 +31,7 @@ public class OverViewController {
     
     @Resource
     private DataService dataService; 
-    
+    /*
     @RequestMapping("/")    
     public ModelAndView getIndex(){      
         ModelAndView mav = new ModelAndView("index"); 
@@ -39,7 +39,7 @@ public class OverViewController {
         mav.addObject("user", user); 
         return mav; 
     }    
-    
+    */
 
     @RequestMapping("/menu")    
     public ModelAndView getMenu(){      

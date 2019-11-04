@@ -3,7 +3,9 @@ C:\Users\Administrator\IdeaProjects\oracat\gz Maven Webapp\src\main\java\com\ora
 C:\Users\Administrator\IdeaProjects\oracat\gz Maven Webapp\src\main\java\com\oracat\dao\UserDao.java
 C:\Users\Administrator\IdeaProjects\oracat\gz Maven Webapp\src\main\java\com\oracat\controller\OverViewController.java
 C:\Users\Administrator\IdeaProjects\oracat\gz Maven Webapp\src\main\java\com\oracat\dao\OverViewCatagoryDao.java
+C:\Users\Administrator\IdeaProjects\oracat\gz Maven Webapp\src\main\java\com\oracat\controller\UserController.java
 C:\Users\Administrator\IdeaProjects\oracat\gz Maven Webapp\src\main\java\com\oracat\model\Menu.java
+C:\Users\Administrator\IdeaProjects\oracat\gz Maven Webapp\src\main\java\com\oracat\interceptor\AuthorInterceptor.java
 C:\Users\Administrator\IdeaProjects\oracat\gz Maven Webapp\src\main\java\com\oracat\dao\YzGoodsDao.java
 C:\Users\Administrator\IdeaProjects\oracat\gz Maven Webapp\src\main\java\com\oracat\service\DataService.java
 C:\Users\Administrator\IdeaProjects\oracat\gz Maven Webapp\src\main\java\com\oracat\util\tag\PagerTag.java

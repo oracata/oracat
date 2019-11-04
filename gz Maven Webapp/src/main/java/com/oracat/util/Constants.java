@@ -15,7 +15,7 @@ public class Constants {
 	public static final String DOCUMENTTABLE = "document_inf";
 	
 	// 登录
-	public static final String LOGIN = "loginForm";
+	public static final String LOGIN = "loginform";
 	// 用户的session对象
 	public static final String USER_SESSION = "user_session";
 	

@@ -1,8 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<frameset cols="12%,*"  border="3" >
-       <frame src="menu.do" name="topFrame"  id="leftFrame" />
-       <frameset rows="100%"   border="1" >
-       <frame src="overview.do"   id="rightFrame" />
-       </frameset> 
-</frameset>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<!-- 立即请求/main -->
+<jsp:forward page="main"/>

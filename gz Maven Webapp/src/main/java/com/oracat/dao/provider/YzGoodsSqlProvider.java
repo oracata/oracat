@@ -45,7 +45,7 @@ public class YzGoodsSqlProvider {
 						}
 					}
 				}.toString();
-				sql +="    order by date  ";
+				sql +="    order by date desc  ";
 				
 				if(params.get("pageModel") != null){
 					sql += " limit #{pageModel.firstLimitParam} , #{pageModel.pageSize}  ";

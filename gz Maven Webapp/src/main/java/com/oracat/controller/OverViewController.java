@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.oracat.model.User;
 import  com.oracat.service.UserService;
-import com.oracat.util.tools;
 import com.oracat.util.tag.PageModel;
 import com.oracat.model.Goods;
 import com.oracat.model.OverViewCatagory;
@@ -31,15 +30,15 @@ public class OverViewController {
     
     @Resource
     private DataService dataService; 
-    /*
+
     @RequestMapping("/")    
     public ModelAndView getIndex(){      
-        ModelAndView mav = new ModelAndView("index"); 
+        ModelAndView mav = new ModelAndView("main");
         User user = userService.selectUserById(1); 
         mav.addObject("user", user); 
         return mav; 
     }    
-    */
+
 
     @RequestMapping("/menu")    
     public ModelAndView getMenu(){      

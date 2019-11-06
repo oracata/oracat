@@ -26,7 +26,7 @@ public class AuthorInterceptor  implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request,
                                 HttpServletResponse response, Object handler, Exception exception)
             throws Exception {
-        System.out.println("**********¿πΩÿ÷Æ∫Û**********");
+      //  System.out.println("**********¿πΩÿ÷Æ∫Û**********");
     }
 
     /**
@@ -36,7 +36,7 @@ public class AuthorInterceptor  implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response,
                            Object handler, ModelAndView mv) throws Exception {
-        System.out.println("**********¿πΩÿpost**********");
+       // System.out.println("**********¿πΩÿpost**********");
     }
 
     /**

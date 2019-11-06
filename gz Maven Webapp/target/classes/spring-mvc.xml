@@ -18,12 +18,12 @@
     </context:component-scan>
 
    <context:annotation-config/>
-
+   <mvc:annotation-driven/>
     <!-- 静态资源如404页面由WEB服务器默认的Servlet来处理 -->
-    <!--
+
     <mvc:default-servlet-handler/>
-     -->
-    <!--
+
+
    <mvc:interceptors>
 
        <mvc:interceptor>
@@ -33,7 +33,7 @@
            <bean class="com.oracat.interceptor.AuthorInterceptor"/>
        </mvc:interceptor>
    </mvc:interceptors>
-   -->
+
 
   <bean
       class="org.springframework.web.servlet.view.InternalResourceViewResolver">

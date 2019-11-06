@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/gz Maven Webapp/gz.iml" filepath="$PROJECT_DIR$/gz Maven Webapp/gz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/oracat.iml" filepath="$PROJECT_DIR$/.idea/oracat.iml" />
+    </modules>
+  </component>
+</project>

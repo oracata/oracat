@@ -127,10 +127,21 @@
     <version>1.1.2</version>
 </dependency>
 
+
+      <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+          <version>3.0.1</version>
+          <scope>provided</scope>
+      </dependency>
+
+
+
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>jstl-impl</artifactId>
             <version>1.2</version>
+            <!--
             <exclusions>
                 <exclusion>
                     <groupId>javax.servlet</groupId>
@@ -145,6 +156,7 @@
                     <artifactId>jstl-api</artifactId>
                 </exclusion>
             </exclusions>
+            -->
         </dependency>
  
   	   <dependency>
@@ -156,6 +168,16 @@
   </dependencies>
   <build>
     <finalName>gz</finalName>
+      <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <configuration>
+                  <source>6</source>
+                  <target>6</target>
+              </configuration>
+          </plugin>
+      </plugins>
   </build>
   <properties>
   	<springVersion>4.1.5.RELEASE</springVersion>

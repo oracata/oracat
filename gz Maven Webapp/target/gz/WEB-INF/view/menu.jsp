@@ -123,6 +123,17 @@
  
 			</ul>
 		</li>
+
+
+
+		<li class="closed"><span class="folder">
+
+<a href="javascript:void(0);" onclick="javascript:  if (top.location != self.location){     top.location=self.location;  window.parent.location.href='loginform.do'   }    " >
+注销
+</a>
+		</span></li>
+
+
 	</ul>
 
  

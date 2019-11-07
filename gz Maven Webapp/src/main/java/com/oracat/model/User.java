@@ -5,6 +5,7 @@ public class User {
 	private Integer userId;
 	private String userName;
 	private String userPassword;
+	private String loginmessage;
 
 	public Integer getUserId() {
 		return userId;
@@ -30,4 +31,11 @@ public class User {
 		this.userPassword = userPassword;
 	}
 
+	public String getLoginmessage() {
+		return loginmessage;
+	}
+
+	public void setLoginmessage(String loginmessage) {
+		this.loginmessage = loginmessage;
+	}
 }

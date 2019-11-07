@@ -14,6 +14,8 @@ public class UserController {
     @RequestMapping("/loginform")
     public ModelAndView login(Model model,HttpSession session ,@ModelAttribute User user)
        {
+           //如果是注销请求则删除session
+           session.removeAttribute("user_session");
            ModelAndView mv = new ModelAndView();
            System.out.println("开始验证用户名和密码");
            System.out.println("name:"+user.getUserName());
@@ -30,7 +32,10 @@ public class UserController {
 
            }
            else{
-               mv.addObject("message","输入错误！");
+               user.setUserName("");
+               user.setUserPassword("");
+               user.setLoginmessage("请重新登录！");
+               mv.addObject("message",user);
                mv.setViewName("loginform");
            }
 

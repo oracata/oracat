@@ -34,7 +34,7 @@ public class UserController {
            else{
                user.setUserName("");
                user.setUserPassword("");
-               user.setLoginmessage("ÇëÖØÐÂµÇÂ¼£¡");
+               user.setLoginmessage("ÇëµÇÂ¼£¡");
                mv.addObject("message",user);
                mv.setViewName("loginform");
            }

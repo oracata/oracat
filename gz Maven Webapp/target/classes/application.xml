@@ -13,15 +13,49 @@
     </bean>
 
 
-    <!-- 配置数据源 -->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <!-- 不使用properties来配置 -->
-         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" /> 
-         <property name="url" value="jdbc:mysql://10.0.0.23:3306/crawl?serverTimezone=GMT%2B8" />
-          <property name="username" value="root" /> 
-          <property name="password" value="1qaz@WSX" /> 
-      
+
+    <!--创建数据源1，连接数据库db1 -->
+    <bean id="dataSource1" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://10.0.0.23:3306/crawl?serverTimezone=GMT%2B8"  />
+        <property name="username" value="root" />
+        <property name="password" value="1qaz@WSX" />
     </bean>
+    <!--创建数据源2，连接数据库db2 -->
+    <bean id="dataSource2" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+        <property name="url" value="jdbc:sqlserver://10.0.0.5:36368;DatabaseName=cr_v11_erp" />
+        <property name="username" value="sa" />
+        <property name="password" value="1a2s3d8180192@" />
+    </bean>
+
+
+    <bean id="dynamicDataSource" class="com.oracat.util.DynamicDataSource">
+        <property name="targetDataSources">
+            <map key-type="java.lang.String">
+                <!-- 指定lookupKey和与之对应的数据源 -->
+                <entry key="mysql" value-ref="dataSource1"></entry>
+                <entry key="sqlserver" value-ref="dataSource2"></entry>
+
+            </map>
+        </property>
+        <!-- 这里可以指定默认的数据源 -->
+        <property name="defaultTargetDataSource" ref="dataSource1" />
+        </bean>
+
+
+
+    <!-- 配置数据源 -->
+    <!--
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">     -->
+        <!-- 不使用properties来配置 -->
+    <!--     <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" /> -->
+       <!--  <property name="url" value="jdbc:mysql://10.0.0.23:3306/crawl?serverTimezone=GMT%2B8" />  -->
+       <!--   <property name="username" value="root" /> -->
+      <!--    <property name="password" value="1qaz@WSX" /> -->
+
+    <!--   </bean> -->
+
 
     <!-- 自动扫描了所有的XxxxMapper.xml对应的mapper接口文件，这样就不用一个一个手动配置Mpper的映射了，只要Mapper接口类和Mapper映射文件对应起来就可以了。 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -30,7 +64,10 @@
 
     <!-- 配置Mybatis的文件 ，mapperLocations配置**Mapper.xml文件位置，configLocation配置mybatis-config文件位置-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
+
+     <!--   <property name="dataSource" ref="dataSource" />  -->
+
+        <property name="dataSource" ref="dynamicDataSource" />
       <!--  <property name="mapperLocations" value="classpath:sql-mapper.xml"/>    -->
         <property name="configLocation" value="classpath:mybatis-config.xml" />
         <!-- <property name="typeAliasesPackage" value="com.tiantian.ckeditor.model" /> -->

@@ -35,15 +35,15 @@
 	<ul id="browser" class="filetree treeview-famfamfam">
 		<li><span class="folder">
 		
-<a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='overview.do';  frame.location.reload(); " >
-概览
+<a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='realtime.do';  frame.location.reload(); " >
+实时
 </a>
 		
 		</span>
 			<ul>
 				<li class="closed"><span class="folder">
 				
-<a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='yz_overview.do';  frame.location.reload(); " >
+<a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='overview.do';  frame.location.reload(); " >
 云中
 </a>
 				

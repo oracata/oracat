@@ -11,7 +11,9 @@ import com.oracat.dao.*;
 import com.oracat.model.Goods;
 import com.oracat.model.Goodsforgoods;
 import com.oracat.model.OverViewCatagory;
+import com.oracat.model.RealTime;
 import com.oracat.service.DataService;
+import com.oracat.util.DynamicDataSourceHolder;
 import com.oracat.util.tag.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +36,9 @@ public class DataServiceImpl implements DataService{
 	
 	@Autowired
 	private YzGoodsDao yzGoodsDao;
- 
+
+	@Autowired
+	private ReportRealTimeDao reportRealTimeDao ;
 	
 
 	
@@ -84,6 +88,7 @@ public class DataServiceImpl implements DataService{
 	@Transactional(readOnly=true)
 	@Override
 	public List<Goods> findYzGoods(Goods goods,PageModel pageModel) {
+		DynamicDataSourceHolder.setDataSource("mysql");
 		/** 当前需要分页的总数据条数  */
 		Map<String,Object> params = new HashMap<String, Object>();
 		params.put("Goods", goods);
@@ -101,7 +106,13 @@ public class DataServiceImpl implements DataService{
 	}
 	
  
+   @Override
+	public List<RealTime> selectRealTime()
+   {
+	   DynamicDataSourceHolder.setDataSource("sqlserver");
+   	   return reportRealTimeDao.selectRealTime();
 
+   }
 
 
 

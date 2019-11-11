@@ -3,6 +3,6 @@
 <frameset cols="12%,*"  border="3"  id="main">
     <frame src="menu.do" name="topFrame"  id="leftFrame" />
     <frameset rows="100%"   border="1" >
-        <frame src="overview.do"   id="rightFrame" />
+        <frame src="realtime.do"   id="rightFrame" />
     </frameset>
 </frameset>

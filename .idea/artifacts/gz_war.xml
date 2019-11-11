@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="gz:war">
+    <output-path>$PROJECT_DIR$/gz Maven Webapp/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>gz</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="gz.war">
+      <element id="artifact" artifact-name="gz:war exploded" />
+    </root>
+  </artifact>
+</component>

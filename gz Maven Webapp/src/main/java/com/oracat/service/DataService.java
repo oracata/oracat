@@ -24,6 +24,14 @@ public interface DataService {
 
 	
 	List<Goods> findYzGoods(Goods goods,PageModel pageModel)  ;
+
+
+	/**实时数据
+	 * **
+	 * @return
+	 */
+
+	List<RealTime> selectRealTime();
 	
 
 	

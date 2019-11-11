@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
+import com.oracat.util.DynamicDataSourceHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.oracat.dao.OverViewCatagoryDao;
@@ -20,6 +21,7 @@ public class OverViewCatagoryServiceImpl implements OverViewCatagoryService {
 
     public List<OverViewCatagory> selectOverViewCatagory() {  
        System.out.println(getTimeDay(-1));
+        DynamicDataSourceHolder.setDataSource("mysql");
         return overViewCatagoryDao.selectOverViewCatagory(getTimeDay(-1));
     }
     

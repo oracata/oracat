@@ -1,6 +1,7 @@
 package com.oracat.util.tag;
 
 import com.oracat.util.Constants;
+import com.oracat.util.DynamicDataSourceHolder;
 
 /**
  *  ∑÷“≥ µÃÂ 
@@ -34,7 +35,9 @@ public class PageModel {
 		this.pageIndex = pageIndex;
 	}
 	public int getPageSize() {
+		System.out.println("******************************"+this.pageSize);
 		this.pageSize = this.pageSize <= Constants.PAGE_DEFAULT_SIZE?Constants.PAGE_DEFAULT_SIZE:this.pageSize;
+
 		return pageSize;
 	}
 	public void setPageSize(int pageSize) {
@@ -52,7 +55,15 @@ public class PageModel {
 	
 	
 	public int getFirstLimitParam(){
-		return (this.getPageIndex()-1)*this.getPageSize() ;
+		Integer first = 0;
+		if(DynamicDataSourceHolder.getDataSource().equals("mysql")) {
+			first=(this.getPageIndex() - 1) * this.getPageSize();
+		}
+
+		if(DynamicDataSourceHolder.getDataSource().equals("sqlserver")) {
+			first=((this.getPageIndex()-1 ) * this.getPageSize())+1;
+		}
+		return first;
 	}
 	
 	

@@ -7,7 +7,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <title>东昌品种</title>
+    <title>日报</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="cache-control" content="no-cache" />
@@ -108,9 +108,9 @@
                                     <td class="font3">
                                         开始日期：<input type="text" id="begin_date" name="begin_date" value="${reportday_con.begin_date}"  />
                                         结束日期：<input type="text" id="end_date"   name="end_date" value="${reportday_con.end_date}" />
-                                        省份：<input type="text" name="goods_id" value="${reportday_con.shengfen}"  />
-                                        地市：<input type="text" name="goods_name" value="${reportday_con.chengshi}"  />
-                                        区县：<input type="text" name="goods_name" value="${reportday_con.quyufl}"  />
+                                        省份：<input type="text" name="shengfen" value="${reportday_con.shengfen}"  />
+                                        地市：<input type="text" name="chengshi" value="${reportday_con.chengshi}"  />
+                                        区县：<input type="text" name="quyufl" value="${reportday_con.quyufl}"  />
                                         <input type="submit" value="查询"/>
 
                                     </td>

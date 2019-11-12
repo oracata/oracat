@@ -38,5 +38,5 @@ public interface DataService {
     List<B2bPrice> selectB2bPrice(B2bPrice b2bprice);
 
 
-    List<ReportDay> findReportDay(ReportDay v_reportday, PageModel pageModel);
+    List<ReportDay> findReportDay(ReportDay reportday, PageModel pageModel);
 }

@@ -1,7 +1,7 @@
 package com.oracat.dao;
 
 import com.oracat.dao.provider.ReportDaySqlProvider;
-import com.oracat.model.Goods;
+
 import com.oracat.model.ReportDay;
 import org.apache.ibatis.annotations.SelectProvider;
 

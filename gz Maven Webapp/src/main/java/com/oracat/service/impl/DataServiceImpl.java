@@ -8,10 +8,7 @@ import java.util.Map;
  
 
 import com.oracat.dao.*;
-import com.oracat.model.Goods;
-import com.oracat.model.Goodsforgoods;
-import com.oracat.model.OverViewCatagory;
-import com.oracat.model.RealTime;
+import com.oracat.model.*;
 import com.oracat.service.DataService;
 import com.oracat.util.DynamicDataSourceHolder;
 import com.oracat.util.tag.PageModel;
@@ -39,8 +36,12 @@ public class DataServiceImpl implements DataService{
 
 	@Autowired
 	private ReportRealTimeDao reportRealTimeDao ;
-	
 
+    @Autowired  //自动装配
+    private B2bPriceDao b2bPriceDao ;
+
+    @Autowired
+	private  ReportDayDao  reportDayDao;
 	
 	/*****************东昌服务接口实现*************************************/
 	@Transactional(readOnly=true)
@@ -54,6 +55,7 @@ public class DataServiceImpl implements DataService{
 	@Transactional(readOnly=true)
 	@Override
 	public List<Goods> findDcGoods(Goods goods,PageModel pageModel) {
+		DynamicDataSourceHolder.setDataSource("mysql");
 		/** 当前需要分页的总数据条数  */
 		Map<String,Object> params = new HashMap<String, Object>();
 		params.put("Goods", goods);
@@ -77,7 +79,7 @@ public class DataServiceImpl implements DataService{
 	 * */
 	@Override
 	public Goods findDcGoodById(Integer goods_id) {
-		
+
 		return dcGoodsDao.selectByGoods_id(goods_id);
 	}
 
@@ -104,9 +106,32 @@ public class DataServiceImpl implements DataService{
 		 
 		return yzgoods;
 	}
-	
- 
-   @Override
+
+	//日报
+	@Transactional(readOnly=true)
+	@Override
+	public List<ReportDay> findReportDay(ReportDay reportday,PageModel pageModel) {
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+		/** 当前需要分页的总数据条数  */
+		Map<String,Object> params = new HashMap<String, Object>();
+		params.put("ReportDay", reportday);
+		int recordCount = reportDayDao.count(params);
+		pageModel.setRecordCount(recordCount);
+
+		if(recordCount > 0){
+			/** 开始分页查询数据：查询第几页的数据 */
+			params.put("pageModel", pageModel);
+		}
+
+		List<ReportDay>  reportday_result= reportDayDao.selectByPage(params);
+
+		return reportday_result;
+	}
+
+
+
+
+	@Override
 	public List<RealTime> selectRealTime()
    {
 	   DynamicDataSourceHolder.setDataSource("sqlserver");
@@ -115,8 +140,19 @@ public class DataServiceImpl implements DataService{
    }
 
 
+    @Override
+    public List<B2bPrice> selectB2bPrice(B2bPrice b2bprice)
+    {
+        DynamicDataSourceHolder.setDataSource("sqlserver");
+
+        return b2bPriceDao.selectB2bPrice(b2bprice.getId(),b2bprice.getNo(),b2bprice.getName());
+
+    }
 
 
 
-	
+
+
+
+
 }

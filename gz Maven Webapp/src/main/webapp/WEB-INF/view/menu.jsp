@@ -94,8 +94,14 @@
 </a>						
 						
 						</span></li>
-						
-						
+
+
+
+						<li><span class="file">
+<a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='b2bprice.do';  frame.location.reload(); " >
+电商价格
+</a></span></li>
+
 
 
 						
@@ -104,7 +110,44 @@
 				
 				
 		<li class="closed"><span class="folder">
-				
+
+
+
+
+				<li class="closed"><span class="folder">
+
+<a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='price.do';  frame.location.reload(); " >
+报表
+</a>
+				</span>
+					<ul>
+						<li><span class="file">
+
+<a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='reportday.do';  frame.location.reload(); " >
+日报
+</a>
+						</span></li>
+
+
+
+						<li><span class="file">
+<a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='reportmonth.do';  frame.location.reload(); " >
+月报
+</a></span></li>
+
+
+
+
+					</ul>
+				</li>
+
+
+				<li class="closed"><span class="folder">
+
+
+
+
+
 <a href="javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('rightFrame'); frame.src='yz_overview.do';  frame.location.reload(); " >
 配置
 </a>

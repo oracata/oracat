@@ -32,8 +32,11 @@ public interface DataService {
 	 */
 
 	List<RealTime> selectRealTime();
-	
 
-	
-	
+	/** 电商与erp价格对比
+	**/
+    List<B2bPrice> selectB2bPrice(B2bPrice b2bprice);
+
+
+    List<ReportDay> findReportDay(ReportDay v_reportday, PageModel pageModel);
 }

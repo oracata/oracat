@@ -1,11 +1,15 @@
 package com.oracat.service;
 
+import java.beans.IntrospectionException;
+import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 import java.util.List;
 
 
 import com.oracat.model.*;
 
 import com.oracat.util.tag.PageModel;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public interface DataService {
 	/**
@@ -39,4 +43,6 @@ public interface DataService {
 
 
     List<ReportDay> findReportDay(ReportDay reportday, PageModel pageModel);
+
+	XSSFWorkbook exportExcelInfo(B2bPrice b2bprice) throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException;
 }

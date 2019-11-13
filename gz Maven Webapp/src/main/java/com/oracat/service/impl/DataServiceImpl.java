@@ -1,17 +1,19 @@
 package com.oracat.service.impl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.beans.IntrospectionException;
+import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
+import java.util.*;
 
- 
- 
 
 import com.oracat.dao.*;
 import com.oracat.model.*;
 import com.oracat.service.DataService;
 import com.oracat.util.DynamicDataSourceHolder;
+import com.oracat.util.excel.ExcelBean;
+import com.oracat.util.excel.ExcelUtil;
 import com.oracat.util.tag.PageModel;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -130,8 +132,7 @@ public class DataServiceImpl implements DataService{
 
 
 
-
-	@Override
+    @Override
 	public List<RealTime> selectRealTime()
    {
 	   DynamicDataSourceHolder.setDataSource("sqlserver");
@@ -150,6 +151,43 @@ public class DataServiceImpl implements DataService{
     }
 
 
+    @Override
+    public XSSFWorkbook exportExcelInfo(B2bPrice b2bprice) throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException {
+        //根据条件查询数据，把数据装载到一个list中
+
+        /** 特殊字段格式化
+        for(int i=0;i<list.size();i++){
+            //查询财务名字
+            int adminId = list.get(i).getAdminId();
+            String adminName = salarymanageDao.selectAdminNameById(adminId);
+            list.get(i).setAdminName(adminName);
+            list.get(i).setId(i+1);
+        }
+         **/
+        DynamicDataSourceHolder.setDataSource("sqlserver");
+        List<B2bPrice> list = b2bPriceDao.selectB2bPrice(b2bprice.getId(),b2bprice.getNo(),b2bprice.getName());
+        List<ExcelBean> excel=new ArrayList<>();
+        Map<Integer,List<ExcelBean>> map=new LinkedHashMap<>();
+        XSSFWorkbook xssfWorkbook=null;
+        //设置标题栏
+        excel.add(new ExcelBean("商品id","id",0));
+        excel.add(new ExcelBean("商品编码","no",0));
+        excel.add(new ExcelBean("商品名称","name",0));
+        excel.add(new ExcelBean("规格","spec",0));
+        excel.add(new ExcelBean("产家","manufacturer",0));
+        excel.add(new ExcelBean("电商价格","pfpj",0));
+        excel.add(new ExcelBean("进价","cankcbj",0));
+        excel.add(new ExcelBean("最低销售价","zdxshj",0));
+        excel.add(new ExcelBean("电商库存","stock_num",0));
+
+
+
+        map.put(0, excel);
+        String sheetName = "电商价格";
+        //调用ExcelUtil的方法
+        xssfWorkbook = ExcelUtil.createExcelFile(B2bPrice.class, list, map, sheetName);
+        return xssfWorkbook;
+    }
 
 
 

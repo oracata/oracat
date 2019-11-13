@@ -52,6 +52,25 @@
                                         商品名称：<input type="text" name="name" value="${b2bprice_con.name}"  />
                                         <input type="submit" value="查询"/>
 
+                                     <!--
+                                        <form name="exportform" method="post" id="exportform" action="export.do">
+
+                                                        <input type="submit" value="导出excel"/>
+                                        </form>
+                                        -->
+
+                                        <a href="export">导出excel</a>
+
+                                        <!--
+                                        <form name="exportform" method="post" id="exportform" action="export.do">
+
+                                            <input type="submit" value="导出excel"/>
+                                        </form>
+                                     -->
+                                        <!--
+                                        <a href=  "javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('exportform'); frame.src='export.do';   ">导出excel</a>
+
+                                       -->
                                     </td>
                                 </tr>
                             </table>

@@ -95,6 +95,7 @@
                     <td>电商价格  </td>
                     <td>erp进价</td>
                     <td>erp最低销售价    </td>
+                    <td>终端近7天平均开票价    </td>
                     <td>电商库存   </td>
 
 
@@ -110,6 +111,7 @@
                         <td>${b2bprice.pfpj                                }</td>
                         <td>${b2bprice.cankcbj                                }</td>
                         <td>${b2bprice.zdxshj                                }</td>
+                        <td>${b2bprice.hshj                                }</td>
                         <td>${b2bprice.stock_num                                }</td>
 
 

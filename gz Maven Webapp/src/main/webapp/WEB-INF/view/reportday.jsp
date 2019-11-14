@@ -82,6 +82,101 @@
     </script>
 
 
+   <!--查询条件 三级联动-->
+    <script type="text/javascript">
+
+        function show_1(){
+            $.ajax({
+                url:'province/selectAll.action',
+                type:'post',
+                data:{'typeId':0},
+                dataType:'json',
+                //成功回调函数的参数data是一个json数组，长度是json数组里面的对象的个数。
+                success:function(data){
+                    /*
+                        alert(data);
+                        alert(JSON.stringify(data));
+                    */
+                    console.log(JSON.stringify(data));
+                    console.log(data.length);
+                    var t="<option value='0'>----请选择省----</option>";
+                    for(var i=0;i<data.length;i++){
+                        t+="<option value="+data[i].provinceId+">"+data[i].provinceName+"</option>";
+                        //<option value=1>liaoning</option><option value=1>heilongjiang</option>
+                    }
+                    $("#p").html(t);
+                }
+            })
+
+        }
+        function show_2(){
+
+            var provinceId=$("#p").val();
+            $.ajax({
+                url:'province/selectAllCity.action',
+                type:'post',
+                data:{'provinceId':provinceId},
+                dataType:'json',
+                success:function(data){
+                    var t="<option value='0'>----请选择城市----</option>";
+                    for(var i=0;i<data.length;i++){
+                        t+="<option value="+data[i].cityId+">"+data[i].cityName+"</option>"
+                    }
+                    $("#c").html(t);
+                },
+                error:function(data){
+                    alert("查询城市失败了！");
+                }
+            })
+
+        }
+
+        function show_3(){
+
+            var cityId=$("#c").val();
+            $.ajax({
+                url:'province/selectAllArea.action',
+                type:'post',
+                data:{"cityId":cityId},
+                dataType:'json',
+                success:function(data){
+                    alert(data);
+                    console.log(JSON.stringify(data));
+                    var t="<option value='0'>----请选择市区----</option>";
+                    for(var i=0;i<data.length;i++){
+                        t+="<option value="+data[i].areaId+">"+data[i].areaName+"</option>"
+                    }
+                    $("#a").html(t);
+                }
+            })
+
+        }
+
+
+        function text_1(){
+            $.ajax({
+                url:'TextResponseBody/text.action',
+                type:'post',
+                dataType:'json',
+                success:function(data){
+                    /*
+                        alert(data);
+                        alert(JSON.stringify(data));
+                    */
+                    console.log(JSON.stringify(data));
+                    console.log(data.length);
+                    var t="<option value='0'>----请选择省----</option>";
+                    for(var i=0;i<data.length;i++){
+                        t+="<option value="+data[i].provinceId+">"+data[i].provinceName+"</option>";
+                        //<option value=1>liaoning</option><option value=1>heilongjiang</option>
+                    }
+                    $("#p").html(t);
+                }
+            })
+
+        }
+    </script>
+
 
 </head>
 <body>
@@ -104,6 +199,14 @@
                     <td class="fftd">
                         <form name="reportdayform" method="post" id="form" action="reportday.do">
                             <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <select id="p"  οnchange="show_2()"></select>
+                                        <select id="c" οnchange="show_3()"><option value='0'>----请选择城市----</option></select>
+                                        <select id="a" ><option value='0'>----请选择市区----</option></select>
+
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td class="font3">
                                         开始日期：<input type="text" id="begin_date" name="begin_date" value="${reportday_con.begin_date}"  />

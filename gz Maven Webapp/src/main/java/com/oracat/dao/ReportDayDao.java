@@ -3,6 +3,7 @@ package com.oracat.dao;
 import com.oracat.dao.provider.ReportDaySqlProvider;
 
 import com.oracat.model.ReportDay;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 
 import java.util.List;
@@ -13,4 +14,14 @@ public interface ReportDayDao {
     List<ReportDay> selectByPage(Map<String, Object> params);
     @SelectProvider(type=ReportDaySqlProvider.class,method="count")
     Integer count(Map<String, Object> params);
+
+    //ÏÂÀ­¿ò
+    @Select("SELECT distinct shengfen FROM report_b2b_data")
+    List<String> selectShengfen();
+
+    @Select("SELECT distinct chengshi FROM report_b2b_data where shengfen=#{shengfen}")
+    List<String> selectChengshi(String shengfen);
+
+    @Select("SELECT distinct quyufl FROM report_b2b_data where shengfen=#{shengfen} and chengshi=#{chengshi}")
+    List<String> selectQuyufl(String shengfen,String chengshi);
 }

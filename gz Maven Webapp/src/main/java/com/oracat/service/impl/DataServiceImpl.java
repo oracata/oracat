@@ -131,6 +131,34 @@ public class DataServiceImpl implements DataService{
 	}
 
 
+	@Override
+	public List<String> selectShengfen()
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+		return reportDayDao.selectShengfen();
+	}
+
+	@Override
+	public List<String> selectChengshi(String shengfen)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+		return reportDayDao.selectChengshi( shengfen);
+	}
+
+	@Override
+	public List<String> selectQuyufl(String shengfen,String chengshi)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+		return reportDayDao.selectQuyufl( shengfen, chengshi);
+	}
+
+
+
+
+
+
+
+	//实时图表
 
     @Override
 	public List<RealTime> selectRealTime()
@@ -178,12 +206,13 @@ public class DataServiceImpl implements DataService{
         excel.add(new ExcelBean("电商价格","pfpj",0));
         excel.add(new ExcelBean("进价","cankcbj",0));
         excel.add(new ExcelBean("最低销售价","zdxshj",0));
+		excel.add(new ExcelBean("终端近7天平均开票价","hshj",0));
         excel.add(new ExcelBean("电商库存","stock_num",0));
 
 
 
         map.put(0, excel);
-        String sheetName = "电商价格";
+        String sheetName = "电商价格对比";
         //调用ExcelUtil的方法
         xssfWorkbook = ExcelUtil.createExcelFile(B2bPrice.class, list, map, sheetName);
         return xssfWorkbook;

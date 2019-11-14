@@ -10,7 +10,18 @@ public class B2bPrice {
     private double pfpj            ;
     private double cankcbj         ;
     private double zdxshj          ;
+    private double hshj;
     private int stock_num      ;
+
+    public double getHshj() {
+        return hshj;
+    }
+
+    public void setHshj(double hshj) {
+        this.hshj = hshj;
+    }
+
+
 
     public String getId() {
         return id;

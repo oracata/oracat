@@ -11,7 +11,7 @@ import java.util.Map;
 
 public interface B2bPriceDao {
 
-    @Select("SELECT  a.id,a.no,a.name ,a.spec,a.manufacturer ,a.pfpj,round(c.cankcbj,2) AS cankcbj,c.zdxshj AS zdxshj,b.stock_num\n" +
+    @Select("SELECT  a.id,a.no,a.name ,a.spec,a.manufacturer ,a.pfpj,round(c.cankcbj,2) AS cankcbj,c.zdxshj AS zdxshj,d.hshj,b.stock_num\n" +
             "  FROM openquery(b2b,'select * from   goods') a\n" +
             "INNER JOIN openquery(b2b,'select  * from  mv_khlb_kc_hshj') b  ON a.id=b.ID AND b.kehulb=1\n" +
             "LEFT JOIN \n" +
@@ -23,6 +23,11 @@ public interface B2bPriceDao {
             "inner join zkspkc_hz_v1 f(nolock) on a.spid=f.spid and f.hzid='HZZ00000001' and f.jigid='000' left join centerbkspzl ce(nolock)on a.spid=ce.spid and ce.jigid='000' and ce.hzid='HZZ00000001' and ce.centerid='CEN00000011'\n" +
             "where a.beactive='是' and a.jigid='000' and dbo.hzid_get_jgkc('HZZ00000001',a.spid,'000','全部','是 ')>0   \n" +
             ") c  ON a.id=c.spid\n" +
+            "left join (SELECT b.spid,round(AVG(b.hshj),2) hshj\n" +
+            "  FROM gxkphz(NOLOCK)a  INNER JOIN gxkpmx(NOLOCK) b ON a.djbh=b.djbh\n" +
+            "WHERE a.centerid='CEN00000011' AND bmid='BMZ00000069'\n" +
+            "AND kaiprq BETWEEN CONVERT(varchar(100), GETDATE()-7, 23) AND  CONVERT(varchar(100), GETDATE(), 23) \n" +
+            "GROUP BY b.spid ) d on a.id=d.spid  \n"+
             "WHERE a.state=1  \n" +
             "AND ( a.id LIKE '%${id}%' and a.no LIKE '%${no}%' and a.name LIKE '%${name}%' )\n" +
             "ORDER BY b.stock_num DESC ,c.cankcbj DESC  \n ")

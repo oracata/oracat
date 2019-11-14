@@ -40,9 +40,17 @@ public interface DataService {
 	/** 电商与erp价格对比
 	**/
     List<B2bPrice> selectB2bPrice(B2bPrice b2bprice);
-
-
-    List<ReportDay> findReportDay(ReportDay reportday, PageModel pageModel);
-
+	//**导出excel**/
 	XSSFWorkbook exportExcelInfo(B2bPrice b2bprice) throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException;
+
+
+    /**日报**/
+    List<ReportDay> findReportDay(ReportDay reportday, PageModel pageModel);
+    List<String> selectShengfen();
+	List<String> selectChengshi(String shengfen);
+	List<String> selectQuyufl(String shengfen,String chengshi);
+
+
+
+
 }

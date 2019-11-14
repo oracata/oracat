@@ -9,7 +9,7 @@
         <module name="gz" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="8">
       <module name="gz" target="8" />
     </bytecodeTargetLevel>
   </component>

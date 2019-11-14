@@ -57,16 +57,17 @@ public class B2bPriceController {
 
             // 指定下载的文件名，浏览器都会使用本地编码，即GBK，浏览器收到这个文件名后，用ISO-8859-1来解码，然后用GBK来显示
             // 所以我们用GBK解码，ISO-8859-1来编码，在浏览器那边会反过来执行。
-            response.setHeader("Content-Disposition", "attachment;filename=" +new String("电商价格.xlsx".getBytes("GBK"),"ISO-8859-1"));
-        response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+            //文件名
+            String filename="电商价格"+tools.getTimeDay(0)+".xlsx";
+            response.setHeader("Content-Disposition", "attachment;filename=" +new String(filename.getBytes("GBK"),"ISO-8859-1"));
+            response.setContentType("application/vnd.ms-excel;charset=UTF-8");
             response.setHeader("Pragma", "no-cache");
             response.setHeader("Cache-Control", "no-cache");
             response.setDateHeader("Expires", 0);
 
 
             XSSFWorkbook workbook=null;
-            //导出Excel对象
-           // Object salaryService;
+
             workbook = dataService.exportExcelInfo(v_b2bprice);
             OutputStream output = null;
             try {

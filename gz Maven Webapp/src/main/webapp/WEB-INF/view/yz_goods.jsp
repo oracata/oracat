@@ -21,6 +21,17 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<link href="${ctx}/view/css/pager.css" type="text/css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
 	
 <script  >
 $(function () {
@@ -83,8 +94,12 @@ $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
 
 
 
+
+
+
+
 </head>
-<body>
+<body   >
 	<!-- 导航 -->
 	<table width="100%" border="0" cellpadding="0" cellspacing="0">
 	  <tr><td height="10"></td></tr>

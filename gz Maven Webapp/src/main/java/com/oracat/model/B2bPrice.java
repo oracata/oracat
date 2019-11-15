@@ -11,7 +11,19 @@ public class B2bPrice {
     private double cankcbj         ;
     private double zdxshj          ;
     private double hshj;
+    private double abs_rate;
     private int stock_num      ;
+
+
+
+    public double getAbs_rate() {
+        return abs_rate;
+    }
+
+    public void setAbs_rate(double abs_rate) {
+        this.abs_rate = abs_rate;
+    }
+
 
     public double getHshj() {
         return hshj;

@@ -204,9 +204,10 @@ public class DataServiceImpl implements DataService{
         excel.add(new ExcelBean("规格","spec",0));
         excel.add(new ExcelBean("产家","manufacturer",0));
         excel.add(new ExcelBean("电商价格","pfpj",0));
+        excel.add(new ExcelBean("终端近7天平均开票价","hshj",0));
+        excel.add(new ExcelBean("与终端销价对比率","abs_rate",0));
         excel.add(new ExcelBean("进价","cankcbj",0));
         excel.add(new ExcelBean("最低销售价","zdxshj",0));
-		excel.add(new ExcelBean("终端近7天平均开票价","hshj",0));
         excel.add(new ExcelBean("电商库存","stock_num",0));
 
 

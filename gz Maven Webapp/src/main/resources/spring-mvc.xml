@@ -21,12 +21,17 @@
    <context:annotation-config/>
 
    <mvc:annotation-driven/>
+
     <!-- 静态资源如404页面由WEB服务器默认的Servlet来处理 -->
-
     <mvc:default-servlet-handler/>
+    <!--设置静态资料访问路径-->
+    <mvc:resources location="/WEB-INF/images/" mapping="/**"/>
+    <mvc:resources location="/WEB-INF/js/" mapping="/**"/>
 
 
-   <mvc:interceptors>
+
+
+    <mvc:interceptors>
 
        <mvc:interceptor>
            <mvc:mapping path="/*"/>

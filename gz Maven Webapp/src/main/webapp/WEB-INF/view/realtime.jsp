@@ -47,11 +47,21 @@
 
 
         $(document).ready(function(){
-            $("form[id$='form']").submit(function(){
-                showLoading();
-                return true;
-            });
-        });
+                //任选以form结束的form进行处理
+                $("form[id$='form']").submit(function(){
+                    showLoading();
+                    return true;
+                });
+
+                //导出excel
+                $("a[id$='export']").click(function(){
+                    showLoading();
+                    return true;
+                });
+
+            }
+
+        );
 
     </script>
 

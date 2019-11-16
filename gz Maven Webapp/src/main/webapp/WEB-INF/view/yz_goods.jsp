@@ -24,8 +24,7 @@
 
 
 
-
-
+	<script src="./loading.js"></script>
 
 
 
@@ -96,10 +95,11 @@ $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
 
 
 
-
-
 </head>
-<body   >
+<body  >
+
+
+
 	<!-- 导航 -->
 	<table width="100%" border="0" cellpadding="0" cellspacing="0">
 	  <tr><td height="10"></td></tr>

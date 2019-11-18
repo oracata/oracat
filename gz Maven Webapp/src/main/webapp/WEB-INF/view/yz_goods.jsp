@@ -23,7 +23,6 @@
 	<link href="${ctx}/view/css/pager.css" type="text/css" rel="stylesheet" />
 
 
-
 	<script  >
 
 
@@ -62,7 +61,6 @@
 		);
 
 	</script>
-
 
 
 

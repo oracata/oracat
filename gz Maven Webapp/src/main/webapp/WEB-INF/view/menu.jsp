@@ -70,7 +70,7 @@
 				
 				<li class="closed"><span class="folder">
 				
-<a href="javascript:void(0);" onclick="javascript:    var frame=window.parent.document.getElementById('rightFrame'); frame.src='dc_overview.do';  frame.location.reload(); " >
+<a href="javascript:void(0);" onclick="javascript:   window.parent.document.getElementById('rightFrame').contentWindow.showLoading(); var frame=window.parent.document.getElementById('rightFrame'); frame.src='404.html';  frame.location.reload();   " >
 东昌
 </a>
 				
@@ -90,7 +90,7 @@
 	
 				<li class="closed"><span class="folder">
 				
-<a href="javascript:void(0);" onclick="javascript:    var frame=window.parent.document.getElementById('rightFrame'); frame.src='price.do';  frame.location.reload(); " >
+<a href="javascript:void(0);" onclick="javascript: window.parent.document.getElementById('rightFrame').contentWindow.showLoading();  var frame=window.parent.document.getElementById('rightFrame'); frame.src='404.html';  frame.location.reload();   " >
 对比分析
 </a>				
 				
@@ -98,7 +98,7 @@
 					<ul>
 						<li><span class="file">
 						
-<a href="javascript:void(0);" onclick="javascript:    var frame=window.parent.document.getElementById('rightFrame'); frame.src='price.do';  frame.location.reload(); " >
+<a href="javascript:void(0);" onclick="javascript: window.parent.document.getElementById('rightFrame').contentWindow.showLoading(); var frame=window.parent.document.getElementById('rightFrame'); frame.src='404.html';  frame.location.reload();   " >
 价格对比
 </a>						
 						
@@ -125,7 +125,7 @@
 
 				<li class="closed"><span class="folder">
 
-<a href="javascript:void(0);" onclick="javascript:    var frame=window.parent.document.getElementById('rightFrame'); frame.src='price.do';  frame.location.reload(); " >
+<a href="javascript:void(0);" onclick="javascript:  window.parent.document.getElementById('rightFrame').contentWindow.showLoading(); var frame=window.parent.document.getElementById('rightFrame'); frame.src='404.html';  frame.location.reload();   " >
 报表
 </a>
 				</span>
@@ -140,7 +140,7 @@
 
 
 						<li><span class="file">
-<a href="javascript:void(0);" onclick="javascript:    var frame=window.parent.document.getElementById('rightFrame'); frame.src='reportmonth.do';  frame.location.reload(); " >
+<a href="javascript:void(0);" onclick="javascript: window.parent.document.getElementById('rightFrame').contentWindow.showLoading();  var frame=window.parent.document.getElementById('rightFrame'); frame.src='404.html';  frame.location.reload();  " >
 月报
 </a></span></li>
 
@@ -157,7 +157,7 @@
 
 
 
-<a href="javascript:void(0);" onclick="javascript:window.parent.document.getElementById('rightFrame').contentWindow.showLoading();   var frame=window.parent.document.getElementById('rightFrame'); frame.src='yz_overview.do';  frame.location.reload(); " >
+<a href="javascript:void(0);" onclick="javascript:window.parent.document.getElementById('rightFrame').contentWindow.showLoading(); var frame=window.parent.document.getElementById('rightFrame'); frame.src='404.html';  frame.location.reload();  " >
 配置
 </a>
 				
@@ -165,7 +165,7 @@
 					<ul>
 						<li><span class="file">
 						
-<a href="javascript:void(0);" onclick="javascript:window.parent.document.getElementById('rightFrame').contentWindow.showLoading();   var frame=window.parent.document.getElementById('rightFrame'); frame.src='goods_for_goods.do';  frame.location.reload(); " >
+<a href="javascript:void(0);" onclick="javascript:window.parent.document.getElementById('rightFrame').contentWindow.showLoading(); var frame=window.parent.document.getElementById('rightFrame'); frame.src='404.html';  frame.location.reload();  " >
 商品对应关系维护
 </a>
 						

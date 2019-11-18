@@ -9,7 +9,8 @@
 </head>
 
 
-<frameset  cols="12%,*"  border="3"    id="mainFrame"   onload="javascript:      var frame=window.parent.document.getElementById('rightFrame');          frame.onload = function(){             window.parent.document.getElementById('rightFrame').contentWindow.completeLoading();     }; frame.document.body.appendChild(frame); " >
+<frameset  cols="12%,*"  border="3"    id="mainFrame"     onload="javascript:      var frame=window.parent.document.getElementById('rightFrame');          frame.onload = function(){             window.parent.document.getElementById('rightFrame').contentWindow.completeLoading();     }; frame.document.body.appendChild(frame); " >
+
 
         <frame name="topFrame"  id="leftFrame" src="menu.do"  />
 

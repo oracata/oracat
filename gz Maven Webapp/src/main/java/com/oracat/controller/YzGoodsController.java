@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.oracat.model.User;
@@ -26,12 +27,12 @@ public class YzGoodsController {
  
     
     @Resource
-    private DataService dataService; 
-    
-    
-    
-  
-    @RequestMapping("/yz_goods")    
+    private DataService dataService;
+
+
+
+
+    @RequestMapping("/yz_goods")
     public ModelAndView getDcGoodsView(Model model,Integer pageIndex,
 			 @ModelAttribute Goods goods){      
         ModelAndView mav = new ModelAndView("yz_goods");

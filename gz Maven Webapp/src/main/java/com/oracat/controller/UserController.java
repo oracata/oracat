@@ -26,7 +26,7 @@ public class UserController {
                User user_session=new User();
                user_session.setUserName(user.getUserName());
                user_session.setUserPassword( user.getUserPassword());
-               session.setMaxInactiveInterval(600); //超时时间600s=10分钟
+               session.setMaxInactiveInterval(1200); //超时时间600s=10分钟
                session.setAttribute("user_session",user_session);
             mv.setViewName("main");
 

@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import java.io.PrintWriter;
 
 
 /**
@@ -68,7 +68,15 @@ public class AuthorInterceptor  implements HandlerInterceptor {
             if(user == null){
                 /** 如果用户没有登录，跳转到登录页面 */
                 request.setAttribute("message", "请先登录再访问网站!");
-                request.getRequestDispatcher(Constants.LOGIN).forward(request, response);
+                //request.getRequestDispatcher只能在frame子页面中跳转
+               // request.getRequestDispatcher(Constants.LOGIN).forward(request, response);
+                PrintWriter out = response.getWriter();
+                out.println("<html>");
+                out.println("<script>");
+                out.println("window.open ('"+request.getContextPath()+"/loginform.do','_top')");
+                out.println("</script>");
+                out.println("</html>");
+
                 return flag;
             }else{
                 flag = true;

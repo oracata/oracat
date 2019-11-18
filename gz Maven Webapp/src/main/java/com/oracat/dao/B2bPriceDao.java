@@ -11,7 +11,7 @@ import java.util.Map;
 
 public interface B2bPriceDao {
 
-    @Select("SELECT  a.id,a.no,a.name ,a.spec,a.manufacturer ,a.pfpj,round(c.cankcbj,2) AS cankcbj,c.zdxshj AS zdxshj,d.hshj,round(ABS((a.pfpj- d.hshj)*100/ d.hshj),2) as abs_rate,b.stock_num\n" +
+    @Select("SELECT  a.id,a.no,a.name ,a.spec,a.manufacturer ,a.pfpj,round(c.cankcbj,2) AS cankcbj,c.zdxshj AS zdxshj,d.hshj,round((a.pfpj- d.hshj)*100/ d.hshj,2) as abs_rate,b.stock_num\n" +
             "  FROM openquery(b2b,'select * from   goods') a\n" +
             "INNER JOIN openquery(b2b,'select  * from  mv_khlb_kc_hshj') b  ON a.id=b.ID AND b.kehulb=1\n" +
             "LEFT JOIN \n" +

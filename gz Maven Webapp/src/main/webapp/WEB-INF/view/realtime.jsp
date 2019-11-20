@@ -77,7 +77,7 @@
 
 <!-- 柱图 -->
 
-<div id="chart"></div>
+<div id="chart" align="center"></div>
 <%
     // store chart config name-config value pair
     Map<String, String> chartConfig = new HashMap<String, String>();
@@ -153,7 +153,7 @@
 
 <!-- 柱图 -->
 
-<div id="chart2"></div>
+<div id="chart2" align="center"></div>
 <%
     // store chart config name-config value pair
     Map<String, String> chartConfig2 = new HashMap<String, String>();

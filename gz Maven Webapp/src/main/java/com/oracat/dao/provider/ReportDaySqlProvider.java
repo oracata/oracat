@@ -99,7 +99,7 @@ public class ReportDaySqlProvider {
 
 
 
-        sql2 +="   order by shengfen,chengshi,quyufl    ";
+        sql2 +="   order by shengfen,chengshi,quyufl ,rq   ";
 
 
 

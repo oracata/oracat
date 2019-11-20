@@ -35,8 +35,9 @@ public class PageModel {
 		this.pageIndex = pageIndex;
 	}
 	public int getPageSize() {
-		System.out.println("******************************"+this.pageSize);
-		this.pageSize = this.pageSize <= Constants.PAGE_DEFAULT_SIZE?Constants.PAGE_DEFAULT_SIZE:this.pageSize;
+
+			this.pageSize = this.pageSize <= Constants.PAGE_DEFAULT_SIZE ? Constants.PAGE_DEFAULT_SIZE : this.pageSize;
+
 
 		return pageSize;
 	}
@@ -62,6 +63,7 @@ public class PageModel {
 
 		if(DynamicDataSourceHolder.getDataSource().equals("sqlserver")) {
 			first=((this.getPageIndex()-1 ) * this.getPageSize())+1;
+
 		}
 		return first;
 	}

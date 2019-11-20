@@ -1,3 +1,9 @@
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.LinkedHashMap" %>
+<%@ page import="com.oracat.model.ReportDay" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.oracat.util.FusionCharts" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 
@@ -14,15 +20,20 @@
     <meta http-equiv="expires" content="0" />
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
     <meta http-equiv="description" content="This is my page" />
-    <link href="${ctx}/view/css/css.css" type="text/css" rel="stylesheet" />
+    <link href="./css/css.css" type="text/css" rel="stylesheet" />
+
+
+
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link href="${ctx}/view/css/pager.css" type="text/css" rel="stylesheet" />
 
 
+    <link href="./css/pager.css" type="text/css" rel="stylesheet" />
+
+    <script src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <script src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
 
 
     <script  >
@@ -136,22 +147,24 @@
 
         function show_1(){
             $.ajax({
-                url:'province/selectAll.action',
+                url:'selectAllProvince.do',
                 type:'post',
                 data:{'typeId':0},
                 dataType:'json',
                 //成功回调函数的参数data是一个json数组，长度是json数组里面的对象的个数。
                 success:function(data){
-                    /*
-                        alert(data);
-                        alert(JSON.stringify(data));
-                    */
-                    console.log(JSON.stringify(data));
-                    console.log(data.length);
-                    var t="<option value='0'>----请选择省----</option>";
+
+                   console.log(JSON.stringify(data));
+                   console.log(data.length);
+                    var t="<option value=''>----请选择省----</option>";
                     for(var i=0;i<data.length;i++){
-                        t+="<option value="+data[i].provinceId+">"+data[i].provinceName+"</option>";
-                        //<option value=1>liaoning</option><option value=1>heilongjiang</option>
+                        if(data[i]==' 合计'){
+                            t+="<option value=' 合计'>合计</option>";
+                        }
+                        else{
+                            t+="<option value="+data[i]+">"+data[i]+"</option>";
+                        }
+
                     }
                     $("#p").html(t);
                 }
@@ -161,16 +174,23 @@
         function show_2(){
 
             var provinceId=$("#p").val();
+
             $.ajax({
-                url:'province/selectAllCity.action',
+                url:'selectAllCityProvince.do',
                 type:'post',
                 data:{'provinceId':provinceId},
                 dataType:'json',
                 success:function(data){
-                    var t="<option value='0'>----请选择城市----</option>";
+                    var t="<option value=''>----请选择城市----</option>";
                     for(var i=0;i<data.length;i++){
-                        t+="<option value="+data[i].cityId+">"+data[i].cityName+"</option>"
+                        if(data[i]==' 合计'){
+                            t+="<option value=' 合计'>合计</option>";
+                        }
+                        else{
+                        t+="<option value="+data[i]+">"+data[i]+"</option>";
+                          }
                     }
+
                     $("#c").html(t);
                 },
                 error:function(data){
@@ -182,18 +202,24 @@
 
         function show_3(){
 
+            var provinceId=$("#p").val();
             var cityId=$("#c").val();
             $.ajax({
-                url:'province/selectAllArea.action',
+                url:'selectAllAreaProvince.do',
                 type:'post',
-                data:{"cityId":cityId},
+                data:{'provinceId':provinceId,"cityId":cityId},
                 dataType:'json',
                 success:function(data){
-                    alert(data);
-                    console.log(JSON.stringify(data));
-                    var t="<option value='0'>----请选择市区----</option>";
+
+                   console.log(JSON.stringify(data));
+                    var t="<option value=''>----请选择市区----</option>";
                     for(var i=0;i<data.length;i++){
-                        t+="<option value="+data[i].areaId+">"+data[i].areaName+"</option>"
+                        if(data[i]==' 合计'){
+                            t+="<option value=' 合计'>合计</option>";
+                        }
+                        else{
+                            t+="<option value="+data[i]+">"+data[i]+"</option>";
+                        }
                     }
                     $("#a").html(t);
                 }
@@ -202,28 +228,7 @@
         }
 
 
-        function text_1(){
-            $.ajax({
-                url:'TextResponseBody/text.action',
-                type:'post',
-                dataType:'json',
-                success:function(data){
-                    /*
-                        alert(data);
-                        alert(JSON.stringify(data));
-                    */
-                    console.log(JSON.stringify(data));
-                    console.log(data.length);
-                    var t="<option value='0'>----请选择省----</option>";
-                    for(var i=0;i<data.length;i++){
-                        t+="<option value="+data[i].provinceId+">"+data[i].provinceName+"</option>";
-                        //<option value=1>liaoning</option><option value=1>heilongjiang</option>
-                    }
-                    $("#p").html(t);
-                }
-            })
 
-        }
     </script>
 
 
@@ -231,7 +236,7 @@
 
 
 </head>
-<body>
+<body   >
 <!-- 导航 -->
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tr><td height="10"></td></tr>
@@ -251,21 +256,17 @@
                     <td class="fftd">
                         <form name="reportdayform" method="post" id="form" action="reportday.do">
                             <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td>
-                                        <select id="p"  οnchange="show_2()"></select>
-                                        <select id="c" οnchange="show_3()"><option value='0'>----请选择城市----</option></select>
-                                        <select id="a" ><option value='0'>----请选择市区----</option></select>
 
-                                    </td>
-                                </tr>
                                 <tr>
                                     <td class="font3">
                                         开始日期：<input type="text" id="begin_date" name="begin_date" value="${reportday_con.begin_date}"  />
                                         结束日期：<input type="text" id="end_date"   name="end_date" value="${reportday_con.end_date}" />
-                                        省份：<input type="text" name="shengfen" value="${reportday_con.shengfen}"  />
-                                        地市：<input type="text" name="chengshi" value="${reportday_con.chengshi}"  />
-                                        区县：<input type="text" name="quyufl" value="${reportday_con.quyufl}"  />
+                                        省份：
+                                        <select id="p" name="shengfen" onmouseover="show_1();" onchange="show_2();" ><option value="${reportday_con.shengfen}">${reportday_con.shengfen}</option></select>
+                                        地市：
+                                        <select id="c" name="chengshi"  onchange="show_3()"><option value="${reportday_con.chengshi}">${reportday_con.chengshi}</option></select>
+                                        区县：
+                                        <select id="a" name="quyufl" ><option value="${reportday_con.quyufl}">${reportday_con.quyufl}</option></select>
                                         <input type="submit" value="查询"/>
 
                                     </td>
@@ -277,6 +278,82 @@
             </table>
         </td>
     </tr>
+
+
+    <!-- 图表展示区 -->
+    <tr><td>
+        <div id="chart"></div>
+        <%
+            // store chart config name-config value pair
+            Map<String, String> chartConfig = new HashMap<String, String>();
+            chartConfig.put("caption", "日报");
+            chartConfig.put("subCaption", "");
+            chartConfig.put("xAxisName", "时间");
+            chartConfig.put("yAxisName", "下单金额");
+            chartConfig.put("formatNumberScale", "0");
+            chartConfig.put("numberSuffix", "");
+            chartConfig.put("theme", "fusion");
+
+
+
+            //store label-value pair
+            //LinkedHashMap 保证数据顺序
+            Map<String, Double> dataValuePair = new LinkedHashMap<String, Double>();
+
+
+            //遍历List
+            Object re = request.getAttribute("reportday");
+            List<ReportDay> ol= (List)re;
+            for(int i=0;i<ol.size();i++){
+                ReportDay      ov = ol.get(i);
+
+
+                dataValuePair.put(""+ov.getRq()+"", ov.getOrder_pay_price());
+
+            }
+            StringBuilder jsonData = new StringBuilder();
+            StringBuilder data = new StringBuilder();
+
+            // json data to use as chart data source
+            jsonData.append("{'chart':{");
+            for(Map.Entry conf:chartConfig.entrySet())
+            {
+                jsonData.append("'" + conf.getKey()+"':'"+conf.getValue() + "',");
+            }
+
+            jsonData.replace(jsonData.length() - 1, jsonData.length() ,"},");
+
+            // build  data object from label-value pair
+            data.append("'data':[");
+
+            for(Map.Entry pair:dataValuePair.entrySet())
+            {
+
+                data.append("{'label':'" + pair.getKey() + "','value':'" + pair.getValue() +"'},");
+
+            }
+            data.replace(data.length() - 1, data.length(),"]");
+
+            jsonData.append(data.toString());
+            jsonData.append("}");
+
+
+            // Create chart instance
+            // charttype, chartID, width, height,containerid, data format, data
+            FusionCharts firstChart = new FusionCharts(
+                    "line",
+                    "first_chart",
+                    "100%",
+                    "50%",
+                    "chart",
+                    "json",
+                    jsonData.toString()
+            );
+        %>
+        <%= firstChart.render() %>
+
+    </td></tr>
+
 
     <!-- 数据展示区 -->
     <tr valign="top">

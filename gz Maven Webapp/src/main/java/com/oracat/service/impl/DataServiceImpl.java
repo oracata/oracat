@@ -122,6 +122,7 @@ public class DataServiceImpl implements DataService{
 
 		if(recordCount > 0){
 			/** 开始分页查询数据：查询第几页的数据 */
+
 			params.put("pageModel", pageModel);
 		}
 
@@ -149,7 +150,7 @@ public class DataServiceImpl implements DataService{
 	public List<String> selectQuyufl(String shengfen,String chengshi)
 	{
 		DynamicDataSourceHolder.setDataSource("sqlserver");
-		return reportDayDao.selectQuyufl( shengfen, chengshi);
+		return reportDayDao.selectQuyufl(shengfen,chengshi);
 	}
 
 

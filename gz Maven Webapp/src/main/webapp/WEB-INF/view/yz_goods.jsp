@@ -14,13 +14,13 @@
 	<meta http-equiv="expires" content="0" />    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
 	<meta http-equiv="description" content="This is my page" />
-	<link href="${ctx}/view/css/css.css" type="text/css" rel="stylesheet" />
+	<link href="./css/css.css" type="text/css" rel="stylesheet" />
 
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<link href="${ctx}/view/css/pager.css" type="text/css" rel="stylesheet" />
+	<link href="./css/pager.css" type="text/css" rel="stylesheet" />
 
 
 	<script  >

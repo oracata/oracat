@@ -51,6 +51,12 @@ public interface DataService {
 	List<String> selectQuyufl(String shengfen,String chengshi);
 
 
-
+	/** 云中商品对应关系
+	 **/
+	List<GoodsForYz> selectGoodsForYz(GoodsForYz goodsforyz);
+	GoodsForYz findGoodsForYzById(String jnd_spid);
+	void modifyGoodsForYz(GoodsForYz goodsforyz);
+	void addGoodsForYz(GoodsForYz goodsforyz);
+	void removeGoodsForYzById(String jnd_spid);
 
 }

@@ -14,18 +14,127 @@
 	<meta http-equiv="expires" content="0" />    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
 	<meta http-equiv="description" content="This is my page" />
-	<link href="${ctx}/view/css/css.css" type="text/css" rel="stylesheet" />
+	<link href="../css/css.css" type="text/css" rel="stylesheet" />
 
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<link href="${ctx}/view/css/pager.css" type="text/css" rel="stylesheet" />
-	
+	<link href="../css/pager.css" type="text/css" rel="stylesheet" />
 
 
 
 
+
+
+	<link rel="stylesheet" type="text/css" href="../js/ligerUI/skins/Aqua/css/ligerui-dialog.css"/>
+	<link href="../js/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
+	<script type="text/javascript" src="../js/jquery-migrate-1.2.1.js"></script>
+	<script src="../js/ligerUI/js/core/base.js" type="text/javascript"></script>
+	<script src="../js/ligerUI/js/plugins/ligerDrag.js" type="text/javascript"></script>
+	<script src="../js/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
+	<script src="../js/ligerUI/js/plugins/ligerResizable.js" type="text/javascript"></script>
+
+
+
+	<script  >
+
+
+		//在页面未加载完毕之前显示的loading Html自定义内容
+		var _LoadingHtml = '<div id="loadingDiv" style="display: none; "><div id="over" style=" position: absolute;top: 0;left: 0; width: 100%;height: 100%; background-color: #f5f5f5;opacity:0.5;z-index: 1000;"></div><div id="layout" style="position: absolute;top: 40%; left: 40%;width: 20%; height: 20%;  z-index: 1001;text-align:center;"><img src="../images/timg.gif" /></div></div>';
+		//呈现loading效果
+		document.write(_LoadingHtml);
+
+		//移除loading效果
+		function completeLoading() {
+			document.getElementById("loadingDiv").style.display="none";
+		}
+		//展示loading效果http://localhost:2006/
+		function showLoading()
+		{
+			document.getElementById("loadingDiv").style.display="block";
+		}
+
+
+
+		$(document).ready(function(){
+					//任选以form结束的form进行处理
+					$("form[id$='form']").submit(function(){
+						showLoading();
+						return true;
+					});
+
+					//导出excel
+					$("a[id$='export']").click(function(){
+						showLoading();
+						return true;
+					});
+
+				}
+
+		);
+
+	</script>
+
+
+	<script type="text/javascript">
+		$(function(){
+
+			/** 增加记录绑定点击事件 */
+			$("#add").click(function(){
+
+							window.location = "${ctx }/goodsforgoods/addGoodsForYz?flag=1";
+
+			})
+
+
+
+			/** 获取上一次选中的部门数据 */
+			var boxs  = $("input[type='checkbox'][id^='box_']");
+
+			/** 给全选按钮绑定点击事件  */
+			$("#checkAll").click(function(){
+				// this是checkAll  this.checked是true
+				// 所有数据行的选中状态与全选的状态一致
+				boxs.attr("checked",this.checked);
+			})
+
+			/** 给数据行绑定鼠标覆盖以及鼠标移开事件  */
+			$("tr[id^='data_']").hover(function(){
+				$(this).css("backgroundColor","#2ec2ff");
+			},function(){
+				$(this).css("backgroundColor","#ffffff");
+			})
+
+
+			/** 删除员工绑定点击事件 */
+			$("#delete").click(function(){
+               //设置路径 不然ligerui会出问题
+				window.location = "${ctx }/goodsforgoods/deleteGoodsForYz";
+				var checkedBoxs = boxs.filter(":checked");
+				if(checkedBoxs.length < 1){
+					$.ligerDialog.error("请选择一个需要删除的部门！");
+				}else{
+					/** 得到用户选中的所有的需要删除的ids */
+					var ids = checkedBoxs.map(function(){
+						return this.value;
+					})
+
+					$.ligerDialog.confirm("确认要删除吗?","删除部门",function(r){
+						if(r){
+							// alert("删除："+ids.get());
+							// 发送请求
+							window.location = "${ctx }/goodsforgoods/addGoodsForYz?ids=" + ids.get();
+						}
+					});
+				}
+			})
+
+
+
+		})
+	</script>
 
 
 </head>
@@ -47,14 +156,17 @@
 		  <table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
 		    <tr>
 			  <td class="fftd">
-			  	<form name="dcform" method="post" id="form" action="yz_goods.do">
+			  	<form name="goodsforgoodsform" method="get" id="goodsforgoodsform" action="goodsforgoods.do">
 				    <table width="100%" border="0" cellpadding="0" cellspacing="0">
 					  <tr>
 					    <td class="font3">
-					    	佳能达商品内码：<input type="text" name="goods_condition" value="${goods_condition.jnd_id}"  />
-					    	佳能达商品名称：<input type="text" name="jnd_goods_name" value="${goods_condition.jnd_goods_name}"  />
+					    	佳能达商品内码：<input type="text" name="jnd_spid"  value="${goodsforyz_con.jnd_spid}" />
+					    	佳能达商品名称：<input type="text" name="jnd_spname"  value="${goodsforyz_con.jnd_spname}"  />
 					    	 <input type="submit" value="查询"/>
-					    	 <input id="delete" type="button" value="删除"/>
+							<td>
+						  <input id="add" type="button" value="增加"/>
+							<input id="delete" type="button" value="删除" align="left"/>
+				     	  </td>
 					    	 
 					    </td>
 					  </tr>
@@ -71,29 +183,28 @@
 	    <td height="20">
 		  <table width="100%" border="1" cellpadding="5" cellspacing="0" style="border:#c2c6cc 1px solid; border-collapse:collapse;">
 		    <tr class="main_trbg_tit" align="center">
-         	
-	        <td>佳能达商品内码</td>                    
+				<td><input type="checkbox" name="checkAll" id="checkAll"></td>
+				<td>佳能达商品内码</td>
             <td>佳能达商品名称</td>
             <td>云中商品编码</td>
             <td>云中商品名称 </td>
-            <td>东昌商品编码</td>
-            <td>东昌商品名称</td>
+				<td>修改 </td>
+
 
 
 		 
 			</tr>
-			<c:forEach items="${requestScope.yz_goods}" var="yz_goods" varStatus="stat">
+			<c:forEach items="${requestScope.goodsforyz}" var="goodsforyz" varStatus="stat">
 				<tr id="data_${stat.index}" align="center" class="main_trbg" onMouseOver="move(this);" onMouseOut="out(this);">
-			<td><input type="checkbox" id="box_${stat.index}" value="${dept.id}"></td>	
-		    <td>${goods_for_goods.jnd_id              }</td>
-            <td>${goods_for_goods.jnd_goods_name          }</td>
-            <td>${goods_for_goods.yz_id       }</td>
-            <td>${goods_for_goods.yz_goods_name            }</td>
-            <td>${goods_for_goods.dc_id      }</td>
-            <td>${goods_for_goods.dc_goods_name      }</td>
+			<td><input type="checkbox" id="box_${stat.index}" value="${goodsforyz.jnd_spid }"></td>
+		    <td>${goodsforyz.jnd_spid              }</td>
+            <td>${goodsforyz.jnd_spname          }</td>
+            <td>${goodsforyz.yz_goods_id       }</td>
+            <td>${goodsforyz.yz_goods_name            }</td>
+
   
-            	 <td align="center" width="40px;"><a href="${ctx}/dept/updateDept?flag=1&id=${dept.id}">
-							<img title="修改" src="${ctx}/images/update.gif"/></a>
+            	 <td align="center" width="40px;"><a href="${ctx}/goodsforgoods/updateGoodsForYz?flag=1&id=${goodsforyz.jnd_spid}">
+							<img title="修改" src="../images/update.gif"/></a>
 					  </td> 
 
 				</tr>

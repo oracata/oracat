@@ -44,6 +44,9 @@ public class DataServiceImpl implements DataService{
 
     @Autowired
 	private  ReportDayDao  reportDayDao;
+
+	@Autowired  //自动装配
+	private GoodsForYzDao goodsForYzDao ;
 	
 	/*****************东昌服务接口实现*************************************/
 	@Transactional(readOnly=true)
@@ -222,6 +225,52 @@ public class DataServiceImpl implements DataService{
 
 
 
+   /**云中商品对应关系**/
 
+	@Override
+	public List<GoodsForYz> selectGoodsForYz(GoodsForYz goodsforyz)
+	{
+		DynamicDataSourceHolder.setDataSource("mysql");
+
+		return goodsForYzDao.selectGoodsForYz(goodsforyz.getJnd_spid(),goodsforyz.getJnd_spname());
+
+	}
+
+
+	@Override
+	public GoodsForYz findGoodsForYzById(String jnd_spid)
+	{
+		DynamicDataSourceHolder.setDataSource("mysql");
+
+		return goodsForYzDao.findGoodsForYzById(jnd_spid);
+
+	}
+
+	@Override
+	public void modifyGoodsForYz(GoodsForYz goodsforyz)
+	{
+		DynamicDataSourceHolder.setDataSource("mysql");
+
+		 goodsForYzDao.modifyGoodsForYz(goodsforyz.getJnd_spid(),goodsforyz.getJnd_spname(),goodsforyz.getYz_goods_id(),goodsforyz.getYz_goods_name());
+
+	}
+
+	@Override
+	public void addGoodsForYz(GoodsForYz goodsforyz)
+	{
+		DynamicDataSourceHolder.setDataSource("mysql");
+
+		goodsForYzDao.addGoodsForYz(goodsforyz.getJnd_spid(),goodsforyz.getJnd_spname(),goodsforyz.getYz_goods_id(),goodsforyz.getYz_goods_name());
+
+	}
+
+	@Override
+	public void removeGoodsForYzById(String jnd_spid)
+	{
+		DynamicDataSourceHolder.setDataSource("mysql");
+
+		goodsForYzDao.deleteGoodsForYz(jnd_spid);
+
+	}
 
 }

@@ -158,15 +158,15 @@
 
 
 <a href="javascript:void(0);" onclick="javascript:window.parent.document.getElementById('rightFrame').contentWindow.showLoading(); var frame=window.parent.document.getElementById('rightFrame'); frame.src='404.html';  frame.location.reload();  " >
-配置
+基础资料
 </a>
 				
 				</span>
 					<ul>
 						<li><span class="file">
 						
-<a href="javascript:void(0);" onclick="javascript:window.parent.document.getElementById('rightFrame').contentWindow.showLoading(); var frame=window.parent.document.getElementById('rightFrame'); frame.src='404.html';  frame.location.reload();  " >
-商品对应关系维护
+<a href="javascript:void(0);" onclick="javascript:window.parent.document.getElementById('rightFrame').contentWindow.showLoading(); var frame=window.parent.document.getElementById('rightFrame'); frame.src='goodsforgoods/goodsforgoods.do';  frame.location.reload();  " >
+云中商品对应关系
 </a>
 						
 						</span></li>

@@ -24,6 +24,7 @@ F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\service\DataServ
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\dao\DcGoodsDao.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\model\User.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\util\DynamicDataSource.java
+F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\controller\GoodsForGoodsController.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\model\OverViewCatagory.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\model\ReportDay.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\util\excel\ExcelUtil.java

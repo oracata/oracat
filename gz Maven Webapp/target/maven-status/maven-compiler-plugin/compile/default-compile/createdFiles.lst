@@ -1,6 +1,7 @@
 com\oracat\util\FusionCharts$FusionTable.class
 com\oracat\controller\RealTimeController.class
 com\oracat\dao\provider\ReportDaySqlProvider$2.class
+com\oracat\controller\GoodsForGoodsController.class
 com\oracat\controller\UserController.class
 com\oracat\controller\YzGoodsController.class
 com\oracat\util\DynamicDataSource.class

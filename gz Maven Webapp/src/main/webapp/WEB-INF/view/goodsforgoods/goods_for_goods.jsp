@@ -16,10 +16,7 @@
 	<meta http-equiv="description" content="This is my page" />
 	<link href="../css/css.css" type="text/css" rel="stylesheet" />
 
-   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 	<link href="../css/pager.css" type="text/css" rel="stylesheet" />
 
 
@@ -27,14 +24,14 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="../js/ligerUI/skins/Aqua/css/ligerui-dialog.css"/>
-	<link href="../js/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
-	<script type="text/javascript" src="../js/jquery-migrate-1.2.1.js"></script>
-	<script src="../js/ligerUI/js/core/base.js" type="text/javascript"></script>
-	<script src="../js/ligerUI/js/plugins/ligerDrag.js" type="text/javascript"></script>
-	<script src="../js/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
-	<script src="../js/ligerUI/js/plugins/ligerResizable.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="${ctx}/js/ligerUI/skins/Aqua/css/ligerui-dialog.css"/>
+    <link href="${ctx}/js/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="${ctx }/js/jquery-1.11.0.js"></script>
+    <script type="text/javascript" src="${ctx }/js/jquery-migrate-1.2.1.js"></script>
+    <script src="${ctx}/js/ligerUI/js/core/base.js" type="text/javascript"></script>
+    <script src="${ctx}/js/ligerUI/js/plugins/ligerDrag.js" type="text/javascript"></script>
+    <script src="${ctx}/js/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
+    <script src="${ctx}/js/ligerUI/js/plugins/ligerResizable.js" type="text/javascript"></script>
 
 
 
@@ -108,26 +105,24 @@
 			})
 
 
-			/** 删除员工绑定点击事件 */
+			/** 删除记录绑定点击事件 */
 			$("#delete").click(function(){
-               //设置路径 不然ligerui会出问题
-				window.location = "${ctx }/goodsforgoods/deleteGoodsForYz";
+
+
 				var checkedBoxs = boxs.filter(":checked");
 				if(checkedBoxs.length < 1){
-					$.ligerDialog.error("请选择一个需要删除的部门！");
+
+                   alert("请选择一个需要删除的记录！");
 				}else{
 					/** 得到用户选中的所有的需要删除的ids */
 					var ids = checkedBoxs.map(function(){
 						return this.value;
 					})
 
-					$.ligerDialog.confirm("确认要删除吗?","删除部门",function(r){
-						if(r){
-							// alert("删除："+ids.get());
-							// 发送请求
-							window.location = "${ctx }/goodsforgoods/addGoodsForYz?ids=" + ids.get();
-						}
-					});
+                    alert("确认要删除吗?","删除记录");
+
+							window.location = "${ctx }/goodsforgoods/deleteGoodsForYz?ids=" + ids.get();
+
 				}
 			})
 
@@ -137,8 +132,9 @@
 	</script>
 
 
+
 </head>
-<body>
+<body >
 	<!-- 导航 -->
 	<table width="100%" border="0" cellpadding="0" cellspacing="0">
 	  <tr><td height="10"></td></tr>

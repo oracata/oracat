@@ -49,7 +49,10 @@ public interface DataService {
     List<String> selectShengfen();
 	List<String> selectChengshi(String shengfen);
 	List<String> selectQuyufl(String shengfen,String chengshi);
-
+   /**年度报表**/
+   List<ReportYear> selectReportYear(String begin_date,String end_date);
+    //**导出excel**/
+    XSSFWorkbook exportReportYear() throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException;
 
 	/** 云中商品对应关系
 	 **/

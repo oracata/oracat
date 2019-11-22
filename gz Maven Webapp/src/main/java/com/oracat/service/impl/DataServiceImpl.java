@@ -42,6 +42,10 @@ public class DataServiceImpl implements DataService{
     @Autowired  //自动装配
     private B2bPriceDao b2bPriceDao ;
 
+
+	@Autowired  //自动装配
+	private ReportYearDao reportYearDao ;
+
     @Autowired
 	private  ReportDayDao  reportDayDao;
 
@@ -157,6 +161,54 @@ public class DataServiceImpl implements DataService{
 	}
 
 
+
+
+   /** 年度报表**/
+
+	@Override
+	public List<ReportYear> selectReportYear(String begin_date,String end_date)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return  reportYearDao.selectReportYear(begin_date,end_date);
+
+	}
+
+	@Override
+	public XSSFWorkbook exportReportYear() throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException {
+		//根据条件查询数据，把数据装载到一个list中
+
+		/** 特殊字段格式化
+		 for(int i=0;i<list.size();i++){
+		 //查询财务名字
+		 int adminId = list.get(i).getAdminId();
+		 String adminName = salarymanageDao.selectAdminNameById(adminId);
+		 list.get(i).setAdminName(adminName);
+		 list.get(i).setId(i+1);
+		 }
+		 **/
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+		List<ReportYear> list = reportYearDao.selectReportYear("","");
+		List<ExcelBean> excel=new ArrayList<>();
+		Map<Integer,List<ExcelBean>> map=new LinkedHashMap<>();
+		XSSFWorkbook xssfWorkbook=null;
+		//设置标题栏
+		excel.add(new ExcelBean("区域","area",0));
+		excel.add(new ExcelBean("201907","je201907",0));
+		excel.add(new ExcelBean("201908","je201908",0));
+		excel.add(new ExcelBean("201909","je201909",0));
+		excel.add(new ExcelBean("201910","je201910",0));
+		excel.add(new ExcelBean("201911","je201911",0));
+		excel.add(new ExcelBean("全年","year",0));
+		excel.add(new ExcelBean("毛利额","ml",0));
+		excel.add(new ExcelBean("毛利率","mll",0));
+
+		map.put(0, excel);
+		String sheetName = "电商年表";
+		//调用ExcelUtil的方法
+		xssfWorkbook = ExcelUtil.createExcelFile(ReportYear.class, list, map, sheetName);
+		return xssfWorkbook;
+	}
 
 
 

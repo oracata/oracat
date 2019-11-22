@@ -146,6 +146,15 @@
 
 
 
+						<li><span class="file">
+<a href="javascript:void(0);" onclick="javascript: window.parent.document.getElementById('rightFrame').contentWindow.showLoading();  var frame=window.parent.document.getElementById('rightFrame'); frame.src='reportyear.do';  frame.location.reload();  " >
+年报
+</a></span></li>
+
+
+
+
+
 
 					</ul>
 				</li>
@@ -165,7 +174,7 @@
 					<ul>
 						<li><span class="file">
 						
-<a href="javascript:void(0);" onclick="javascript:window.parent.document.getElementById('rightFrame').contentWindow.showLoading(); var frame=window.parent.document.getElementById('rightFrame'); frame.src='goodsforgoods/goodsforgoods.do';  frame.location.reload();  " >
+<a href="javascript:void(0);" onclick="javascript:window.parent.document.getElementById('rightFrame').contentWindow.showLoading(); var frame=window.parent.document.getElementById('rightFrame'); frame.src='goodsforgoods/goodsforgoods';  frame.location.reload();  " >
 云中商品对应关系
 </a>
 						

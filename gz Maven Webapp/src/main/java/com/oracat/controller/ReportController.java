@@ -1,13 +1,17 @@
 package com.oracat.controller;
 
+import com.oracat.model.B2bPrice;
 import com.oracat.model.Goods;
 import com.oracat.model.ReportDay;
+import com.oracat.model.ReportYear;
 import com.oracat.service.DataService;
 import com.oracat.util.ToJson;
 import com.oracat.util.tag.PageModel;
 import com.oracat.util.tools;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +21,15 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.beans.IntrospectionException;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -112,6 +124,61 @@ public class ReportController {
     }
 
 
+
+
+
+    @RequestMapping("/reportyear")
+    public ModelAndView getReportYearView(){
+
+
+        ModelAndView mav = new ModelAndView("reportyear");
+
+
+
+        List<ReportYear> reportyear =dataService.selectReportYear("","");
+        mav.addObject("reportyear", reportyear);
+
+        return mav;
+    }
+
+
+    @RequestMapping("/exportreportyear")
+    public void getExport( HttpServletRequest request, HttpServletResponse response)
+            throws ClassNotFoundException, IntrospectionException, IllegalAccessException, ParseException, InvocationTargetException, UnsupportedEncodingException {
+
+        response.reset(); //清除buffer缓存
+        Map<String,Object> map=new HashMap<String,Object>();
+
+
+        // 指定下载的文件名，浏览器都会使用本地编码，即GBK，浏览器收到这个文件名后，用ISO-8859-1来解码，然后用GBK来显示
+        // 所以我们用GBK解码，ISO-8859-1来编码，在浏览器那边会反过来执行。
+        //文件名
+        String filename="年报"+tools.getTimeDay(0)+".xlsx";
+        response.setHeader("Content-Disposition", "attachment;filename=" +new String(filename.getBytes("GBK"),"ISO-8859-1"));
+        response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+
+
+        XSSFWorkbook workbook=null;
+
+        workbook = dataService.exportReportYear();
+        OutputStream output = null;
+        try {
+            output = response.getOutputStream();
+            BufferedOutputStream bufferedOutPut = new BufferedOutputStream(output);
+            workbook.write(bufferedOutPut);
+            bufferedOutPut.flush();
+            bufferedOutPut.close();
+            output.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
 
 }

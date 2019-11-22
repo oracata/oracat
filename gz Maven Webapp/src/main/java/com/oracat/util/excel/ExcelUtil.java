@@ -140,7 +140,7 @@ public class ExcelUtil {
         XSSFFont font1 = workbook.createFont();
         font1.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);
         font1.setFontName("黑体");
-        font1.setFontHeightInPoints((short) 14);// 设置字体大小
+        font1.setFontHeightInPoints((short) 12);// 设置字体大小
         fontStyle.setFont(font1);
         fontStyle.setBorderBottom(XSSFCellStyle.BORDER_THIN); // 下边框
         fontStyle.setBorderLeft(XSSFCellStyle.BORDER_THIN);// 左边框

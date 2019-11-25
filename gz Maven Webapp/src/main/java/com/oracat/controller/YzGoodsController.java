@@ -41,8 +41,11 @@ public class YzGoodsController {
 		System.out.println("getPageIndex = " + pageModel.getPageIndex());
 		System.out.println("getPageSize = " + pageModel.getPageSize());
 		System.out.println("getRecordCount = " + pageModel.getRecordCount());
+
+
 		if(pageIndex != null){
 			pageModel.setPageIndex(pageIndex);
+
 		}
 		
 		

@@ -2,15 +2,19 @@ package com.oracat.controller;
 
 import com.oracat.model.GoodsForYz;
 import com.oracat.service.DataService;
+import com.oracat.util.ToJson;
+import com.oracat.util.tools;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class GoodsForGoodsController {
@@ -93,5 +97,25 @@ public class GoodsForGoodsController {
         // 返回ModelAndView
         return mv;
     }
+
+
+
+    /**
+     * 增加记录 检索jnd_spid
+     * **/
+    @RequestMapping("/goodsforgoods/selectGoodsForYzNotin")
+    @ResponseBody
+    //挑选全部的省份信息
+    public void selectGoodsForYzNotin(HttpServletRequest request, HttpServletResponse response
+                         ) {
+        List<Map<String,String>> list=new ArrayList<Map<String,String>>();
+        try {
+            list=dataService.findGoodsForYzNotin(tools.getTimeDay(-1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ToJson.toJson(list, request, response);
+    }
+
 
 }

@@ -110,6 +110,7 @@
                 <tr class="main_trbg_tit" align="center">
 
                     <td>区域</td>
+                    <td>201906</td>
                     <td>201907</td>
                     <td>201908</td>
                     <td>201909</td>
@@ -125,6 +126,7 @@
                     <tr id="data_${stat.index}" align="center" class="main_trbg" onMouseOver="move(this);" onMouseOut="out(this);">
 
                         <td>${reportyear.area              }</td>
+                        <td>${reportyear.je201906              }</td>
                         <td>${reportyear.je201907              }</td>
                         <td>${reportyear.je201908            }</td>
                         <td>${reportyear.je201909                        }</td>

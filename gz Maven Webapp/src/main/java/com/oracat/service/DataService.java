@@ -4,6 +4,7 @@ import java.beans.IntrospectionException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 
 import com.oracat.model.*;
@@ -61,5 +62,5 @@ public interface DataService {
 	void modifyGoodsForYz(GoodsForYz goodsforyz);
 	void addGoodsForYz(GoodsForYz goodsforyz);
 	void removeGoodsForYzById(String jnd_spid);
-
+	List<Map<String,String>> findGoodsForYzNotin(String date);
 }

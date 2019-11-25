@@ -90,7 +90,7 @@ public class ReportDaySqlProvider {
 
                 if (params.get("pageModel") != null) {
                     PageModel pageModel = (PageModel) params.get("pageModel");
-                    WHERE("  RowNumber BETWEEN   " + pageModel.getFirstLimitParam() + " and  " + pageModel.getPageSize() + " ");
+                    WHERE("  RowNumber BETWEEN   " + (pageModel.getFirstLimitParam()+1) + " and  " + (pageModel.getFirstLimitParam()+pageModel.getPageSize())+  " ");
                 }
 
             }

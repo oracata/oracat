@@ -2,6 +2,10 @@ package com.oracat.model;
 
 public class ReportYear {
     String area       ;
+
+
+
+    Double je201906    ;
     Double je201907    ;
     Double je201908    ;
     Double je201909    ;
@@ -11,7 +15,13 @@ public class ReportYear {
     Double ml         ;
     Double mll        ;
 
+    public Double getJe201906() {
+        return je201906;
+    }
 
+    public void setJe201906(Double je201906) {
+        this.je201906 = je201906;
+    }
 
     public String getArea() {
         return area;

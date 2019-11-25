@@ -11,7 +11,7 @@ public interface ReportYearDao {
 
 
     @Select("\n" +
-            "SELECT  n.chengshi  area,isnull(\"2019-07\",0) je201907,isnull(\"2019-08\",0) je201908,isnull(\"2019-09\",0) je201909,isnull(\"2019-10\",0) je201910,isnull(\"2019-11\",0)  je201911,isnull(\"全年\",0) year,isnull(m.cankml,0) ml,isnull(m.cankmll,0) mll FROM (\n" +
+            "SELECT  n.chengshi  area,isnull(\"2019-06\",0) je201906,isnull(\"2019-07\",0) je201907,isnull(\"2019-08\",0) je201908,isnull(\"2019-09\",0) je201909,isnull(\"2019-10\",0) je201910,isnull(\"2019-11\",0)  je201911,isnull(\"全年\",0) year,isnull(m.cankml,0) ml,isnull(m.cankmll,0) mll FROM (\n" +
             "select '文山州' chengshi  union all \n" +
             "select '昭通市'     union all \n" +
             "select '保山市'     union all \n" +
@@ -32,10 +32,10 @@ public interface ReportYearDao {
             ") n\n" +
             "LEFT JOIN (\n" +
             "\n" +
-            " SELECT  h.chengshi,\"2019-07\",\"2019-08\",\"2019-09\",\"2019-10\",\"2019-11\",\"全年\",cankml,cankmll\n" +
+            " SELECT  h.chengshi,\"2019-06\",\"2019-07\",\"2019-08\",\"2019-09\",\"2019-10\",\"2019-11\",\"全年\",cankml,cankmll\n" +
             "   FROM (\n" +
-            "    SELECT chengshi,sum(isnull(\"2019-07\",0)) \"2019-07\",sum(isnull(\"2019-08\",0)) \"2019-08\",sum(isnull(\"2019-09\",0)) \"2019-09\",sum(isnull(\"2019-10\",0)) \"2019-10\",sum(isnull(\"2019-11\",0)) \"2019-11\",\n" +
-            "    sum(isnull(\"2019-07\",0))+sum(isnull(\"2019-08\",0)) +sum(isnull(\"2019-09\",0))+sum(isnull(\"2019-10\",0))+sum(isnull(\"2019-11\",0)) \"全年\"\n" +
+            "    SELECT chengshi,sum(isnull(\"2019-06\",0)) \"2019-06\",sum(isnull(\"2019-07\",0)) \"2019-07\",sum(isnull(\"2019-08\",0)) \"2019-08\",sum(isnull(\"2019-09\",0)) \"2019-09\",sum(isnull(\"2019-10\",0)) \"2019-10\",sum(isnull(\"2019-11\",0)) \"2019-11\",\n" +
+            "    sum(isnull(\"2019-06\",0))+sum(isnull(\"2019-07\",0))+sum(isnull(\"2019-08\",0)) +sum(isnull(\"2019-09\",0))+sum(isnull(\"2019-10\",0))+sum(isnull(\"2019-11\",0)) \"全年\"\n" +
             "     FROM (\n" +
             "     \t\n" +
             "     \t\n" +
@@ -63,13 +63,13 @@ public interface ReportYearDao {
             "where    a.djbh like 'XH%' and a.djbs in ('XHC','XHH','XHF')\n" +
             "     and a.bmname like rtrim('电商事业部') +'%'\n" +
             "\n" +
-            "     and a.rq between '2019-07-01' and '2019-11-22'\n" +
+            "     and a.rq between '2019-06-01' and '2019-11-30'\n" +
             "     \n" +
             "   and  NOT EXISTS(SELECT 1 FROM jgwldwzl_bm WHERE bmid IN ('BMZ00000085','BMZ00000069') and wldwid=c.wldwid AND creattime>c.creattime  )    \n" +
             "\n" +
             "group by c.chengshi,substring(rq,1,7)\n" +
             "having sum(b.hsje)<>0) t\n" +
-            "PIVOT(sum(t.hsje) FOR t.rq  in  (\"2019-07\",\"2019-08\",\"2019-09\",\"2019-10\",\"2019-11\") ) AS PVT\n" +
+            "PIVOT(sum(t.hsje) FOR t.rq  in  (\"2019-06\",\"2019-07\",\"2019-08\",\"2019-09\",\"2019-10\",\"2019-11\") ) AS PVT\n" +
             "    ) f  GROUP BY chengshi\n" +
             "    ) h\n" +
             "    \n" +
@@ -102,7 +102,7 @@ public interface ReportYearDao {
             "where    a.djbh like 'XH%' and a.djbs in ('XHC','XHH','XHF')\n" +
             "     and a.bmname like rtrim('电商事业部') +'%'\n" +
             "\n" +
-            "     and a.rq between '2019-07-01' and '2019-11-22'\n" +
+            "     and a.rq between '2019-06-01' and '2019-11-30'\n" +
             "     \n" +
             "   and  NOT EXISTS(SELECT 1 FROM jgwldwzl_bm WHERE bmid IN ('BMZ00000085','BMZ00000069') and wldwid=c.wldwid AND creattime>c.creattime  )    \n" +
             "\n" +
@@ -114,11 +114,11 @@ public interface ReportYearDao {
             "\n" +
             "UNION ALL     \n" +
             "    \n" +
-            "   SELECT chengshi , sum(isnull(\"2019-07\",0)) \"2019-07\",sum(isnull(\"2019-08\",0)) \"2019-08\",sum(isnull(\"2019-09\",0)) \"2019-09\",sum(isnull(\"2019-10\",0)) \"2019-10\",sum(isnull(\"2019-11\",0)) \"2019-11\",SUM(\"全年\") \"全年\",SUM(cankml) cankml,SUM(cankmll) cankmll\n" +
+            "   SELECT chengshi ,  sum(isnull(\"2019-06\",0)) \"2019-06\",sum(isnull(\"2019-07\",0)) \"2019-07\",sum(isnull(\"2019-08\",0)) \"2019-08\",sum(isnull(\"2019-09\",0)) \"2019-09\",sum(isnull(\"2019-10\",0)) \"2019-10\",sum(isnull(\"2019-11\",0)) \"2019-11\",SUM(\"全年\") \"全年\",SUM(cankml) cankml,SUM(cankmll) cankmll\n" +
             "   FROM (\n" +
             "    \n" +
-            "     SELECT '合计' chengshi ,sum(isnull(\"2019-07\",0)) \"2019-07\",sum(isnull(\"2019-08\",0)) \"2019-08\",sum(isnull(\"2019-09\",0)) \"2019-09\",sum(isnull(\"2019-10\",0)) \"2019-10\",sum(isnull(\"2019-11\",0)) \"2019-11\",\n" +
-            "    sum(isnull(\"2019-07\",0))+sum(isnull(\"2019-08\",0)) +sum(isnull(\"2019-09\",0))+sum(isnull(\"2019-10\",0))+sum(isnull(\"2019-11\",0)) \"全年\",0 cankml,0 cankmll\n" +
+            "     SELECT '合计' chengshi,sum(isnull(\"2019-06\",0)) \"2019-06\" ,sum(isnull(\"2019-07\",0)) \"2019-07\",sum(isnull(\"2019-08\",0)) \"2019-08\",sum(isnull(\"2019-09\",0)) \"2019-09\",sum(isnull(\"2019-10\",0)) \"2019-10\",sum(isnull(\"2019-11\",0)) \"2019-11\",\n" +
+            "    sum(isnull(\"2019-06\",0))+sum(isnull(\"2019-07\",0))+sum(isnull(\"2019-08\",0)) +sum(isnull(\"2019-09\",0))+sum(isnull(\"2019-10\",0))+sum(isnull(\"2019-11\",0)) \"全年\",0 cankml,0 cankmll\n" +
             "     FROM (\n" +
             "     \t\n" +
             "     \t\n" +
@@ -145,20 +145,20 @@ public interface ReportYearDao {
             "where    a.djbh like 'XH%' and a.djbs in ('XHC','XHH','XHF')\n" +
             "     and a.bmname like rtrim('电商事业部') +'%'\n" +
             "\tand chengshi IN ( SELECT distinct chengshi FROM report_b2b_data WHERE shengfen='云南省')\n" +
-            "     and a.rq between '2019-07-01' and '2019-11-22'\n" +
+            "     and a.rq between '2019-06-01' and '2019-11-30'\n" +
             "     \n" +
             "   and  NOT EXISTS(SELECT 1 FROM jgwldwzl_bm WHERE bmid IN ('BMZ00000085','BMZ00000069') and wldwid=c.wldwid AND creattime>c.creattime  )    \n" +
             "\n" +
             "group by  substring(rq,1,7)\n" +
             "having sum(b.hsje)<>0\n" +
             ") t\n" +
-            "PIVOT(sum(t.hsje) FOR t.rq  in  (\"2019-07\",\"2019-08\",\"2019-09\",\"2019-10\",\"2019-11\") ) AS PVT\n" +
+            "PIVOT(sum(t.hsje) FOR t.rq  in  (\"2019-06\",\"2019-07\",\"2019-08\",\"2019-09\",\"2019-10\",\"2019-11\") ) AS PVT\n" +
             "\n" +
             "\n" +
             "UNION ALL\n" +
             "\n" +
             "    \n" +
-            "    SELECT '合计',0,0,0,0,0,0,round(cankml,2) cankml,round(t.cankmll,2) cankmll FROM (\n" +
+            "    SELECT '合计',0,0,0,0,0,0,0,round(cankml,2) cankml,round(t.cankmll,2) cankmll FROM (\n" +
             "    select  sum(b.hsje) as hsje\n" +
             "      ,sum(case when b.ywyjsje<>0 then b.ywyjsje else b.hsje end-(case when a.djlx='x40' or a.djlx='x60' then (case when b.cankcbj<>0 then round(b.cankcbj/b.xsbzjlgg*b.shl,2) else (case when b.ywyjsje<>0 then b.ywyjsje else b.hsje end) end) else round(b.cankcbj/b.xsbzjlgg*b.shl,2) end)) as cankml\n" +
             "      ,sum(case when b.ywyjsje<>0 then b.ywyjsje else b.hsje end-(case when a.djlx='x40' or a.djlx='x60' then (case when b.cankcbj<>0 then round(b.cankcbj/b.xsbzjlgg*b.shl,2) else (case when b.ywyjsje<>0 then b.ywyjsje else b.hsje end) end) else round(b.cankcbj/b.xsbzjlgg*b.shl,2) end))/sum(case when b.ywyjsje<>0 then b.ywyjsje else b.hsje end)*100 as cankmll\n" +
@@ -181,7 +181,7 @@ public interface ReportYearDao {
             "where    a.djbh like 'XH%' and a.djbs in ('XHC','XHH','XHF')\n" +
             "     and a.bmname like rtrim('电商事业部') +'%'\n" +
             "\tand chengshi IN ( SELECT distinct chengshi FROM report_b2b_data WHERE shengfen='云南省')\n" +
-            "     and a.rq between '2019-07-01' and '2019-11-22'\n" +
+            "     and a.rq between '2019-06-01' and '2019-11-30'\n" +
             "     \n" +
             "   and  NOT EXISTS(SELECT 1 FROM jgwldwzl_bm WHERE bmid IN ('BMZ00000085','BMZ00000069') and wldwid=c.wldwid AND creattime>c.creattime  )    \n" +
             "   \tand chengshi IN ( SELECT distinct chengshi FROM report_b2b_data WHERE shengfen='云南省')\n" +

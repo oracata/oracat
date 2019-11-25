@@ -19,6 +19,7 @@ public class PageModel {
 
 	public int getRecordCount() {
 		this.recordCount = this.recordCount <= 0 ? 0:this.recordCount;
+
 		return recordCount;
 	}
 	public void setRecordCount(int recordCount) {
@@ -28,7 +29,7 @@ public class PageModel {
 		this.pageIndex = this.pageIndex <= 0?1:this.pageIndex;
 		/** 判断当前页面是否超过了总页数:如果超过了默认给最后一页作为当前页  */
 		this.pageIndex = this.pageIndex>=this.getTotalSize()?this.getTotalSize():this.pageIndex;
-		
+
 		return pageIndex;
 	}
 	public void setPageIndex(int pageIndex) {
@@ -51,20 +52,18 @@ public class PageModel {
 		}else{
 			totalSize = (this.getRecordCount() -1)/this.getPageSize() + 1;
 		}
+
+
+
 		return totalSize;
 	}
 	
 	
 	public int getFirstLimitParam(){
 		Integer first = 0;
-		if(DynamicDataSourceHolder.getDataSource().equals("mysql")) {
-			first=(this.getPageIndex() - 1) * this.getPageSize();
-		}
 
-		if(DynamicDataSourceHolder.getDataSource().equals("sqlserver")) {
-			first=((this.getPageIndex()-1 ) * this.getPageSize())+1;
+		first=(this.getPageIndex() - 1) * this.getPageSize();
 
-		}
 		return first;
 	}
 	

@@ -104,6 +104,29 @@
 
         });
 
+    </script>
+
+
+    <script type="text/javascript">
+
+        function show_jnd_spid() {
+            $.ajax({
+                url: 'selectGoodsForYzNotin.do',
+                type: 'get',
+                data: {},
+                dataType: 'json',
+                //成功回调函数的参数data是一个json数组，长度是json数组里面的对象的个数。
+                success: function (data) {
+
+                    console.log(JSON.stringify(data));
+                    console.log(data.length);
+
+                    $("#jnd_spid").val(data[0].getKey());
+                    $("#jnd_spname").val(data[0].getValue());
+                }
+            })
+        }
+
 
     </script>
 </head>
@@ -127,7 +150,7 @@
                     <tr><td class="font3 fftd">
                         <table>
                             <tr>
-                                <td class="font3 fftd">佳能达商品id：<input type="text" name="jnd_spid" id="jnd_spid" size="20" value="${goodsforyz.jnd_spid }"/></td>
+                                <td class="font3 fftd">佳能达商品id：<input onclick="show_jnd_spid()" type="text" name="jnd_spid" id="jnd_spid" size="20" value="${goodsforyz.jnd_spid }"/></td>
                                 <td class="font3 fftd">佳能达商品名称：<input type="text" name="jnd_spname" id="jnd_spname" size="20" value="${goodsforyz.jnd_spname }"/></td>
                                 <td class="font3 fftd">云中商品id：<input type="text" name="yz_goods_id" id="yz_goods_id" size="20" value="${goodsforyz.yz_goods_id }"/></td>
                                 <td class="font3 fftd">云中商品名称：<input type="text" name="yz_goods_name" id="yz_goods_name" size="20" value="${goodsforyz.yz_goods_name }"/></td>

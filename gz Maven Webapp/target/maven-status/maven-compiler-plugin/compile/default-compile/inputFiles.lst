@@ -8,8 +8,10 @@ F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\util\Constants.j
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\dao\MenuDao.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\service\OverViewCatagoryService.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\util\tag\PageModel.java
+F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\dao\GoodsForYzDao.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\dao\YzGoodsDao.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\dao\provider\DcGoodsSqlProvider.java
+F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\model\GoodsForYz.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\model\B2bPrice.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\service\impl\DataServiceImpl.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\controller\ReportController.java
@@ -27,13 +29,14 @@ F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\util\DynamicData
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\controller\GoodsForGoodsController.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\model\OverViewCatagory.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\model\ReportDay.java
+F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\dao\ReportYearDao.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\util\excel\ExcelUtil.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\interceptor\AuthorInterceptor.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\dao\provider\ReportDaySqlProvider.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\dao\B2bPriceDao.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\service\UserService.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\controller\OverViewController.java
-F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\model\Goodsforgoods.java
+F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\model\ReportYear.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\service\impl\UserServiceImpl.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\util\tag\PagerTag.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\dao\UserDao.java

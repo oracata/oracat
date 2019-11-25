@@ -47,10 +47,10 @@ public class ReportController {
 
         //初始化查询条件
         if(v_reportday.getBegin_date()==null && v_reportday.getEnd_date()==null&&v_reportday.getShengfen()==null&&v_reportday.getChengshi()==null&&v_reportday.getQuyufl()==null) {
-            v_reportday.setBegin_date(tools.getTimeDay(0));
+            v_reportday.setBegin_date(tools.getTimeDay(-14));
             v_reportday.setEnd_date(tools.getTimeDay(0));
             v_reportday.setShengfen("云南省");
-            v_reportday.setChengshi("");
+            v_reportday.setChengshi(" 合计");
             v_reportday.setQuyufl(" 合计");
         }
 
@@ -60,8 +60,12 @@ public class ReportController {
         System.out.println("getPageIndex = " + pageModel.getPageIndex());
         System.out.println("getPageSize = " + pageModel.getPageSize());
         System.out.println("getRecordCount = " + pageModel.getRecordCount());
+
+
         if(pageIndex != null){
             pageModel.setPageIndex(pageIndex);
+
+
         }
 
 

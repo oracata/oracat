@@ -98,7 +98,7 @@
 					<ul>
 						<li><span class="file">
 						
-<a href="javascript:void(0);" onclick="javascript: window.parent.document.getElementById('rightFrame').contentWindow.showLoading(); var frame=window.parent.document.getElementById('rightFrame'); frame.src='404.html';  frame.location.reload();   " >
+<a href="javascript:void(0);" onclick="javascript: window.parent.document.getElementById('rightFrame').contentWindow.showLoading(); var frame=window.parent.document.getElementById('rightFrame'); frame.src='pricepare.do';  frame.location.reload();   " >
 价格对比
 </a>						
 						

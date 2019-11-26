@@ -108,7 +108,7 @@ public class GoodsForGoodsController {
     //挑选全部的省份信息
     public void selectGoodsForYzNotin(HttpServletRequest request, HttpServletResponse response
                          ) {
-        List<Map<String,String>> list=new ArrayList<Map<String,String>>();
+        List<Map<String,Map<String,Map<String,String>>>>  list=new ArrayList<Map<String,Map<String,Map<String,String>>>>();
         try {
             list=dataService.findGoodsForYzNotin(tools.getTimeDay(-1));
         } catch (Exception e) {
@@ -116,6 +116,61 @@ public class GoodsForGoodsController {
         }
         ToJson.toJson(list, request, response);
     }
+
+
+    @RequestMapping("/goodsforgoods/selectGoodsForYzId")
+    @ResponseBody
+    //挑选全部的省份信息
+    public void selectGoodsForYzID(HttpServletRequest request, HttpServletResponse response
+            ,@RequestParam("jnd_spname") String jnd_spname,@RequestParam("manufacturer") String manufacturer
+    ) {
+        List<Map<String,Map<String,Map<String,String>>>>  list=new ArrayList<Map<String,Map<String,Map<String,String>>>>();
+        try {
+            list=dataService.findGoodsForYzId(tools.getTimeDay(-1),jnd_spname,manufacturer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ToJson.toJson(list, request, response);
+    }
+
+
+    @RequestMapping("/goodsforgoods/selectGoodsForYzName")
+    @ResponseBody
+    //挑选全部的省份信息
+    public void select_yz_goods_name(HttpServletRequest request, HttpServletResponse response
+            ,@RequestParam("yz_goods_id") String yz_goods_id
+    ) {
+        List<String>  list=new ArrayList<String>();
+        try {
+            list=dataService.findGoodsForYzName(tools.getTimeDay(-1),yz_goods_id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ToJson.toJson(list, request, response);
+    }
+
+
+
+
+    @RequestMapping("/goodsforgoods/removeGoodsForYzId")
+    @ResponseBody
+    //挑选全部的省份信息
+    public void removeGoodsForYzId(HttpServletRequest request, HttpServletResponse response
+            ,@RequestParam("jnd_spid") String jnd_spid
+    ) {
+        int stat=0;
+        try {
+            stat=dataService.removeGoodsForYzId(jnd_spid);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ToJson.toJson(stat, request, response);
+    }
+
+
+
+
+
 
 
 }

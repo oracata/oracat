@@ -62,5 +62,8 @@ public interface DataService {
 	void modifyGoodsForYz(GoodsForYz goodsforyz);
 	void addGoodsForYz(GoodsForYz goodsforyz);
 	void removeGoodsForYzById(String jnd_spid);
-	List<Map<String,String>> findGoodsForYzNotin(String date);
+    List<Map<String,Map<String,Map<String,String>>>>  findGoodsForYzNotin(String date);
+    List<Map<String,Map<String,Map<String,String>>>>  findGoodsForYzId(String date,String jnd_spname,String manufacturer);
+    List<String>  findGoodsForYzName(String date,String goods_id);
+    int removeGoodsForYzId(String jnd_spid);
 }

@@ -3,7 +3,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <title>人事管理系统——修改部门</title>
+    <title>增加记录</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="cache-control" content="no-cache" />
@@ -121,8 +121,85 @@
                     console.log(JSON.stringify(data));
                     console.log(data.length);
 
-                    $("#jnd_spid").val(data[0].getKey());
-                    $("#jnd_spname").val(data[0].getValue());
+                    $("#jnd_spid").val(data[0]['id']);
+                    $("#jnd_spname").val(data[0]['name']);
+                    $("#manufacturer").val(data[0]['manufacturer']);
+                    $("#spec").val(data[0]['spec']);
+
+                    $("#yz_goods_name").val('');
+                    $("#yz_goods_id").val('');
+                }
+            })
+        }
+
+
+
+        function select_yz_goods_id() {
+
+            var jnd_spname=$("#jnd_spname").val().split('(')[0];
+
+            var manufacturer=$("#manufacturer").val().split('(')[0];
+            var spec=$("#spec").val();
+
+            $.ajax({
+                url: 'selectGoodsForYzId.do',
+                type: 'get',
+                data: {'jnd_spname':jnd_spname,'manufacturer':manufacturer},
+                dataType: 'json',
+                //成功回调函数的参数data是一个json数组，长度是json数组里面的对象的个数。
+                success: function (data) {
+
+                    console.log(JSON.stringify(data));
+                    console.log(data.length);
+
+                    var t="<option value=''>----请选择----</option>";
+                    for(var i=0;i<data.length;i++){
+
+                            t+="<option value="+data[i]['goods_id']+">"+data[i]['goods_id']+"|"+data[i]['goods_name']+"|"+data[i]['producer']+"|"+data[i]['spec']+"| 佳能达规格："+spec+"</option>";
+                    }
+
+                    $("#yz_goods_id").html(t);
+                }
+            })
+        }
+
+
+
+        function select_yz_goods_name() {
+
+            var yz_goods_id=$("#yz_goods_id").val();
+            $.ajax({
+                url: 'selectGoodsForYzName.do',
+                type: 'get',
+                data: {'yz_goods_id':yz_goods_id},
+                dataType: 'json',
+                //成功回调函数的参数data是一个json数组，长度是json数组里面的对象的个数。
+                success: function (data) {
+
+                    console.log(JSON.stringify(data));
+                    console.log(data.length);
+
+                    $("#yz_goods_name").val(data[0]);
+                }
+            })
+        }
+
+
+        function remove_spid(){
+
+            var jnd_spid=$("#jnd_spid").val();
+            $.ajax({
+                url: 'removeGoodsForYzId.do',
+                type: 'get',
+                data: {'jnd_spid':jnd_spid},
+                dataType: 'json',
+                //成功回调函数的参数data是一个json数组，长度是json数组里面的对象的个数。
+                success: function (data) {
+
+                    console.log(JSON.stringify(data));
+                    console.log(data.length);
+
+                  alert("移除成功！");
                 }
             })
         }
@@ -152,7 +229,11 @@
                             <tr>
                                 <td class="font3 fftd">佳能达商品id：<input onclick="show_jnd_spid()" type="text" name="jnd_spid" id="jnd_spid" size="20" value="${goodsforyz.jnd_spid }"/></td>
                                 <td class="font3 fftd">佳能达商品名称：<input type="text" name="jnd_spname" id="jnd_spname" size="20" value="${goodsforyz.jnd_spname }"/></td>
-                                <td class="font3 fftd">云中商品id：<input type="text" name="yz_goods_id" id="yz_goods_id" size="20" value="${goodsforyz.yz_goods_id }"/></td>
+                                <input type="hidden"  id="manufacturer" name="manufacturer" value="" />
+                                <input type="hidden" id="spec"  name="spec" value="" />
+
+                                <td class="font3 fftd">云中商品id：  <select  onmouseover="select_yz_goods_id()" onchange="select_yz_goods_name()"  name="yz_goods_id" id="yz_goods_id" > <option></option></select></td>
+                                <input type="hidden" id="yz_name"  name="yz_name" value="" />
                                 <td class="font3 fftd">云中商品名称：<input type="text" name="yz_goods_name" id="yz_goods_name" size="20" value="${goodsforyz.yz_goods_name }"/></td>
 
                             </tr>
@@ -161,7 +242,7 @@
                     </td></tr>
                     <tr><td class="main_tdbor"></td></tr>
 
-                    <tr><td align="left" class="fftd"><input type="submit" value="确定增加">&nbsp;&nbsp;<input id="rr" type="reset" value="取消 "></td></tr>
+                    <tr><td align="right" class="fftd"><input type="submit" value="确定增加">&nbsp;&nbsp;<input id="rr" type="reset" value="取消 "> &nbsp;&nbsp;<input type="button" onclick="remove_spid()" value="找不到对应关系，移除SPID"></td></tr>
                 </table>
             </form>
         </td>

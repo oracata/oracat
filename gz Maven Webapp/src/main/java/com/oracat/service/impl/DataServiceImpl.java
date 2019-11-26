@@ -326,7 +326,7 @@ public class DataServiceImpl implements DataService{
 	}
 
 	@Override
-	public List<Map<String,String>>  findGoodsForYzNotin(String date)
+	public List<Map<String,Map<String,Map<String,String>>>>   findGoodsForYzNotin(String date)
 	{
 		DynamicDataSourceHolder.setDataSource("mysql");
 
@@ -335,6 +335,35 @@ public class DataServiceImpl implements DataService{
 	}
 
 
+    @Override
+    public List<Map<String,Map<String,Map<String,String>>>>   findGoodsForYzId(String date,String jnd_spname,String manufacturer)
+    {
+        DynamicDataSourceHolder.setDataSource("mysql");
+
+        return goodsForYzDao.findGoodsForYzId(date,jnd_spname,manufacturer);
+
+    }
+
+
+
+    @Override
+    public List<String>   findGoodsForYzName(String date,String goods_id)
+    {
+        DynamicDataSourceHolder.setDataSource("mysql");
+
+        return goodsForYzDao.findGoodsForYzName(date,goods_id);
+
+    }
+
+
+    @Override
+    public int removeGoodsForYzId(String jnd_spid)
+    {
+        DynamicDataSourceHolder.setDataSource("mysql");
+
+      return  goodsForYzDao.removeGoodsForYzId(jnd_spid);
+
+    }
 
 
 

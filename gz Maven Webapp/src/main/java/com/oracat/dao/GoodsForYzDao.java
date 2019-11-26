@@ -45,7 +45,7 @@ public interface GoodsForYzDao {
     int  deleteGoodsForYz(@Param("jnd_spid") String jnd_spid);
 
 
-    @Select("select  a.id ,a.name from jnd_goods a \n" +
+    @Select("select  a.id ,a.name,a.manufacturer,a.spec from jnd_goods a \n" +
             "INNER JOIN jnd_kc_hshj e on a.id=e.id   and e.date='${date}'\n" +
             "where a.date='${date}' and a.STATE=1 AND e.kehulb='1' and e.stock_num>0\n" +
             "and a.id not in (\n" +
@@ -53,8 +53,23 @@ public interface GoodsForYzDao {
             "and a.id not in (\n" +
             "select jnd_spid from goods_for_yz_nofind\n" +
             ") order by e.stock_num desc  limit 1\n"  )
-    List<Map<String,String>> findGoodsForYzNotin(@Param("date") String date);
+    List<Map<String,Map<String,Map<String,String>>>> findGoodsForYzNotin(@Param("date") String date);
 
 
+    @Select("select goods_id,goods_name,producer,spec from yz_puyao \n" +
+            "where date='${date}' and goods_name like '%${jnd_spname}%' and producer like '%${manufacturer}%'\n"  )
+    List<Map<String,Map<String,Map<String,String>>>> findGoodsForYzId(@Param("date") String date,
+                                              @Param("jnd_spname") String jnd_spname,
+                                              @Param("manufacturer") String manufacturer
+                                              );
 
+    @Select("select goods_name from yz_puyao \n" +
+            "where date='${date}' and goods_id='${goods_id}' \n"  )
+    List<String> findGoodsForYzName(@Param("date") String date,
+                                                                      @Param("goods_id") String goods_id
+    );
+
+    @Insert(" insert into  goods_for_yz_nofind    select  '${jnd_spid}' from dual  \n"  )
+    int removeGoodsForYzId(@Param("jnd_spid") String jnd_spid
+    );
 }

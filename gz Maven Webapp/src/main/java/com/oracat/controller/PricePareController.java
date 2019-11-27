@@ -1,5 +1,6 @@
 package com.oracat.controller;
 
+import com.oracat.model.PricePare;
 import com.oracat.model.ReportDay;
 import com.oracat.service.DataService;
 import com.oracat.util.tag.PageModel;
@@ -22,20 +23,18 @@ public class PricePareController {
 
 
 
-    @RequestMapping("/reportday")
+    @RequestMapping("/pricepare")
     public ModelAndView getReportDayView(Model model, Integer pageIndex,
-                                         @ModelAttribute ReportDay v_reportday){
+                                         @ModelAttribute PricePare v_pricepare){
 
         //初始化查询条件
-        if(v_reportday.getBegin_date()==null && v_reportday.getEnd_date()==null&&v_reportday.getShengfen()==null&&v_reportday.getChengshi()==null&&v_reportday.getQuyufl()==null) {
-            v_reportday.setBegin_date(tools.getTimeDay(-14));
-            v_reportday.setEnd_date(tools.getTimeDay(0));
-            v_reportday.setShengfen("云南省");
-            v_reportday.setChengshi(" 合计");
-            v_reportday.setQuyufl(" 合计");
+        if(v_pricepare.getBegin_date()==null && v_pricepare.getEnd_date()==null) {
+            v_pricepare.setBegin_date(tools.getTimeDay(-14));
+            v_pricepare.setEnd_date(tools.getTimeDay(0));
+
         }
 
-        ModelAndView mav = new ModelAndView("reportday");
+        ModelAndView mav = new ModelAndView("pricepare");
 
         PageModel pageModel = new PageModel();
         System.out.println("getPageIndex = " + pageModel.getPageIndex());
@@ -50,10 +49,10 @@ public class PricePareController {
         }
 
 
-        List<ReportDay> reportday =dataService.findReportDay(v_reportday, pageModel);
-        mav.addObject("reportday", reportday);
+        List<PricePare> pricepare =dataService.findPricePare(v_pricepare, pageModel);
+        mav.addObject("pricepare", pricepare);
         mav.addObject("pageModel", pageModel);
-        mav.addObject("reportday_con", v_reportday);   //回写查询条件
+        mav.addObject("pricepare_con", v_pricepare);   //回写查询条件
 
 
 

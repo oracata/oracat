@@ -51,6 +51,9 @@ public class DataServiceImpl implements DataService{
 
 	@Autowired  //自动装配
 	private GoodsForYzDao goodsForYzDao ;
+
+	@Autowired  //自动装配
+	private PricePareDao pricePareDao ;
 	
 	/*****************东昌服务接口实现*************************************/
 	@Transactional(readOnly=true)
@@ -75,7 +78,7 @@ public class DataServiceImpl implements DataService{
 	        /** 开始分页查询数据：查询第几页的数据 */
 		    params.put("pageModel", pageModel);
 	    }
-		System.out.println("***********begindate:"+goods.getBegin_date());
+
 		List<Goods> dcgoods = dcGoodsDao.selectByPage(params);
 		 
 		return dcgoods;
@@ -105,14 +108,14 @@ public class DataServiceImpl implements DataService{
 		params.put("Goods", goods);
 		int recordCount = yzGoodsDao.count(params);
 		pageModel.setRecordCount(recordCount);
-		
+
 		if(recordCount > 0){
 	        /** 开始分页查询数据：查询第几页的数据 */
 		    params.put("pageModel", pageModel);
 	    }
-		System.out.println("***********begindate:"+goods.getBegin_date());
+
 		List<Goods> yzgoods = yzGoodsDao.selectByPage(params);
-		 
+
 		return yzgoods;
 	}
 
@@ -365,6 +368,31 @@ public class DataServiceImpl implements DataService{
 
     }
 
+
+    /**价格对比**/
+	@Transactional(readOnly=true)
+	@Override
+	public List<PricePare> findPricePare(PricePare pricepare,PageModel pageModel) {
+		DynamicDataSourceHolder.setDataSource("mysql");
+		/** 当前需要分页的总数据条数  */
+		Map<String,Object> params = new HashMap<String, Object>();
+		params.put("PricePare", pricepare);
+
+
+		int recordCount = pricePareDao.count(params);
+		pageModel.setRecordCount(recordCount);
+
+		if(recordCount > 0){
+
+			params.put("pageModel", pageModel);
+		}
+
+
+
+		List<PricePare> yzpricepare = pricePareDao.selectByPage(params);
+
+		return yzpricepare;
+	}
 
 
 }

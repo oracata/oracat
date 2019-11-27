@@ -1,7 +1,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.LinkedHashMap" %>
-<%@ page import="com.oracat.model.ReportDay" %>
+<%@ page import="com.oracat.model.PricePare" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.oracat.util.FusionCharts" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -13,7 +13,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <title>日报</title>
+    <title>价格对比</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="cache-control" content="no-cache" />
@@ -142,96 +142,6 @@
     </script>
 
 
-    <!--查询条件 三级联动-->
-    <script type="text/javascript">
-
-        function show_1(){
-            $.ajax({
-                url:'selectAllProvince.do',
-                type:'post',
-                data:{'typeId':0},
-                dataType:'json',
-                //成功回调函数的参数data是一个json数组，长度是json数组里面的对象的个数。
-                success:function(data){
-
-                    console.log(JSON.stringify(data));
-                    console.log(data.length);
-                    var t="<option value=''>----请选择省----</option>";
-                    for(var i=0;i<data.length;i++){
-                        if(data[i]==' 合计'){
-                            t+="<option value=' 合计'>合计</option>";
-                        }
-                        else{
-                            t+="<option value="+data[i]+">"+data[i]+"</option>";
-                        }
-
-                    }
-                    $("#p").html(t);
-                }
-            })
-
-        }
-        function show_2(){
-
-            var provinceId=$("#p").val();
-
-            $.ajax({
-                url:'selectAllCityProvince.do',
-                type:'post',
-                data:{'provinceId':provinceId},
-                dataType:'json',
-                success:function(data){
-                    var t="<option value=''>----请选择城市----</option>";
-                    for(var i=0;i<data.length;i++){
-                        if(data[i]==' 合计'){
-                            t+="<option value=' 合计'>合计</option>";
-                        }
-                        else{
-                            t+="<option value="+data[i]+">"+data[i]+"</option>";
-                        }
-                    }
-
-                    $("#c").html(t);
-                },
-                error:function(data){
-                    alert("查询城市失败了！");
-                }
-            })
-
-        }
-
-        function show_3(){
-
-            var provinceId=$("#p").val();
-            var cityId=$("#c").val();
-            $.ajax({
-                url:'selectAllAreaProvince.do',
-                type:'post',
-                data:{'provinceId':provinceId,"cityId":cityId},
-                dataType:'json',
-                success:function(data){
-
-                    console.log(JSON.stringify(data));
-                    var t="<option value=''>----请选择市区----</option>";
-                    for(var i=0;i<data.length;i++){
-                        if(data[i]==' 合计'){
-                            t+="<option value=' 合计'>合计</option>";
-                        }
-                        else{
-                            t+="<option value="+data[i]+">"+data[i]+"</option>";
-                        }
-                    }
-                    $("#a").html(t);
-                }
-            })
-
-        }
-
-
-
-    </script>
-
-
 
 
 
@@ -242,7 +152,7 @@
     <tr><td height="10"></td></tr>
     <tr>
         <td width="15" height="32"></td>
-        <td class="main_locbg font2">&nbsp;&nbsp;&nbsp;当前位置：报表 &gt; 日报</td>
+        <td class="main_locbg font2">&nbsp;&nbsp;&nbsp;当前位置： 价格&gt; 价格对比</td>
         <td width="15" height="32"></td>
     </tr>
 </table>
@@ -254,19 +164,18 @@
             <table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
                 <tr>
                     <td class="fftd">
-                        <form name="reportdayform" method="post" id="form" action="reportday.do">
+                        <form name="pricepareform" method="post" id="form" action="pricepare.do">
                             <table width="100%" border="0" cellpadding="0" cellspacing="0">
 
                                 <tr>
                                     <td class="font3">
-                                        开始日期：<input type="text" id="begin_date" name="begin_date" value="${reportday_con.begin_date}"  />
-                                        结束日期：<input type="text" id="end_date"   name="end_date" value="${reportday_con.end_date}" />
-                                        省份：
-                                        <select id="p" name="shengfen" onmouseover="show_1();" onchange="show_2();" ><option value="${reportday_con.shengfen}">${reportday_con.shengfen}</option></select>
-                                        地市：
-                                        <select id="c" name="chengshi"  onchange="show_3()"><option value="${reportday_con.chengshi}">${reportday_con.chengshi}</option></select>
-                                        区县：
-                                        <select id="a" name="quyufl" ><option value="${reportday_con.quyufl}">${reportday_con.quyufl}</option></select>
+                                        开始日期：<input type="text" id="begin_date" name="begin_date" value="${pricepare_con.begin_date}"  />
+                                        结束日期：<input type="text" id="end_date"   name="end_date" value="${pricepare_con.end_date}" />
+                                        佳能达商品编码：
+                                        <input type="text" id="no" name="no"  value="${pricepare_con.no}"/>
+                                        佳能达商品名称：
+                                        <input type="text" id="name" name="name"  value="${pricepare_con.name}"/>
+
                                         <input type="submit" value="查询"/>
 
                                     </td>
@@ -286,10 +195,10 @@
         <%
             // store chart config name-config value pair
             Map<String, String> chartConfig = new HashMap<String, String>();
-            chartConfig.put("caption", "日报");
+            chartConfig.put("caption", "价格对比");
             chartConfig.put("subCaption", "");
             chartConfig.put("xAxisName", "时间");
-            chartConfig.put("yAxisName", "下单金额");
+            chartConfig.put("yAxisName", "价格");
             chartConfig.put("formatNumberScale", "0");
             chartConfig.put("numberSuffix", "");
             chartConfig.put("theme", "fusion");
@@ -298,17 +207,17 @@
 
             //store label-value pair
             //LinkedHashMap 保证数据顺序
-            Map<String, Double> dataValuePair = new LinkedHashMap<String, Double>();
+            Map<String, Double[]> dataValuePair = new LinkedHashMap<String, Double[]>();
 
 
             //遍历List
-            Object re = request.getAttribute("reportday");
-            List<ReportDay> ol= (List)re;
+            Object re = request.getAttribute("pricepare");
+            List<PricePare> ol= (List)re;
             for(int i=0;i<ol.size();i++){
-                ReportDay      ov = ol.get(i);
+                PricePare      ov = ol.get(i);
+                Double[] dt={ov.getPfpj(),ov.getPrice()};
 
-
-                dataValuePair.put(""+ov.getRq()+"", ov.getOrder_pay_price());
+                dataValuePair.put(""+ov.getDate()+"", dt);
 
             }
             StringBuilder jsonData = new StringBuilder();
@@ -323,25 +232,62 @@
 
             jsonData.replace(jsonData.length() - 1, jsonData.length() ,"},");
 
-            // build  data object from label-value pair
-            data.append("'data':[");
+            // build  categories
+
+            data.append("'categories':[  {                  \n" +
+                    "      \"category\": [  \n");
 
             for(Map.Entry pair:dataValuePair.entrySet())
             {
+                data.append("{'label':'" + pair.getKey() + "'},");
+            }
 
-                data.append("{'label':'" + pair.getKey() + "','value':'" + pair.getValue() +"'},");
+            data.replace(data.length() - 1, data.length() ,"         ]  \n" +
+                    "        }    \n" +
+                    "    ],  ");
+
+
+            //
+
+
+            data.append("'dataset':[    {     \n" +
+                    "            \"seriesname\": \"佳通达价格\",   \n" +
+                    "            \"data\": [   ");
+
+            for(Map.Entry pair:dataValuePair.entrySet())
+            {
+                Double[]  val=(Double[])pair.getValue();
+                data.append("{'value':'" +val[0] +"'},");
 
             }
-            data.replace(data.length() - 1, data.length(),"]");
+            data.replace(data.length() - 1, data.length(),"]   },");
+
+
+
+            data.append("  {\n" +
+                    "            \"seriesname\": \"云中价格\",\n" +
+                    "            \"data\": [ ");
+
+            for(Map.Entry pair:dataValuePair.entrySet())
+            {
+                Double[]  val=(Double[])pair.getValue();
+                data.append("{'value':'" + val[1] +"'},");
+
+            }
+            data.replace(data.length() - 1, data.length(),"]   } ]");
+
+
 
             jsonData.append(data.toString());
             jsonData.append("}");
+
+            System.out.println( jsonData.toString());
 
 
             // Create chart instance
             // charttype, chartID, width, height,containerid, data format, data
             FusionCharts firstChart = new FusionCharts(
-                    "line",
+                    "msline",
                     "first_chart",
                     "100%",
                     "50%",
@@ -361,40 +307,32 @@
             <table width="100%" border="1" cellpadding="5" cellspacing="0" style="border:#c2c6cc 1px solid; border-collapse:collapse;">
                 <tr class="main_trbg_tit" align="center">
 
-                    <td>日期                </td>
-                    <td>省份                </td>
-                    <td>地市                </td>
-                    <td>区县                </td>
-                    <td>电商客户数          </td>
-                    <td>登录率(%)           </td>
-                    <td>登录-下单客户数     </td>
-                    <td>登录-未下单客户数   </td>
-                    <td>订单-支付-客户数    </td>
-                    <td>订单-支付-金额      </td>
-                    <td>订单-未支付-客户数  </td>
-                    <td>订单-未支付-金额    </td>
-                    <td>购物车-客户数       </td>
-                    <td>购物车-金额         </td>
+                    <td>日期           </td>
+                    <td>商品编码       </td>
+                    <td>商品名称       </td>
+                    <td>规格           </td>
+                    <td>产家           </td>
+                    <td>电商价格       </td>
+                    <td>云中价格       </td>
+                    <td>云中规格       </td>
+                    <td>云中活动类型   </td>
+                    <td>云中活动       </td>
 
 
                 </tr>
-                <c:forEach items="${requestScope.reportday}" var="reportday" varStatus="stat">
+                <c:forEach items="${requestScope.pricepare}" var="pricepare" varStatus="stat">
                     <tr id="data_${stat.index}" align="center" class="main_trbg" onMouseOver="move(this);" onMouseOut="out(this);">
 
-                        <td>${reportday.rq                       }</td>
-                        <td>${reportday.shengfen                 }</td>
-                        <td>${reportday.chengshi                 }</td>
-                        <td>${reportday.quyufl                   }</td>
-                        <td>${reportday.custom_num               }</td>
-                        <td>${reportday.login_rate               }</td>
-                        <td>${reportday.login_pay_custom         }</td>
-                        <td>${reportday.login_nopay_custom       }</td>
-                        <td>${reportday.order_pay_custom         }</td>
-                        <td>${reportday.order_pay_price          }</td>
-                        <td>${reportday.order_nopay_custom       }</td>
-                        <td>${reportday.order_nopay_price        }</td>
-                        <td>${reportday.shopping_cart_custom     }</td>
-                        <td>${reportday.shopping_cart_price      }</td>
+                        <td>${pricepare.date              }</td>
+                        <td>${pricepare.no                }</td>
+                        <td>${pricepare.name              }</td>
+                        <td>${pricepare.spec              }</td>
+                        <td>${pricepare.manufacturer      }</td>
+                        <td>${pricepare.pfpj              }</td>
+                        <td>${pricepare.price             }</td>
+                        <td>${pricepare.yz_spec           }</td>
+                        <td>${pricepare.active_type       }</td>
+                        <td>${pricepare.active_name       }</td>
 
 
                     </tr>
@@ -409,7 +347,7 @@
                 pageSize="${requestScope.pageModel.pageSize}"
                 recordCount="${requestScope.pageModel.recordCount}"
                 style="digg"
-                submitUrl="${ctx}/reportday.do?pageIndex"/>
+                submitUrl="${ctx}/pricepare.do?pageIndex"/>
 
     </td></tr>
 

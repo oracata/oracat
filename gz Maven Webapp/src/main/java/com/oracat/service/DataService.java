@@ -66,4 +66,7 @@ public interface DataService {
     List<Map<String,Map<String,Map<String,String>>>>  findGoodsForYzId(String date,String jnd_spname,String manufacturer);
     List<String>  findGoodsForYzName(String date,String goods_id);
     int removeGoodsForYzId(String jnd_spid);
+
+    /**价格对比**/
+	List<PricePare> findPricePare(PricePare pricepare,PageModel pageModel)  ;
 }

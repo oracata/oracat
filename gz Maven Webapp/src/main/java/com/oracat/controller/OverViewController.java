@@ -1,6 +1,7 @@
 package com.oracat.controller;
  
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
@@ -54,7 +55,9 @@ public class OverViewController {
     public ModelAndView getOverView(){      
         ModelAndView mav = new ModelAndView("overview"); 
         List<OverViewCatagory> overViewCatagory = overViewCatagoryService.selectOverViewCatagory();
-        mav.addObject("overViewCatagory", overViewCatagory); 
+        List<Map<String,Integer>> fenlei = overViewCatagoryService.selectYzFenlei();
+        mav.addObject("overViewCatagory", overViewCatagory);
+        mav.addObject("Fenlei", fenlei);
         return mav; 
     }  
     

@@ -1,10 +1,12 @@
 com\oracat\util\FusionCharts$FusionTable.class
 com\oracat\dao\GoodsForYzDao.class
 com\oracat\controller\RealTimeController.class
+com\oracat\dao\provider\PricePareSqlProvider$2.class
 com\oracat\dao\provider\ReportDaySqlProvider$2.class
 com\oracat\controller\GoodsForGoodsController.class
 com\oracat\dao\ReportYearDao.class
 com\oracat\controller\UserController.class
+com\oracat\dao\provider\PricePareSqlProvider.class
 com\oracat\controller\YzGoodsController.class
 com\oracat\util\DynamicDataSource.class
 com\oracat\util\Constants.class
@@ -33,7 +35,9 @@ com\oracat\model\GoodsForYz.class
 com\oracat\util\tag\PagerTag.class
 com\oracat\model\Menu.class
 com\oracat\model\User.class
+com\oracat\controller\PricePareController.class
 com\oracat\dao\OverViewCatagoryDao.class
+com\oracat\model\PricePare.class
 com\oracat\service\UserService.class
 com\oracat\util\FusionCharts$TimeSeries$KeyValuePair.class
 com\oracat\util\tag\PageModel.class
@@ -47,6 +51,8 @@ com\oracat\util\excel\ExcelBean.class
 com\oracat\util\FusionCharts$FusionTable$OrderBy.class
 com\oracat\dao\provider\ReportDaySqlProvider$1.class
 com\oracat\model\OverViewCatagory.class
+com\oracat\dao\provider\PricePareSqlProvider$1.class
+com\oracat\dao\PricePareDao.class
 com\oracat\util\DynamicDataSourceHolder.class
 com\oracat\controller\ReportController.class
 com\oracat\dao\UserDao.class

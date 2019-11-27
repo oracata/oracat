@@ -1,10 +1,7 @@
 package com.oracat.service.impl;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
+import java.util.*;
 
 import com.oracat.util.DynamicDataSourceHolder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +30,13 @@ public class OverViewCatagoryServiceImpl implements OverViewCatagoryService {
     String date = fmt.format(cal.getTime());
     return date;
     	}
-    
+
+    public List<Map<String,Integer>> selectYzFenlei() {
+
+        DynamicDataSourceHolder.setDataSource("mysql");
+        return overViewCatagoryDao.selectYzFenlei();
+    }
+
+
+
 }

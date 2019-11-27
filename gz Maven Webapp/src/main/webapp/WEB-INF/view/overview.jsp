@@ -131,7 +131,76 @@
             );
         %>
         <%= firstChart.render() %>
-        
+
+
+
+<!-- 饼图 -->
+
+<div id="chart"></div>
+<%
+    // store chart config name-config value pair
+    Map<String, String> chartConfig2 = new HashMap<String, String>();
+    chartConfig.put("caption", "品种数量对比");
+    chartConfig.put("subCaption", "");
+    chartConfig.put("xAxisName", "公司名称");
+    chartConfig.put("yAxisName", "品种数量");
+    chartConfig.put("formatNumberScale", "0");
+    chartConfig.put("numberSuffix", "");
+    chartConfig.put("theme", "fusion");
+
+
+    //store label-value pair
+    Map<String, Integer> dataValuePair2 = new HashMap<String, Integer>();
+
+
+    //遍历List
+    Object re2 = request.getAttribute("Fenlei");
+    List<Map<String,Object>> ol2= (List)re2;
+    for(int i=0;i<ol2.size();i++){
+        Map<String,Object>      ov2 = ol2.get(i);
+        for(Map.Entry<String, Object>    ov2me:ov2.entrySet()) {
+            dataValuePair.put("" + ov2me.getKey() + "", (Integer)ov2me.getValue());
+        }
+
+    }
+    StringBuilder jsonData2 = new StringBuilder();
+    StringBuilder data2 = new StringBuilder();
+
+    // json data to use as chart data source
+    jsonData2.append("{'chart':{");
+    for(Map.Entry conf2:chartConfig2.entrySet())
+    {
+        jsonData2.append("'" + conf2.getKey()+"':'"+conf2.getValue() + "',");
+    }
+
+    jsonData2.replace(jsonData2.length() - 1, jsonData2.length() ,"},");
+
+    // build  data object from label-value pair
+    data2.append("'data':[");
+
+    for(Map.Entry pair2:dataValuePair2.entrySet())
+    {
+        data2.append("{'label':'" + pair2.getKey() + "','value':'" + pair2.getValue() +"'},");
+    }
+    data2.replace(data2.length() - 1, data2.length(),"]");
+
+    jsonData2.append(data2.toString());
+    jsonData2.append("}");
+
+
+    // Create chart instance
+    // charttype, chartID, width, height,containerid, data format, data
+    FusionCharts firstChart2 = new FusionCharts(
+            "doughnut2d",
+            "first_chart",
+            "700",
+            "400",
+            "chart",
+            "json",
+            jsonData2.toString()
+    );
+%>
+<%= firstChart2.render() %>
         
         
         

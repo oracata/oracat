@@ -155,10 +155,10 @@
 
     //遍历List
     Object re2 = request.getAttribute("Fenlei");
-    List<Map<String,Object>> ol2= (List)re2;
+    List<Map<String,Integer>> ol2= (List)re2;
     for(int i=0;i<ol2.size();i++){
-        Map<String,Object>      ov2 = ol2.get(i);
-        for(Map.Entry<String, Object>    ov2me:ov2.entrySet()) {
+        Map<String,Integer>      ov2 = ol2.get(i);
+        for(Map.Entry<String, Integer>    ov2me:ov2.entrySet()) {
             dataValuePair.put("" + ov2me.getKey() + "", (Integer)ov2me.getValue());
         }
 

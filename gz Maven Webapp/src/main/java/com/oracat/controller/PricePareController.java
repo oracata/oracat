@@ -29,7 +29,7 @@ public class PricePareController {
 
         //初始化查询条件
         if(v_pricepare.getBegin_date()==null && v_pricepare.getEnd_date()==null) {
-            v_pricepare.setBegin_date(tools.getTimeDay(-14));
+            v_pricepare.setBegin_date(tools.getTimeDay(-30));
             v_pricepare.setEnd_date(tools.getTimeDay(0));
 
         }
@@ -37,6 +37,7 @@ public class PricePareController {
         ModelAndView mav = new ModelAndView("pricepare");
 
         PageModel pageModel = new PageModel();
+        pageModel.setPageSize(31);
         System.out.println("getPageIndex = " + pageModel.getPageIndex());
         System.out.println("getPageSize = " + pageModel.getPageSize());
         System.out.println("getRecordCount = " + pageModel.getRecordCount());

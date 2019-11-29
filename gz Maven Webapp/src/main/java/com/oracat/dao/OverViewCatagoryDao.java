@@ -14,7 +14,7 @@ public interface OverViewCatagoryDao {
     public List<OverViewCatagory> selectOverViewCatagory(String date);
 
 
-    @Select("select fenlei1,count(*) from  yz_fl where  date in (\n" +
+    @Select("select fenlei1,count(*) num from  yz_fl where  date in (\n" +
             "select  max(date)  from yz_fl    )\n" +
             "group by fenlei1 ")
     List<Map<String,Integer>> selectYzFenlei();

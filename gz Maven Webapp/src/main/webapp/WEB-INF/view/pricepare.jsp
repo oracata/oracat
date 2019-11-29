@@ -251,7 +251,7 @@
 
 
             data.append("'dataset':[    {     \n" +
-                    "            \"seriesname\": \"佳通达价格\",   \n" +
+                    "            \"seriesname\": \"佳能达价格\",   \n" +
                     "            \"data\": [   ");
 
             for(Map.Entry pair:dataValuePair.entrySet())

@@ -66,7 +66,7 @@
 
 <!-- 柱图 -->
 
-        <div id="chart"></div>
+        <div id="chart" align="center"></div>
         <%
             // store chart config name-config value pair
             Map<String, String> chartConfig = new HashMap<String, String>();
@@ -136,33 +136,58 @@
 
 <!-- 饼图 -->
 
-<div id="chart"></div>
+<div id="chart2" align="center"></div>
 <%
     // store chart config name-config value pair
     Map<String, String> chartConfig2 = new HashMap<String, String>();
-    chartConfig.put("caption", "品种数量对比");
-    chartConfig.put("subCaption", "");
-    chartConfig.put("xAxisName", "公司名称");
-    chartConfig.put("yAxisName", "品种数量");
-    chartConfig.put("formatNumberScale", "0");
-    chartConfig.put("numberSuffix", "");
-    chartConfig.put("theme", "fusion");
+    chartConfig2.put("caption", "品种数量对比");
+    chartConfig2.put("subCaption", "");
+    chartConfig2.put("xAxisName", "公司名称");
+    chartConfig2.put("yAxisName", "品种数量");
+    chartConfig2.put("formatNumberScale", "0");
+    chartConfig2.put("numberSuffix", "");
+    chartConfig2.put("theme", "fusion");
 
 
     //store label-value pair
-    Map<String, Integer> dataValuePair2 = new HashMap<String, Integer>();
+    //LinkedHashMap 保证数据顺序
+    Map<String, Integer> dataValuePair2 = new LinkedHashMap<String, Integer>();
 
 
     //遍历List
     Object re2 = request.getAttribute("Fenlei");
     List<Map<String,Integer>> ol2= (List)re2;
-    for(int i=0;i<ol2.size();i++){
-        Map<String,Integer>      ov2 = ol2.get(i);
-        for(Map.Entry<String, Integer>    ov2me:ov2.entrySet()) {
-            dataValuePair.put("" + ov2me.getKey() + "", (Integer)ov2me.getValue());
+
+
+    String[] key=new String[ol2.size()];
+    Number [] val=new Number [ol2.size()];
+    for (int i = 0; i < ol2.size(); i++) {
+        Map<String, Integer> map = ol2.get(i);
+
+        int j=0;
+        for (String string :map.keySet()){
+
+            if(j==0) {
+                key[i] = String.valueOf(map.get(string));
+            }
+
+            if(j==1) {
+                val[i] = ((Number)map.get(string)).intValue();
+            }
+            j++;
         }
 
+        dataValuePair2.put(""+key[i]+"", val[i].intValue());
     }
+
+
+
+
+         //
+
+
+
+
     StringBuilder jsonData2 = new StringBuilder();
     StringBuilder data2 = new StringBuilder();
 
@@ -180,6 +205,7 @@
 
     for(Map.Entry pair2:dataValuePair2.entrySet())
     {
+
         data2.append("{'label':'" + pair2.getKey() + "','value':'" + pair2.getValue() +"'},");
     }
     data2.replace(data2.length() - 1, data2.length(),"]");
@@ -187,15 +213,16 @@
     jsonData2.append(data2.toString());
     jsonData2.append("}");
 
+    System.out.println(jsonData2);
 
     // Create chart instance
     // charttype, chartID, width, height,containerid, data format, data
     FusionCharts firstChart2 = new FusionCharts(
             "doughnut2d",
-            "first_chart",
+            "first_chart2",
             "700",
             "400",
-            "chart",
+            "chart2",
             "json",
             jsonData2.toString()
     );

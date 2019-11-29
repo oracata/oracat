@@ -57,14 +57,14 @@ public interface GoodsForYzDao {
 
 
     @Select("select goods_id,goods_name,producer,spec from yz_puyao \n" +
-            "where date in(select max(date) from yz_puyao) and goods_name like '%${jnd_spname}%' and producer like '%${manufacturer}%'\n"  )
+            "where  (date in(select max(date) from yz_puyao) or date='${date}')  and goods_name like '%${jnd_spname}%' and producer like '%${manufacturer}%'\n"  )
     List<Map<String,Map<String,Map<String,String>>>> findGoodsForYzId(@Param("date") String date,
                                               @Param("jnd_spname") String jnd_spname,
                                               @Param("manufacturer") String manufacturer
                                               );
 
     @Select("select goods_name from yz_puyao \n" +
-            "where date in(select max(date) from yz_puyao) and goods_id='${goods_id}' \n"  )
+            "where (date in(select max(date) from yz_puyao) or date='${date}') and goods_id='${goods_id}' \n"  )
     List<String> findGoodsForYzName(@Param("date") String date,
                                                                       @Param("goods_id") String goods_id
     );

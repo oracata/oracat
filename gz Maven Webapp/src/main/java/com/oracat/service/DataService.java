@@ -69,4 +69,8 @@ public interface DataService {
 
     /**价格对比**/
 	List<PricePare> findPricePare(PricePare pricepare,PageModel pageModel)  ;
+
+	/**无电商资料终端开单客户**/
+	List<ErpCustom> selectErpCustom(String begin_date ,String end_date );
+	List<ErpCustom> selectFgsCustom( );
 }

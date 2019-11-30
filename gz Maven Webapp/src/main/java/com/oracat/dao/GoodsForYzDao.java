@@ -10,10 +10,12 @@ import java.util.Map;
 
 public interface GoodsForYzDao {
 
-    @Select("select jnd_spid,jnd_spname,yz_goods_id,yz_goods_name  from goods_for_yz \n" +
+    @Select("select jnd_spid,b.no jnd_spbm,jnd_spname,yz_goods_id,yz_goods_name  from goods_for_yz a\n" +
+            "inner join jnd_goods b  on a.jnd_spid=b.id and b.date in (select max(date) from jnd_goods)\n" +
             "WHERE 1=1  \n" +
-            "AND ( jnd_spid LIKE '%${jnd_spid}%' and jnd_spname LIKE '%${jnd_spname}%'  )\n"  )
+            "AND ( jnd_spid LIKE '%${jnd_spid}%' and jnd_spname LIKE '%${jnd_spname}%' and b.no like '%${jnd_spbm}%')\n"  )
     List<GoodsForYz> selectGoodsForYz(@Param("jnd_spid") String jnd_spid,
+                                      @Param("jnd_spbm") String jnd_spbm,
                                     @Param("jnd_spname") String jnd_spname );
 
 

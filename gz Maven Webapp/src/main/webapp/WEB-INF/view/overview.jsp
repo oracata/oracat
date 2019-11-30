@@ -140,7 +140,7 @@
 <%
     // store chart config name-config value pair
     Map<String, String> chartConfig2 = new HashMap<String, String>();
-    chartConfig2.put("caption", "品种数量对比");
+    chartConfig2.put("caption", "云中品牌结构");
     chartConfig2.put("subCaption", "");
     chartConfig2.put("xAxisName", "公司名称");
     chartConfig2.put("yAxisName", "品种数量");

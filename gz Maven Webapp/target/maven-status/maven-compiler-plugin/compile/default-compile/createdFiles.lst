@@ -26,6 +26,7 @@ com\oracat\controller\B2bPriceController.class
 com\oracat\util\ToJson.class
 com\oracat\util\FusionCharts.class
 com\oracat\dao\provider\YzGoodsSqlProvider.class
+com\oracat\dao\ErpCustomDao.class
 com\oracat\model\ReportMonth.class
 com\oracat\model\ReportDay.class
 com\oracat\dao\provider\ReportDaySqlProvider.class
@@ -41,6 +42,7 @@ com\oracat\model\PricePare.class
 com\oracat\service\UserService.class
 com\oracat\util\FusionCharts$TimeSeries$KeyValuePair.class
 com\oracat\util\tag\PageModel.class
+com\oracat\controller\ErpCustomController.class
 com\oracat\model\ReportYear.class
 com\oracat\util\FusionCharts$FusionTable$FilterType.class
 com\oracat\dao\ReportRealTimeDao.class
@@ -64,3 +66,4 @@ com\oracat\util\tools.class
 com\oracat\dao\provider\DcGoodsSqlProvider.class
 com\oracat\service\OverViewCatagoryService.class
 com\oracat\util\FusionCharts$1.class
+com\oracat\model\ErpCustom.class

@@ -179,6 +179,28 @@
 </a>
 						
 						</span></li>
+
+
+						<li><span class="file">
+
+<a href="javascript:void(0);" onclick="javascript:window.parent.document.getElementById('rightFrame').contentWindow.showLoading(); var frame=window.parent.document.getElementById('rightFrame'); frame.src='erpcustom.do';  frame.location.reload();  " >
+无资料终端开单客户
+</a>
+
+						</span></li>
+
+
+
+
+						<li><span class="file">
+
+<a href="javascript:void(0);" onclick="javascript:window.parent.document.getElementById('rightFrame').contentWindow.showLoading(); var frame=window.parent.document.getElementById('rightFrame'); frame.src='fgscustom.do';  frame.location.reload();  " >
+无资料分公司转总部客户
+</a>
+
+						</span></li>
+
+
 					</ul>
 				</li>			
  

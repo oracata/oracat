@@ -13,6 +13,7 @@ F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\model\Menu.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\model\ReportMonth.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\service\DataService.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\dao\DcGoodsDao.java
+F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\controller\ErpCustomController.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\util\DynamicDataSource.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\controller\GoodsForGoodsController.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\model\ReportDay.java
@@ -28,6 +29,7 @@ F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\dao\provider\YzG
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\util\Constants.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\util\tag\PageModel.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\dao\YzGoodsDao.java
+F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\model\ErpCustom.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\dao\provider\DcGoodsSqlProvider.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\model\B2bPrice.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\model\PricePare.java
@@ -35,6 +37,7 @@ F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\model\Goods.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\controller\B2bPriceController.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\controller\UserController.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\controller\YzGoodsController.java
+F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\dao\ErpCustomDao.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\model\User.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\model\OverViewCatagory.java
 F:\idea_project\oracat\gz Maven Webapp\src\main\java\com\oracat\dao\ReportYearDao.java

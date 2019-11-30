@@ -156,8 +156,10 @@
 				    <table width="100%" border="0" cellpadding="0" cellspacing="0">
 					  <tr>
 					    <td class="font3">
-					    	佳能达商品内码：<input type="text" name="jnd_spid"  value="${goodsforyz_con.jnd_spid}" />
-					    	佳能达商品名称：<input type="text" name="jnd_spname"  value="${goodsforyz_con.jnd_spname}"  />
+					    	佳能达商品内码：<input type="text" name="jnd_spid"  value="${goodsforyz_con.jnd_spid}"/>
+							佳能达商品编码：<input type="text" name="jnd_spbm"  value="${goodsforyz_con.jnd_spbm}" />
+
+							佳能达商品名称：<input type="text" name="jnd_spname"  value="${goodsforyz_con.jnd_spname}"  />
 					    	 <input type="submit" value="查询"/>
 							<td>
 						  <input id="add" type="button" value="增加"/>
@@ -181,6 +183,7 @@
 		    <tr class="main_trbg_tit" align="center">
 				<td><input type="checkbox" name="checkAll" id="checkAll"></td>
 				<td>佳能达商品内码</td>
+				<td>佳能达商品编码</td>
             <td>佳能达商品名称</td>
             <td>云中商品编码</td>
             <td>云中商品名称 </td>
@@ -194,6 +197,7 @@
 				<tr id="data_${stat.index}" align="center" class="main_trbg" onMouseOver="move(this);" onMouseOut="out(this);">
 			<td><input type="checkbox" id="box_${stat.index}" value="${goodsforyz.jnd_spid }"></td>
 		    <td>${goodsforyz.jnd_spid              }</td>
+			<td>${goodsforyz.jnd_spbm              }</td>
             <td>${goodsforyz.jnd_spname          }</td>
             <td>${goodsforyz.yz_goods_id       }</td>
             <td>${goodsforyz.yz_goods_name            }</td>

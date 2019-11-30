@@ -2,6 +2,10 @@ package com.oracat.model;
 
 public class GoodsForYz {
 	   private   String jnd_spid          ;
+
+
+
+	  private   String jnd_spbm;
 	   private   String jnd_spname  ;
 	   private   String yz_goods_id           ;
 	   private   String yz_goods_name   ;
@@ -37,6 +41,14 @@ public class GoodsForYz {
 
 	public void setYz_goods_name(String yz_goods_name) {
 		this.yz_goods_name = yz_goods_name;
+	}
+
+	public String getJnd_spbm() {
+		return jnd_spbm;
+	}
+
+	public void setJnd_spbm(String jnd_spbm) {
+		this.jnd_spbm = jnd_spbm;
 	}
 
 

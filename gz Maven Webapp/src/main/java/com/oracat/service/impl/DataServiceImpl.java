@@ -54,6 +54,9 @@ public class DataServiceImpl implements DataService{
 
 	@Autowired  //自动装配
 	private PricePareDao pricePareDao ;
+
+	@Autowired  //自动装配
+	private ErpCustomDao erpCustomDao ;
 	
 	/*****************东昌服务接口实现*************************************/
 	@Transactional(readOnly=true)
@@ -287,7 +290,7 @@ public class DataServiceImpl implements DataService{
 	{
 		DynamicDataSourceHolder.setDataSource("mysql");
 
-		return goodsForYzDao.selectGoodsForYz(goodsforyz.getJnd_spid(),goodsforyz.getJnd_spname());
+		return goodsForYzDao.selectGoodsForYz(goodsforyz.getJnd_spid(),goodsforyz.getJnd_spbm(),goodsforyz.getJnd_spname());
 
 	}
 
@@ -392,6 +395,29 @@ public class DataServiceImpl implements DataService{
 		List<PricePare> yzpricepare = pricePareDao.selectByPage(params);
 
 		return yzpricepare;
+	}
+
+
+
+
+	/**电商无资料终端开单客户**/
+
+	@Override
+	public List<ErpCustom> selectErpCustom(String begin_date,String end_date)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return erpCustomDao.selectErpCustom(begin_date,end_date);
+
+	}
+
+	@Override
+	public List<ErpCustom> selectFgsCustom()
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return erpCustomDao.selectFgsCustom();
+
 	}
 
 

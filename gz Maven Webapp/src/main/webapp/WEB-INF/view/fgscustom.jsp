@@ -112,6 +112,7 @@
                     <td>是否电商  </td>
                     <td>收货人    </td>
                     <td>收货人联系电话 </td>
+                    <td>开票员 </td>
 
 
 
@@ -133,6 +134,7 @@
                     <td>${fgscustom.is_dssc   } </td>
                     <td>${fgscustom.shouhr   }  </td>
                     <td>${fgscustom.shr_lxdh  } </td>
+                    <td>${fgscustom.kpman  } </td>
 
 
                     </tr>

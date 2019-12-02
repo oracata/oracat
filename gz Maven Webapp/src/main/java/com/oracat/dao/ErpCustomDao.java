@@ -10,8 +10,9 @@ import java.util.List;
 public interface ErpCustomDao {
 
 
-    @Select(" SELECT shengfen,chengshi,quyufl,kehulb,a.wldwid,wldwbh,wldwname,a.lxdh,lxr,ds_lxr  ,  ds_lxdh ,  is_dssc ,c.shouhr,c.lxdh AS shr_lxdh\n" +
+    @Select(" SELECT shengfen,chengshi,quyufl,kehulb,a.wldwid,wldwbh,wldwname,a.lxdh,lxr,ds_lxr  ,  ds_lxdh ,  is_dssc ,c.shouhr,c.lxdh AS shr_lxdh,d.kpman\n" +
             "  FROM wldwzl(NOLOCK) a \n" +
+            "left join jgwldwzl_bm(NOLOCK) d ON a.WLDWID=d.wldwid  AND  d.bmid IN ('BMZ00000085','BMZ00000069') \n" +
             " LEFT JOIN (\n" +
             " \n" +
             "SELECT b.wldwid,a.shouhr,a.lxdh\n" +
@@ -39,8 +40,9 @@ public interface ErpCustomDao {
 
 
 
-    @Select("  SELECT shengfen,chengshi,quyufl,kehulb,a.wldwid,wldwbh,wldwname,a.lxdh,lxr,ds_lxr  ,  ds_lxdh ,  is_dssc ,c.shouhr,c.lxdh AS shr_lxdh\n" +
+    @Select("  SELECT shengfen,chengshi,quyufl,kehulb,a.wldwid,wldwbh,wldwname,a.lxdh,lxr,ds_lxr  ,  ds_lxdh ,  is_dssc ,c.shouhr,c.lxdh AS shr_lxdh ,d.kpman\n" +
             "   FROM wldwzl(NOLOCK) a \n" +
+            "left join jgwldwzl_bm(NOLOCK) d ON a.WLDWID=d.wldwid  AND  d.bmid IN ('BMZ00000085','BMZ00000069') \n" +
             " LEFT JOIN (\n" +
             " \n" +
             "SELECT b.wldwid,a.shouhr,a.lxdh\n" +

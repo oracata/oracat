@@ -15,6 +15,15 @@ public class ErpCustom {
     private String is_dssc      ;
     private String shouhr       ;
     private String shr_lxdh     ;
+    private  String kpman ;
+
+    public String getKpman() {
+        return kpman;
+    }
+
+    public void setKpman(String kpman) {
+        this.kpman = kpman;
+    }
 
     public String getShengfen() {
         return shengfen;

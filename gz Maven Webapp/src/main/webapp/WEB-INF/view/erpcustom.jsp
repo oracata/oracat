@@ -112,6 +112,7 @@
                     <td>是否电商  </td>
                     <td>收货人    </td>
                     <td>收货人联系电话 </td>
+                    <td>开单员 </td>
 
 
 
@@ -133,6 +134,7 @@
                     <td>${erpcustom.is_dssc   } </td>
                     <td>${erpcustom.shouhr   }  </td>
                     <td>${erpcustom.shr_lxdh  } </td>
+                    <td>${erpcustom.kpman  } </td>
 
 
                     </tr>

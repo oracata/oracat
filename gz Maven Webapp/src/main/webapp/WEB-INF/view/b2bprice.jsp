@@ -135,6 +135,7 @@
                     <td>规格    </td>
                     <td>生产厂家</td>
                     <td>电商价格  </td>
+                    <td>专项价格  </td>
                     <td>终端近7天平均开票价    </td>
                     <td>与终端销价对比率    </td>
                     <td>erp进价</td>
@@ -153,6 +154,7 @@
                         <td>${b2bprice.spec                        }</td>
                         <td>${b2bprice.manufacturer                                }</td>
                         <td>${b2bprice.pfpj                                }</td>
+                        <td>${b2bprice.xsj                                }</td>
                         <td>${b2bprice.hshj                                }</td>
                         <td>${b2bprice.abs_rate                                }</td>
                         <td>${b2bprice.cankcbj                                }</td>

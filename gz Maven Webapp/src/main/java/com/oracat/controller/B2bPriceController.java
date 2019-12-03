@@ -46,6 +46,16 @@ public class B2bPriceController {
     }
 
 
+    @RequestMapping("/pricenotin")
+    public ModelAndView getPriceNotin(){
+
+        ModelAndView mav = new ModelAndView("pricenotin");
+        List<B2bPrice> pricenotin = dataService.selectPriceNotin();
+        mav.addObject("pricenotin", pricenotin);
+
+        return mav;
+    }
+
 
     @RequestMapping("/export")
     public void getExport(ModelMap model, @ModelAttribute B2bPrice v_b2bprice, HttpServletRequest request, HttpServletResponse response)

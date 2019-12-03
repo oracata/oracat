@@ -43,7 +43,7 @@ public interface DataService {
     List<B2bPrice> selectB2bPrice(B2bPrice b2bprice);
 	//**导出excel**/
 	XSSFWorkbook exportExcelInfo(B2bPrice b2bprice) throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException;
-
+	List<B2bPrice> selectPriceNotin();
 
     /**日报**/
     List<ReportDay> findReportDay(ReportDay reportday, PageModel pageModel);

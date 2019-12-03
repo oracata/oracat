@@ -241,6 +241,16 @@ public class DataServiceImpl implements DataService{
     }
 
 
+	@Override
+	public List<B2bPrice> selectPriceNotin()
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return b2bPriceDao.selectPriceNotin();
+
+	}
+
+
     @Override
     public XSSFWorkbook exportExcelInfo(B2bPrice b2bprice) throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException {
         //根据条件查询数据，把数据装载到一个list中

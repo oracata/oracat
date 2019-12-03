@@ -113,6 +113,12 @@
 
 
 
+						<li><span class="file">
+<a href="javascript:void(0);" onclick="javascript: window.parent.document.getElementById('rightFrame').contentWindow.showLoading();  var frame=window.parent.document.getElementById('rightFrame'); frame.src='pricenotin.do';  frame.location.reload();  " >
+无价格待上架商品
+</a></span></li>
+
+
 						
 					</ul>
 				</li>

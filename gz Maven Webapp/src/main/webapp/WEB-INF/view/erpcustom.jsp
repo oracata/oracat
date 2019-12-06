@@ -14,10 +14,10 @@
     <meta http-equiv="expires" content="0" />
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
     <meta http-equiv="description" content="This is my page" />
-    <link href="../css/css.css" type="text/css" rel="stylesheet" />
+    <link href="./css/css.css" type="text/css" rel="stylesheet" />
 
 
-    <link href="../css/pager.css" type="text/css" rel="stylesheet" />
+    <link href="./css/pager.css" type="text/css" rel="stylesheet" />
 
 
 
@@ -75,11 +75,106 @@
     </script>
 
 
+    <script type="text/javascript">
+        $(function(){
+
+
+
+            /** 给数据行绑定鼠标覆盖以及鼠标移开事件  */
+            $("tr[id^='data_']").hover(function(){
+                $(this).css("backgroundColor","#2ec2ff");
+            },function(){
+                $(this).css("backgroundColor","#ffffff");
+            })
+
+
+            /** 更新记录绑定点击事件 */
+            $("#update").click(function(){
+
+
+                /** 获取上一次选中的数据 */
+                var boxs  = $("input[type='checkbox'][id^='box_']");
+
+                var checkedBoxs = boxs.filter(":checked");
+                if(checkedBoxs.length < 1){
+
+                    alert("请选择一个需要更新的数据！");
+                }
+                else if(checkedBoxs.length > 1)
+                {
+                    alert("只能选择一行数据！");
+                }else {
+
+                    var id = checkedBoxs.map(function(){
+                        return this.value;
+                    })
+
+                    var lxdh = $("#lxdh_"+id.get());
+                    var lxr = $("#lxr_"+id.get());
+                    var ds_lxr = $("#ds_lxr_"+id.get());
+                    var ds_lxdh = $("#ds_lxdh_"+id.get());
+                    var msg = "";
+                    if ($.trim(lxdh.val()) == "") {
+                        msg = "联系电话不能为空！";
+                        lxdh.focus();
+                    }
+                    else if (lxdh.val().length!==11) {
+                        msg = "联系电话不是11位！";
+                        lxdh.focus();
+                    }
+                    else if ($.trim(lxr.val()) == "") {
+                        msg = "联系人不能为空！";
+                        lxr.focus();
+                    } else if ($.trim(ds_lxr.val()) == "") {
+                        msg = "电商联系人不能为空！";
+                        ds_lxr.focus();
+                    } else if ($.trim(ds_lxdh.val()) == "") {
+                        msg = "电商联系电话不能为空！";
+                        ds_lxdh.focus();
+                    }
+                    else if (ds_lxdh.val().length!==11) {
+                        msg = "电商联系电话不是11位！";
+                        ds_lxdh.focus();
+                    }
+                    if (msg != "") {
+                       alert(msg);
+                        return false;
+                    } else {
+                        $("#form_update_"+id.get()).submit();
+                        showLoading();
+                    }
+
+
+                }
+
+            })
+
+            })
+
+
+
+
+
+
+
+
+
+    </script>
+
+<script>
+    function updated_num() {
+
+    var num=<%=(String)request.getAttribute("flag")%>;
+    if(num!==null) {
+        alert('更新条' + num + '记录！');
+        }
+    }
+</script>
 
 
 
 </head>
-<body >
+<body onload="  updated_num();">
 <!-- 导航 -->
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tr><td height="10"></td></tr>
@@ -91,13 +186,62 @@
 </table>
 
 <table width="100%" height="90%" border="0" cellpadding="5" cellspacing="0" class="main_tabbor">
+    <!-- 查询区  -->
+    <tr valign="top">
+        <td height="30">
+            <table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
+                <tr>
+                    <td class="fftd">
+                        <form name="erpcustomform" method="post" id="form" action="erpcustom.do">
+                            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td class="font3">
+                                        往来单位ID：<input type="text" name="wldwid" value="${erpcustom_con.wldwid}"  />
+                                        往来单位编码：<input type="text" name="wldwbh" value="${erpcustom_con.wldwbh}"  />
+                                        往来单位名称：<input type="text" name="wldwname" value="${erpcustom_con.wldwname}"  />
+                                        <input type="submit" value="查询"/>
 
+                                        <!--
+                                           <form name="exportform" method="post" id="exportform" action="export.do">
+
+                                                           <input type="submit" value="导出excel"/>
+                                           </form>
+                                           -->
+
+                                        <a href="export" id="export">导出excel</a>
+
+                                        <!--
+                                        <form name="exportform" method="post" id="exportform" action="export.do">
+
+                                            <input type="submit" value="导出excel"/>
+                                        </form>
+                                     -->
+                                        <!--
+                                        <a href=  "javascript:void(0);" onclick="javascript:   var frame=window.parent.document.getElementById('exportform'); frame.src='export.do';   ">导出excel</a>
+
+                                       -->
+                                    </td>
+
+                                    <td>
+                                        <input id="update" type="button" value="更新"/>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
 
     <!-- 数据展示区 -->
     <tr valign="top">
         <td height="20">
-            <table width="100%" border="1" cellpadding="5" cellspacing="0" style="border:#c2c6cc 1px solid; border-collapse:collapse;">
+            <table width="100%" border="1" cellpadding="5" cellspacing="0" style="border:#c2c6cc 1px solid; border-collapse:collapse;" align="top">
                 <tr class="main_trbg_tit" align="center">
+
+                    <td>请选择一项</td>
                     <td>省份 </td>
                     <td>地市  </td>
                     <td>区县   </td>
@@ -119,24 +263,31 @@
 
                 </tr>
                 <c:forEach items="${requestScope.erpcustom}" var="erpcustom" varStatus="stat">
+                    <tr id="data_${stat.index}" align="center" class="main_trbg" onMouseOver="move(this);" onMouseOut="out(this);">
 
+                    <td><input type="checkbox" id="box_${stat.index}" value="${stat.index}"></td>
+                        <form id="form_update_${stat.index}" action="updateerpcustom.do"  method="post">
                     <td>${erpcustom.shengfen } </td>
                     <td>${erpcustom.chengshi  } </td>
                     <td>${erpcustom.quyufl    } </td>
                     <td>${erpcustom.kehulb    } </td>
-                    <td>${erpcustom.wldwid   }</td>
+                    <td><input type="text" id="wldwid_${stat.index}"    name="wldwid"    value="${erpcustom.wldwid   }" readonly="true" /></td>
                     <td>${erpcustom.wldwbh    } </td>
                     <td>${erpcustom.wldwname  } </td>
-                    <td>${erpcustom.lxdh     }  </td>
-                    <td>${erpcustom.lxr      }  </td>
-                    <td>${erpcustom.ds_lxr   }  </td>
-                    <td>${erpcustom.ds_lxdh  }  </td>
+                    <td><input type="text" id="lxdh_${stat.index}"    name="lxdh"    value="${erpcustom.lxdh     }" />  </td>
+                    <td><input type="text" id="lxr_${stat.index}"     name="lxr"     value="${erpcustom.lxr      }" />  </td>
+                    <td><input type="text" id="ds_lxr_${stat.index}"  name="ds_lxr"  value="${erpcustom.ds_lxr   }" />  </td>
+                    <td><input type="text" id="ds_lxdh_${stat.index}" name="ds_lxdh" value="${erpcustom.ds_lxdh  }" />  </td>
                     <td>${erpcustom.is_dssc   } </td>
                     <td>${erpcustom.shouhr   }  </td>
                     <td>${erpcustom.shr_lxdh  } </td>
                     <td>${erpcustom.kpman  } </td>
 
+                            <!--
+                        <input id="submit_${stat.index}" type="submit" value="修改" style="display:none;"/>
+                        -->
 
+                        </form>
                     </tr>
                 </c:forEach>
             </table>

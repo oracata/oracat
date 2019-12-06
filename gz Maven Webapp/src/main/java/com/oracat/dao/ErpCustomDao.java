@@ -4,6 +4,7 @@ import com.oracat.model.ErpCustom;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public interface ErpCustomDao {
             " from openquery(b2b,'select * from enterprise_custom') a \n" +
             "WHERE   a.state=2\n" +
             " )\n" +
-            " AND  beactive='是' AND    isxs='是'\n"  )
+            " AND  beactive='是' AND   fuzr<>'耿晓琴' and  is_dssc = '否' and   isxs='是'\n"  )
     List<ErpCustom> selectErpCustom(@Param("begin_date") String begin_date,
                                      @Param("end_date") String end_date  );
 
@@ -62,8 +63,17 @@ public interface ErpCustomDao {
             " from openquery(b2b,'select * from enterprise_custom') a \n" +
             "WHERE      a.state=2 \n" +
             " )\n" +
-            " AND  beactive='是' AND    isxs='是' ;\n"  )
+            " AND  beactive='是' AND    isxs='是'  and is_dssc = '否';\n"  )
     List<ErpCustom> selectFgsCustom();
 
+    @Update("update a set a.ds_lxr = '${ds_lxr}', a.ds_lxdh = '${ds_lxdh}', a.is_dssc = '是' , a.lxr='${lxr}',a.lxdh='${lxdh}' \n" +
+            "FROM wldwzl a(NOLOCK)\n" +
+            "WHERE a.wldwid = '${wldwid}' AND  a.is_dssc = '否'\n"  )
+    int  modifyErpCustom(@Param("wldwid") String wldwid,
+                          @Param("lxdh") String lxdh,
+                          @Param("lxr") String lxr,
+                          @Param("ds_lxdh") String ds_lxdh,
+                          @Param("ds_lxr") String ds_lxr
+    );
 
 }

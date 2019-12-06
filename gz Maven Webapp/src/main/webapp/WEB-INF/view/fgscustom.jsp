@@ -14,10 +14,10 @@
     <meta http-equiv="expires" content="0" />
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
     <meta http-equiv="description" content="This is my page" />
-    <link href="../css/css.css" type="text/css" rel="stylesheet" />
+    <link href="./css/css.css" type="text/css" rel="stylesheet" />
 
 
-    <link href="../css/pager.css" type="text/css" rel="stylesheet" />
+    <link href="./css/pager.css" type="text/css" rel="stylesheet" />
 
 
 
@@ -119,7 +119,7 @@
 
                 </tr>
                 <c:forEach items="${requestScope.fgscustom}" var="fgscustom" varStatus="stat">
-
+                    <tr id="data_${stat.index}" align="center" class="main_trbg" onMouseOver="move(this);" onMouseOut="out(this);">
                     <td>${fgscustom.shengfen } </td>
                     <td>${fgscustom.chengshi  } </td>
                     <td>${fgscustom.quyufl    } </td>

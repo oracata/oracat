@@ -431,4 +431,15 @@ public class DataServiceImpl implements DataService{
 	}
 
 
+	@Override
+	public int modifyErpCustom(ErpCustom erpcustom)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return erpCustomDao.modifyErpCustom(erpcustom.getWldwid(),erpcustom.getLxdh(),erpcustom.getLxr(),erpcustom.getDs_lxdh(),erpcustom.getDs_lxr());
+
+	}
+
+
+
 }

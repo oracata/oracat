@@ -73,4 +73,5 @@ public interface DataService {
 	/**无电商资料终端开单客户**/
 	List<ErpCustom> selectErpCustom(String begin_date ,String end_date );
 	List<ErpCustom> selectFgsCustom( );
+	int modifyErpCustom(ErpCustom erpcustom );
 }

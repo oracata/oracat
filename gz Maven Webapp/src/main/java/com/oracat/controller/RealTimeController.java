@@ -25,4 +25,14 @@ public class RealTimeController {
         mav.addObject("realtime", realtime);
         return mav;
     }
+
+
+
+    @RequestMapping("/tab")
+    public ModelAndView getTab(){
+
+        ModelAndView mav = new ModelAndView("tab");
+
+        return mav;
+    }
 }

@@ -120,7 +120,7 @@
                     </td></tr>
                     <tr><td class="main_tdbor"></td></tr>
 
-                    <tr><td align="left" class="fftd"><input type="submit" value="修改">&nbsp;&nbsp;<input type="reset" value="取消 "></td></tr>
+                    <tr><td align="left" class="fftd"><input type="submit" value="修改">&nbsp;&nbsp;<input type="reset" value="取消 "><input type="button" onclick="remove_spid()" value="找不到对应关系，移除SPID"> <input type="button" onclick="javascript:   var frame=window.parent.document.getElementById('10'); frame.src='goodsforgoods/goodsforgoods';  frame.location.reload(); " value="返回"></td></tr>
                 </table>
             </form>
         </td>

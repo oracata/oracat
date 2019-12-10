@@ -1,9 +1,22 @@
+<%@ page import="com.oracat.model.B2bPrice" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<%
+    //遍历List 取得记录数
+    int num=0;
+    //遍历List 取得记录数
+    if(request.getAttribute("b2bprice")!=null) {
+        Object re = request.getAttribute("b2bprice");
+        List<B2bPrice> ol = (List) re;
+        num = ol.size();
+    }
+%>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -14,13 +27,13 @@
     <meta http-equiv="expires" content="0" />
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
     <meta http-equiv="description" content="This is my page" />
-    <link href="./css/css.css" type="text/css" rel="stylesheet" />
+     <link href="./css/css.css" type="text/css" rel="stylesheet" />
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link href="./css/pager.css" type="text/css" rel="stylesheet" />
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+     <link rel="stylesheet" href="/resources/demos/style.css">
+     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+     <link href="./css/pager.css" type="text/css" rel="stylesheet" />
 
 
 
@@ -66,8 +79,26 @@
 
 
 
+
+
+
+
 </head>
-<body  >
+
+
+<script>
+    <!-- 数据行数自适应高度 -->
+    function autoheight() {
+        var n = <%=num%>;
+        if (Number(n) !==0) {
+
+
+            $('.layui-tab-item.layui-show', parent.document).css('height', '' + Number(n) * 30 + '');
+        }
+    }
+</script>
+
+<body  onload="	 autoheight()" >
 <!-- 导航 -->
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tr><td height="10"></td></tr>
@@ -126,7 +157,7 @@
     <!-- 数据展示区 -->
     <tr valign="top">
         <td height="20">
-            <table width="100%" border="1" cellpadding="5" cellspacing="0" style="border:#c2c6cc 1px solid; border-collapse:collapse;">
+            <table width="100%" height="100%" border="1" cellpadding="5" cellspacing="0" style="border:#c2c6cc 1px solid; border-collapse:collapse;">
                 <tr class="main_trbg_tit" align="center">
 
                     <td>商品id</td>

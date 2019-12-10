@@ -9,10 +9,66 @@
     <link rel="stylesheet" href="./js/layui/css/layui.css">
     <style>
         .layui-tab-item{width:100%; height:100%; }
+        .layui-body{ height:100%; }
     </style>
+
+
+
+
+
+    <script  >
+
+
+        //在页面未加载完毕之前显示的loading Html自定义内容
+        var _LoadingHtml = '<div id="loadingDiv" style="display: none; "><div id="over" style=" position: absolute;top: 0;left: 0; width: 100%;height: 100%; background-color: #f5f5f5;opacity:0.5;z-index: 1000;"></div><div id="layout" style="position: absolute;top: 40%; left: 40%;width: 20%; height: 20%;  z-index: 1001;text-align:center;"><img src="./images/timg.gif" /></div></div>';
+        //呈现loading效果
+        document.write(_LoadingHtml);
+
+        //移除loading效果
+        function completeLoading() {
+            document.getElementById("loadingDiv").style.display="none";
+        }
+        //展示loading效果http://localhost:2006/
+        function showLoading()
+        {
+            document.getElementById("loadingDiv").style.display="block";
+        }
+
+
+
+        $(document).ready(function(){
+                //任选以form结束的form进行处理
+                $("form[id$='form']").submit(function(){
+                    showLoading();
+                    return true;
+                });
+
+                //导出excel
+                $("a[id$='export']").click(function(){
+                    showLoading();
+                    return true;
+                });
+
+            }
+
+        );
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
 </head>
-<body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
+<body class="layui-layout-body" height="100%">
+<div class="layui-layout layui-layout-admin" height="100%">
 
 
 
@@ -23,35 +79,46 @@
             <div title="菜单缩放" class="kit-side-fold"><i class="fa fa-navicon" aria-hidden="true"></i></div>
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;"><i class="fa fa-user-circle-o fa-lg"></i> <span >生源追踪</span></a>
+                <li class="layui-nav-item "> <!-- class中加入 对象 layui-nav-itemed 即可以张开-->
+                    <a class="" href="javascript:;"><i class="fa fa-user-circle-o fa-lg"></i> <span >竞争对手情况</span></a>
                     <dl class="layui-nav-child">
-                        <dd><a data-url="yz_goods.do" data-id="3" data-title="测试" class="site-demo-active"  href="javascript:;" data-type="tabAdd">测试</a></dd>
-                        <dd><a href="javascript:;"><i class="fa fa-clipboard fa-lg"></i> <span >学校信息</span></a></dd>
-                        <dd><a href="javascript:;"><i class="fa fa-file-text fa-lg"></i> <span >工做计划</span></a></dd>
+                        <dd><a data-url="yz_goods.do" data-id="1" data-title="云中商品" class="site-demo-active"  href="javascript:;" data-type="tabAdd" >云中商品</a></dd>
+                        <dd><a data-url="overview.do" data-id="2" data-title="云中种类" class="site-demo-active"  href="javascript:;" data-type="tabAdd">云中种类</a></dd>
+                        <dd><a data-url="dc_goods.do" data-id="3" data-title="东昌商品" class="site-demo-active"  href="javascript:;" data-type="tabAdd">东昌商品</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="fa fa-vcard fa-lg"></i> <span >学员管理</span></a>
+                    <a href="javascript:;"><i class="fa fa-vcard fa-lg"></i> <span >对比分析</span></a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;"><i class="fa fa-th-list fa-lg"></i> <span >学员列表</span></a></dd>
-                        <dd><a href="javascript:;"><i class="fa fa-user-o fa-lg"></i> <span >考勤管理</span></a></dd>
-                        <dd><a href="javascript:;"><i class="fa fa-send-o fa-lg"></i> <span >沟通计划</span></a></dd>
-                        <dd><a href="javascript:;"><i class="fa fa-frown-o fa-lg"></i> <span >成绩管理</span></a></dd>
+                        <dd><a data-url="pricepare.do" data-id="4" data-title="价格对比" class="site-demo-active"  href="javascript:;" data-type="tabAdd">价格对比</a></dd>
+                        <dd><a data-url="b2bprice.do" data-id="5" data-title="电商价格" class="site-demo-active"  href="javascript:;" data-type="tabAdd"  >电商价格</a></dd>
+                        <dd><a data-url="pricenotin.do" data-id="6" data-title="无价格待上架商品" class="site-demo-active"  href="javascript:;" data-type="tabAdd">无价格待上架商品</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="fa fa-diamond fa-lg"></i> <span >管理设置</span></a>
+                    <a href="javascript:;"><i class="fa fa-diamond fa-lg"></i> <span >报表</span></a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;"><i class="fa fa-address-book fa-lg"></i> <span >账号管理</span></a></dd>
-                        <dd><a href="javascript:;"><i class="fa fa-check-square fa-lg"></i> <span >授权管理</span></a></dd>
+                        <dd><a data-url="reportday.do" data-id="7" data-title="日报" class="site-demo-active"  href="javascript:;" data-type="tabAdd">日报</a></dd>
+                        <dd><a data-url="404.html" data-id="8" data-title="月报" class="site-demo-active"  href="javascript:;" data-type="tabAdd">月报</a></dd>
+                        <dd><a data-url="reportyear.do" data-id="9" data-title="年报" class="site-demo-active"  href="javascript:;" data-type="tabAdd">年报</a></dd>
+                        <dd><a data-url="realtime.do" data-id="13" data-title="实时图表" class="site-demo-active"  href="javascript:;" data-type="tabAdd">实时图表</a></dd>
                     </dl>
                 </li>
+
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="fa fa-vcard fa-lg"></i> <span >基础资料</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a data-url="goodsforgoods/goodsforgoods" data-id="10" data-title="云中商品对应关系" class="site-demo-active"  href="javascript:;" data-type="tabAdd" >云中商品对应关系</a></dd>
+                        <dd><a data-url="erpcustom.do" data-id="11" data-title="无资料终端开单客户" class="site-demo-active"  href="javascript:;" data-type="tabAdd">无资料终端开单客户</a></dd>
+                        <dd><a data-url="fgscustom.do" data-id="12" data-title="无资料分公司转总部客户" class="site-demo-active"  href="javascript:;" data-type="tabAdd">无资料分公司转总部客户</a></dd>
+                    </dl>
+                </li>
+
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="fa fa-gear fa-lg"></i> <span >系统管理</span></a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;"><i class="fa fa-window-restore fa-lg"></i> <span >系统信息</span></a></dd>
-                        <dd><a href="javascript:;"><i class="fa fa-database fa-lg"></i> <span >操作日志</span></a></dd>
+                        <dd><a onclick="javascript: window.location.href='loginform.do';   "     href="javascript:void(0);" >注销</a></dd>
+                        <dd><a data-url="tab.do" data-id="12" data-title="test" class="site-demo-active"  href="javascript:;" data-type="tabAdd">test</a></dd>
                     </dl>
                 </li>
             </ul>
@@ -81,6 +148,8 @@
                 //将footer和body的宽度修改
                 $('.layui-body').css('left', 60+'px');
                 $('.layui-footer').css('left', 60+'px');
+
+              //  $('.layui-body').css('height', '100%');
                 //将二级导航栏隐藏
                 $('dd span').each(function(){
                     $(this).hide();
@@ -91,6 +160,7 @@
                 $('.layui-side.layui-bg-black').width(200);
                 $('.kit-side-fold i').css('margin-right', '10%');
                 $('.layui-body').css('left', 200+'px');
+            //    $('.layui-body').css('height', '100%');
                 $('.layui-footer').css('left', 200+'px');
                 $('dd span').each(function(){
                     $(this).show();
@@ -105,6 +175,7 @@
 
 
     <div class="layui-body" style="top:0px">
+
         <!-- 内容主体区域 -->
         <div class="layui-tab layui-tab-card" lay-filter="demo" lay-allowclose="true"   style="height: 100%" >
             <ul class="layui-tab-title">
@@ -119,15 +190,23 @@
     </div>
 
     <div class="layui-footer">
-      欢迎使用！
-    </div>
+    欢迎使用！
+</div>
+
+
+
 </div>
 <script src="./js/layui/layui.js"></script>
+
+
+
 <script>
     //JavaScript代码区域
     layui.use('element', function(){
         var element = layui.element;
         var $ = layui.jquery;
+
+
         //触发事件
         var active = {
             //在这里给active绑定几项事件，后面可通过active调用这些事件
@@ -136,7 +215,7 @@
                 //关于tabAdd的方法所传入的参数可看layui的开发文档中基础方法部分
                 element.tabAdd('demo', {
                     title: name,
-                    content: '<iframe data-frameid="'+id+'" scrolling="no" frameborder="0" src="'+url+'" style="height: 100%;width:100%"></iframe>',
+                    content: '<iframe id="'+id+'" data-frameid="'+id+'" scrolling="no" frameborder="0" src="'+url+'" style="height: 100%;width:100%"   ></iframe>',
                     id: id //规定好的id
                 })
                 element.render('tab');

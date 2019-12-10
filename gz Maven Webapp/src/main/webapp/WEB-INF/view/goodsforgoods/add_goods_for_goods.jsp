@@ -242,7 +242,7 @@
                     </td></tr>
                     <tr><td class="main_tdbor"></td></tr>
 
-                    <tr><td align="right" class="fftd"><input type="submit" value="确定增加">&nbsp;&nbsp;<input id="rr" type="reset" value="取消 "> &nbsp;&nbsp;<input type="button" onclick="remove_spid()" value="找不到对应关系，移除SPID"></td></tr>
+                    <tr><td align="right" class="fftd"><input type="submit" value="确定增加">&nbsp;&nbsp;<input id="rr" type="reset" value="取消 "> &nbsp;&nbsp;<input type="button" onclick="remove_spid()" value="找不到对应关系，移除SPID"> <input type="button" onclick="javascript:   var frame=window.parent.document.getElementById('10'); frame.src='goodsforgoods/goodsforgoods';  frame.location.reload(); " value="返回"></td></tr>
                 </table>
             </form>
         </td>

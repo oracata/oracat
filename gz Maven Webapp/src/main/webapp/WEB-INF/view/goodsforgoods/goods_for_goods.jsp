@@ -1,9 +1,21 @@
+
+<%@ page import="com.oracat.model.GoodsForYz" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8"%>
 
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+
+<%  	int num=0;
+	//遍历List 取得记录数
+	if(request.getAttribute("goodsforyz")!=null) {
+		Object re = request.getAttribute("goodsforyz");
+		List<GoodsForYz> ol = (List) re;
+		  num = ol.size();
+	}
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -22,7 +34,8 @@
 
 
 
-
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <link rel="stylesheet" type="text/css" href="${ctx}/js/ligerUI/skins/Aqua/css/ligerui-dialog.css"/>
     <link href="${ctx}/js/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
@@ -72,7 +85,16 @@
 
 		);
 
+
+
+
+
+
+
 	</script>
+
+
+
 
 
 	<script type="text/javascript">
@@ -131,10 +153,27 @@
 		})
 	</script>
 
+	<script>
+		<!-- 数据行数自适应高度 -->
+		function autoheight() {
+			var n = <%=num%>;
+			if (Number(n) !==0) {
+
+
+			$('.layui-tab-item.layui-show', parent.document).css('height', '' + Number(n) * 30 + '');
+		}
+		}
+	</script>
+
+
+
+
+
 
 
 </head>
-<body >
+<body  onload="	 autoheight()">
+
 	<!-- 导航 -->
 	<table width="100%" border="0" cellpadding="0" cellspacing="0">
 	  <tr><td height="10"></td></tr>
@@ -193,6 +232,7 @@
 
 		 
 			</tr>
+
 			<c:forEach items="${requestScope.goodsforyz}" var="goodsforyz" varStatus="stat">
 				<tr id="data_${stat.index}" align="center" class="main_trbg" onMouseOver="move(this);" onMouseOut="out(this);">
 			<td><input type="checkbox" id="box_${stat.index}" value="${goodsforyz.jnd_spid }"></td>
@@ -208,6 +248,7 @@
 					  </td> 
 
 				</tr>
+
 			</c:forEach>
 		  </table>
 		</td>

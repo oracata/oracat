@@ -46,7 +46,11 @@ public class DataServiceImpl implements DataService{
 	@Autowired  //自动装配
 	private ReportYearDao reportYearDao ;
 
-    @Autowired
+	@Autowired  //自动装配
+	private ReportMonthDao reportMonthDao ;
+
+
+	@Autowired
 	private  ReportDayDao  reportDayDao;
 
 	@Autowired  //自动装配
@@ -167,6 +171,16 @@ public class DataServiceImpl implements DataService{
 	}
 
 
+	/** 月报表**/
+
+	@Override
+	public List<ReportMonth> selectReportMonth(String begin_date,String end_date)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return  reportMonthDao.selectReportMonth(begin_date,end_date);
+
+	}
 
 
    /** 年度报表**/
@@ -205,6 +219,7 @@ public class DataServiceImpl implements DataService{
 		excel.add(new ExcelBean("201909","je201909",0));
 		excel.add(new ExcelBean("201910","je201910",0));
 		excel.add(new ExcelBean("201911","je201911",0));
+		excel.add(new ExcelBean("201912","je201912",0));
 		excel.add(new ExcelBean("全年","year",0));
 		excel.add(new ExcelBean("毛利额","ml",0));
 		excel.add(new ExcelBean("毛利率","mll",0));
@@ -276,6 +291,7 @@ public class DataServiceImpl implements DataService{
         excel.add(new ExcelBean("规格","spec",0));
         excel.add(new ExcelBean("产家","manufacturer",0));
         excel.add(new ExcelBean("电商价格","pfpj",0));
+		excel.add(new ExcelBean("专项价格","xsj",0));
         excel.add(new ExcelBean("终端近7天平均开票价","hshj",0));
         excel.add(new ExcelBean("与终端销价对比率","abs_rate",0));
         excel.add(new ExcelBean("进价","cankcbj",0));

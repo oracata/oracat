@@ -18,11 +18,29 @@
 
     <title>FusionCharts | My First Chart</title>
 
-
+<!--
     <script src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
 
 
     <script src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+-->
+
+
+    <!-- FusionCharts Library -->
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/3.15.0-sr.1/fusioncharts.js"></script>
+    <script type="text/javascript"
+            src="https://cdn.fusioncharts.com/fusioncharts/3.15.0-sr.1/themes/fusioncharts.theme.fusion.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gumshoe/3.5.1/js/gumshoe.min.js"></script>
+
+    <!-- GEO IP -->
+    <script src="//js.maxmind.com/js/apis/geoip2/v2.1/geoip2.js"></script>
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
+
+    <!-- Mixpanel -->
+    <script src="/public/js/mixpanel.js"></script>
+
+
+
 
 
 
@@ -76,8 +94,10 @@
 
 
 <!-- 柱图 -->
-
-<div id="chart" align="center"></div>
+<table>
+    <tr>
+<td>
+<div id="chart"  ></div>
 <%
     // store chart config name-config value pair
     Map<String, String> chartConfig = new HashMap<String, String>();
@@ -146,14 +166,14 @@
     );
 %>
 <%= firstChart.render() %>
-
-
+    </td>
+<td>
 <!--分割线**************************** -->
 
 
 <!-- 柱图 -->
 
-<div id="chart2" align="center"></div>
+<div id="chart2"  ></div>
 <%
     // store chart config name-config value pair
     Map<String, String> chartConfig2 = new HashMap<String, String>();
@@ -223,8 +243,317 @@
 %>
 <%= firstChart2.render() %>
 
+    </td>
+    </tr>
+
+    <tr>
+        <td>
+
+            <script type="javascript">
+                const dataSource = {
+                    chart: {
+                        caption: "Process Involved During Course Design",
+                        yaxismaxvalue: "1100",
+                        yaxisminvalue: "0",
+                        theme: "fusion",
+                        valuefontsize: "12",
+                        viewmode: "1",
+                        valuefontcolor: "#FFFFFF",
+                        plotfillhovercolor: "#1A237E",
+                        divlinealpha: "0"
+                    },
+                    dataset: [
+                        {
+                            data: [
+                                {
+                                    id: "01",
+                                    x: "15",
+                                    y: "1000",
+                                    label: "Kick Off{br}meeting",
+                                    shape: "rectangle",
+                                    color: "#5D62B5",
+                                    width: "100",
+                                    height: "60",
+                                    hovercolor: "#1A237E"
+                                },
+                                {
+                                    id: "02",
+                                    x: "15",
+                                    y: "800",
+                                    label: "Review existing{br}course materials",
+                                    color: "#29C3BE",
+                                    shape: "rectangle",
+                                    width: "100",
+                                    height: "60"
+                                },
+                                {
+                                    id: "03",
+                                    x: "15",
+                                    y: "600",
+                                    label:
+                                        "Collaborate on{br}course topics,{br}outcomes,{br}objectives,etc.",
+                                    color: "#F2726F",
+                                    shape: "rectangle",
+                                    width: "100",
+                                    height: "60"
+                                },
+                                {
+                                    id: "04",
+                                    x: "15",
+                                    y: "350",
+                                    label: "Finalize outcomes{br}& objectives.",
+                                    color: "#FFC533",
+                                    shape: "polygon",
+                                    radius: "60"
+                                },
+                                {
+                                    id: "05",
+                                    x: "15",
+                                    y: "100",
+                                    label: "Complete Course{br}blueprint.",
+                                    color: "#62B58F",
+                                    shape: "rectangle",
+                                    width: "100",
+                                    height: "60"
+                                },
+                                {
+                                    id: "06",
+                                    x: "45",
+                                    y: "100",
+                                    label: "Discuss{br}assessments of{br} course outcomes.",
+                                    color: "#BC95DF",
+                                    shape: "rectangle",
+                                    width: "100",
+                                    height: "60"
+                                },
+                                {
+                                    id: "07",
+                                    x: "45",
+                                    y: "350",
+                                    label: "Align assessments{br} to outcomes.",
+                                    color: "#F2726F",
+                                    shape: "rectangle",
+                                    width: "100",
+                                    height: "60"
+                                },
+                                {
+                                    id: "08",
+                                    x: "45",
+                                    y: "600",
+                                    label: "Develop{br}assessments for{br}online delivery.",
+                                    color: "#FFC533",
+                                    shape: "polygon",
+                                    radius: "60"
+                                },
+                                {
+                                    id: "09",
+                                    x: "45",
+                                    y: "800",
+                                    label: "Update Course{br} blueprint with{br} assessment info.",
+                                    color: "#C7D631",
+                                    shape: "rectangle",
+                                    width: "100",
+                                    height: "60"
+                                },
+                                {
+                                    id: "10",
+                                    x: "45",
+                                    y: "1000",
+                                    label: "Determine weekly{br} activities and{br}materials",
+                                    color: "#FFC533",
+                                    shape: "polygon",
+                                    radius: "60"
+                                },
+                                {
+                                    id: "11",
+                                    x: "75",
+                                    y: "1000",
+                                    label: "Update Course{br}blueprint with{br}weekly activities",
+                                    color: "#C7D631",
+                                    shape: "rectangle",
+                                    width: "100",
+                                    height: "60"
+                                },
+                                {
+                                    id: "12",
+                                    x: "75",
+                                    y: "800",
+                                    label: "Build course{br}carmen",
+                                    color: "#BC95DF",
+                                    shape: "rectangle",
+                                    width: "100",
+                                    height: "60"
+                                },
+                                {
+                                    id: "13",
+                                    x: "75",
+                                    y: "600",
+                                    label: "Complete syllabus{br}templete",
+                                    color: "#C7D631",
+                                    shape: "rectangle",
+                                    width: "100",
+                                    height: "60"
+                                },
+                                {
+                                    id: "14",
+                                    x: "75",
+                                    y: "350",
+                                    label: "Review course{br}(Faculty)",
+                                    color: "#FFC533",
+                                    shape: "polygon",
+                                    radius: "60"
+                                },
+                                {
+                                    id: "15",
+                                    x: "75",
+                                    label: "Course{br}complete",
+                                    y: "100",
+                                    shape: "rectangle",
+                                    color: "#5D62B5",
+                                    width: "100",
+                                    height: "60"
+                                }
+                            ]
+                        }
+                    ],
+                    connectors: [
+                        {
+                            connector: [
+                                {
+                                    from: "01",
+                                    to: "02",
+                                    strength: "2",
+                                    arrowatstart: "0",
+                                    arrowatend: "1",
+                                    alpha: "50"
+                                },
+                                {
+                                    from: "02",
+                                    to: "03",
+                                    strength: "2",
+                                    arrowatstart: "0",
+                                    arrowatend: "1",
+                                    alpha: "50"
+                                },
+                                {
+                                    from: "03",
+                                    to: "04",
+                                    strength: "2",
+                                    arrowatstart: "0",
+                                    arrowatend: "1",
+                                    alpha: "50"
+                                },
+                                {
+                                    from: "04",
+                                    to: "05",
+                                    strength: "2",
+                                    arrowatstart: "0",
+                                    arrowatend: "1",
+                                    alpha: "50"
+                                },
+                                {
+                                    from: "05",
+                                    to: "06",
+                                    strength: "2",
+                                    arrowatstart: "0",
+                                    arrowatend: "1",
+                                    alpha: "50"
+                                },
+                                {
+                                    from: "06",
+                                    to: "07",
+                                    strength: "2",
+                                    arrowatstart: "0",
+                                    arrowatend: "1",
+                                    alpha: "50"
+                                },
+                                {
+                                    from: "07",
+                                    to: "08",
+                                    strength: "2",
+                                    arrowatstart: "0",
+                                    arrowatend: "1",
+                                    alpha: "50"
+                                },
+                                {
+                                    from: "08",
+                                    to: "09",
+                                    strength: "2",
+                                    arrowatstart: "0",
+                                    arrowatend: "1",
+                                    alpha: "50"
+                                },
+                                {
+                                    from: "09",
+                                    to: "10",
+                                    strength: "2",
+                                    arrowatstart: "0",
+                                    arrowatend: "1",
+                                    alpha: "50"
+                                },
+                                {
+                                    from: "10",
+                                    to: "11",
+                                    strength: "2",
+                                    arrowatstart: "0",
+                                    arrowatend: "1",
+                                    alpha: "50"
+                                },
+                                {
+                                    from: "11",
+                                    to: "12",
+                                    strength: "2",
+                                    arrowatstart: "0",
+                                    arrowatend: "1",
+                                    alpha: "50"
+                                },
+                                {
+                                    from: "12",
+                                    to: "13",
+                                    strength: "2",
+                                    arrowatstart: "0",
+                                    arrowatend: "1",
+                                    alpha: "50"
+                                },
+                                {
+                                    from: "13",
+                                    to: "14",
+                                    strength: "2",
+                                    arrowatstart: "0",
+                                    arrowatend: "1",
+                                    alpha: "50"
+                                },
+                                {
+                                    from: "14",
+                                    to: "15",
+                                    strength: "2",
+                                    arrowatstart: "0",
+                                    arrowatend: "1",
+                                    alpha: "50"
+                                }
+                            ]
+                        }
+                    ]
+                };
+
+                FusionCharts.ready(function() {
+                    var myChart = new FusionCharts({
+                        type: "dragnode",
+                        renderAt: "chart-container",
+                        width: "100%",
+                        height: "100%",
+                        dataFormat: "json",
+                        dataSource
+                    }).render();
+                });
 
 
+            </script>
+            <div id="chart-container"></div>
+        </td>
+    </tr>
+
+</table>
 
 
 

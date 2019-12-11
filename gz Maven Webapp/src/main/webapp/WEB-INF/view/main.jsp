@@ -10,6 +10,7 @@
     <style>
         .layui-tab-item{width:100%; height:100%; }
         .layui-body{ height:100%; }
+        .layui-tab-item.layui-show{ height:1200px; }
     </style>
 
 
@@ -99,7 +100,7 @@
                     <a href="javascript:;"><i class="fa fa-diamond fa-lg"></i> <span >报表</span></a>
                     <dl class="layui-nav-child">
                         <dd><a data-url="reportday.do" data-id="7" data-title="日报" class="site-demo-active"  href="javascript:;" data-type="tabAdd">日报</a></dd>
-                        <dd><a data-url="404.html" data-id="8" data-title="月报" class="site-demo-active"  href="javascript:;" data-type="tabAdd">月报</a></dd>
+                        <dd><a data-url="reportmonth.do" data-id="8" data-title="月报" class="site-demo-active"  href="javascript:;" data-type="tabAdd">月报</a></dd>
                         <dd><a data-url="reportyear.do" data-id="9" data-title="年报" class="site-demo-active"  href="javascript:;" data-type="tabAdd">年报</a></dd>
                         <dd><a data-url="realtime.do" data-id="13" data-title="实时图表" class="site-demo-active"  href="javascript:;" data-type="tabAdd">实时图表</a></dd>
                     </dl>

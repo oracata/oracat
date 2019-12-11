@@ -90,11 +90,17 @@
     <!-- 数据行数自适应高度 -->
     function autoheight() {
         var n = <%=num%>;
+
         if (Number(n) !==0) {
 
+            if(Number(n)>30) {
+                $('.layui-tab-item.layui-show', parent.document).css('height', '' + Number(n) * 30 + '');
+            } else{
 
-            $('.layui-tab-item.layui-show', parent.document).css('height', '' + Number(n) * 30 + '');
+                $('.layui-tab-item.layui-show', parent.document).css('height', '' +(500+(Number(n) * 30))+ '');
+            }
         }
+
     }
 </script>
 

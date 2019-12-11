@@ -116,6 +116,7 @@
                     <td>201909</td>
                     <td>201910</td>
                     <td>201911</td>
+                    <td>201912</td>
                     <td>全年</td>
                     <td>毛利额</td>
                     <td>毛利率</td>
@@ -132,6 +133,7 @@
                         <td>${reportyear.je201909                        }</td>
                         <td>${reportyear.je201910                                }</td>
                         <td>${reportyear.je201911                                }</td>
+                        <td>${reportyear.je201912                                }</td>
                         <td>${reportyear.year                                }</td>
                         <td>${reportyear.ml                                }</td>
                         <td>${reportyear.mll                                }</td>

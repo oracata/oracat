@@ -1,9 +1,6 @@
 package com.oracat.controller;
 
-import com.oracat.model.B2bPrice;
-import com.oracat.model.Goods;
-import com.oracat.model.ReportDay;
-import com.oracat.model.ReportYear;
+import com.oracat.model.*;
 import com.oracat.service.DataService;
 import com.oracat.util.ToJson;
 import com.oracat.util.tag.PageModel;
@@ -57,6 +54,7 @@ public class ReportController {
         ModelAndView mav = new ModelAndView("reportday");
 
         PageModel pageModel = new PageModel();
+
         System.out.println("getPageIndex = " + pageModel.getPageIndex());
         System.out.println("getPageSize = " + pageModel.getPageSize());
         System.out.println("getRecordCount = " + pageModel.getRecordCount());
@@ -128,6 +126,33 @@ public class ReportController {
     }
 
 
+    @RequestMapping("/reportmonth")
+    public ModelAndView getReportMonthView(Model model,
+                                           @ModelAttribute ReportMonth v_reportmonth){
+
+        //初始化查询条件
+        if(v_reportmonth.getBegin_date()==null && v_reportmonth.getEnd_date()==null) {
+            v_reportmonth.setBegin_date("2019-06-01");
+            v_reportmonth.setEnd_date(tools.getTimeDay(0));
+
+        }
+
+        ModelAndView mav = new ModelAndView("reportmonth");
+
+
+
+
+
+
+        List<ReportMonth> reportmonth =dataService.selectReportMonth(v_reportmonth.getBegin_date(),v_reportmonth.getEnd_date());
+        mav.addObject("reportmonth", reportmonth);
+        mav.addObject("reportmonth_con", v_reportmonth);   //回写查询条件
+
+
+
+
+        return mav;
+    }
 
 
 

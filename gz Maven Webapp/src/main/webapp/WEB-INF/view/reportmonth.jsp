@@ -1,7 +1,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.LinkedHashMap" %>
-<%@ page import="com.oracat.model.ReportDay" %>
+<%@ page import="com.oracat.model.ReportMonth" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.oracat.util.FusionCharts" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -142,94 +142,6 @@
     </script>
 
 
-   <!--查询条件 三级联动-->
-    <script type="text/javascript">
-
-        function show_1(){
-            $.ajax({
-                url:'selectAllProvince.do',
-                type:'post',
-                data:{'typeId':0},
-                dataType:'json',
-                //成功回调函数的参数data是一个json数组，长度是json数组里面的对象的个数。
-                success:function(data){
-
-                   console.log(JSON.stringify(data));
-                   console.log(data.length);
-                    var t="<option value=''>----请选择省----</option>";
-                    for(var i=0;i<data.length;i++){
-                        if(data[i]==' 合计'){
-                            t+="<option value=' 合计'>合计</option>";
-                        }
-                        else{
-                            t+="<option value="+data[i]+">"+data[i]+"</option>";
-                        }
-
-                    }
-                    $("#p").html(t);
-                }
-            })
-
-        }
-        function show_2(){
-
-            var provinceId=$("#p").val();
-
-            $.ajax({
-                url:'selectAllCityProvince.do',
-                type:'post',
-                data:{'provinceId':provinceId},
-                dataType:'json',
-                success:function(data){
-                    var t="<option value=''>----请选择城市----</option>";
-                    for(var i=0;i<data.length;i++){
-                        if(data[i]==' 合计'){
-                            t+="<option value=' 合计'>合计</option>";
-                        }
-                        else{
-                        t+="<option value="+data[i]+">"+data[i]+"</option>";
-                          }
-                    }
-
-                    $("#c").html(t);
-                },
-                error:function(data){
-                    alert("查询城市失败了！");
-                }
-            })
-
-        }
-
-        function show_3(){
-
-            var provinceId=$("#p").val();
-            var cityId=$("#c").val();
-            $.ajax({
-                url:'selectAllAreaProvince.do',
-                type:'post',
-                data:{'provinceId':provinceId,"cityId":cityId},
-                dataType:'json',
-                success:function(data){
-
-                   console.log(JSON.stringify(data));
-                    var t="<option value=''>----请选择市区----</option>";
-                    for(var i=0;i<data.length;i++){
-                        if(data[i]==' 合计'){
-                            t+="<option value=' 合计'>合计</option>";
-                        }
-                        else{
-                            t+="<option value="+data[i]+">"+data[i]+"</option>";
-                        }
-                    }
-                    $("#a").html(t);
-                }
-            })
-
-        }
-
-
-
-    </script>
 
 
 
@@ -242,7 +154,7 @@
     <tr><td height="10"></td></tr>
     <tr>
         <td width="15" height="32"></td>
-        <td class="main_locbg font2">&nbsp;&nbsp;&nbsp;当前位置：报表 &gt; 日报</td>
+        <td class="main_locbg font2">&nbsp;&nbsp;&nbsp;当前位置：报表 &gt; 月报</td>
         <td width="15" height="32"></td>
     </tr>
 </table>
@@ -254,19 +166,14 @@
             <table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
                 <tr>
                     <td class="fftd">
-                        <form name="reportdayform" method="post" id="form" action="reportday.do">
+                        <form name="reportmonthform" method="post" id="form" action="reportmonth.do">
                             <table width="100%" border="0" cellpadding="0" cellspacing="0">
 
                                 <tr>
                                     <td class="font3">
-                                        开始日期：<input type="text" id="begin_date" name="begin_date" value="${reportday_con.begin_date}"  />
-                                        结束日期：<input type="text" id="end_date"   name="end_date" value="${reportday_con.end_date}" />
-                                        省份：
-                                        <select id="p" name="shengfen" onmouseover="show_1();" onchange="show_2();" ><option value="${reportday_con.shengfen}">${reportday_con.shengfen}</option></select>
-                                        地市：
-                                        <select id="c" name="chengshi"  onchange="show_3()"><option value="${reportday_con.chengshi}">${reportday_con.chengshi}</option></select>
-                                        区县：
-                                        <select id="a" name="quyufl" ><option value="${reportday_con.quyufl}">${reportday_con.quyufl}</option></select>
+                                        开始日期：<input type="text" id="begin_date" name="begin_date" value="${reportmonth_con.begin_date}"  />
+                                        结束日期：<input type="text" id="end_date"   name="end_date" value="${reportmonth_con.end_date}" />
+
                                         <input type="submit" value="查询"/>
 
                                     </td>
@@ -282,14 +189,14 @@
 
     <!-- 图表展示区 -->
     <tr><td>
-        <div id="chart" ></div>
+        <div id="chart"></div>
         <%
             // store chart config name-config value pair
             Map<String, String> chartConfig = new HashMap<String, String>();
-            chartConfig.put("caption", "日报");
+            chartConfig.put("caption", "月报");
             chartConfig.put("subCaption", "");
             chartConfig.put("xAxisName", "时间");
-            chartConfig.put("yAxisName", "下单金额");
+            chartConfig.put("yAxisName", "含税金额");
             chartConfig.put("formatNumberScale", "0");
             chartConfig.put("numberSuffix", "");
             chartConfig.put("theme", "fusion");
@@ -302,13 +209,14 @@
 
 
             //遍历List
-            Object re = request.getAttribute("reportday");
-            List<ReportDay> ol= (List)re;
+            Object re = request.getAttribute("reportmonth");
+            List<ReportMonth> ol= (List)re;
             for(int i=0;i<ol.size();i++){
-                ReportDay      ov = ol.get(i);
+                ReportMonth      ov = ol.get(i);
 
-
-                dataValuePair.put(""+ov.getRq()+"", ov.getOrder_pay_price());
+                if(!ov.getRq().equals("合计")) {
+                    dataValuePair.put("" + ov.getRq() + "", ov.getHsje());
+                }
 
             }
             StringBuilder jsonData = new StringBuilder();
@@ -361,40 +269,37 @@
             <table width="100%" border="1" cellpadding="5" cellspacing="0" style="border:#c2c6cc 1px solid; border-collapse:collapse;">
                 <tr class="main_trbg_tit" align="center">
 
-                    <td>日期                </td>
-                    <td>省份                </td>
-                    <td>地市                </td>
-                    <td>区县                </td>
+                    <td>日期</td>
+                    <td>含税金额</td>
+                    <td>参考毛利</td>
+                    <td>参考毛利率</td>
                     <td>电商客户数          </td>
-                    <td>登录率(%)           </td>
-                    <td>登录-下单客户数     </td>
-                    <td>登录-未下单客户数   </td>
-                    <td>订单-支付-客户数    </td>
-                    <td>订单-支付-金额      </td>
-                    <td>订单-未支付-客户数  </td>
-                    <td>订单-未支付-金额    </td>
-                    <td>购物车-客户数       </td>
-                    <td>购物车-金额         </td>
+                    <td>登录客户数           </td>
+                    <td>登录率           </td>
+                    <td>支付客户数     </td>
+                    <td>未支付客户数   </td>
+                    <td>未支付金额    </td>
+                    <td>购物车客户数       </td>
+                    <td>购物车金额         </td>
 
 
                 </tr>
-                <c:forEach items="${requestScope.reportday}" var="reportday" varStatus="stat">
+                <c:forEach items="${requestScope.reportmonth}" var="reportmonth" varStatus="stat">
                     <tr id="data_${stat.index}" align="center" class="main_trbg" onMouseOver="move(this);" onMouseOut="out(this);">
 
-                        <td>${reportday.rq                       }</td>
-                        <td>${reportday.shengfen                 }</td>
-                        <td>${reportday.chengshi                 }</td>
-                        <td>${reportday.quyufl                   }</td>
-                        <td>${reportday.custom_num               }</td>
-                        <td>${reportday.login_rate               }</td>
-                        <td>${reportday.login_pay_custom         }</td>
-                        <td>${reportday.login_nopay_custom       }</td>
-                        <td>${reportday.order_pay_custom         }</td>
-                        <td>${reportday.order_pay_price          }</td>
-                        <td>${reportday.order_nopay_custom       }</td>
-                        <td>${reportday.order_nopay_price        }</td>
-                        <td>${reportday.shopping_cart_custom     }</td>
-                        <td>${reportday.shopping_cart_price      }</td>
+                        <td>${reportmonth.rq                }</td>
+                        <td>${reportmonth.hsje              }</td>
+                        <td>${reportmonth.cankml            }</td>
+                        <td>${reportmonth.cankmll           }</td>
+                        <td>${reportmonth.cust_num          }</td>
+                        <td>${reportmonth.login_num         }</td>
+                        <td>${String.format("%.2f",reportmonth.login_num*100/reportmonth.cust_num)       }%</td>
+                        <td>${reportmonth.pay_cust          }</td>
+                        <td>${reportmonth.not_pay_cust      }</td>
+                        <td>${reportmonth.not_pay           }</td>
+                        <td>${reportmonth.cart_cust         }</td>
+                        <td>${reportmonth.cart_price        }</td>
+
 
 
                     </tr>
@@ -402,17 +307,6 @@
             </table>
         </td>
     </tr>
-    <!-- 分页标签 -->
-    <tr valign="top" align="center" ><td align="center" class="font3">
-        <fkjava:pager
-                pageIndex="${requestScope.pageModel.pageIndex}"
-                pageSize="${requestScope.pageModel.pageSize}"
-                recordCount="${requestScope.pageModel.recordCount}"
-                style="digg"
-                submitUrl="${ctx}/reportday.do?pageIndex"/>
-
-    </td></tr>
-
 
 
 </table>

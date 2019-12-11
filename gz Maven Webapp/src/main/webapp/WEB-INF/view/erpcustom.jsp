@@ -1,9 +1,20 @@
+<%@ page import="com.oracat.model.ErpCustom" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+
+<%  	int num=0;
+    //遍历List 取得记录数
+    if(request.getAttribute("erpcustom")!=null) {
+        Object re = request.getAttribute("erpcustom");
+        List<ErpCustom> ol = (List) re;
+        num = ol.size();
+    }
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -171,10 +182,23 @@
     }
 </script>
 
+    <script>
+        <!-- 数据行数自适应高度 -->
+        function autoheight() {
+            var n = <%=num%>;
 
+            if (Number(n) !==0) {
+
+
+                    $('.layui-tab-item.layui-show', parent.document).css('height', '' +(500+(Number(n) * 60))+'');
+
+            }
+
+        }
+    </script>
 
 </head>
-<body onload="  updated_num();">
+<body onload="  updated_num(); autoheight();">
 <!-- 导航 -->
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tr><td height="10"></td></tr>

@@ -50,6 +50,9 @@ public interface DataService {
     List<String> selectShengfen();
 	List<String> selectChengshi(String shengfen);
 	List<String> selectQuyufl(String shengfen,String chengshi);
+
+	/**月报表**/
+	List<ReportMonth> selectReportMonth(String begin_date,String end_date);
    /**年度报表**/
    List<ReportYear> selectReportYear(String begin_date,String end_date);
     //**导出excel**/

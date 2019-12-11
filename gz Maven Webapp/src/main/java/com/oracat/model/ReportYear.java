@@ -11,9 +11,21 @@ public class ReportYear {
     Double je201909    ;
     Double je201910    ;
     Double je201911    ;
+
+
+
+    Double je201912    ;
     Double year       ;
     Double ml         ;
     Double mll        ;
+
+    public Double getJe201912() {
+        return je201912;
+    }
+
+    public void setJe201912(Double je201912) {
+        this.je201912 = je201912;
+    }
 
     public Double getJe201906() {
         return je201906;

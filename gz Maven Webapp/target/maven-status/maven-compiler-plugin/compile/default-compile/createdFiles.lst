@@ -6,6 +6,7 @@ com\oracat\dao\provider\ReportDaySqlProvider$2.class
 com\oracat\controller\GoodsForGoodsController.class
 com\oracat\dao\ReportYearDao.class
 com\oracat\controller\UserController.class
+com\oracat\dao\ReportMonthDao.class
 com\oracat\dao\provider\PricePareSqlProvider.class
 com\oracat\controller\YzGoodsController.class
 com\oracat\util\DynamicDataSource.class

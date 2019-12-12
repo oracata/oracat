@@ -86,164 +86,241 @@
 
 
 
-
-
-</head>
+    </head>
 <body>
 
 
 
-<!-- 柱图 -->
+<!-- 全省图 -->
 <table>
+
+
+    <tr><td align="center">
+
+        <div id="chart-container">
+
+        </div>
+        <%
+            // store chart config name-config value pair
+            Map<String, String> chartConfig3 = new HashMap<String, String>();
+            chartConfig3.put("theme", "fusion");
+            chartConfig3.put("caption", "全省实时订单");
+            chartConfig3.put("showlabels", "0");
+            chartConfig3.put("nullentitycolor", "#4FCAF6");
+            chartConfig3.put("legendcaption", "订单数范围");
+            chartConfig3.put("entitytooltext", "$lname {br} 订单数: $datavalue");
+
+
+
+            //store label-value pair
+            //LinkedHashMap 保证数据顺序
+            Map<String, Double> dataValuePair3 = new LinkedHashMap<String, Double>();
+
+
+            //遍历List
+            Object re3 = request.getAttribute("realtime");
+            List<RealTime> ol3= (List)re3;
+            for(int i=0;i<ol3.size();i++){
+                RealTime      ov3 = ol3.get(i);
+
+
+                dataValuePair3.put(""+ov3.getRq().substring(11,21)+"", ov3.getOrder_pay_price());
+
+            }
+            StringBuilder jsonData3 = new StringBuilder();
+            StringBuilder data3 = new StringBuilder();
+
+            // json data to use as chart data source
+            jsonData3.append("{'chart':{");
+            for(Map.Entry conf3:chartConfig3.entrySet())
+            {
+                jsonData3.append("'" + conf3.getKey()+"':'"+conf3.getValue() + "',");
+            }
+
+            jsonData3.replace(jsonData3.length() - 1, jsonData3.length() ,"},");
+
+            // build  data object from label-value pair
+            data3.append("'data':[");
+
+            for(Map.Entry pair3:dataValuePair3.entrySet())
+            {
+
+                data3.append("{'label':'" + pair3.getKey() + "','value':'" + pair3.getValue() +"'},");
+
+            }
+            data3.replace(data3.length() - 1, data3.length(),"]");
+
+            jsonData3.append(data3.toString());
+            jsonData3.append("}");
+
+
+            // Create chart instance
+            // charttype, chartID, width, height,containerid, data format, data
+            FusionCharts firstChart3 = new FusionCharts(
+                    "maps/yunnan",
+                    "firstChart3",
+                    "800",
+                    "600",
+                    "chart-container",
+                    "json",
+                    jsonData3.toString()
+            );
+        %>
+        <%= firstChart3.render() %>
+
+
+    </td></tr>
+
+
     <tr>
-<td>
-<div id="chart"  ></div>
-<%
-    // store chart config name-config value pair
-    Map<String, String> chartConfig = new HashMap<String, String>();
-    chartConfig.put("caption", "实时订单总金额");
-    chartConfig.put("subCaption", "");
-    chartConfig.put("xAxisName", "时间");
-    chartConfig.put("yAxisName", "下单总金额");
-    chartConfig.put("formatNumberScale", "0");
-    chartConfig.put("numberSuffix", "");
-    chartConfig.put("theme", "fusion");
-    chartConfig.put("labelStep", "5");
+        <td>
+            <div id="chart"  ></div>
+            <%
+                // store chart config name-config value pair
+                Map<String, String> chartConfig = new HashMap<String, String>();
+                chartConfig.put("caption", "实时订单总金额");
+                chartConfig.put("subCaption", "");
+                chartConfig.put("xAxisName", "时间");
+                chartConfig.put("yAxisName", "下单总金额");
+                chartConfig.put("formatNumberScale", "0");
+                chartConfig.put("numberSuffix", "");
+                chartConfig.put("theme", "fusion");
+                chartConfig.put("labelStep", "5");
 
 
-    //store label-value pair
-    //LinkedHashMap 保证数据顺序
-    Map<String, Double> dataValuePair = new LinkedHashMap<String, Double>();
+                //store label-value pair
+                //LinkedHashMap 保证数据顺序
+                Map<String, Double> dataValuePair = new LinkedHashMap<String, Double>();
 
 
-    //遍历List
-    Object re = request.getAttribute("realtime");
-    List<RealTime> ol= (List)re;
-    for(int i=0;i<ol.size();i++){
-        RealTime      ov = ol.get(i);
+                //遍历List
+                Object re = request.getAttribute("realtime");
+                List<RealTime> ol= (List)re;
+                for(int i=0;i<ol.size();i++){
+                    RealTime      ov = ol.get(i);
 
 
-        dataValuePair.put(""+ov.getRq().substring(11,21)+"", ov.getOrder_pay_price());
+                    dataValuePair.put(""+ov.getRq().substring(11,21)+"", ov.getOrder_pay_price());
 
-    }
-    StringBuilder jsonData = new StringBuilder();
-    StringBuilder data = new StringBuilder();
+                }
+                StringBuilder jsonData = new StringBuilder();
+                StringBuilder data = new StringBuilder();
 
-    // json data to use as chart data source
-    jsonData.append("{'chart':{");
-    for(Map.Entry conf:chartConfig.entrySet())
-    {
-        jsonData.append("'" + conf.getKey()+"':'"+conf.getValue() + "',");
-    }
+                // json data to use as chart data source
+                jsonData.append("{'chart':{");
+                for(Map.Entry conf:chartConfig.entrySet())
+                {
+                    jsonData.append("'" + conf.getKey()+"':'"+conf.getValue() + "',");
+                }
 
-    jsonData.replace(jsonData.length() - 1, jsonData.length() ,"},");
+                jsonData.replace(jsonData.length() - 1, jsonData.length() ,"},");
 
-    // build  data object from label-value pair
-    data.append("'data':[");
+                // build  data object from label-value pair
+                data.append("'data':[");
 
-    for(Map.Entry pair:dataValuePair.entrySet())
-    {
+                for(Map.Entry pair:dataValuePair.entrySet())
+                {
 
-        data.append("{'label':'" + pair.getKey() + "','value':'" + pair.getValue() +"'},");
+                    data.append("{'label':'" + pair.getKey() + "','value':'" + pair.getValue() +"'},");
 
-    }
-    data.replace(data.length() - 1, data.length(),"]");
+                }
+                data.replace(data.length() - 1, data.length(),"]");
 
-    jsonData.append(data.toString());
-    jsonData.append("}");
-
-
-    // Create chart instance
-    // charttype, chartID, width, height,containerid, data format, data
-    FusionCharts firstChart = new FusionCharts(
-            "area2d",
-            "first_chart",
-            "700",
-            "400",
-            "chart",
-            "json",
-            jsonData.toString()
-    );
-%>
-<%= firstChart.render() %>
-    </td>
-<td>
-<!--分割线**************************** -->
+                jsonData.append(data.toString());
+                jsonData.append("}");
 
 
-<!-- 柱图 -->
-
-<div id="chart2"  ></div>
-<%
-    // store chart config name-config value pair
-    Map<String, String> chartConfig2 = new HashMap<String, String>();
-    chartConfig2.put("caption", "实时登录客户数");
-    chartConfig2.put("subCaption", "");
-    chartConfig2.put("xAxisName", "时间");
-    chartConfig2.put("yAxisName", "登录客户数");
-    chartConfig2.put("formatNumberScale", "0");
-    chartConfig2.put("numberSuffix", "");
-    chartConfig2.put("theme", "fusion");
-    chartConfig2.put("labelStep", "5");
-
-
-    //store label-value pair
-    //LinkedHashMap 保证数据顺序
-    Map<String, Double> dataValuePair2 = new LinkedHashMap<String, Double>();
+                // Create chart instance
+                // charttype, chartID, width, height,containerid, data format, data
+                FusionCharts firstChart = new FusionCharts(
+                        "area2d",
+                        "first_chart",
+                        "700",
+                        "400",
+                        "chart",
+                        "json",
+                        jsonData.toString()
+                );
+            %>
+            <%= firstChart.render() %>
+        </td>
+        <td>
+            <!--分割线**************************** -->
 
 
-    //遍历List
-    Object re2 = request.getAttribute("realtime");
-    List<RealTime> ol2= (List)re2;
-    for(int i=0;i<ol2.size();i++){
-        RealTime      ov2 = ol2.get(i);
+            <!-- 柱图 -->
+
+            <div id="chart2"  ></div>
+            <%
+                // store chart config name-config value pair
+                Map<String, String> chartConfig2 = new HashMap<String, String>();
+                chartConfig2.put("caption", "实时登录客户数");
+                chartConfig2.put("subCaption", "");
+                chartConfig2.put("xAxisName", "时间");
+                chartConfig2.put("yAxisName", "登录客户数");
+                chartConfig2.put("formatNumberScale", "0");
+                chartConfig2.put("numberSuffix", "");
+                chartConfig2.put("theme", "fusion");
+                chartConfig2.put("labelStep", "5");
 
 
-        dataValuePair2.put(""+ov2.getRq().substring(11,21)+"", (double) (ov2.getLogin_nopay_custom()+ov2.getLogin_pay_custom()));
-
-    }
-    StringBuilder jsonData2 = new StringBuilder();
-    StringBuilder data2 = new StringBuilder();
-
-    // json data to use as chart data source
-    jsonData2.append("{'chart':{");
-    for(Map.Entry conf2:chartConfig2.entrySet())
-    {
-        jsonData2.append("'" + conf2.getKey()+"':'"+conf2.getValue() + "',");
-    }
-
-    jsonData2.replace(jsonData2.length() - 1, jsonData2.length() ,"},");
-
-    // build  data object from label-value pair
-    data2.append("'data':[");
-
-    for(Map.Entry pair2:dataValuePair2.entrySet())
-    {
-
-        data2.append("{'label':'" + pair2.getKey() + "','value':'" + pair2.getValue() +"'},");
-
-    }
-    data2.replace(data2.length() - 1, data2.length(),"]");
-
-    jsonData2.append(data2.toString());
-    jsonData2.append("}");
+                //store label-value pair
+                //LinkedHashMap 保证数据顺序
+                Map<String, Double> dataValuePair2 = new LinkedHashMap<String, Double>();
 
 
-    // Create chart instance
-    // charttype, chartID, width, height,containerid, data format, data
-    FusionCharts firstChart2 = new FusionCharts(
-            "spline",
-            "first_chart2",
-            "700",
-            "400",
-            "chart2",
-            "json",
-            jsonData2.toString()
-    );
-%>
-<%= firstChart2.render() %>
+                //遍历List
+                Object re2 = request.getAttribute("realtime");
+                List<RealTime> ol2= (List)re2;
+                for(int i=0;i<ol2.size();i++){
+                    RealTime      ov2 = ol2.get(i);
 
-    </td>
+
+                    dataValuePair2.put(""+ov2.getRq().substring(11,21)+"", (double) (ov2.getLogin_nopay_custom()+ov2.getLogin_pay_custom()));
+
+                }
+                StringBuilder jsonData2 = new StringBuilder();
+                StringBuilder data2 = new StringBuilder();
+
+                // json data to use as chart data source
+                jsonData2.append("{'chart':{");
+                for(Map.Entry conf2:chartConfig2.entrySet())
+                {
+                    jsonData2.append("'" + conf2.getKey()+"':'"+conf2.getValue() + "',");
+                }
+
+                jsonData2.replace(jsonData2.length() - 1, jsonData2.length() ,"},");
+
+                // build  data object from label-value pair
+                data2.append("'data':[");
+
+                for(Map.Entry pair2:dataValuePair2.entrySet())
+                {
+
+                    data2.append("{'label':'" + pair2.getKey() + "','value':'" + pair2.getValue() +"'},");
+
+                }
+                data2.replace(data2.length() - 1, data2.length(),"]");
+
+                jsonData2.append(data2.toString());
+                jsonData2.append("}");
+
+
+                // Create chart instance
+                // charttype, chartID, width, height,containerid, data format, data
+                FusionCharts firstChart2 = new FusionCharts(
+                        "spline",
+                        "first_chart2",
+                        "700",
+                        "400",
+                        "chart2",
+                        "json",
+                        jsonData2.toString()
+                );
+            %>
+            <%= firstChart2.render() %>
+
+        </td>
     </tr>
 
     <tr>

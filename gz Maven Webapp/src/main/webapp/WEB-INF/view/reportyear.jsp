@@ -1,9 +1,24 @@
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.LinkedHashMap" %>
+<%@ page import="com.oracat.model.RealTime" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.oracat.util.FusionCharts" %>
+<%@ page import="com.oracat.model.ReportYear" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
+
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -66,6 +81,15 @@
 
 
 
+    <script type="text/javascript"
+            src="<%=basePath%>js/fusioncharts/fusioncharts.js"></script>
+    <script type="text/javascript"
+            src="<%=basePath%>js/fusioncharts/themes/fusioncharts.theme.fint.js"></script>
+    <script type="text/javascript"
+            src="<%=basePath%>js/fusioncharts/fusioncharts.maps.js"></script>
+    <script type="text/javascript"
+            src="<%=basePath%>js/fusioncharts/maps/fusioncharts.yunnan.js"></script>
+
 </head>
 <body  >
 <!-- 导航 -->
@@ -102,7 +126,149 @@
             </table>
         </td>
     </tr>
+<tr  ><td  align="center">
 
+    <div id="chart-container" >
+
+    </div>
+    <%
+        // store chart config name-config value pair
+        Map<String, String> chartConfig3 = new HashMap<String, String>();
+        chartConfig3.put("theme", "fusion");
+        chartConfig3.put("caption", "全省全年金额分布");
+        chartConfig3.put("showlabels", "1");
+        chartConfig3.put("numbersuffix", "(千元)");
+        chartConfig3.put("nullentitycolor", "#4FCAF6");
+        chartConfig3.put("legendcaption", "金额范围");
+        chartConfig3.put("entitytooltext", "$lname {br} 金额: $datavalue");
+
+
+
+        //store label-value pair
+        //LinkedHashMap 保证数据顺序
+        Map<String, Double> dataValuePair3 = new LinkedHashMap<String, Double>();
+
+
+        //遍历List
+        Object re3 = request.getAttribute("reportyear");
+        List<ReportYear> ol3= (List)re3;
+        for(int i=0;i<ol3.size();i++){
+            ReportYear      ov3 = ol3.get(i);
+
+
+            if ("曲靖".equals(ov3.getArea()))        { dataValuePair3.put("2", ov3.getYear());
+            } else if ("昆明".equals(ov3.getArea())) { dataValuePair3.put("1", ov3.getYear());
+            } else if ("昭通".equals(ov3.getArea())) { dataValuePair3.put("5", ov3.getYear());
+            } else if ("楚雄".equals(ov3.getArea())) { dataValuePair3.put("13", ov3.getYear());
+            } else if ("临沧".equals(ov3.getArea())) { dataValuePair3.put("8", ov3.getYear());
+            } else if ("版纳".equals(ov3.getArea())) { dataValuePair3.put("16", ov3.getYear());
+            } else if ("普洱".equals(ov3.getArea())) { dataValuePair3.put("7", ov3.getYear());
+            } else if ("保山".equals(ov3.getArea())) { dataValuePair3.put("4", ov3.getYear());
+            } else if ("红河".equals(ov3.getArea())) { dataValuePair3.put("14", ov3.getYear());
+            } else if ("玉溪".equals(ov3.getArea())) { dataValuePair3.put("3", ov3.getYear());
+            } else if ("文山".equals(ov3.getArea())) { dataValuePair3.put("15", ov3.getYear());
+            } else if ("大理".equals(ov3.getArea())) { dataValuePair3.put("12", ov3.getYear());
+            } else if ("丽江".equals(ov3.getArea())) { dataValuePair3.put("6", ov3.getYear());
+            } else if ("德宏".equals(ov3.getArea())) { dataValuePair3.put("9", ov3.getYear());
+            } else if ("怒江".equals(ov3.getArea())) { dataValuePair3.put("10", ov3.getYear());
+            } else if ("迪庆".equals(ov3.getArea())) { dataValuePair3.put("11", ov3.getYear());
+            }
+
+
+
+        }
+        StringBuilder jsonData3 = new StringBuilder();
+        StringBuilder data3 = new StringBuilder();
+        StringBuilder data4 = new StringBuilder();
+
+        // json data to use as chart data source
+        jsonData3.append("{'chart':{");
+        for(Map.Entry conf3:chartConfig3.entrySet())
+        {
+            jsonData3.append("'" + conf3.getKey()+"':'"+conf3.getValue() + "',");
+        }
+
+        jsonData3.replace(jsonData3.length() - 1, jsonData3.length() ,"},");
+
+        data4.append("  'colorrange': {\n" +
+                "    'gradient': '0',\n" +
+                "    'color': [" +
+                "  {                                        \n" +
+                "        'minvalue': '0',                \n" +
+                "        'maxvalue': '700',               \n" +
+                "        'displayvalue': '0 - 700',   \n" +
+                "        'code': '#F0F1F9'                   \n" +
+                "      },                                  \n" +
+                "  {                                        \n" +
+                "        'minvalue': '700',                \n" +
+                "        'maxvalue': '10000',               \n" +
+                "        'displayvalue': '700 - 10000',   \n" +
+                "        'code': '#FFE0B2'                   \n" +
+                "      },                                  \n" +
+                "      {                                   \n" +
+                "        'minvalue': '10000',               \n" +
+                "        'maxvalue': '30000',               \n" +
+                "        'displayvalue': '10000 - 30000',  \n" +
+                "        'code': '#FB8C00'                   \n" +
+                "      },                                  \n" +
+                "      {                                   \n" +
+                "        'minvalue': '30000',               \n" +
+                "        'maxvalue': '100000',              \n" +
+                "        'displayvalue': '30000 - 100000', \n" +
+                "        'code': '#FD8963'                   \n" +
+                "      },                                  \n" +
+                "      {                                   \n" +
+                "        'minvalue': '100000',              \n" +
+                "        'maxvalue': '200000',              \n" +
+                "        'displayvalue': '100000 - 200000',\n" +
+                "        'code': '#EF5350'                   \n" +
+                "      },                                  \n" +
+                "      {                                   \n" +
+                "        'minvalue': '200000',              \n" +
+                "        'maxvalue': '1000000',              \n" +
+                "        'displayvalue': '200000 - 1000000',\n" +
+                "        'code': '#D60100'                   \n" +
+                "      },                                  \n" +
+                "      {                                   \n" +
+                "        'minvalue': '1000000',              \n" +
+                "        'maxvalue': '5000000',              \n" +
+                "        'displayvalue': '> 1000000',        \n" +
+                "        'code': '#C62828'                   \n" +
+                "      }                                   \n" +
+                "    ]                                     \n" +
+                "  },    ");
+        jsonData3.append(data4.toString());
+        // build  data object from label-value pair
+        data3.append("'data':[");
+
+        for(Map.Entry pair3:dataValuePair3.entrySet())
+        {
+
+            data3.append("{'id':'" + pair3.getKey() + "','value':'" + pair3.getValue() +"'},");
+
+        }
+        data3.replace(data3.length() - 1, data3.length(),"]");
+
+        jsonData3.append(data3.toString());
+        jsonData3.append("}");
+
+        System.out.println(jsonData3.toString());
+        // Create chart instance
+        // charttype, chartID, width, height,containerid, data format, data
+        FusionCharts firstChart3 = new FusionCharts(
+                "maps/yunnan",
+                "firstChart3",
+                "800",
+                "600",
+                "chart-container",
+                "json",
+                jsonData3.toString()
+        );
+    %>
+    <%= firstChart3.render() %>
+
+
+</td></tr>
     <!-- 数据展示区 -->
     <tr valign="top">
         <td height="20">

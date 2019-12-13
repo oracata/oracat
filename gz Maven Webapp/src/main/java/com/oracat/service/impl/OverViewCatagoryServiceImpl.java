@@ -37,6 +37,11 @@ public class OverViewCatagoryServiceImpl implements OverViewCatagoryService {
         return overViewCatagoryDao.selectYzFenlei();
     }
 
+    public List<Map<String,Integer>> selectJndfl() {
+
+        DynamicDataSourceHolder.setDataSource("mysql");
+        return overViewCatagoryDao.selectJndfl();
+    }
 
 
 }

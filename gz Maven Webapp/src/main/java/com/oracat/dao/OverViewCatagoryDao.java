@@ -20,4 +20,10 @@ public interface OverViewCatagoryDao {
     List<Map<String,Integer>> selectYzFenlei();
 
 
+
+    @Select("select   leibie_2 ,count(*) num from jnd_goods where date='2019-12-13' and state=1\n" +
+            "group by leibie_2  ")
+    List<Map<String,Integer>> selectJndfl();
+
+
 }

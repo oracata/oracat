@@ -56,8 +56,10 @@ public class OverViewController {
         ModelAndView mav = new ModelAndView("overview"); 
         List<OverViewCatagory> overViewCatagory = overViewCatagoryService.selectOverViewCatagory();
         List<Map<String,Integer>> fenlei = overViewCatagoryService.selectYzFenlei();
+        List<Map<String,Integer>> jndfl = overViewCatagoryService.selectJndfl();
         mav.addObject("overViewCatagory", overViewCatagory);
         mav.addObject("Fenlei", fenlei);
+        mav.addObject("jndfl", jndfl);
         return mav; 
     }  
     

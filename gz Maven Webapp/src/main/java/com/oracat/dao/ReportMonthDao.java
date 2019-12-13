@@ -14,7 +14,7 @@ public interface ReportMonthDao {
     @Select("\n" +
             "SELECT a.rq,hsje,round(cankml,2) cankml,round(cankmll,2) cankmll,cust_num,login_num,pay_cust,not_pay_cust,not_pay,cart_cust,cart_price  FROM (\n" +
             "  SELECT  rq,(SELECT count(a.enterprise_id) FROM openquery(b2b,'select * from enterprise_custom') a \n" +
-            "INNER JOIN wldwzl b ON a.enterprise_id=b.wldwid AND b.beactive='是' WHERE STATE=2 AND  convert(varchar(30),a.request_time,120)<t.rq+'-31 23:59:59' ) cust_num,round(hsje,2) hsje, round(cankml,2) cankml,round(t.cankmll,2) cankmll FROM (\n" +
+            "INNER JOIN wldwzl(nolock) b ON a.enterprise_id=b.wldwid AND b.beactive='是' WHERE STATE=2 AND  convert(varchar(30),a.request_time,120)<t.rq+'-31 23:59:59' ) cust_num,round(hsje,2) hsje, round(cankml,2) cankml,round(t.cankmll,2) cankmll FROM (\n" +
             "    select  SUBSTRING(a.rq,1,7) rq ,    sum(b.hsje) as hsje\n" +
             " \n" +
             "      ,sum(case when b.ywyjsje<>0 then b.ywyjsje else b.hsje end-(case when a.djlx='x40' or a.djlx='x60' then (case when b.cankcbj<>0 then round(b.cankcbj/b.xsbzjlgg*b.shl,2) else (case when b.ywyjsje<>0 then b.ywyjsje else b.hsje end) end) else round(b.cankcbj/b.xsbzjlgg*b.shl,2) end)) as cankml\n" +
@@ -31,7 +31,7 @@ public interface ReportMonthDao {
             "UNION ALL \n" +
             "\n" +
             "  SELECT  '合计',(SELECT count(a.enterprise_id) FROM openquery(b2b,'select * from enterprise_custom') a \n" +
-            "INNER JOIN wldwzl b ON a.enterprise_id=b.wldwid AND b.beactive='是' WHERE STATE=2  ) cust_num,round(hsje,2) hsje, round(cankml,2) cankml,round(t.cankmll,2) cankmll FROM (\n" +
+            "INNER JOIN wldwzl(nolock) b ON a.enterprise_id=b.wldwid AND b.beactive='是' WHERE STATE=2  ) cust_num,round(hsje,2) hsje, round(cankml,2) cankml,round(t.cankmll,2) cankmll FROM (\n" +
             "    select    sum(b.hsje) as hsje\n" +
             " \n" +
             "      ,sum(case when b.ywyjsje<>0 then b.ywyjsje else b.hsje end-(case when a.djlx='x40' or a.djlx='x60' then (case when b.cankcbj<>0 then round(b.cankcbj/b.xsbzjlgg*b.shl,2) else (case when b.ywyjsje<>0 then b.ywyjsje else b.hsje end) end) else round(b.cankcbj/b.xsbzjlgg*b.shl,2) end)) as cankml\n" +

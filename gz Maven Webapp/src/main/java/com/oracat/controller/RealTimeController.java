@@ -22,7 +22,9 @@ public class RealTimeController {
 
         ModelAndView mav = new ModelAndView("realtime");
         List<RealTime> realtime = dataService.selectRealTime();
+        List<RealTime> area = dataService.selectArea();
         mav.addObject("realtime", realtime);
+        mav.addObject("area", area);
         return mav;
     }
 

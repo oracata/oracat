@@ -61,6 +61,9 @@ public class DataServiceImpl implements DataService{
 
 	@Autowired  //自动装配
 	private ErpCustomDao erpCustomDao ;
+
+	@Autowired  //自动装配
+	private Top10CustDao top10CustDao ;
 	
 	/*****************东昌服务接口实现*************************************/
 	@Transactional(readOnly=true)
@@ -233,7 +236,38 @@ public class DataServiceImpl implements DataService{
 
 
 
+	/** 客户top10报表**/
 
+	@Override
+	public List<Top10Cust> selectTop10Cust(String begin_date,String end_date)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return  top10CustDao.selectTop10Cust(begin_date,end_date);
+
+	}
+
+	/** 商品top10报表**/
+
+	@Override
+	public List<Top10Cust> selectTop10Goods(String begin_date,String end_date)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return  top10CustDao.selectTop10Goods(begin_date,end_date);
+
+	}
+
+	/** 优惠券报表**/
+
+	@Override
+	public List<Top10Cust> selectCoupon(String begin_date,String end_date)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return  top10CustDao.selectCoupon(begin_date,end_date);
+
+	}
 
 	//实时图表
 
@@ -244,6 +278,20 @@ public class DataServiceImpl implements DataService{
    	   return reportRealTimeDao.selectRealTime();
 
    }
+
+
+
+	//实时图表
+
+	@Override
+	public List<RealTime> selectArea()
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+		return reportRealTimeDao.selectArea();
+
+	}
+
+
 
 
     @Override

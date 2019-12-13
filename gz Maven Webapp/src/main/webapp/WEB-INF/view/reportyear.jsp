@@ -134,6 +134,7 @@
     <%
         // store chart config name-config value pair
         Map<String, String> chartConfig3 = new HashMap<String, String>();
+        chartConfig3.put("showborder", "0");
         chartConfig3.put("theme", "fusion");
         chartConfig3.put("caption", "全省全年金额分布");
         chartConfig3.put("showlabels", "1");

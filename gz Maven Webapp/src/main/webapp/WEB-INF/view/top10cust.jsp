@@ -1,7 +1,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.LinkedHashMap" %>
-<%@ page import="com.oracat.model.ReportMonth" %>
+<%@ page import="com.oracat.model.Top10Cust" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.oracat.util.FusionCharts" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -154,7 +154,7 @@
     <tr><td height="10"></td></tr>
     <tr>
         <td width="15" height="32"></td>
-        <td class="main_locbg font2">&nbsp;&nbsp;&nbsp;当前位置：报表 &gt; 月报</td>
+        <td class="main_locbg font2">&nbsp;&nbsp;&nbsp;当前位置：报表 &gt; 销售客户top10</td>
         <td width="15" height="32"></td>
     </tr>
 </table>
@@ -166,14 +166,14 @@
             <table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
                 <tr>
                     <td class="fftd">
-                        <form name="reportmonthform" method="post" id="form" action="reportmonth.do">
+                        <form name="top10custform" method="post" id="form" action="top10cust.do">
                             <table width="100%" border="0" cellpadding="0" cellspacing="0">
 
                                 <tr>
                                     <td class="font3">
-                                        开始日期：<input type="text" id="begin_date" name="begin_date" value="${reportmonth_con.begin_date}"  />
-                                        结束日期：<input type="text" id="end_date"   name="end_date" value="${reportmonth_con.end_date}" />
-
+                                        开始日期：<input type="text" id="begin_date" name="begin_date" value="${top10cust_con.begin_date}"  />
+                                        结束日期：<input type="text" id="end_date"   name="end_date" value="${top10cust_con.end_date}" />
+                                       
                                         <input type="submit" value="查询"/>
 
                                     </td>
@@ -189,37 +189,34 @@
 
     <!-- 图表展示区 -->
     <tr><td>
-        <div id="chart" align="center"></div>
+        <div id="chart" ></div>
         <%
             // store chart config name-config value pair
             Map<String, String> chartConfig = new HashMap<String, String>();
-            chartConfig.put("caption", "月报");
-            chartConfig.put("subcaption", "各月数据比较");
-            chartConfig.put("showvalues", "0");
-            chartConfig.put("labeldisplay", "ROTATE");
-            chartConfig.put("rotatelabels", "1");
-            chartConfig.put("plothighlighteffect", "fadeout");
-            chartConfig.put("plottooltext", "$seriesName in $label : <b>$dataValue</b>");
+            chartConfig.put("caption", "销售客户Top10");
+            chartConfig.put("subCaption", "");
+            chartConfig.put("xAxisName", "客户名称");
+            chartConfig.put("yAxisName", "含税金额");
+            chartConfig.put("formatNumberScale", "0");
+            chartConfig.put("numberSuffix", "");
             chartConfig.put("theme", "fusion");
 
 
 
             //store label-value pair
             //LinkedHashMap 保证数据顺序
-            Map<String, Double[]> dataValuePair = new LinkedHashMap<String, Double[]>();
+            Map<String, Double> dataValuePair = new LinkedHashMap<String, Double>();
 
 
             //遍历List
-            Object re = request.getAttribute("reportmonth");
-            List<ReportMonth> ol= (List)re;
+            Object re = request.getAttribute("top10cust");
+            List<Top10Cust> ol= (List)re;
             for(int i=0;i<ol.size();i++){
-                ReportMonth      ov = ol.get(i);
+                Top10Cust      ov = ol.get(i);
 
-                if(!("合计".equals(ov.getRq()))) {
-                    Double[] dt = {ov.getHsje(), ov.getCankmll()};
 
-                    dataValuePair.put("" + ov.getRq() + "", dt);
-                }
+                dataValuePair.put(""+ov.getWldwname()+"", ov.getHsje());
+
             }
             StringBuilder jsonData = new StringBuilder();
             StringBuilder data = new StringBuilder();
@@ -233,85 +230,28 @@
 
             jsonData.replace(jsonData.length() - 1, jsonData.length() ,"},");
 
-            // build  categories
-
-            data.append("'axis':[  {                  \n" +
-                    "     'title': \"含税金额\",\n" +
-                    "      'titlepos': \"left\",\n" +
-                    "      'numberprefix': \"￥\",\n" +
-                    "      'divlineisdashed': \"1\",\n" +
-                    "      'maxvalue': \"200000\",\n" +
-                    "      'dataset': [ " +
-                    " {\n" +
-                    "          'seriesname': \"含税金额\",\n" +
-                    "          'linethickness': \"3\",\n" +
-                    "          'data': [ \n");
-
-
+            // build  data object from label-value pair
+            data.append("'data':[");
 
             for(Map.Entry pair:dataValuePair.entrySet())
             {
-                Double[]  val=(Double[])pair.getValue();
-                data.append("{'value':'" +val[0] +"'},");
+
+                data.append("{'label':'" + pair.getKey() + "','value':'" + pair.getValue() +"'},");
 
             }
-            data.replace(data.length() - 1, data.length(),"] }  ] },");
-
-
-
-
-            data.append("{                  \n" +
-                    "     'title': \"毛利率\",\n" +
-                    "      'titlepos': \"RIGHT\",\n" +
-                    "      'numberprefix': \"%\",\n" +
-                    "     'axisonleft': \"0\",\n" +
-                    "      'numdivlines': \"5\","+
-                    "      'divlineisdashed': \"1\",\n" +
-                    "      'maxvalue': \"5\",\n" +
-                    "      'dataset': [ " +
-                    " {\n" +
-                    "          'seriesname': \"毛利率\",\n" +
-                    "          'linethickness': \"3\",\n" +
-                    "          'data': [ \n");
-
-
-
-            for(Map.Entry pair:dataValuePair.entrySet())
-            {
-                Double[]  val=(Double[])pair.getValue();
-                data.append("{'value':'" +val[1] +"'},");
-
-            }
-            data.replace(data.length() - 1, data.length(),"]   }    ]\n" +
-                    "    }\n" +
-                    "  ],");
-
-            data.append("'categories':[  {                  \n" +
-                    "      \"category\": [  \n");
-
-            for(Map.Entry pair:dataValuePair.entrySet())
-            {
-                data.append("{'label':'" + pair.getKey() + "'},");
-            }
-
-            data.replace(data.length() - 1, data.length() ,"         ]  \n" +
-                    "        }    \n" +
-                    "    ]  ");
-
+            data.replace(data.length() - 1, data.length(),"]");
 
             jsonData.append(data.toString());
             jsonData.append("}");
-
-            System.out.println( jsonData.toString());
 
 
             // Create chart instance
             // charttype, chartID, width, height,containerid, data format, data
             FusionCharts firstChart = new FusionCharts(
-                    "multiaxisline",
+                    "column2d",
                     "first_chart",
-                    "1024",
-                    "700",
+                    "100%",
+                    "50%",
                     "chart",
                     "json",
                     jsonData.toString()
@@ -328,36 +268,21 @@
             <table width="100%" border="1" cellpadding="5" cellspacing="0" style="border:#c2c6cc 1px solid; border-collapse:collapse;">
                 <tr class="main_trbg_tit" align="center">
 
-                    <td>日期</td>
-                    <td>含税金额</td>
-                    <td>参考毛利</td>
-                    <td>参考毛利率</td>
-                    <td>电商客户数          </td>
-                    <td>登录客户数           </td>
-                    <td>登录率           </td>
-                    <td>支付客户数     </td>
-                    <td>未支付客户数   </td>
-                    <td>未支付金额    </td>
-                    <td>购物车客户数       </td>
-                    <td>购物车金额         </td>
+                    <td>客户名称                </td>
+                    <td>含税金额                </td>
+                    <td>毛利                </td>
+                    <td>毛利率                </td>
+
 
 
                 </tr>
-                <c:forEach items="${requestScope.reportmonth}" var="reportmonth" varStatus="stat">
+                <c:forEach items="${requestScope.top10cust}" var="top10cust" varStatus="stat">
                     <tr id="data_${stat.index}" align="center" class="main_trbg" onMouseOver="move(this);" onMouseOut="out(this);">
 
-                        <td>${reportmonth.rq                }</td>
-                        <td>${reportmonth.hsje              }</td>
-                        <td>${reportmonth.cankml            }</td>
-                        <td>${reportmonth.cankmll           }</td>
-                        <td>${reportmonth.cust_num          }</td>
-                        <td>${reportmonth.login_num         }</td>
-                        <td>${String.format("%.2f",reportmonth.login_num*100/reportmonth.cust_num)       }%</td>
-                        <td>${reportmonth.pay_cust          }</td>
-                        <td>${reportmonth.not_pay_cust      }</td>
-                        <td>${reportmonth.not_pay           }</td>
-                        <td>${reportmonth.cart_cust         }</td>
-                        <td>${reportmonth.cart_price        }</td>
+                        <td>${top10cust.wldwname                       }</td>
+                        <td>${top10cust.hsje                 }</td>
+                        <td>${top10cust.cankml                 }</td>
+                        <td>${top10cust.cankmll                   }</td>
 
 
 
@@ -366,6 +291,7 @@
             </table>
         </td>
     </tr>
+
 
 
 </table>

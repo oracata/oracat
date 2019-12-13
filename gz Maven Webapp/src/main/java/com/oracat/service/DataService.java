@@ -37,6 +37,7 @@ public interface DataService {
 	 */
 
 	List<RealTime> selectRealTime();
+	List<RealTime> selectArea();
 
 	/** 电商与erp价格对比
 	**/
@@ -55,6 +56,14 @@ public interface DataService {
 	List<ReportMonth> selectReportMonth(String begin_date,String end_date);
    /**年度报表**/
    List<ReportYear> selectReportYear(String begin_date,String end_date);
+
+	/**top10cust**/
+	List<Top10Cust> selectTop10Cust(String begin_date,String end_date);
+	/**top10goods**/
+	List<Top10Cust> selectTop10Goods(String begin_date,String end_date);
+
+	/**coupon**/
+	List<Top10Cust> selectCoupon(String begin_date,String end_date);
     //**导出excel**/
     XSSFWorkbook exportReportYear() throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException;
 

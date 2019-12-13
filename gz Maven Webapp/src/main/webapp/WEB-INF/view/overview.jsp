@@ -63,7 +63,7 @@
 <body>
 
 
-
+<table><tr><td>
 <!-- 柱图 -->
 
         <div id="chart" align="center"></div>
@@ -75,6 +75,7 @@
             chartConfig.put("xAxisName", "公司名称");
             chartConfig.put("yAxisName", "品种数量");
             chartConfig.put("formatNumberScale", "0");
+            chartConfig.put("showValues ", "1");
             chartConfig.put("numberSuffix", "");
             chartConfig.put("theme", "fusion");
             
@@ -133,14 +134,14 @@
         <%= firstChart.render() %>
 
 
-
+</td><td>
 <!-- 饼图 -->
 
 <div id="chart2" align="center"></div>
 <%
     // store chart config name-config value pair
     Map<String, String> chartConfig2 = new HashMap<String, String>();
-    chartConfig2.put("caption", "云中品牌结构");
+    chartConfig2.put("caption", "云中品种结构");
     chartConfig2.put("subCaption", "");
     chartConfig2.put("xAxisName", "公司名称");
     chartConfig2.put("yAxisName", "品种数量");
@@ -228,8 +229,105 @@
     );
 %>
 <%= firstChart2.render() %>
-        
-        
+
+</td></tr></table>
+
+
+<!-- 饼图 -->
+
+<div id="chart3" align="center"></div>
+<%
+    // store chart config name-config value pair
+    Map<String, String> chartConfig3 = new HashMap<String, String>();
+    chartConfig3.put("caption", "电商品种结构");
+    chartConfig3.put("subCaption", "");
+    chartConfig3.put("xAxisName", "公司名称");
+    chartConfig3.put("yAxisName", "品种数量");
+    chartConfig3.put("formatNumberScale", "0");
+    chartConfig3.put("numberSuffix", "");
+    chartConfig3.put("theme", "fusion");
+
+
+    //store label-value pair
+    //LinkedHashMap 保证数据顺序
+    Map<String, Integer> dataValuePair3= new LinkedHashMap<String, Integer>();
+
+
+    //遍历List
+    Object re3 = request.getAttribute("jndfl");
+    List<Map<String,Integer>> ol3= (List)re3;
+
+
+    String[] key3=new String[ol3.size()];
+    Number [] val3=new Number [ol3.size()];
+    for (int i = 0; i < ol3.size(); i++) {
+        Map<String, Integer> map = ol3.get(i);
+
+        int j=0;
+        for (String string :map.keySet()){
+
+            if(j==0) {
+                key3[i] = String.valueOf(map.get(string));
+            }
+
+            if(j==1) {
+                val3[i] = ((Number)map.get(string)).intValue();
+            }
+            j++;
+        }
+
+        dataValuePair3.put(""+key3[i]+"", val3[i].intValue());
+    }
+
+
+
+
+    //
+
+
+
+
+    StringBuilder jsonData3 = new StringBuilder();
+    StringBuilder data3 = new StringBuilder();
+
+    // json data to use as chart data source
+    jsonData3.append("{'chart':{");
+    for(Map.Entry conf3:chartConfig3.entrySet())
+    {
+        jsonData3.append("'" + conf3.getKey()+"':'"+conf3.getValue() + "',");
+    }
+
+    jsonData3.replace(jsonData3.length() - 1, jsonData3.length() ,"},");
+
+    // build  data object from label-value pair
+    data3.append("'data':[");
+
+    for(Map.Entry pair3:dataValuePair3.entrySet())
+    {
+
+        data3.append("{'label':'" + pair3.getKey() + "','value':'" + pair3.getValue() +"'},");
+    }
+    data3.replace(data3.length() - 1, data3.length(),"]");
+
+    jsonData3.append(data3.toString());
+    jsonData3.append("}");
+
+    System.out.println(jsonData3);
+
+    // Create chart instance
+    // charttype, chartID, width, height,containerid, data format, data
+    FusionCharts firstChart3 = new FusionCharts(
+            "doughnut2d",
+            "first_chart3",
+            "1000",
+            "600",
+            "chart3",
+            "json",
+            jsonData3.toString()
+    );
+%>
+<%= firstChart3.render() %>
+
         
     </body>
 </html>

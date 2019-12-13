@@ -155,6 +155,64 @@ public class ReportController {
     }
 
 
+/** top10cust**/
+    @RequestMapping("/top10cust")
+    public ModelAndView getTop10CustView(Model model,
+                                           @ModelAttribute Top10Cust v_top10cust){
+
+        //初始化查询条件
+        if(v_top10cust.getBegin_date()==null && v_top10cust.getEnd_date()==null) {
+            v_top10cust.setBegin_date("2019-06-01");
+            v_top10cust.setEnd_date(tools.getTimeDay(0));
+
+        }
+        ModelAndView mav = new ModelAndView("top10cust");
+        List<Top10Cust> top10cust =dataService.selectTop10Cust(v_top10cust.getBegin_date(),v_top10cust.getEnd_date());
+        mav.addObject("top10cust", top10cust);
+        mav.addObject("top10cust_con", v_top10cust);   //回写查询条件
+
+        return mav;
+    }
+
+    /** top10goods**/
+    @RequestMapping("/top10goods")
+    public ModelAndView getTop10GoodsView(Model model,
+                                         @ModelAttribute Top10Cust v_top10goods){
+
+        //初始化查询条件
+        if(v_top10goods.getBegin_date()==null && v_top10goods.getEnd_date()==null) {
+            v_top10goods.setBegin_date("2019-06-01");
+            v_top10goods.setEnd_date(tools.getTimeDay(0));
+
+        }
+        ModelAndView mav = new ModelAndView("top10goods");
+        List<Top10Cust> top10goods =dataService.selectTop10Goods(v_top10goods.getBegin_date(),v_top10goods.getEnd_date());
+        mav.addObject("top10goods", top10goods);
+        mav.addObject("top10goods_con", v_top10goods);   //回写查询条件
+
+        return mav;
+    }
+
+
+    /** coupon**/
+    @RequestMapping("/coupon")
+    public ModelAndView getCouponView(Model model,
+                                          @ModelAttribute Top10Cust v_coupon){
+
+        //初始化查询条件
+        if(v_coupon.getBegin_date()==null && v_coupon.getEnd_date()==null) {
+            v_coupon.setBegin_date("2019-06-01");
+            v_coupon.setEnd_date(tools.getTimeDay(0));
+
+        }
+        ModelAndView mav = new ModelAndView("coupon");
+        List<Top10Cust> coupon =dataService.selectCoupon(v_coupon.getBegin_date(),v_coupon.getEnd_date());
+        mav.addObject("coupon", coupon);
+        mav.addObject("coupon_con", v_coupon);   //回写查询条件
+
+        return mav;
+    }
+
 
     @RequestMapping("/reportyear")
     public ModelAndView getReportYearView(){

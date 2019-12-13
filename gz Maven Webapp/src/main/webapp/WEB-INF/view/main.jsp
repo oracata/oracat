@@ -103,6 +103,9 @@
                         <dd><a data-url="reportmonth.do" data-id="8" data-title="月报" class="site-demo-active"  href="javascript:;" data-type="tabAdd">月报</a></dd>
                         <dd><a data-url="reportyear.do" data-id="9" data-title="年报" class="site-demo-active"  href="javascript:;" data-type="tabAdd">年报</a></dd>
                         <dd><a data-url="realtime.do" data-id="13" data-title="实时图表" class="site-demo-active"  href="javascript:;" data-type="tabAdd">实时图表</a></dd>
+                        <dd><a data-url="top10cust.do" data-id="14" data-title="销售客户TOP10" class="site-demo-active"  href="javascript:;" data-type="tabAdd">销售客户TOP10</a></dd>
+                        <dd><a data-url="top10goods.do" data-id="15" data-title="销售品种TOP10" class="site-demo-active"  href="javascript:;" data-type="tabAdd">销售品种TOP10</a></dd>
+                        <dd><a data-url="coupon.do" data-id="16" data-title="活动完成情况" class="site-demo-active"  href="javascript:;" data-type="tabAdd">活动完成情况</a></dd>
                     </dl>
                 </li>
 

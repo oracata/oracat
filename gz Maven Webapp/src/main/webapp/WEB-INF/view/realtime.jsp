@@ -10,11 +10,19 @@
 <%@page import="java.util.*" %>
 <%@page import="com.oracat.util.FusionCharts" %>
 <%@page import="com.oracat.model.*" %>
+
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
+
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
-    <meta http-equiv="refresh" content="60" />
+    <meta http-equiv="refresh" content="300" />
 
     <title>FusionCharts | My First Chart</title>
 
@@ -26,10 +34,18 @@
 -->
 
 
-    <!-- FusionCharts Library -->
-    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/3.15.0-sr.1/fusioncharts.js"></script>
     <script type="text/javascript"
-            src="https://cdn.fusioncharts.com/fusioncharts/3.15.0-sr.1/themes/fusioncharts.theme.fusion.js"></script>
+            src="<%=basePath%>js/fusioncharts/fusioncharts.js"></script>
+    <script type="text/javascript"
+            src="<%=basePath%>js/fusioncharts/themes/fusioncharts.theme.fint.js"></script>
+
+    <script type="text/javascript"
+            src="<%=basePath%>js/fusioncharts/fusioncharts.maps.js"></script>
+    <script type="text/javascript"
+            src="<%=basePath%>js/fusioncharts/maps/fusioncharts.yunnan.js"></script>
+
+
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gumshoe/3.5.1/js/gumshoe.min.js"></script>
 
     <!-- GEO IP -->
@@ -92,23 +108,25 @@
 
 
 <!-- 全省图 -->
-<table>
+<table align="center">
 
 
-    <tr><td align="center">
+    <tr><td >
 
-        <div id="chart-container">
+        <div id="chart-container" >
 
         </div>
         <%
             // store chart config name-config value pair
             Map<String, String> chartConfig3 = new HashMap<String, String>();
+            chartConfig3.put("showborder", "0");
             chartConfig3.put("theme", "fusion");
-            chartConfig3.put("caption", "全省实时订单");
-            chartConfig3.put("showlabels", "0");
+            chartConfig3.put("caption", "全省实时订单分布");
+            chartConfig3.put("showlabels", "1");
+            chartConfig3.put("numbersuffix", "(元)");
             chartConfig3.put("nullentitycolor", "#4FCAF6");
-            chartConfig3.put("legendcaption", "订单数范围");
-            chartConfig3.put("entitytooltext", "$lname {br} 订单数: $datavalue");
+            chartConfig3.put("legendcaption", "金额范围");
+            chartConfig3.put("entitytooltext", "$lname {br} 金额: $datavalue");
 
 
 
@@ -118,17 +136,36 @@
 
 
             //遍历List
-            Object re3 = request.getAttribute("realtime");
+            Object re3 = request.getAttribute("area");
             List<RealTime> ol3= (List)re3;
             for(int i=0;i<ol3.size();i++){
                 RealTime      ov3 = ol3.get(i);
 
 
-                dataValuePair3.put(""+ov3.getRq().substring(11,21)+"", ov3.getOrder_pay_price());
+                if ("曲靖".equals(ov3.getChengshi()))        { dataValuePair3.put("2", ov3.getOrder_pay_price());
+                } else if ("昆明".equals(ov3.getChengshi())) { dataValuePair3.put("1", ov3.getOrder_pay_price());
+                } else if ("昭通".equals(ov3.getChengshi())) { dataValuePair3.put("5", ov3.getOrder_pay_price());
+                } else if ("楚雄".equals(ov3.getChengshi())) { dataValuePair3.put("13", ov3.getOrder_pay_price());
+                } else if ("临沧".equals(ov3.getChengshi())) { dataValuePair3.put("8", ov3.getOrder_pay_price());
+                } else if ("版纳".equals(ov3.getChengshi())) { dataValuePair3.put("16", ov3.getOrder_pay_price());
+                } else if ("普洱".equals(ov3.getChengshi())) { dataValuePair3.put("7", ov3.getOrder_pay_price());
+                } else if ("保山".equals(ov3.getChengshi())) { dataValuePair3.put("4", ov3.getOrder_pay_price());
+                } else if ("红河".equals(ov3.getChengshi())) { dataValuePair3.put("14", ov3.getOrder_pay_price());
+                } else if ("玉溪".equals(ov3.getChengshi())) { dataValuePair3.put("3", ov3.getOrder_pay_price());
+                } else if ("文山".equals(ov3.getChengshi())) { dataValuePair3.put("15", ov3.getOrder_pay_price());
+                } else if ("大理".equals(ov3.getChengshi())) { dataValuePair3.put("12", ov3.getOrder_pay_price());
+                } else if ("丽江".equals(ov3.getChengshi())) { dataValuePair3.put("6", ov3.getOrder_pay_price());
+                } else if ("德宏".equals(ov3.getChengshi())) { dataValuePair3.put("9", ov3.getOrder_pay_price());
+                } else if ("怒江".equals(ov3.getChengshi())) { dataValuePair3.put("10", ov3.getOrder_pay_price());
+                } else if ("迪庆".equals(ov3.getChengshi())) { dataValuePair3.put("11", ov3.getOrder_pay_price());
+                }
+
+
 
             }
             StringBuilder jsonData3 = new StringBuilder();
             StringBuilder data3 = new StringBuilder();
+            StringBuilder data4 = new StringBuilder();
 
             // json data to use as chart data source
             jsonData3.append("{'chart':{");
@@ -139,13 +176,44 @@
 
             jsonData3.replace(jsonData3.length() - 1, jsonData3.length() ,"},");
 
+            data4.append("  'colorrange': {\n" +
+                    "    'gradient': '0',\n" +
+                    "    'color': [" +
+
+                    "      {                                   \n" +
+                    "        'minvalue': '0',               \n" +
+                    "        'maxvalue': '1000',              \n" +
+                    "        'displayvalue': '0 - 1000', \n" +
+                    "        'code': '#4FCAF6'                   \n" +
+                    "      },                                  \n" +
+                    "      {                                   \n" +
+                    "        'minvalue': '1000',              \n" +
+                    "        'maxvalue': '2000',              \n" +
+                    "        'displayvalue': '1000 - 2000',\n" +
+                    "        'code': '#EF5350'                   \n" +
+                    "      },                                  \n" +
+                    "      {                                   \n" +
+                    "        'minvalue': '2000',              \n" +
+                    "        'maxvalue': '8000',              \n" +
+                    "        'displayvalue': '2000 - 8000',\n" +
+                    "        'code': '#D60100'                   \n" +
+                    "      },                                  \n" +
+                    "      {                                   \n" +
+                    "        'minvalue': '8000',              \n" +
+                    "        'maxvalue': '20000',              \n" +
+                    "        'displayvalue': '> 8000',        \n" +
+                    "        'code': '#C62828'                   \n" +
+                    "      }                                   \n" +
+                    "    ]                                     \n" +
+                    "  },    ");
+            jsonData3.append(data4.toString());
             // build  data object from label-value pair
             data3.append("'data':[");
 
             for(Map.Entry pair3:dataValuePair3.entrySet())
             {
 
-                data3.append("{'label':'" + pair3.getKey() + "','value':'" + pair3.getValue() +"'},");
+                data3.append("{'id':'" + pair3.getKey() + "','value':'" + pair3.getValue() +"'},");
 
             }
             data3.replace(data3.length() - 1, data3.length(),"]");
@@ -153,7 +221,7 @@
             jsonData3.append(data3.toString());
             jsonData3.append("}");
 
-
+            System.out.println(jsonData3.toString());
             // Create chart instance
             // charttype, chartID, width, height,containerid, data format, data
             FusionCharts firstChart3 = new FusionCharts(
@@ -169,11 +237,15 @@
         <%= firstChart3.render() %>
 
 
-    </td></tr>
+
+    </td>
 
 
-    <tr>
+
         <td>
+            <script src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+            <script src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+            <table><tr><td>
             <div id="chart"  ></div>
             <%
                 // store chart config name-config value pair
@@ -235,7 +307,7 @@
                 FusionCharts firstChart = new FusionCharts(
                         "area2d",
                         "first_chart",
-                        "700",
+                        "600",
                         "400",
                         "chart",
                         "json",
@@ -243,8 +315,8 @@
                 );
             %>
             <%= firstChart.render() %>
-        </td>
-        <td>
+            </td></tr>
+        <tr><td>
             <!--分割线**************************** -->
 
 
@@ -311,7 +383,7 @@
                 FusionCharts firstChart2 = new FusionCharts(
                         "spline",
                         "first_chart2",
-                        "700",
+                        "600",
                         "400",
                         "chart2",
                         "json",
@@ -320,315 +392,12 @@
             %>
             <%= firstChart2.render() %>
 
+        </td></tr></table>
+
         </td>
     </tr>
 
-    <tr>
-        <td>
 
-            <script type="javascript">
-                const dataSource = {
-                    chart: {
-                        caption: "Process Involved During Course Design",
-                        yaxismaxvalue: "1100",
-                        yaxisminvalue: "0",
-                        theme: "fusion",
-                        valuefontsize: "12",
-                        viewmode: "1",
-                        valuefontcolor: "#FFFFFF",
-                        plotfillhovercolor: "#1A237E",
-                        divlinealpha: "0"
-                    },
-                    dataset: [
-                        {
-                            data: [
-                                {
-                                    id: "01",
-                                    x: "15",
-                                    y: "1000",
-                                    label: "Kick Off{br}meeting",
-                                    shape: "rectangle",
-                                    color: "#5D62B5",
-                                    width: "100",
-                                    height: "60",
-                                    hovercolor: "#1A237E"
-                                },
-                                {
-                                    id: "02",
-                                    x: "15",
-                                    y: "800",
-                                    label: "Review existing{br}course materials",
-                                    color: "#29C3BE",
-                                    shape: "rectangle",
-                                    width: "100",
-                                    height: "60"
-                                },
-                                {
-                                    id: "03",
-                                    x: "15",
-                                    y: "600",
-                                    label:
-                                        "Collaborate on{br}course topics,{br}outcomes,{br}objectives,etc.",
-                                    color: "#F2726F",
-                                    shape: "rectangle",
-                                    width: "100",
-                                    height: "60"
-                                },
-                                {
-                                    id: "04",
-                                    x: "15",
-                                    y: "350",
-                                    label: "Finalize outcomes{br}& objectives.",
-                                    color: "#FFC533",
-                                    shape: "polygon",
-                                    radius: "60"
-                                },
-                                {
-                                    id: "05",
-                                    x: "15",
-                                    y: "100",
-                                    label: "Complete Course{br}blueprint.",
-                                    color: "#62B58F",
-                                    shape: "rectangle",
-                                    width: "100",
-                                    height: "60"
-                                },
-                                {
-                                    id: "06",
-                                    x: "45",
-                                    y: "100",
-                                    label: "Discuss{br}assessments of{br} course outcomes.",
-                                    color: "#BC95DF",
-                                    shape: "rectangle",
-                                    width: "100",
-                                    height: "60"
-                                },
-                                {
-                                    id: "07",
-                                    x: "45",
-                                    y: "350",
-                                    label: "Align assessments{br} to outcomes.",
-                                    color: "#F2726F",
-                                    shape: "rectangle",
-                                    width: "100",
-                                    height: "60"
-                                },
-                                {
-                                    id: "08",
-                                    x: "45",
-                                    y: "600",
-                                    label: "Develop{br}assessments for{br}online delivery.",
-                                    color: "#FFC533",
-                                    shape: "polygon",
-                                    radius: "60"
-                                },
-                                {
-                                    id: "09",
-                                    x: "45",
-                                    y: "800",
-                                    label: "Update Course{br} blueprint with{br} assessment info.",
-                                    color: "#C7D631",
-                                    shape: "rectangle",
-                                    width: "100",
-                                    height: "60"
-                                },
-                                {
-                                    id: "10",
-                                    x: "45",
-                                    y: "1000",
-                                    label: "Determine weekly{br} activities and{br}materials",
-                                    color: "#FFC533",
-                                    shape: "polygon",
-                                    radius: "60"
-                                },
-                                {
-                                    id: "11",
-                                    x: "75",
-                                    y: "1000",
-                                    label: "Update Course{br}blueprint with{br}weekly activities",
-                                    color: "#C7D631",
-                                    shape: "rectangle",
-                                    width: "100",
-                                    height: "60"
-                                },
-                                {
-                                    id: "12",
-                                    x: "75",
-                                    y: "800",
-                                    label: "Build course{br}carmen",
-                                    color: "#BC95DF",
-                                    shape: "rectangle",
-                                    width: "100",
-                                    height: "60"
-                                },
-                                {
-                                    id: "13",
-                                    x: "75",
-                                    y: "600",
-                                    label: "Complete syllabus{br}templete",
-                                    color: "#C7D631",
-                                    shape: "rectangle",
-                                    width: "100",
-                                    height: "60"
-                                },
-                                {
-                                    id: "14",
-                                    x: "75",
-                                    y: "350",
-                                    label: "Review course{br}(Faculty)",
-                                    color: "#FFC533",
-                                    shape: "polygon",
-                                    radius: "60"
-                                },
-                                {
-                                    id: "15",
-                                    x: "75",
-                                    label: "Course{br}complete",
-                                    y: "100",
-                                    shape: "rectangle",
-                                    color: "#5D62B5",
-                                    width: "100",
-                                    height: "60"
-                                }
-                            ]
-                        }
-                    ],
-                    connectors: [
-                        {
-                            connector: [
-                                {
-                                    from: "01",
-                                    to: "02",
-                                    strength: "2",
-                                    arrowatstart: "0",
-                                    arrowatend: "1",
-                                    alpha: "50"
-                                },
-                                {
-                                    from: "02",
-                                    to: "03",
-                                    strength: "2",
-                                    arrowatstart: "0",
-                                    arrowatend: "1",
-                                    alpha: "50"
-                                },
-                                {
-                                    from: "03",
-                                    to: "04",
-                                    strength: "2",
-                                    arrowatstart: "0",
-                                    arrowatend: "1",
-                                    alpha: "50"
-                                },
-                                {
-                                    from: "04",
-                                    to: "05",
-                                    strength: "2",
-                                    arrowatstart: "0",
-                                    arrowatend: "1",
-                                    alpha: "50"
-                                },
-                                {
-                                    from: "05",
-                                    to: "06",
-                                    strength: "2",
-                                    arrowatstart: "0",
-                                    arrowatend: "1",
-                                    alpha: "50"
-                                },
-                                {
-                                    from: "06",
-                                    to: "07",
-                                    strength: "2",
-                                    arrowatstart: "0",
-                                    arrowatend: "1",
-                                    alpha: "50"
-                                },
-                                {
-                                    from: "07",
-                                    to: "08",
-                                    strength: "2",
-                                    arrowatstart: "0",
-                                    arrowatend: "1",
-                                    alpha: "50"
-                                },
-                                {
-                                    from: "08",
-                                    to: "09",
-                                    strength: "2",
-                                    arrowatstart: "0",
-                                    arrowatend: "1",
-                                    alpha: "50"
-                                },
-                                {
-                                    from: "09",
-                                    to: "10",
-                                    strength: "2",
-                                    arrowatstart: "0",
-                                    arrowatend: "1",
-                                    alpha: "50"
-                                },
-                                {
-                                    from: "10",
-                                    to: "11",
-                                    strength: "2",
-                                    arrowatstart: "0",
-                                    arrowatend: "1",
-                                    alpha: "50"
-                                },
-                                {
-                                    from: "11",
-                                    to: "12",
-                                    strength: "2",
-                                    arrowatstart: "0",
-                                    arrowatend: "1",
-                                    alpha: "50"
-                                },
-                                {
-                                    from: "12",
-                                    to: "13",
-                                    strength: "2",
-                                    arrowatstart: "0",
-                                    arrowatend: "1",
-                                    alpha: "50"
-                                },
-                                {
-                                    from: "13",
-                                    to: "14",
-                                    strength: "2",
-                                    arrowatstart: "0",
-                                    arrowatend: "1",
-                                    alpha: "50"
-                                },
-                                {
-                                    from: "14",
-                                    to: "15",
-                                    strength: "2",
-                                    arrowatstart: "0",
-                                    arrowatend: "1",
-                                    alpha: "50"
-                                }
-                            ]
-                        }
-                    ]
-                };
-
-                FusionCharts.ready(function() {
-                    var myChart = new FusionCharts({
-                        type: "dragnode",
-                        renderAt: "chart-container",
-                        width: "100%",
-                        height: "100%",
-                        dataFormat: "json",
-                        dataSource
-                    }).render();
-                });
-
-
-            </script>
-            <div id="chart-container"></div>
-        </td>
-    </tr>
 
 </table>
 

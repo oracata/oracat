@@ -8,4 +8,5 @@ import com.oracat.model.OverViewCatagory;;
 public interface OverViewCatagoryService {
 	List<OverViewCatagory> selectOverViewCatagory();
 	List<Map<String,Integer>> selectYzFenlei();
+	List<Map<String,Integer>> selectJndfl();
 }

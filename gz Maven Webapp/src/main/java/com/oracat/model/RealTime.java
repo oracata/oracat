@@ -20,6 +20,13 @@ public class RealTime {
     private Integer shopping_cart_custom       ;
     private Double shopping_cart_price        ;
 
+
+
+
+
+
+
+
     public String getCustom_id() {
         return custom_id;
     }

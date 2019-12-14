@@ -11,7 +11,7 @@ import java.util.List;
 public interface ErpCustomDao {
 
 
-    @Select(" SELECT shengfen,chengshi,quyufl,kehulb,a.wldwid,wldwbh,wldwname,a.lxdh,lxr,ds_lxr  ,  ds_lxdh ,  is_dssc ,c.shouhr,c.lxdh AS shr_lxdh,d.kpman\n" +
+    @Select(" SELECT shengfen,chengshi,quyufl,kehulb,a.wldwid,wldwbh,wldwname,a.lxdh,lxr,ds_lxr  ,  ds_lxdh ,  is_dssc ,c.shouhr,c.lxdh AS shr_lxdh,d.kpman,a.shenhrq_zlfzr\n" +
             "  FROM wldwzl(NOLOCK) a \n" +
             "left join jgwldwzl_bm(NOLOCK) d ON a.WLDWID=d.wldwid  AND  d.bmid IN ('BMZ00000085','BMZ00000069') \n" +
             " LEFT JOIN (\n" +
@@ -35,7 +35,7 @@ public interface ErpCustomDao {
             " from openquery(b2b,'select * from enterprise_custom') a \n" +
             "WHERE   a.state=2\n" +
             " )\n" +
-            " AND  beactive='ÊÇ' AND   fuzr<>'¹¢ÏþÇÙ' and  is_dssc = '·ñ' and   isxs='ÊÇ'\n"  )
+            " AND  beactive='ÊÇ' AND   fuzr<>'¹¢ÏþÇÙ' and  is_dssc = '·ñ' and   isxs='ÊÇ' order by a.shenhrq_zlfzr desc  \n"  )
     List<ErpCustom> selectErpCustom(@Param("begin_date") String begin_date,
                                      @Param("end_date") String end_date  );
 

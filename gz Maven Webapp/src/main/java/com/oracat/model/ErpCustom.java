@@ -17,6 +17,18 @@ public class ErpCustom {
     private String shr_lxdh     ;
     private  String kpman ;
 
+
+
+    private String shenhrq_zlfzr;
+
+    public String getShenhrq_zlfzr() {
+        return shenhrq_zlfzr;
+    }
+
+    public void setShenhrq_zlfzr(String shenhrq_zlfzr) {
+        this.shenhrq_zlfzr = shenhrq_zlfzr;
+    }
+
     public String getKpman() {
         return kpman;
     }

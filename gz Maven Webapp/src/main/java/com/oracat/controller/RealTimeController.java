@@ -30,10 +30,13 @@ public class RealTimeController {
 
 
 
-    @RequestMapping("/tab")
+    @RequestMapping("/saleflow")
     public ModelAndView getTab(){
 
-        ModelAndView mav = new ModelAndView("tab");
+        ModelAndView mav = new ModelAndView("saleflow");
+        List<RealTime> realtime = dataService.selectRealTime();
+
+        mav.addObject("realtime", realtime);
 
         return mav;
     }

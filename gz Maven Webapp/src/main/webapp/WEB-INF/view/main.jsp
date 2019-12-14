@@ -118,6 +118,16 @@
                     </dl>
                 </li>
 
+
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="fa fa-vcard fa-lg"></i> <span >核心流程</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a data-url="saleflow.do" data-id="17" data-title="销售流程" class="site-demo-active"  href="javascript:;" data-type="tabAdd" >销售流程</a></dd>
+
+                    </dl>
+                </li>
+
+
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="fa fa-gear fa-lg"></i> <span >系统管理</span></a>
                     <dl class="layui-nav-child">

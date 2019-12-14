@@ -281,6 +281,7 @@
                     <td>收货人    </td>
                     <td>收货人联系电话 </td>
                     <td>开单员 </td>
+                    <td>首营审批时间</td>
 
 
 
@@ -306,6 +307,7 @@
                     <td>${erpcustom.shouhr   }  </td>
                     <td>${erpcustom.shr_lxdh  } </td>
                     <td>${erpcustom.kpman  } </td>
+                    <td>${erpcustom.shenhrq_zlfzr}</td>
 
                             <!--
                         <input id="submit_${stat.index}" type="submit" value="修改" style="display:none;"/>

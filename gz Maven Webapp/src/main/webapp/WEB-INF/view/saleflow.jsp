@@ -26,12 +26,6 @@
 
     <title>FusionCharts | My First Chart</title>
 
-    <!--
-        <script src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
-
-
-        <script src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
-    -->
 
 
     <script type="text/javascript"
@@ -39,14 +33,11 @@
     <script type="text/javascript"
             src="<%=basePath%>js/fusioncharts/themes/fusioncharts.theme.fint.js"></script>
 
-    <script type="text/javascript"
-            src="<%=basePath%>js/fusioncharts/fusioncharts.maps.js"></script>
-    <script type="text/javascript"
-            src="<%=basePath%>js/fusioncharts/maps/fusioncharts.yunnan.js"></script>
 
 
     <script type="text/javascript"
             src="<%=basePath%>js/fusioncharts/fusioncharts.powercharts.js"></script>
+
 
 
 
@@ -70,20 +61,11 @@
 
 </head>
 <body>
-<script type="text/javascript"
-        src="<%=basePath%>js/fusioncharts/fusioncharts.js"></script>
-<script type="text/javascript"
-        src="<%=basePath%>js/fusioncharts/themes/fusioncharts.theme.fint.js"></script>
-
-
-
-<script type="text/javascript"
-        src="<%=basePath%>js/fusioncharts/fusioncharts.powercharts.js"></script>
 
 
 <script>
 
-
+<!-- 360浏览器需要 用极速模式才能显示 -->
 
     <c:forEach items="${realtime}" var="realtime">
 
@@ -379,8 +361,8 @@
         var myChart = new FusionCharts({
             type: "dragnode",
             renderAt: "chart-container2",
-            width: "800",
-            height: "600",
+            width: "100%",
+            height: "800",
             dataFormat: "json",
             dataSource
         }).render();

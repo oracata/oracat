@@ -104,6 +104,36 @@
     }
 </script>
 
+
+<script type="text/javascript">
+    //页面加载完毕之后执行函数体内的函数和window.οnlοad=function(){};等价
+    $(document).ready(function(){
+
+
+        $("td[id^='td_']").each(function(){
+            var tdNum=Number($(this).html());
+            if(tdNum>0){
+                $(this).css("background-color","pink");
+            }
+        });
+
+
+
+
+        $("td[id^='td2_']").each(function(){
+            var tdNum=Number($(this).html());
+            if(tdNum<-10){
+                $(this).css("background-color","pink");
+            }
+        });
+
+
+    });
+
+
+</script>
+
+
 <body  onload="	 autoheight()" >
 <!-- 导航 -->
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -191,9 +221,9 @@
                         <td>${b2bprice.spec                        }</td>
                         <td>${b2bprice.manufacturer                                }</td>
                         <td>${b2bprice.pfpj                                }</td>
-                        <td>${b2bprice.xsj                                }</td>
+                        <td id="td_${stat.index}">${b2bprice.xsj                                }</td>
                         <td>${b2bprice.hshj                                }</td>
-                        <td>${b2bprice.abs_rate                                }</td>
+                        <td id="td2_${stat.index}">${b2bprice.abs_rate                                }</td>
                         <td>${b2bprice.cankcbj                                }</td>
                         <td>${b2bprice.zdxshj                                }</td>
 

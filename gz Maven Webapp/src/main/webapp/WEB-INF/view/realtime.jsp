@@ -182,14 +182,14 @@
 
                     "      {                                   \n" +
                     "        'minvalue': '0',               \n" +
-                    "        'maxvalue': '1000',              \n" +
-                    "        'displayvalue': '0 - 1000', \n" +
+                    "        'maxvalue': '750',              \n" +
+                    "        'displayvalue': '0 - 750', \n" +
                     "        'code': '#4FCAF6'                   \n" +
                     "      },                                  \n" +
                     "      {                                   \n" +
-                    "        'minvalue': '1000',              \n" +
+                    "        'minvalue': '750',              \n" +
                     "        'maxvalue': '2000',              \n" +
-                    "        'displayvalue': '1000 - 2000',\n" +
+                    "        'displayvalue': '750 - 2000',\n" +
                     "        'code': '#EF5350'                   \n" +
                     "      },                                  \n" +
                     "      {                                   \n" +

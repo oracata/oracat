@@ -54,16 +54,20 @@ public interface DataService {
 
 	/**月报表**/
 	List<ReportMonth> selectReportMonth(String begin_date,String end_date);
+	XSSFWorkbook exportReportMonth(String begin_date,String end_date) throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException;
    /**年度报表**/
    List<ReportYear> selectReportYear(String begin_date,String end_date);
 
 	/**top10cust**/
 	List<Top10Cust> selectTop10Cust(String begin_date,String end_date);
+	XSSFWorkbook exportTop10cust(String begin_date,String end_date) throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException;
 	/**top10goods**/
 	List<Top10Cust> selectTop10Goods(String begin_date,String end_date);
+	XSSFWorkbook exportTop10goods(String begin_date,String end_date) throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException;
 
 	/**coupon**/
 	List<Top10Cust> selectCoupon(String begin_date,String end_date);
+	XSSFWorkbook exportCoupon(String begin_date,String end_date) throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException;
     //**导出excel**/
     XSSFWorkbook exportReportYear() throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException;
 

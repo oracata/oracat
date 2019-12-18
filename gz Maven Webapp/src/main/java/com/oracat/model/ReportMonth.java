@@ -5,8 +5,6 @@ public class ReportMonth {
     private double hsje              ;
     private String begin_date              ;
     private String end_date                ;
-
-
     private double cankml            ;
     private double cankmll           ;
     private int cust_num          ;
@@ -16,6 +14,17 @@ public class ReportMonth {
     private double not_pay           ;
     private int cart_cust         ;
     private double cart_price        ;
+    private double login_rate;
+
+    public double getLogin_rate() {
+        return login_rate;
+    }
+
+    public void setLogin_rate(double login_rate) {
+        this.login_rate = login_rate;
+    }
+
+
 
     public String getBegin_date() {
         return begin_date;

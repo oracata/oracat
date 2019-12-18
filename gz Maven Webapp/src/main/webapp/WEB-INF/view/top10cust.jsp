@@ -65,6 +65,13 @@
 
                 //导出excel
                 $("a[id$='export']").click(function(){
+
+                    var content1 = document.getElementById("begin_date");
+                    var content2 = document.getElementById("end_date");
+
+
+                    window.location.href="exporttop10cust?"+"begin_date="+content1.value+"&end_date="+content2.value;
+
                     showLoading();
                     return true;
                 });
@@ -175,6 +182,12 @@
                                         结束日期：<input type="text" id="end_date"   name="end_date" value="${top10cust_con.end_date}" />
                                        
                                         <input type="submit" value="查询"/>
+
+                                    </td>
+                                    <td class="font3">
+
+                                        <a  id="export">导出excel</a>
+
 
                                     </td>
                                 </tr>

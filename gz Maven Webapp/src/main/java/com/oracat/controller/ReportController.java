@@ -154,6 +154,48 @@ public class ReportController {
         return mav;
     }
 
+    @RequestMapping("/exportreportmonth")
+    public void getExportMonth( HttpServletRequest request, HttpServletResponse response)
+            throws ClassNotFoundException, IntrospectionException, IllegalAccessException, ParseException, InvocationTargetException, UnsupportedEncodingException {
+
+        response.reset(); //清除buffer缓存
+        Map<String,Object> map=new HashMap<String,Object>();
+
+
+        // 指定下载的文件名，浏览器都会使用本地编码，即GBK，浏览器收到这个文件名后，用ISO-8859-1来解码，然后用GBK来显示
+        // 所以我们用GBK解码，ISO-8859-1来编码，在浏览器那边会反过来执行。
+        //文件名
+        String filename="月报"+tools.getTimeDay(0)+".xlsx";
+        response.setHeader("Content-Disposition", "attachment;filename=" +new String(filename.getBytes("GBK"),"ISO-8859-1"));
+        response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+
+
+        XSSFWorkbook workbook=null;
+
+        workbook = dataService.exportReportMonth(request.getParameter("begin_date"),request.getParameter("end_date"));
+        OutputStream output = null;
+        try {
+            output = response.getOutputStream();
+            BufferedOutputStream bufferedOutPut = new BufferedOutputStream(output);
+            workbook.write(bufferedOutPut);
+            bufferedOutPut.flush();
+            bufferedOutPut.close();
+            output.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
+
+
 
 /** top10cust**/
     @RequestMapping("/top10cust")
@@ -174,6 +216,47 @@ public class ReportController {
         return mav;
     }
 
+
+
+    @RequestMapping("/exporttop10cust")
+    public void getExportTop10cust( HttpServletRequest request, HttpServletResponse response)
+            throws ClassNotFoundException, IntrospectionException, IllegalAccessException, ParseException, InvocationTargetException, UnsupportedEncodingException {
+
+        response.reset(); //清除buffer缓存
+        Map<String,Object> map=new HashMap<String,Object>();
+
+
+        // 指定下载的文件名，浏览器都会使用本地编码，即GBK，浏览器收到这个文件名后，用ISO-8859-1来解码，然后用GBK来显示
+        // 所以我们用GBK解码，ISO-8859-1来编码，在浏览器那边会反过来执行。
+        //文件名
+        String filename="销售客户top10"+tools.getTimeDay(0)+".xlsx";
+        response.setHeader("Content-Disposition", "attachment;filename=" +new String(filename.getBytes("GBK"),"ISO-8859-1"));
+        response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+
+
+        XSSFWorkbook workbook=null;
+
+        workbook = dataService.exportTop10cust(request.getParameter("begin_date"),request.getParameter("end_date"));
+        OutputStream output = null;
+        try {
+            output = response.getOutputStream();
+            BufferedOutputStream bufferedOutPut = new BufferedOutputStream(output);
+            workbook.write(bufferedOutPut);
+            bufferedOutPut.flush();
+            bufferedOutPut.close();
+            output.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
     /** top10goods**/
     @RequestMapping("/top10goods")
     public ModelAndView getTop10GoodsView(Model model,
@@ -193,7 +276,43 @@ public class ReportController {
         return mav;
     }
 
+    @RequestMapping("/exporttop10goods")
+    public void getExportTop10goods( HttpServletRequest request, HttpServletResponse response)
+            throws ClassNotFoundException, IntrospectionException, IllegalAccessException, ParseException, InvocationTargetException, UnsupportedEncodingException {
 
+        response.reset(); //清除buffer缓存
+        Map<String,Object> map=new HashMap<String,Object>();
+
+
+        // 指定下载的文件名，浏览器都会使用本地编码，即GBK，浏览器收到这个文件名后，用ISO-8859-1来解码，然后用GBK来显示
+        // 所以我们用GBK解码，ISO-8859-1来编码，在浏览器那边会反过来执行。
+        //文件名
+        String filename="销售商品top10"+tools.getTimeDay(0)+".xlsx";
+        response.setHeader("Content-Disposition", "attachment;filename=" +new String(filename.getBytes("GBK"),"ISO-8859-1"));
+        response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+
+
+        XSSFWorkbook workbook=null;
+
+        workbook = dataService.exportTop10goods(request.getParameter("begin_date"),request.getParameter("end_date"));
+        OutputStream output = null;
+        try {
+            output = response.getOutputStream();
+            BufferedOutputStream bufferedOutPut = new BufferedOutputStream(output);
+            workbook.write(bufferedOutPut);
+            bufferedOutPut.flush();
+            bufferedOutPut.close();
+            output.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
     /** coupon**/
     @RequestMapping("/coupon")
     public ModelAndView getCouponView(Model model,
@@ -212,6 +331,47 @@ public class ReportController {
 
         return mav;
     }
+
+
+
+    @RequestMapping("/exportcoupon")
+    public void getExportConpon( HttpServletRequest request, HttpServletResponse response)
+            throws ClassNotFoundException, IntrospectionException, IllegalAccessException, ParseException, InvocationTargetException, UnsupportedEncodingException {
+
+        response.reset(); //清除buffer缓存
+        Map<String,Object> map=new HashMap<String,Object>();
+
+
+        // 指定下载的文件名，浏览器都会使用本地编码，即GBK，浏览器收到这个文件名后，用ISO-8859-1来解码，然后用GBK来显示
+        // 所以我们用GBK解码，ISO-8859-1来编码，在浏览器那边会反过来执行。
+        //文件名
+        String filename="优惠券"+tools.getTimeDay(0)+".xlsx";
+        response.setHeader("Content-Disposition", "attachment;filename=" +new String(filename.getBytes("GBK"),"ISO-8859-1"));
+        response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+
+
+        XSSFWorkbook workbook=null;
+
+        workbook = dataService.exportCoupon(request.getParameter("begin_date"),request.getParameter("end_date"));
+        OutputStream output = null;
+        try {
+            output = response.getOutputStream();
+            BufferedOutputStream bufferedOutPut = new BufferedOutputStream(output);
+            workbook.write(bufferedOutPut);
+            bufferedOutPut.flush();
+            bufferedOutPut.close();
+            output.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
 
 
     @RequestMapping("/reportyear")

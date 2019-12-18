@@ -185,6 +185,36 @@ public class DataServiceImpl implements DataService{
 
 	}
 
+	@Override
+	public XSSFWorkbook exportReportMonth(String begin_date,String end_date) throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException {
+		//根据条件查询数据，把数据装载到一个list中
+
+
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+		List<ReportMonth> list = reportMonthDao.selectReportMonth(begin_date,end_date);
+		List<ExcelBean> excel=new ArrayList<>();
+		Map<Integer,List<ExcelBean>> map=new LinkedHashMap<>();
+		XSSFWorkbook xssfWorkbook=null;
+		//设置标题栏
+		excel.add(new ExcelBean("日期","rq",0));
+		excel.add(new ExcelBean("含税金额","hsje",0));
+		excel.add(new ExcelBean("参考毛利","cankml",0));
+		excel.add(new ExcelBean("参考毛利率","cankmll",0));
+		excel.add(new ExcelBean("电商客户数","cust_num",0));
+		excel.add(new ExcelBean("登录客户数","login_num",0));
+		excel.add(new ExcelBean("登录率","login_rate",0));
+		excel.add(new ExcelBean("支付客户数","pay_cust",0));
+		excel.add(new ExcelBean("未支付客户数","not_pay_cust",0));
+		excel.add(new ExcelBean("未支付金额","not_pay",0));
+		excel.add(new ExcelBean("购物车客户数","cart_cust",0));
+		excel.add(new ExcelBean("购物车金额","cart_price",0));
+
+		map.put(0, excel);
+		String sheetName = "电商月表";
+		//调用ExcelUtil的方法
+		xssfWorkbook = ExcelUtil.createExcelFile(ReportMonth.class, list, map, sheetName);
+		return xssfWorkbook;
+	}
 
    /** 年度报表**/
 
@@ -247,6 +277,32 @@ public class DataServiceImpl implements DataService{
 
 	}
 
+	@Override
+	public XSSFWorkbook exportTop10cust(String begin_date,String end_date) throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException {
+		//根据条件查询数据，把数据装载到一个list中
+
+
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+		List<Top10Cust> list = top10CustDao.selectTop10Cust(begin_date,end_date);
+		List<ExcelBean> excel=new ArrayList<>();
+		Map<Integer,List<ExcelBean>> map=new LinkedHashMap<>();
+		XSSFWorkbook xssfWorkbook=null;
+		//设置标题栏
+		excel.add(new ExcelBean("客户名称","wldwname",0));
+		excel.add(new ExcelBean("含税金额","hsje",0));
+		excel.add(new ExcelBean("毛利","cankml",0));
+		excel.add(new ExcelBean("毛利率","cankmll",0));
+
+
+		map.put(0, excel);
+		String sheetName = "销售客户top10";
+		//调用ExcelUtil的方法
+		xssfWorkbook = ExcelUtil.createExcelFile(Top10Cust.class, list, map, sheetName);
+		return xssfWorkbook;
+	}
+
+
+
 	/** 商品top10报表**/
 
 	@Override
@@ -258,6 +314,32 @@ public class DataServiceImpl implements DataService{
 
 	}
 
+
+	@Override
+	public XSSFWorkbook exportTop10goods(String begin_date,String end_date) throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException {
+		//根据条件查询数据，把数据装载到一个list中
+
+
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+		List<Top10Cust> list = top10CustDao.selectTop10Goods(begin_date,end_date);
+		List<ExcelBean> excel=new ArrayList<>();
+		Map<Integer,List<ExcelBean>> map=new LinkedHashMap<>();
+		XSSFWorkbook xssfWorkbook=null;
+		//设置标题栏
+		excel.add(new ExcelBean("商品名称","spmch",0));
+		excel.add(new ExcelBean("含税金额","hsje",0));
+		excel.add(new ExcelBean("毛利","cankml",0));
+		excel.add(new ExcelBean("毛利率","cankmll",0));
+
+
+		map.put(0, excel);
+		String sheetName = "销售商品top10";
+		//调用ExcelUtil的方法
+		xssfWorkbook = ExcelUtil.createExcelFile(Top10Cust.class, list, map, sheetName);
+		return xssfWorkbook;
+	}
+
+
 	/** 优惠券报表**/
 
 	@Override
@@ -268,6 +350,33 @@ public class DataServiceImpl implements DataService{
 		return  top10CustDao.selectCoupon(begin_date,end_date);
 
 	}
+
+
+	@Override
+	public XSSFWorkbook exportCoupon(String begin_date,String end_date) throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException {
+		//根据条件查询数据，把数据装载到一个list中
+
+
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+		List<Top10Cust> list = top10CustDao.selectCoupon(begin_date,end_date);
+		List<ExcelBean> excel=new ArrayList<>();
+		Map<Integer,List<ExcelBean>> map=new LinkedHashMap<>();
+		XSSFWorkbook xssfWorkbook=null;
+		//设置标题栏
+		excel.add(new ExcelBean("优惠券类型","coupon",0));
+		excel.add(new ExcelBean("使用单数","num",0));
+		excel.add(new ExcelBean("含税金额","hsje",0));
+		excel.add(new ExcelBean("毛利","cankml",0));
+		excel.add(new ExcelBean("毛利率","cankmll",0));
+
+
+		map.put(0, excel);
+		String sheetName = "优惠券";
+		//调用ExcelUtil的方法
+		xssfWorkbook = ExcelUtil.createExcelFile(Top10Cust.class, list, map, sheetName);
+		return xssfWorkbook;
+	}
+
 
 	//实时图表
 

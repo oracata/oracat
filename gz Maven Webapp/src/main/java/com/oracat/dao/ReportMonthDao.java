@@ -12,7 +12,7 @@ public interface ReportMonthDao {
 
 
     @Select("\n" +
-            "SELECT a.rq,hsje,round(cankml,2) cankml,round(cankmll,2) cankmll,cust_num,login_num,pay_cust,not_pay_cust,not_pay,cart_cust,cart_price  FROM (\n" +
+            "SELECT a.rq,hsje,round(cankml,2) cankml,round(cankmll,2) cankmll,cust_num,login_num,round(login_num*100/cust_num,2) login_rate,pay_cust,not_pay_cust,not_pay,cart_cust,cart_price  FROM (\n" +
             "  SELECT  rq,(SELECT count(a.enterprise_id) FROM openquery(b2b,'select * from enterprise_custom') a \n" +
             "INNER JOIN wldwzl(nolock) b ON a.enterprise_id=b.wldwid AND b.beactive='ÊÇ' WHERE STATE=2 AND  convert(varchar(30),a.request_time,120)<t.rq+'-31 23:59:59' ) cust_num,round(hsje,2) hsje, round(cankml,2) cankml,round(t.cankmll,2) cankmll FROM (\n" +
             "    select  SUBSTRING(a.rq,1,7) rq ,    sum(b.hsje) as hsje\n" +

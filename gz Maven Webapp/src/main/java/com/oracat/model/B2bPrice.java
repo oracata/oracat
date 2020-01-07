@@ -15,6 +15,16 @@ public class B2bPrice {
 
 
     private double xsj;
+
+    public double getZy_xsj() {
+        return zy_xsj;
+    }
+
+    public void setZy_xsj(double zy_xsj) {
+        this.zy_xsj = zy_xsj;
+    }
+
+    private double zy_xsj;
     private double abs_rate;
     private int stock_num      ;
 

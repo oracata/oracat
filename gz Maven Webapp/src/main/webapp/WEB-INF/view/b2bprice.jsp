@@ -128,6 +128,34 @@
         });
 
 
+
+        $("td[id^='td4_']").each(function(){
+
+            var tdNum=Number($(this).html());
+            var id = $(this).attr('id');
+            var index=id.split('_')[1].substring(0);;
+
+           var  zx=Number($("#td_"+index).html());
+           var  zy=Number($("#td3_"+index).html());
+            if(tdNum<zx||tdNum<zy){
+                $(this).css("background-color","red");
+            }
+        });
+
+
+
+
+
+
+        $("td[id^='td3_']").each(function(){
+            var tdNum=Number($(this).html());
+            if(tdNum>0){
+                $(this).css("background-color","pink");
+            }
+        });
+
+
+
     });
 
 
@@ -203,6 +231,7 @@
                     <td>生产厂家</td>
                     <td>电商价格  </td>
                     <td>专项价格  </td>
+                    <td>自营价格  </td>
                     <td>终端近7天平均开票价    </td>
                     <td>与终端销价对比率    </td>
                     <td>erp进价</td>
@@ -220,8 +249,9 @@
                         <td>${b2bprice.name            }</td>
                         <td>${b2bprice.spec                        }</td>
                         <td>${b2bprice.manufacturer                                }</td>
-                        <td>${b2bprice.pfpj                                }</td>
+                        <td id="td4_${stat.index}">${b2bprice.pfpj                                }</td>
                         <td id="td_${stat.index}">${b2bprice.xsj                                }</td>
+                        <td id="td3_${stat.index}">${b2bprice.zy_xsj                                }</td>
                         <td>${b2bprice.hshj                                }</td>
                         <td id="td2_${stat.index}">${b2bprice.abs_rate                                }</td>
                         <td>${b2bprice.cankcbj                                }</td>

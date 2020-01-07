@@ -11,7 +11,7 @@ import java.util.Map;
 
 public interface B2bPriceDao {
 
-    @Select("SELECT  a.id,a.no,a.name ,a.spec,a.manufacturer ,a.pfpj,round(c.cankcbj,2) AS cankcbj,c.zdxshj AS zdxshj,d.hshj,e.xsj,round((a.pfpj- d.hshj)*100/ d.hshj,2) as abs_rate,b.stock_num\n" +
+    @Select("SELECT  a.id,a.no,a.name ,a.spec,a.manufacturer ,a.pfpj,round(c.cankcbj,2) AS cankcbj,c.zdxshj AS zdxshj,d.hshj,round(e.xsj,2) as xsj,round(f.xsj,2) as zy_xsj,round((a.pfpj- d.hshj)*100/ d.hshj,2) as abs_rate,b.stock_num\n" +
             "  FROM openquery(b2b,'select * from   goods') a\n" +
             "INNER JOIN openquery(b2b,'select  * from  mv_khlb_kc_hshj') b  ON a.id=b.ID AND b.kehulb=1\n" +
             "LEFT JOIN \n" +
@@ -31,10 +31,11 @@ public interface B2bPriceDao {
             "GROUP BY b.spid ) d on a.id=d.spid  \n"+
 
             "left join (SELECT spbm,xsj FROM zxiang_jg  WHERE DATE IN (SELECT MAX(DATE) FROM zxiang_jg) ) e on a.no=e.spbm  \n"+
+            "left join (SELECT spbm,xsj FROM zying_jg  WHERE DATE IN (SELECT MAX(DATE) FROM zying_jg) ) f on a.no=f.spbm  \n"+
 
             "WHERE a.state=1  \n" +
             "AND ( a.id LIKE '%${id}%' and a.no LIKE '%${no}%' and a.name LIKE '%${name}%' )\n" +
-            "ORDER BY  e.spbm desc,  ABS((a.pfpj- d.hshj)*100/ d.hshj)   DESC , b.stock_num DESC ,c.cankcbj DESC  \n ")
+            "ORDER BY  e.spbm desc, f.spbm desc,  ABS((a.pfpj- d.hshj)*100/ d.hshj)   DESC , b.stock_num DESC ,c.cankcbj DESC  \n ")
     List<B2bPrice> selectB2bPrice(@Param("id") String id,
                                   @Param("no") String no,
                                   @Param("name") String name);

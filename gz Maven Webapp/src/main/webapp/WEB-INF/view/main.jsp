@@ -145,8 +145,19 @@
                 </li>
 
 
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="fa fa-vcard fa-lg"></i> <span >连锁系统</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a data-url="ls/lsflow" data-id="20" data-title="业务流程" class="site-demo-active"  href="javascript:;" data-type="tabAdd" >业务流程</a></dd>
+                    </dl>
+                </li>
 
-
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="fa fa-vcard fa-lg"></i> <span >便民药柜系统</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a data-url="machine.do" data-id="21" data-title="服务器主机" class="site-demo-active"  href="javascript:;" data-type="tabAdd" >调度表</a></dd>
+                    </dl>
+                </li>
 
 
                 <li class="layui-nav-item">

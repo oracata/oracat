@@ -29,6 +29,14 @@
         <property name="password" value="1a2s3d8180192@" />
     </bean>
 
+    <!--创建数据源链锁系统，连接数据库db2 -->
+    <bean id="dataSourcels" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+        <property name="url" value="jdbc:sqlserver://47.112.123.95,9204;DatabaseName=cr_ypls11_ynjndls" />
+        <property name="username" value="cr_ww" />
+        <property name="password" value="crtech_ww" />
+    </bean>
+
 
     <bean id="dynamicDataSource" class="com.oracat.util.DynamicDataSource">
         <property name="targetDataSources">
@@ -36,6 +44,7 @@
                 <!-- 指定lookupKey和与之对应的数据源 -->
                 <entry key="mysql" value-ref="dataSource1"></entry>
                 <entry key="sqlserver" value-ref="dataSource2"></entry>
+                <entry key="sqlserverls" value-ref="dataSourcels"></entry>
 
             </map>
         </property>

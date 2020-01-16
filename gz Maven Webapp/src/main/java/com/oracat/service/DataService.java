@@ -90,4 +90,11 @@ public interface DataService {
 	List<ErpCustom> selectErpCustom(String begin_date ,String end_date );
 	List<ErpCustom> selectFgsCustom( );
 	int modifyErpCustom(ErpCustom erpcustom );
+
+
+	/**µ÷¶È**/
+	List<JobandTrigger> getJobAndTrigger();
+
+	int queryJobCount();
+
 }

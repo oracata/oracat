@@ -3,6 +3,8 @@ package com.oracat.controller;
 import com.oracat.job.HelloJob;
 import com.oracat.job.NewJob;
 
+import com.oracat.model.JobandTrigger;
+import com.oracat.model.RealTime;
 import com.oracat.service.DataService;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
@@ -16,6 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -25,17 +30,36 @@ public class JobController {
     private DataService dataService;
 
 
-
+    @ResponseBody
     @RequestMapping("/queryjob")
-    public ModelAndView getQueryJob()
-    {
+    public Map<String, Object> queryAll( String job_name ,String flag ){
+
+         Map<String, Object> map = new HashMap<>();
+         List<JobandTrigger> jobAndtrigger = dataService.getJobAndTrigger();
+
+         int count = dataService.queryJobCount();
+         map.put("data", jobAndtrigger);
+         map.put("code", 0);
+         map.put("count", count);
+         map.put("msg", "");
+
+         return map;
+
+
+
+     }
+
+
+    @RequestMapping("/job")
+    public ModelAndView getJob(){
 
         ModelAndView mav = new ModelAndView("job");
-     //   Page<JobAndTrigger> jobAndTrigger = dataService.getJobAndTriggerDetails(pageNum, pageSize);
-     //   mav.addObject("realtime", realtime);
 
         return mav;
     }
+
+
+
 
 
 

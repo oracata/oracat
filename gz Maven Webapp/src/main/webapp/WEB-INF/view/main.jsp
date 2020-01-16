@@ -132,7 +132,7 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="fa fa-vcard fa-lg"></i> <span >调度系统</span></a>
                     <dl class="layui-nav-child">
-                        <dd><a data-url="schedule.do" data-id="18" data-title="调度表" class="site-demo-active"  href="javascript:;" data-type="tabAdd" >调度表</a></dd>
+                        <dd><a data-url="job.do" data-id="18" data-title="调度表" class="site-demo-active"  href="javascript:;" data-type="tabAdd" >调度表</a></dd>
                     </dl>
                 </li>
 

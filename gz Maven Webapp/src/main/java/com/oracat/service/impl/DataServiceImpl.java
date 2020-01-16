@@ -64,7 +64,10 @@ public class DataServiceImpl implements DataService{
 
 	@Autowired  //自动装配
 	private Top10CustDao top10CustDao ;
-	
+
+
+	@Autowired  //自动装配
+	private JobDao jobDao ;
 	/*****************东昌服务接口实现*************************************/
 	@Transactional(readOnly=true)
 	@Override
@@ -613,6 +616,24 @@ public class DataServiceImpl implements DataService{
 
 	}
 
+
+	@Override
+	public List<JobandTrigger> getJobAndTrigger()
+	{
+		DynamicDataSourceHolder.setDataSource("mysql");
+
+		return jobDao.getJobAndTrigger();
+
+	}
+
+	@Override
+	public int queryJobCount()
+	{
+		DynamicDataSourceHolder.setDataSource("mysql");
+
+		return jobDao.queryJobCount();
+
+	}
 
 
 }

@@ -1,6 +1,20 @@
 package com.oracat.model;
 
 public class JobandTrigger {
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    private String[]ids;
+    public String[] getIds() {
+        return ids;
+    }
+    private Integer id;
     private String job_name;
     private String job_group;
     private String job_class_name;
@@ -8,6 +22,37 @@ public class JobandTrigger {
     private String trigger_group;
     private Integer repeat_interval;
     private Integer times_triggered;
+
+    private Integer page;
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }
+
+    private Integer limit;
+
+
+    public String getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime;
+    }
+
+    private  String createtime;
 
     public String getJob_name() {
         return job_name;

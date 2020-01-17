@@ -2,6 +2,8 @@ package com.oracat.dao;
 
 import com.oracat.model.B2bPrice;
 import com.oracat.model.JobandTrigger;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -35,6 +37,21 @@ public interface JobDao {
             "        AND qrtz_triggers.TRIGGER_GROUP = qrtz_simple_triggers.TRIGGER_GROUP\n" +
             "   \n ")
     int queryJobCount();
+
+
+
+    public List<JobandTrigger> queryAllJob(JobandTrigger jobandTrigger);
+
+
+    @Insert(" insert into  jobandtrigger    select  '${job_name}','${job_group}','${job_class_name}','${trigger_name}','${trigger_name}','${trigger_group}','${repeat_interval}'£¬seq_nextval('jobandtriggers')  from dual  \n"  )
+    int insertJob(@Param("job_name")          String job_name,
+                  @Param("job_group")    String job_group,
+                  @Param("job_class_name")   String job_class_name,
+                  @Param("trigger_name") String trigger_name,
+                  @Param("trigger_group")    String                    trigger_group,
+                  @Param("repeat_interval")   int                     repeat_interval
+
+    );
 
 
 

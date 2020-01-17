@@ -11,7 +11,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <title>无资料终端开单客户</title>
+    <title>调度表</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="cache-control" content="no-cache" />
@@ -40,50 +40,19 @@
 <form  id="searchFrm" class="layui-form" method="post">
     <div class="layui-form-item" >
         <div class="layui-inline">
-            <label class="layui-form-label">身份证号：</label>
+            <label class="layui-form-label">任务名称：</label>
             <div class="layui-input-inline">
-                <input type="text"  name="identity"  autocomplete="off" class="layui-input">
+                <input type="text"  name="job_name"  autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">客户姓名：</label>
+            <label class="layui-form-label">任务组：</label>
             <div class="layui-input-inline">
-                <input type="text"  name="custname"  autocomplete="off" class="layui-input">
+                <input type="text"  name="job_group"  autocomplete="off" class="layui-input">
             </div>
         </div>
 
-        <div class="layui-inline">
-            <label class="layui-form-label">客户地址：</label>
-            <div class="layui-input-inline">
-                <input type="text"   name="address"  autocomplete="off" class="layui-input">
-            </div>
-        </div>
 
-    </div>
-
-
-
-    <div class="layui-form-item" >
-        <div class="layui-inline">
-            <label class="layui-form-label">客户电话：</label>
-            <div class="layui-input-inline">
-                <input type="text" id="phone"  name="phone"  autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">客户职位：</label>
-            <div class="layui-input-inline">
-                <input type="text"   name="career"  autocomplete="off" class="layui-input">
-            </div>
-        </div>
-
-        <div class="layui-inline">
-            <label class="layui-form-label">性别：</label>
-            <div class="layui-input-inline">
-                <input type="radio" name="sex" value="1" title="男">
-                <input type="radio" name="sex" value="0" title="女">
-            </div>
-        </div>
     </div>
 
 
@@ -92,7 +61,9 @@
         <div class="layui-input-block">
             <button type="button" class="layui-btn layui-btn-normal layui-btn-sm layui-icon layui-icon-search"  id="doSearch">查询</button>
             <button type="reset" class="layui-btn layui-btn-warm layui-btn-sm layui-icon layui-icon-refresh">重置</button>
+            <!--
             <button type="button" class="layui-btn layui-btn-normal layui-btn-sm layui-icon layui-icon-download-circle"  id="doExport">导出</button>
+            -->
         </div>
     </div>
 
@@ -106,19 +77,36 @@
     <button type="button" class="layui-btn layui-btn-sm" lay-event="add">增加</button>
     <button type="button" class="layui-btn layui-btn-danger layui-btn-sm" lay-event="deleteBatch">批量删除</button>
 </div>
-<div  id="customerBar" style="display: none;">
+
+
+<div  style="display: none;" id="customerbar" >
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 
+
+
 </div>
+
+<div  style="display: none;" id="schedulebar" >
+    <a class="layui-btn layui-btn-xs" lay-event="edit">运行</a>
+
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">暂停</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">恢复</a>
+
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">停止</a>
+
+
+</div>
+
+
 
 
 <%--数据表格结束--%>
 
 
 <%--添加和修改的弹出层开始--%>
-<div style="display: none;padding: 30px;" id="saveOrUpdateDiv" >
+<div style="display: none;padding: 30px;" id="addOrUpdateDiv" >
     <form class="layui-form" action="" id="dataFrm" lay-filter="dataFrm">
         <div class="layui-form-item">
             <div class="layui-inline">
@@ -189,24 +177,23 @@
         //渲染数据表格
         tableIns=table.render({
             elem: '#customerTable'   //渲染的目标对象
-            ,url:'${ctx}/customer/loadAllCustomer.action' //数据接口
-            ,title: '客户数据表'//数据导出来的标题
+            ,url:'queryjob.do' //数据接口
+            ,title: '调度表'//数据导出来的标题
             ,toolbar:"#customerToolBar"   //表格的工具条
 
             ,cellMinWidth:100 //设置列的最小默认宽度
             ,page: true  //是否启用分页
             ,cols: [[   //列表数据
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'identity', title:'身份证号',align:'center',width:'180'}
-                ,{field:'custname', title:'客户姓名',align:'center',width:'100'}
-                ,{field:'phone', title:'客户电话',align:'center',width:'120'}
-                ,{field:'address', title:'客户地址',align:'center',width:'150'}
-                ,{field:'career', title:'客户职位',align:'center',width:'160'}
-                ,{field:'sex', title:'性别',align:'center',width:'80',templet:function(d){
-                        return d.sex=='1'?'<font color=blue>男</font>':'<font color=red>女</font>';
-                    }}
-                ,{field:'createtime', title:'录入时间',align:'center',width:'220'}
-                ,{fixed: 'right', title:'操作', toolbar: '#customerBar', width:180,align:'center'}
+                ,{field:'job_name', title:'任务名称',align:'center',width:'180'}
+                ,{field:'job_group', title:'任务组',align:'center',width:'100'}
+                ,{field:'job_class_name', title:'任务类名',align:'center',width:'220'}
+                ,{field:'trigger_name', title:'触发器名称',align:'center',width:'150'}
+                ,{field:'trigger_group', title:'触发器组',align:'center',width:'160'}
+                ,{field:'repeat_interval', title:'间隔时间（豪秒）',align:'center',width:'200' }
+                ,{field:'times_triggered', title:'已处发次数',align:'center',width:'220'}
+                ,{fixed: 'right', title:'编辑', toolbar: '#customerbar', width:180 ,align:'center'}
+                ,{fixed: 'right', title:'控制', toolbar: '#schedulebar', width:250,align:'center'}
             ]],
             done:function(data,curr,count){
                 //不是第一页时如果当前返回的的数据为0那么就返回上一页
@@ -223,7 +210,7 @@
         $("#doSearch").click(function(){
             var params=$("#searchFrm").serialize();
             tableIns.reload({
-                url:"${ctx}/customer/loadAllCustomer.action?"+params ,
+                url:"queryjob.do?"+params ,
                 page:{
                     curr:1
                 }
@@ -274,7 +261,7 @@
             mainIndex=layer.open({
                 type:1,
                 title:'添加客户',
-                content:$("#saveOrUpdateDiv"),
+                content:$("#addOrUpdateDiv"),
                 area:['800px','450px'],
                 success:function(index){
                     //清空表单数据
@@ -288,7 +275,7 @@
             mainIndex=layer.open({
                 type:1,
                 title:'修改客户',
-                content:$("#saveOrUpdateDiv"),
+                content:$("#addOrUpdateDiv"),
                 area:['800px','450px'],
                 success:function(index){
                     form.val("dataFrm",data);

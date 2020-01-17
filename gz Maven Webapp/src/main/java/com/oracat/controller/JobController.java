@@ -6,6 +6,10 @@ import com.oracat.job.NewJob;
 import com.oracat.model.JobandTrigger;
 import com.oracat.model.RealTime;
 import com.oracat.service.DataService;
+import com.oracat.service.JobService;
+import com.oracat.util.DataGridView;
+import com.oracat.util.Result;
+import com.oracat.util.tools;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.stereotype.Controller;
@@ -18,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,23 +32,17 @@ import java.util.Map;
 public class JobController {
 
     @Resource
-    private DataService dataService;
+    private JobService jobService;
 
 
     @ResponseBody
     @RequestMapping("/queryjob")
-    public Map<String, Object> queryAll( String job_name ,String flag ){
+    public DataGridView queryAll(JobandTrigger jobandTrigger){
 
-         Map<String, Object> map = new HashMap<>();
-         List<JobandTrigger> jobAndtrigger = dataService.getJobAndTrigger();
 
-         int count = dataService.queryJobCount();
-         map.put("data", jobAndtrigger);
-         map.put("code", 0);
-         map.put("count", count);
-         map.put("msg", "");
 
-         return map;
+
+         return jobService.selectAllJobAndTrigger(jobandTrigger);
 
 
 
@@ -60,7 +59,72 @@ public class JobController {
 
 
 
+    @RequestMapping("addJobandTrigger")
+    public Result addJobandTrigger(JobandTrigger JobandTrigger){
+        try {
+            JobandTrigger.setCreatetime(tools.getTimeDay(0));
 
+            jobService.addJobandTrigger(JobandTrigger);
+            return Result.ADD_SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.ADD_ERROR;
+        }
+    }
+
+
+    @RequestMapping("updateJobandTrigger")
+    public Result updateJobandTrigger(JobandTrigger JobandTrigger){
+
+        try {
+            JobandTrigger.setCreatetime(tools.getTimeDay(0));
+
+            jobService.updateJobandTrigger(JobandTrigger);
+            return Result.UPDATE_SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.UPDATE_ERROR;
+        }
+    }
+
+
+
+    @RequestMapping("deleteJobandTrigger")
+    public Result deleteJobandTrigger(JobandTrigger JobandTrigger){
+        try {
+
+            jobService.deleteJobandTrigger(JobandTrigger.getJob_name());
+            return Result.DELETE_SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.DELETE_ERROR;
+        }
+    }
+
+    /**
+     * ÅúÁ¿É¾³ý
+     * @param 
+     * @return
+     */
+    @RequestMapping("deleteBatchJobandTrigger")
+    public Result deleteBatchJobandTrigger(JobandTrigger JobandTrigger){
+        try {
+            jobService.deleteBatchJobandTrigger(JobandTrigger.getIds());
+            return Result.DELETE_SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.DELETE_ERROR;
+        }
+    }
+
+    
+    
+    
+    
+    
+    /*******************************************/
+    /**************             ****************/
+    /******************************************/
 
 
     @ResponseBody

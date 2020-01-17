@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oracat.dao.JobDao">
+    <resultMap id="BaseResultMap" type="com.oracat.model.JobandTrigger">
+        <id column="job_name" jdbcType="VARCHAR" property="job_name" />
+        <result column="job_group" jdbcType="VARCHAR" property="job_group" />
+        <result column="job_class_name" jdbcType="VARCHAR" property="job_class_name" />
+        <result column="trigger_name" jdbcType="VARCHAR" property="trigger_name" />
+        <result column="trigger_group" jdbcType="VARCHAR" property="trigger_group" />
+
+        <result column="repeat_interval" jdbcType="INTEGER" property="repeat_interval" />
+        <result column="times_triggered" jdbcType="INTEGER" property="times_triggered" />
+    </resultMap>
+    <sql id="Base_Column_List">
+job_name,job_group,job_class_name,trigger_name,trigger_group,repeat_interval,times_triggered
+  </sql>
+
+
+
+    <select id="queryAllJob" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include>
+        from jobandtrigger
+        <where>
+            <if test="job_name!=null and job_name!=''">
+                and job_name like concat('%',#{job_name},'%')
+            </if>
+
+            <if test="job_group!=null and job_group!=''">
+                and job_group like concat('%',#{job_group},'%')
+            </if>
+
+
+        </where>
+
+    </select>
+
+
+
+
+
+</mapper>

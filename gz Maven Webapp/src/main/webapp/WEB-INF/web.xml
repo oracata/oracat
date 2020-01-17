@@ -82,7 +82,7 @@
 
     <context-param>
         <param-name>quartz:config-file</param-name>
-        <param-value>scan-quartz.properties</param-value>
+        <param-value>quartz.properties</param-value>
     </context-param>
     <context-param>
         <param-name>quartz:shutdown-on-unload</param-name>

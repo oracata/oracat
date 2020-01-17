@@ -617,23 +617,5 @@ public class DataServiceImpl implements DataService{
 	}
 
 
-	@Override
-	public List<JobandTrigger> getJobAndTrigger()
-	{
-		DynamicDataSourceHolder.setDataSource("mysql");
-
-		return jobDao.getJobAndTrigger();
-
-	}
-
-	@Override
-	public int queryJobCount()
-	{
-		DynamicDataSourceHolder.setDataSource("mysql");
-
-		return jobDao.queryJobCount();
-
-	}
-
 
 }

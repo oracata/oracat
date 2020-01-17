@@ -92,9 +92,6 @@ public interface DataService {
 	int modifyErpCustom(ErpCustom erpcustom );
 
 
-	/**µ÷¶È**/
-	List<JobandTrigger> getJobAndTrigger();
 
-	int queryJobCount();
 
 }

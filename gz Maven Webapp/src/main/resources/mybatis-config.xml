@@ -13,7 +13,7 @@
         <mappers>
         <mapper resource="/mapper/sql-mapper.xml" /> 
         <mapper resource="/mapper/overview-mapper.xml" />
-
+            <mapper resource="/mapper/JobMapper.xml" />
        </mappers>
     
     

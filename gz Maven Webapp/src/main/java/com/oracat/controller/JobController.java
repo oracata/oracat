@@ -58,7 +58,7 @@ public class JobController {
     }
 
 
-
+//注解ResponseBody是把返回结果写到response中
     @RequestMapping("/addJobandTrigger")
     @ResponseBody
     public Result addJobandTrigger(JobandTrigger JobandTrigger){

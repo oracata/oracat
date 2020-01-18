@@ -23,7 +23,7 @@ public class JobandTrigger {
     private Integer repeat_interval;
     private Integer times_triggered;
 
-    private Integer page;
+    private Integer page=1;
 
     public Integer getPage() {
         return page;
@@ -41,7 +41,7 @@ public class JobandTrigger {
         this.limit = limit;
     }
 
-    private Integer limit;
+    private Integer limit=10;
 
 
     public String getCreatetime() {

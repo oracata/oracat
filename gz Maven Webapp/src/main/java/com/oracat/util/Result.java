@@ -4,9 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
-@Getter
-@Data
+@Setter@Getter@Data
 public class Result {
     private Integer code=0;
     private String msg;

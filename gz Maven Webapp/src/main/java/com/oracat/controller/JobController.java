@@ -59,12 +59,14 @@ public class JobController {
 
 
 
-    @RequestMapping("addJobandTrigger")
+    @RequestMapping("/addJobandTrigger")
+    @ResponseBody
     public Result addJobandTrigger(JobandTrigger JobandTrigger){
         try {
             JobandTrigger.setCreatetime(tools.getTimeDay(0));
 
             jobService.addJobandTrigger(JobandTrigger);
+
             return Result.ADD_SUCCESS;
         }catch (Exception e){
             e.printStackTrace();
@@ -73,7 +75,8 @@ public class JobController {
     }
 
 
-    @RequestMapping("updateJobandTrigger")
+    @RequestMapping("/updateJobandTrigger")
+    @ResponseBody
     public Result updateJobandTrigger(JobandTrigger JobandTrigger){
 
         try {
@@ -89,7 +92,8 @@ public class JobController {
 
 
 
-    @RequestMapping("deleteJobandTrigger")
+    @RequestMapping("/deleteJobandTrigger")
+    @ResponseBody
     public Result deleteJobandTrigger(JobandTrigger JobandTrigger){
         try {
 
@@ -106,7 +110,8 @@ public class JobController {
      * @param 
      * @return
      */
-    @RequestMapping("deleteBatchJobandTrigger")
+    @RequestMapping("/deleteBatchJobandTrigger")
+    @ResponseBody
     public Result deleteBatchJobandTrigger(JobandTrigger JobandTrigger){
         try {
             jobService.deleteBatchJobandTrigger(JobandTrigger.getIds());

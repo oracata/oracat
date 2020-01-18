@@ -43,7 +43,7 @@ public interface JobDao {
     public List<JobandTrigger> queryAllJob(JobandTrigger jobandTrigger);
 
 
-    @Insert(" insert into  jobandtrigger    select  '${job_name}','${job_group}','${job_class_name}','${trigger_name}','${trigger_name}','${trigger_group}','${repeat_interval}'£¬seq_nextval('jobandtriggers')  from dual  \n"  )
+    @Insert(" insert into  jobandtrigger    select  '${job_name}','${job_group}','${job_class_name}','${trigger_name}','${trigger_name}','${trigger_group}','${repeat_interval}',seq_nextval('jobandtriggers')  from dual  \n"  )
     int insertJob(@Param("job_name")          String job_name,
                   @Param("job_group")    String job_group,
                   @Param("job_class_name")   String job_class_name,

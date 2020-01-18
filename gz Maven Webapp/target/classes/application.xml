@@ -80,6 +80,28 @@
       <!--  <property name="mapperLocations" value="classpath:sql-mapper.xml"/>    -->
         <property name="configLocation" value="classpath:mybatis-config.xml" />
         <!-- <property name="typeAliasesPackage" value="com.tiantian.ckeditor.model" /> -->
+
+        <!-- 插件 -->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+
+                        <props>
+                           <!--
+                            <prop key="helperDialect">mysql</prop>
+
+                            <prop key="reasonable">true</prop>
+                            -->
+                        </props>
+
+
+                    </property>
+                </bean>
+            </array>
+        </property>
+
+
     </bean>
 
     <!-- 自动扫描注解的bean -->

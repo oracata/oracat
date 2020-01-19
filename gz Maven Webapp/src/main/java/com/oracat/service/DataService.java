@@ -38,6 +38,7 @@ public interface DataService {
 
 	List<RealTime> selectRealTime();
 	List<RealTime> selectArea();
+	List<SaleFlow> selectSaleFlow();
 
 	/** 电商与erp价格对比
 	**/

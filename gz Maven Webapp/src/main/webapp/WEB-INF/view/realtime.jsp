@@ -7,9 +7,15 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
 <%@page import="java.util.*" %>
 <%@page import="com.oracat.util.FusionCharts" %>
 <%@page import="com.oracat.model.*" %>
+
+
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
 
 <%
     String path = request.getContextPath();
@@ -17,6 +23,17 @@
             + request.getServerName() + ":" + request.getServerPort()
             + path + "/";
 
+%>
+
+<%
+    //遍历List 取得记录数
+    int num=0;
+    //遍历List 取得记录数
+    if(request.getAttribute("saleflow")!=null) {
+        Object re = request.getAttribute("saleflow");
+        List<SaleFlow> ol = (List) re;
+        num = ol.size();
+    }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -104,6 +121,8 @@
 
     </head>
 <body>
+
+
 
 
 
@@ -400,7 +419,287 @@
 
 
 </table>
+<table>
+    <tr>
 
+        <td>
+            <script>
+
+                <!-- 360浏览器需要 用极速模式才能显示 -->
+
+           var str='{\n' +
+               '                    chart: {\n' +
+               '                        caption: "销售流程状态",\n' +
+               '                        yaxismaxvalue: "1100",\n' +
+               '                        yaxisminvalue: "0",\n' +
+               '                        theme: "fusion",\n' +
+               '                        valuefontsize: "12",\n' +
+               '                        viewmode: "1",\n' +
+               '                        valuefontcolor: "#FFFFFF",\n' +
+               '                        plotfillhovercolor: "#1A237E",\n' +
+               '                        divlinealpha: "0"\n' +
+               '                    },\n' +
+               '                    dataset: [\n' +
+               '                        {\n' +
+               '                            data: [\n' ;
+                var data='';
+                var width=5;
+                var color='#5D62B5';
+                var state_code=0;
+
+<c:forEach items="${saleflow}" var="saleflow">
+                state_code=${saleflow.state_code};
+                if(state_code===1){
+                    color='#F2726F';
+                }else if(state_code===2) {
+                    color='#29C3BE';
+                }else if(state_code===3) {
+                    color='#FFC533';
+                }else if(state_code===4) {
+                    color='#62B58F';
+                }else if(state_code===5) {
+                    color='#BC95DF';
+                }else if(state_code===6) {
+                    color='#F2726F';
+                }else if(state_code===7) {
+                    color='#FFC533';
+                }else if(state_code===8) {
+                    color='#C7D631';
+                }else if(state_code===9) {
+                    color='#FFC533';
+                }else{
+                    color='#C7D631';
+                }
+                data= data+'                                {\n' +
+               '                                    id: "01",\n' +
+               '                                    x: "'+width+'",\n' +
+               '                                    y: "200",\n' +
+               '                                    label: "${saleflow.state}(${saleflow.num})",\n' +
+               '                                    shape: "rectangle",\n' +
+               '                                    color: "'+color+'",\n' +
+               '                                    width: "100",\n' +
+               '                                    height: "60",\n' +
+               '                                    hovercolor: "#1A237E"\n' +
+               '                                },\n' ;
+                var width=width+5;
+                </c:forEach>
+                data=data.substr(0, data.length - 1);
+                str=str+data;
+                str=str+ '                            ]\n' +
+               '                        }\n' +
+               '                    ],\n' +
+               '                    connectors: [\n' +
+               '                        {\n' +
+               '                            connector: [\n' ;
+               var connector='';
+               var last='0';
+
+                var now='0';
+
+<c:forEach items="${saleflow}" var="saleflow"   varStatus="stat" >
+
+                now=${saleflow.state_code};
+                var index=${stat.index};
+
+
+              if(Number(index)!=0){
+
+                connector=connector+'{\n' +
+               '                                    from: "'+last+'",\n' +
+               '                                    to: "'+now+'",\n' +
+               '                                    strength: "2",\n' +
+               '                                    arrowatstart: "0",\n' +
+               '                                    arrowatend: "1",\n' +
+               '                                    alpha: "50"\n' +
+               '                                },\n' ;
+              }
+                last=now;
+                </c:forEach>
+
+                connector=connector.substr(0, connector.length - 1);
+                str=str+connector;
+                str=str+'                            ]\n' +
+               '                        }\n' +
+               '                    ]\n' +
+               '                }' ;
+
+
+
+
+              //  eval解析复杂json字符串 多层字符串普通的JSON.parse是解析不了的,不能一步到位解析到底的。
+                const dataSource = eval("("+ str +")");
+                const dataSource1 ={
+                    chart: {
+                        caption: "销售流程状态",
+                            yaxismaxvalue: "1100",
+                            yaxisminvalue: "0",
+                            theme: "fusion",
+                            valuefontsize: "12",
+                            viewmode: "1",
+                            valuefontcolor: "#FFFFFF",
+                            plotfillhovercolor: "#1A237E",
+                            divlinealpha: "0"
+                    },
+                    dataset: [
+                        {
+                            data: [
+                                {
+                                    id: "01",
+                                    x: "5",
+                                    y: "200",
+                                    label: "未分配批号(14)",
+                                    shape: "rectangle",
+                                    color: "#F2726F",
+                                    width: "100",
+                                    height: "60",
+                                    hovercolor: "#1A237E"
+                                },
+                                {
+                                    id: "01",
+                                    x: "10",
+                                    y: "200",
+                                    label: "单据等待传送至WMS(3)",
+                                    shape: "rectangle",
+                                    color: "#62B58F",
+                                    width: "100",
+                                    height: "60",
+                                    hovercolor: "#1A237E"
+                                },
+                                {
+                                    id: "01",
+                                    x: "15",
+                                    y: "200",
+                                    label: "单据已传送WMS,等待波次(1)",
+                                    shape: "rectangle",
+                                    color: "#BC95DF",
+                                    width: "100",
+                                    height: "60",
+                                    hovercolor: "#1A237E"
+                                },
+                                {
+                                    id: "01",
+                                    x: "20",
+                                    y: "200",
+                                    label: "正在拣货中(3)",
+                                    shape: "rectangle",
+                                    color: "#F2726F",
+                                    width: "100",
+                                    height: "60",
+                                    hovercolor: "#1A237E"
+                                },
+                                {
+                                    id: "01",
+                                    x: "25",
+                                    y: "200",
+                                    label: "准备出库(30)",
+                                    shape: "rectangle",
+                                    color: "#FFC533",
+                                    width: "100",
+                                    height: "60",
+                                    hovercolor: "#1A237E"
+                                },
+                                {
+                                    id: "01",
+                                    x: "30",
+                                    y: "200",
+                                    label: "已出库打单(478256)",
+                                    shape: "rectangle",
+                                    color: "#C7D631",
+                                    width: "100",
+                                    height: "60",
+                                    hovercolor: "#1A237E"
+                                },
+                                {
+                                    id: "01",
+                                    x: "35",
+                                    y: "200",
+                                    label: "整单差异(21)",
+                                    shape: "rectangle",
+                                    color: "#FFC533",
+                                    width: "100",
+                                    height: "60",
+                                    hovercolor: "#1A237E"
+                                }
+                                ]
+                        }
+                    ],
+                        connectors: [
+                           {
+                        connector: [
+                            {
+                                from: "1",
+                                to: "4",
+                                strength: "2",
+                                arrowatstart: "0",
+                                arrowatend: "1",
+                                alpha: "50"
+                            },
+                            {
+                                from: "4",
+                                to: "5",
+                                strength: "2",
+                                arrowatstart: "0",
+                                arrowatend: "1",
+                                alpha: "50"
+                            },
+                            {
+                                from: "5",
+                                to: "6",
+                                strength: "2",
+                                arrowatstart: "0",
+                                arrowatend: "1",
+                                alpha: "50"
+                            },
+                            {
+                                from: "6",
+                                to: "7",
+                                strength: "2",
+                                arrowatstart: "0",
+                                arrowatend: "1",
+                                alpha: "50"
+                            },
+                            {
+                                from: "7",
+                                to: "8",
+                                strength: "2",
+                                arrowatstart: "0",
+                                arrowatend: "1",
+                                alpha: "50"
+                            },
+                            {
+                                from: "8",
+                                to: "9",
+                                strength: "2",
+                                arrowatstart: "0",
+                                arrowatend: "1",
+                                alpha: "50"
+                            }
+                            ]
+                    }
+                ]
+                };
+
+
+                FusionCharts.ready(function() {
+
+                    var myChart = new FusionCharts({
+                        type: "dragnode",
+                        renderAt: "chart-container2",
+                        width: "100%",
+                        height: "200",
+                        dataFormat: "json",
+                        dataSource
+                    }).render();
+                });
+
+
+            </script>
+
+            <div id="chart-container2" ></div>
+        </td>
+    </tr>
+
+</table>
 
 
 

@@ -1,6 +1,7 @@
 package com.oracat.dao;
 
 import com.oracat.model.RealTime;
+import com.oracat.model.SaleFlow;
 import com.oracat.util.DynamicDataSourceHolder;
 import org.apache.ibatis.annotations.Select;
 
@@ -44,6 +45,113 @@ public interface ReportRealTimeDao {
                 "  else   '其它'  END  AS chengshi \n"+
                 ",order_pay_price from report_b2b_data_realtime where shengfen='云南省' AND quyufl=' 合计' AND chengshi<>' 合计' order by rq ")
         List<RealTime> selectArea();
+
+
+    /*
+        @Select("SELECT state_code,state,COUNT(*) num FROM (\n" +
+                "SELECT a.rq,a.djbh,\n" +
+                "case when a.is_wms='是'\n" +
+                "     then (case when a.handle=-1 then '分配批号失败'\n" +
+                "                    when x.instruct_state=9 then 'WMS指令取消,允许修改单据'\n" +
+                "\t\t      when a.handle<>9 then '未分配批号'\n" +
+                "\t\t      when x.instruct_state is null then '单据等待传送至WMS'\n" +
+                "\t\t\t  when x.instruct_state=0 then '单据已传送WMS,等待波次'\n" +
+                "\t\t\t  when x.instruct_state=1 then '正在拣货中'\n" +
+                "\t\t\t  when x.instruct_state=2 then '准备出库'\n" +
+                "\t\t\t  when x.instruct_state=3 then '已出库打单'\n" +
+                "\t\t\t   WHEN x.Instruct_State=10 THEN '整单差异'\n" +
+                "\t\t\t  else '' end)\n" +
+                "     else\n" +
+                "\t  (case when a.handle=-1  then '分配批号失败'\n" +
+                "\n" +
+                "\t        when a.is_zx='否' then '准备出库'\n" +
+                "\t\t\twhen a.is_zx='是' then '已出库打单'\n" +
+                "\t\t\t WHEN a.djbh IS NULL THEN '支付未开票'\n" +
+                "\t\t\telse ''end)\n" +
+                "\t end as state,\n" +
+                "\t case when a.is_wms='是'\n" +
+                "     then (case when a.handle=-1 then '2'\n" +
+                "                    when x.instruct_state=9 then '3'\n" +
+                "\t\t      when a.handle<>9 then '1'\n" +
+                "\t\t      when x.instruct_state is null then '4'\n" +
+                "\t\t\t  when x.instruct_state=0 then '5'\n" +
+                "\t\t\t  when x.instruct_state=1 then '6'\n" +
+                "\t\t\t  when x.instruct_state=2 then '7'\n" +
+                "\t\t\t  when x.instruct_state=3 then '8'\n" +
+                "\t\t\t   WHEN x.Instruct_State=10 THEN '9'\n" +
+                "\t\t\t  else '' end)\n" +
+                "     else\n" +
+                "\t  (case when a.handle=-1  then '2'\n" +
+                "\n" +
+                "\t        when a.is_zx='否' then '7'\n" +
+                "\t\t\twhen a.is_zx='是' then '8'\n" +
+                "\t\t\t WHEN a.djbh IS NULL THEN '0'\n" +
+                "\t\t\telse ''end)\n" +
+                "\t end as state_code \n" +
+                "\n" +
+                " \n" +
+                "FROM b_gxddhz c  \n" +
+                "LEFT JOIN gxkphz a (nolock) ON c.order_id=a.dsdjbh  \n" +
+                " inner join wldwzl b(nolock) on b.wldwid=a.wldwid\n" +
+                "inner join bmzl e(nolock) on a.bmid=e.bmid\n" +
+                "left join wms_systeminstruct_state x (nolock) on a.djbh=x.instruct_djbh\n" +
+                "where a.djbh like 'XHB%'\n" +
+                "and a.is_zx <> '清' and a.jigid='000' AND  a.dsdjbh<>''\n" +
+                ") a\n" +
+                "GROUP BY state,STATE_code  ORDER BY state_code;\n ")
+
+     */
+    @Select("SELECT state_code,state,COUNT(*) num FROM (\n" +
+            "SELECT a.rq,a.djbh,\n" +
+            "case when a.is_wms='是'\n" +
+            "     then (case when a.handle=-1 then '分配批号失败'\n" +
+            "                    when x.instruct_state=9 then 'WMS指令取消,允许修改单据'\n" +
+            "\t\t      when a.handle<>9 then '未分配批号'\n" +
+            "\t\t      when x.instruct_state is null then '单据等待传送至WMS'\n" +
+            "\t\t\t  when x.instruct_state=0 then '单据已传送WMS,等待波次'\n" +
+            "\t\t\t  when x.instruct_state=1 then '正在拣货中'\n" +
+            "\t\t\t  when x.instruct_state=2 then '准备出库'\n" +
+            "\t\t\t  when x.instruct_state=3 then '已出库打单'\n" +
+            "\t\t\t   WHEN x.Instruct_State=10 THEN '整单差异'\n" +
+            "\t\t\t  else '' end)\n" +
+            "     else\n" +
+            "\t  (case when a.handle=-1  then '分配批号失败'\n" +
+            "\n" +
+            "\t        when a.is_zx='否' then '准备出库'\n" +
+            "\t\t\twhen a.is_zx='是' then '已出库打单'\n" +
+            "\t\t \n" +
+            "\t\t\telse ''end)\n" +
+            "\t end as state,\n" +
+            "\t case when a.is_wms='是'\n" +
+            "     then (case when a.handle=-1 then '2'\n" +
+            "                    when x.instruct_state=9 then '3'\n" +
+            "\t\t      when a.handle<>9 then '1'\n" +
+            "\t\t      when x.instruct_state is null then '4'\n" +
+            "\t\t\t  when x.instruct_state=0 then '5'\n" +
+            "\t\t\t  when x.instruct_state=1 then '6'\n" +
+            "\t\t\t  when x.instruct_state=2 then '7'\n" +
+            "\t\t\t  when x.instruct_state=3 then '8'\n" +
+            "\t\t\t   WHEN x.Instruct_State=10 THEN '9'\n" +
+            "\t\t\t  else '' end)\n" +
+            "     else\n" +
+            "\t  (case when a.handle=-1  then '2'\n" +
+            "\n" +
+            "\t        when a.is_zx='否' then '7'\n" +
+            "\t\t\twhen a.is_zx='是' then '8'\n" +
+            "\t\t\t \n" +
+            "\t\t\telse ''end)\n" +
+            "\t end as state_code \n" +
+            "\n" +
+            " \n" +
+            "FROM  gxkphz a (nolock)  \n" +
+            " inner join wldwzl b(nolock) on b.wldwid=a.wldwid\n" +
+            "inner join bmzl e(nolock) on a.bmid=e.bmid\n" +
+            "left join wms_systeminstruct_state x (nolock) on a.djbh=x.instruct_djbh\n" +
+            "where a.djbh like 'XHB%'\n" +
+            "and a.is_zx <> '清' and a.jigid='000'  \n" +
+            ") a\n" +
+            "GROUP BY state,STATE_code  ORDER BY state_code;\n ")
+        List<SaleFlow> selectSaleFlow();
 
 
 }

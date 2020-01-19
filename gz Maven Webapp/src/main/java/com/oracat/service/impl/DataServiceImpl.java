@@ -403,6 +403,19 @@ public class DataServiceImpl implements DataService{
 
 	}
 
+	//ÊµÊ±Í¼±í
+
+	@Override
+	public List<SaleFlow> selectSaleFlow()
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+		return reportRealTimeDao.selectSaleFlow();
+
+	}
+
+
+
+
 
 
 

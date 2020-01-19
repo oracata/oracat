@@ -121,13 +121,13 @@
             <div class="layui-inline">
                 <label class="layui-form-label">任务名称:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="job_name"  autocomplete="off" class="layui-input">
+                    <input type="text" name="job_name"  lay-verify="job_name" autocomplete="off" class="layui-input" placeholder="请输入任务名">
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label">任务组:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="job_group"  autocomplete="off" class="layui-input">
+                    <input type="text" name="job_group"  autocomplete="off" class="layui-input"  lay-verify="job_group"  placeholder="请输任务组">
                 </div>
             </div>
 
@@ -136,13 +136,13 @@
             <div class="layui-inline">
                 <label class="layui-form-label">任务类名:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="job_class_name"  autocomplete="off" class="layui-input">
+                    <input type="text" name="job_class_name"  autocomplete="off" class="layui-input"  lay-verify="job_class_name"  placeholder="请输任务类名">
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label">触发器名称:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="trigger_name"  autocomplete="off" class="layui-input">
+                    <input type="text" name="trigger_name"  autocomplete="off" class="layui-input"  lay-verify="trigger_name"  placeholder="请输触发器名称">
                 </div>
             </div>
         </div>
@@ -151,19 +151,19 @@
             <div class="layui-inline">
                 <label class="layui-form-label">触发器组:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="trigger_group"  autocomplete="off" class="layui-input">
+                    <input type="text" name="trigger_group"  autocomplete="off" class="layui-input"  lay-verify="trigger_group"  placeholder="请输触发器组">
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label">间隔时间（豪秒）:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="repeat_interval"  autocomplete="off" class="layui-input">
+                    <input type="text" name="repeat_interval"  autocomplete="off" class="layui-input"  lay-verify="repeat_interval"  placeholder="间隔时间（豪秒）">
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label">已处发次数:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="times_triggered"  autocomplete="off" class="layui-input">
+                    <input type="text" name="times_triggered"  autocomplete="off" class="layui-input"  lay-verify="required|number"  placeholder="请输已处发次数">
                 </div>
             </div>
             <!--
@@ -284,7 +284,7 @@
         function openAddCustomer(){
             mainIndex=layer.open({
                 type:1,
-                title:'添加客户',
+                title:'添加任务',
                 content:$("#addOrUpdateDiv"),
                 area:['800px','450px'],
                 maxmin : true,
@@ -297,6 +297,71 @@
                 }
             });
         }
+
+    //表单验证
+        form.verify({
+            job_name: function(value){
+
+                if(value==""){
+                    return '不能为空';
+                }
+            }
+            ,job_group: function(value){
+
+                if(value==""){
+                    return '不能为空';
+                }
+            }
+            ,job_class_name: function(value){
+
+                if(value==""){
+                    return '不能为空';
+                }
+            }
+            ,trigger_name: function(value){
+
+                if(value==""){
+                    return '不能为空';
+                }
+            }
+            ,trigger_group: function(value){
+
+                if(value==""){
+                    return '不能为空';
+                }
+            }
+            ,repeat_interval: function(value){
+
+                if(value==""){
+                    return '不能为空';
+                }
+               else if(/[^\d.]/.test(value)){
+                    return '必须是数字！';
+                }
+
+            }
+
+            ,times_triggered: function(value){
+
+                if(value==""){
+                    return '不能为空';
+                }
+            }
+
+
+            /*
+            job_name: function(value){
+                if(value.length < 5){
+                    return '标题至少得5个字符啊';
+                }
+            }
+            */
+
+
+       //     ,phone: [/^1[3|4|5|7|8]\d{9}$/, '手机必须11位，只能是数字！']
+        //    ,email: [/^[a-z0-9._%-]+@([a-z0-9-]+\.)+[a-z]{2,4}$|^1[3|4|5|7|8]\d{9}$/, '邮箱格式不对']
+        });
+
         //打开修改页面
         function openUpdateCustomer(data){
             mainIndex=layer.open({

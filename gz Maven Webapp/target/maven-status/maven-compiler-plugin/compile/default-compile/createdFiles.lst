@@ -1,8 +1,10 @@
 com\oracat\util\FusionCharts$FusionTable.class
 com\oracat\dao\GoodsForYzDao.class
 com\oracat\controller\RealTimeController.class
+com\oracat\model\SaleFlow.class
 com\oracat\dao\provider\PricePareSqlProvider$2.class
 com\oracat\dao\provider\ReportDaySqlProvider$2.class
+com\oracat\util\DataGridView.class
 com\oracat\controller\GoodsForGoodsController.class
 com\oracat\dao\ReportYearDao.class
 com\oracat\controller\UserController.class
@@ -14,6 +16,7 @@ com\oracat\util\Constants.class
 com\oracat\util\excel\ExcelUtil.class
 com\oracat\model\RealTime.class
 com\oracat\interceptor\AuthorInterceptor.class
+com\oracat\dao\JobDao.class
 com\oracat\service\impl\UserServiceImpl.class
 com\oracat\model\B2bPrice.class
 com\oracat\model\Goods.class
@@ -29,6 +32,7 @@ com\oracat\util\FusionCharts.class
 com\oracat\dao\provider\YzGoodsSqlProvider.class
 com\oracat\dao\Top10CustDao.class
 com\oracat\dao\ErpCustomDao.class
+com\oracat\controller\JobController.class
 com\oracat\model\ReportMonth.class
 com\oracat\model\ReportDay.class
 com\oracat\dao\provider\ReportDaySqlProvider.class
@@ -38,6 +42,7 @@ com\oracat\model\GoodsForYz.class
 com\oracat\util\tag\PagerTag.class
 com\oracat\model\Menu.class
 com\oracat\model\User.class
+com\oracat\util\SysConstants.class
 com\oracat\controller\PricePareController.class
 com\oracat\dao\OverViewCatagoryDao.class
 com\oracat\model\PricePare.class
@@ -47,6 +52,7 @@ com\oracat\util\tag\PageModel.class
 com\oracat\controller\ErpCustomController.class
 com\oracat\model\ReportYear.class
 com\oracat\util\FusionCharts$FusionTable$FilterType.class
+com\oracat\job\NewJob.class
 com\oracat\dao\ReportRealTimeDao.class
 com\oracat\service\impl\OverViewCatagoryServiceImpl.class
 com\oracat\util\FusionCharts$TimeSeries.class
@@ -57,16 +63,22 @@ com\oracat\util\FusionCharts$FusionTable$OrderBy.class
 com\oracat\dao\provider\ReportDaySqlProvider$1.class
 com\oracat\model\OverViewCatagory.class
 com\oracat\dao\provider\PricePareSqlProvider$1.class
+com\oracat\model\JobandTrigger.class
+com\oracat\util\Result.class
 com\oracat\dao\PricePareDao.class
 com\oracat\util\DynamicDataSourceHolder.class
+com\oracat\job\HelloJob.class
 com\oracat\controller\ReportController.class
 com\oracat\dao\UserDao.class
 com\oracat\service\impl\DataServiceImpl.class
+com\oracat\controller\LsController.class
 com\oracat\dao\YzGoodsDao.class
 com\oracat\service\DataService.class
 com\oracat\dao\B2bPriceDao.class
 com\oracat\util\tools.class
 com\oracat\dao\provider\DcGoodsSqlProvider.class
 com\oracat\service\OverViewCatagoryService.class
+com\oracat\service\impl\JobServiceImpl.class
+com\oracat\service\JobService.class
 com\oracat\util\FusionCharts$1.class
 com\oracat\model\ErpCustom.class

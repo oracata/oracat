@@ -471,9 +471,9 @@
                     color='#C7D631';
                 }
                 data= data+'                                {\n' +
-               '                                    id: "01",\n' +
+               '                                    id: "${saleflow.state_code}",\n' +
                '                                    x: "'+width+'",\n' +
-               '                                    y: "200",\n' +
+               '                                    y: "800",\n' +
                '                                    label: "${saleflow.state}(${saleflow.num})",\n' +
                '                                    shape: "rectangle",\n' +
                '                                    color: "'+color+'",\n' +
@@ -500,9 +500,9 @@
 
                 now=${saleflow.state_code};
                 var index=${stat.index};
+                var n = <%=num%>;
 
-
-              if(Number(index)!=0){
+              if(Number(index)!=0||Number(n) ==1){
 
                 connector=connector+'{\n' +
                '                                    from: "'+last+'",\n' +
@@ -526,158 +526,10 @@
 
 
 
+
               //  eval解析复杂json字符串 多层字符串普通的JSON.parse是解析不了的,不能一步到位解析到底的。
                 const dataSource = eval("("+ str +")");
-                const dataSource1 ={
-                    chart: {
-                        caption: "销售流程状态",
-                            yaxismaxvalue: "1100",
-                            yaxisminvalue: "0",
-                            theme: "fusion",
-                            valuefontsize: "12",
-                            viewmode: "1",
-                            valuefontcolor: "#FFFFFF",
-                            plotfillhovercolor: "#1A237E",
-                            divlinealpha: "0"
-                    },
-                    dataset: [
-                        {
-                            data: [
-                                {
-                                    id: "01",
-                                    x: "5",
-                                    y: "200",
-                                    label: "未分配批号(14)",
-                                    shape: "rectangle",
-                                    color: "#F2726F",
-                                    width: "100",
-                                    height: "60",
-                                    hovercolor: "#1A237E"
-                                },
-                                {
-                                    id: "01",
-                                    x: "10",
-                                    y: "200",
-                                    label: "单据等待传送至WMS(3)",
-                                    shape: "rectangle",
-                                    color: "#62B58F",
-                                    width: "100",
-                                    height: "60",
-                                    hovercolor: "#1A237E"
-                                },
-                                {
-                                    id: "01",
-                                    x: "15",
-                                    y: "200",
-                                    label: "单据已传送WMS,等待波次(1)",
-                                    shape: "rectangle",
-                                    color: "#BC95DF",
-                                    width: "100",
-                                    height: "60",
-                                    hovercolor: "#1A237E"
-                                },
-                                {
-                                    id: "01",
-                                    x: "20",
-                                    y: "200",
-                                    label: "正在拣货中(3)",
-                                    shape: "rectangle",
-                                    color: "#F2726F",
-                                    width: "100",
-                                    height: "60",
-                                    hovercolor: "#1A237E"
-                                },
-                                {
-                                    id: "01",
-                                    x: "25",
-                                    y: "200",
-                                    label: "准备出库(30)",
-                                    shape: "rectangle",
-                                    color: "#FFC533",
-                                    width: "100",
-                                    height: "60",
-                                    hovercolor: "#1A237E"
-                                },
-                                {
-                                    id: "01",
-                                    x: "30",
-                                    y: "200",
-                                    label: "已出库打单(478256)",
-                                    shape: "rectangle",
-                                    color: "#C7D631",
-                                    width: "100",
-                                    height: "60",
-                                    hovercolor: "#1A237E"
-                                },
-                                {
-                                    id: "01",
-                                    x: "35",
-                                    y: "200",
-                                    label: "整单差异(21)",
-                                    shape: "rectangle",
-                                    color: "#FFC533",
-                                    width: "100",
-                                    height: "60",
-                                    hovercolor: "#1A237E"
-                                }
-                                ]
-                        }
-                    ],
-                        connectors: [
-                           {
-                        connector: [
-                            {
-                                from: "1",
-                                to: "4",
-                                strength: "2",
-                                arrowatstart: "0",
-                                arrowatend: "1",
-                                alpha: "50"
-                            },
-                            {
-                                from: "4",
-                                to: "5",
-                                strength: "2",
-                                arrowatstart: "0",
-                                arrowatend: "1",
-                                alpha: "50"
-                            },
-                            {
-                                from: "5",
-                                to: "6",
-                                strength: "2",
-                                arrowatstart: "0",
-                                arrowatend: "1",
-                                alpha: "50"
-                            },
-                            {
-                                from: "6",
-                                to: "7",
-                                strength: "2",
-                                arrowatstart: "0",
-                                arrowatend: "1",
-                                alpha: "50"
-                            },
-                            {
-                                from: "7",
-                                to: "8",
-                                strength: "2",
-                                arrowatstart: "0",
-                                arrowatend: "1",
-                                alpha: "50"
-                            },
-                            {
-                                from: "8",
-                                to: "9",
-                                strength: "2",
-                                arrowatstart: "0",
-                                arrowatend: "1",
-                                alpha: "50"
-                            }
-                            ]
-                    }
-                ]
-                };
+
 
 
                 FusionCharts.ready(function() {

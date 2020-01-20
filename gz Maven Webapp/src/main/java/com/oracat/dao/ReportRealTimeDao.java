@@ -47,7 +47,7 @@ public interface ReportRealTimeDao {
         List<RealTime> selectArea();
 
 
-    /*
+
         @Select("SELECT state_code,state,COUNT(*) num FROM (\n" +
                 "SELECT a.rq,a.djbh,\n" +
                 "case when a.is_wms='ÊÇ'\n" +
@@ -99,8 +99,8 @@ public interface ReportRealTimeDao {
                 "and a.is_zx <> 'Çå' and a.jigid='000' AND  a.dsdjbh<>''\n" +
                 ") a\n" +
                 "GROUP BY state,STATE_code  ORDER BY state_code;\n ")
-
-     */
+        List<SaleFlow> selectSaleFlow();
+      /*
     @Select("SELECT state_code,state,COUNT(*) num FROM (\n" +
             "SELECT a.rq,a.djbh,\n" +
             "case when a.is_wms='ÊÇ'\n" +
@@ -152,6 +152,6 @@ public interface ReportRealTimeDao {
             ") a\n" +
             "GROUP BY state,STATE_code  ORDER BY state_code;\n ")
         List<SaleFlow> selectSaleFlow();
-
+  */
 
 }

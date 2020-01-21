@@ -25,9 +25,11 @@ public class RealTimeController {
         List<RealTime> realtime = dataService.selectRealTime();
         List<RealTime> area = dataService.selectArea();
         List<SaleFlow> saleflow=dataService.selectSaleFlow();
+        List<SaleFlow> saleflowerp=dataService.selectSaleFlowErp();
         mav.addObject("realtime", realtime);
         mav.addObject("area", area);
         mav.addObject("saleflow", saleflow);
+        mav.addObject("saleflowerp", saleflowerp);
         return mav;
     }
 

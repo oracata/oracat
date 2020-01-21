@@ -35,6 +35,17 @@
         num = ol.size();
     }
 %>
+
+<%
+    //遍历List 取得记录数
+    int numerp=0;
+    //遍历List 取得记录数
+    if(request.getAttribute("saleflowerp")!=null) {
+        Object re = request.getAttribute("saleflowerp");
+        List<SaleFlow> ol = (List) re;
+        numerp = ol.size();
+    }
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -327,7 +338,7 @@
                         "area2d",
                         "first_chart",
                         "600",
-                        "400",
+                        "300",
                         "chart",
                         "json",
                         jsonData.toString()
@@ -403,7 +414,7 @@
                         "spline",
                         "first_chart2",
                         "600",
-                        "400",
+                        "300",
                         "chart2",
                         "json",
                         jsonData2.toString()
@@ -419,17 +430,23 @@
 
 
 </table>
-<table>
+<table align="center">
     <tr>
 
         <td>
             <script>
 
+
+
+
+
+
+
                 <!-- 360浏览器需要 用极速模式才能显示 -->
 
            var str='{\n' +
                '                    chart: {\n' +
-               '                        caption: "销售流程状态",\n' +
+               '                        caption: "电商销售流程状态",\n' +
                '                        yaxismaxvalue: "1100",\n' +
                '                        yaxisminvalue: "0",\n' +
                '                        theme: "fusion",\n' +
@@ -480,7 +497,7 @@
                '                                    width: "100",\n' +
                '                                    height: "60",\n' +
                '                                    hovercolor: "#1A237E"\n' +
-               '                                },\n' ;
+               '                                },' ;
                 var width=width+5;
                 </c:forEach>
                 data=data.substr(0, data.length - 1);
@@ -511,7 +528,7 @@
                '                                    arrowatstart: "0",\n' +
                '                                    arrowatend: "1",\n' +
                '                                    alpha: "50"\n' +
-               '                                },\n' ;
+               '                                },' ;
               }
                 last=now;
                 </c:forEach>
@@ -526,18 +543,17 @@
 
 
 
-
               //  eval解析复杂json字符串 多层字符串普通的JSON.parse是解析不了的,不能一步到位解析到底的。
                 const dataSource = eval("("+ str +")");
 
 
 
                 FusionCharts.ready(function() {
-
+                    var n = <%=num%>;
                     var myChart = new FusionCharts({
                         type: "dragnode",
                         renderAt: "chart-container2",
-                        width: "100%",
+                        width: '' + Number(n) * 200 + '',
                         height: "200",
                         dataFormat: "json",
                         dataSource
@@ -545,13 +561,25 @@
                 });
 
 
+
+
+
+
             </script>
 
-            <div id="chart-container2" ></div>
+            <div id="chart-container2"  ></div>
         </td>
     </tr>
 
 </table>
+
+
+
+
+
+
+
+
 
 
 

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 
 /**
- * å®šæ—¶ä»»åŠ¡æ§åˆ¶å±‚
+ * ¶¨Ê±ÈÎÎñ¿ØÖÆ²ã
  * @author admin
  * @date 2017-11-25 18:49
  */
@@ -28,9 +28,9 @@ public class ScheduleJobController {
     private ScheduleJobService scheduleJobService;
 
     /**
-     * æŸ¥è¯¢æ‰€æœ‰çš„å®šæ—¶ä»»åŠ¡ï¼Œç”¨äºé¡µé¢åŠ è½½æ—¶æ˜¾ç¤ºè¡¨æ ¼æ•°æ®
-     * @param pageSize æ¯é¡µæ˜¾ç¤ºæ•°é‡
-     * @param pageNumber é¡µæ•°
+     * ²éÑ¯ËùÓĞµÄ¶¨Ê±ÈÎÎñ£¬ÓÃÓÚÒ³Ãæ¼ÓÔØÊ±ÏÔÊ¾±í¸ñÊı¾İ
+     * @param pageSize Ã¿Ò³ÏÔÊ¾ÊıÁ¿
+     * @param pageNumber Ò³Êı
      * @return BootstrapTableResult
      */
     @RequestMapping(value = "/listAllJob", method = RequestMethod.POST)
@@ -41,7 +41,7 @@ public class ScheduleJobController {
     }
 
     /**
-     * æš‚åœå®šæ—¶ä»»åŠ¡
+     * ÔİÍ£¶¨Ê±ÈÎÎñ
      * @param jobId
      * @return BaseResult
      */
@@ -49,11 +49,11 @@ public class ScheduleJobController {
     @ResponseBody
     public BaseResult pauseJob(int jobId) {
         scheduleJobService.pauseJob(jobId);
-        return new BaseResult(1, "success", "å®šæ—¶ä»»åŠ¡æš‚åœæˆåŠŸ");
+        return new BaseResult(1, "success", "¶¨Ê±ÈÎÎñÔİÍ£³É¹¦");
     }
 
     /**
-     * æ¢å¤å®šæ—¶ä»»åŠ¡
+     * »Ö¸´¶¨Ê±ÈÎÎñ
      * @param jobId
      * @return BaseResult
      */
@@ -61,11 +61,11 @@ public class ScheduleJobController {
     @ResponseBody
     public BaseResult resumeJob(int jobId){
         scheduleJobService.resumeJob(jobId);
-        return new BaseResult(1, "success", "å®šæ—¶ä»»åŠ¡æ¢å¤æˆåŠŸ");
+        return new BaseResult(1, "success", "¶¨Ê±ÈÎÎñ»Ö¸´³É¹¦");
     }
 
     /**
-     * ç«‹å³æ‰§è¡Œå®šæ—¶ä»»åŠ¡
+     * Á¢¼´Ö´ĞĞ¶¨Ê±ÈÎÎñ
      * @param jobId
      * @return BaseResult
      */
@@ -73,11 +73,11 @@ public class ScheduleJobController {
     @ResponseBody
     public BaseResult runOnce(int jobId){
         scheduleJobService.runOnce(jobId);
-        return new BaseResult(1, "success", "ç«‹å³æ‰§è¡Œå®šæ—¶ä»»åŠ¡æˆåŠŸ");
+        return new BaseResult(1, "success", "Á¢¼´Ö´ĞĞ¶¨Ê±ÈÎÎñ³É¹¦");
     }
 
     /**
-     * æ›´æ–°æ—¶é—´è¡¨è¾¾å¼
+     * ¸üĞÂÊ±¼ä±í´ïÊ½
      * @param id
      * @param cronExpression
      * @return BaseResult
@@ -86,11 +86,11 @@ public class ScheduleJobController {
     @ResponseBody
     public BaseResult updateCron(int id,String cronExpression){
         scheduleJobService.updateCron(id,cronExpression);
-        return new BaseResult(1, "success", "æ›´æ–°æ—¶é—´è¡¨è¾¾å¼æˆåŠŸ");
+        return new BaseResult(1, "success", "¸üĞÂÊ±¼ä±í´ïÊ½³É¹¦");
     }
 
     /**
-     * æ·»åŠ å®šæ—¶ä»»åŠ¡
+     * Ìí¼Ó¶¨Ê±ÈÎÎñ
      * @param scheduleJob
      * @return
      */
@@ -100,10 +100,10 @@ public class ScheduleJobController {
         try {
             scheduleJobService.addScheduleJob(scheduleJob);
         }catch (Exception e){
-            return new BaseResult(0, "default", "æ·»åŠ å®šæ—¶ä»»åŠ¡å¤±è´¥");
+            return new BaseResult(0, "default", "Ìí¼Ó¶¨Ê±ÈÎÎñÊ§°Ü");
         }
 
-        return new BaseResult(1, "success", "æ·»åŠ å®šæ—¶ä»»åŠ¡æˆåŠŸ");
+        return new BaseResult(1, "success", "Ìí¼Ó¶¨Ê±ÈÎÎñ³É¹¦");
     }
 
 }

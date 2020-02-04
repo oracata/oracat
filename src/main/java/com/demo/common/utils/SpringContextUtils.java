@@ -7,19 +7,19 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 /**
- * è·å–springå®¹å™¨ï¼Œä»¥è®¿é—®å®¹å™¨ä¸­å®šä¹‰çš„å…¶ä»–bean
+ * »ñÈ¡springÈİÆ÷£¬ÒÔ·ÃÎÊÈİÆ÷ÖĞ¶¨ÒåµÄÆäËûbean
  * @author Administrator
- * @date 2017-11-21 ä¸‹åˆ 12:39
+ * @date 2017-11-21 ÏÂÎç 12:39
  */
 @Component
 public class SpringContextUtils implements ApplicationContextAware {
     /**
-     * Springåº”ç”¨ä¸Šä¸‹æ–‡ç¯å¢ƒ
+     * SpringÓ¦ÓÃÉÏÏÂÎÄ»·¾³
      */
     public static ApplicationContext applicationContext;
 
     /**
-     * å®ç°ApplicationContextAwareæ¥å£çš„å›è°ƒæ–¹æ³•ï¼Œè®¾ç½®ä¸Šä¸‹æ–‡ç¯å¢ƒ
+     * ÊµÏÖApplicationContextAware½Ó¿ÚµÄ»Øµ÷·½·¨£¬ÉèÖÃÉÏÏÂÎÄ»·¾³
      * @param applicationContext
      * @throws BeansException
      */
@@ -29,9 +29,9 @@ public class SpringContextUtils implements ApplicationContextAware {
     }
 
     /**
-     * è·å–å¯¹è±¡ è¿™é‡Œé‡å†™äº†beanæ–¹æ³•ï¼Œèµ·ä¸»è¦ä½œç”¨
+     * »ñÈ¡¶ÔÏó ÕâÀïÖØĞ´ÁËbean·½·¨£¬ÆğÖ÷Òª×÷ÓÃ
      * @param name
-     * @return Object ä¸€ä¸ªä»¥æ‰€ç»™åå­—æ³¨å†Œçš„beançš„å®ä¾‹
+     * @return Object Ò»¸öÒÔËù¸øÃû×Ö×¢²áµÄbeanµÄÊµÀı
      * @throws BeansException
      */
     public static <T> T  getBean(String name) throws BeansException {
@@ -39,7 +39,7 @@ public class SpringContextUtils implements ApplicationContextAware {
     }
 
     /**
-     * è·å–ç±»å‹ä¸ºrequiredTypeçš„å¯¹è±¡
+     * »ñÈ¡ÀàĞÍÎªrequiredTypeµÄ¶ÔÏó
      * @param name
      * @param requiredType
      * @param <T>
@@ -50,7 +50,7 @@ public class SpringContextUtils implements ApplicationContextAware {
 //    }
 
     /**
-     * å¦‚æœBeanFactoryåŒ…å«ä¸€ä¸ªä¸æ‰€ç»™åç§°åŒ¹é…çš„beanå®šä¹‰ï¼Œåˆ™è¿”å›true
+     * Èç¹ûBeanFactory°üº¬Ò»¸öÓëËù¸øÃû³ÆÆ¥ÅäµÄbean¶¨Òå£¬Ôò·µ»Øtrue
      * @param name
      * @return boolean
      */
@@ -59,8 +59,8 @@ public class SpringContextUtils implements ApplicationContextAware {
     }
 
     /**
-     * åˆ¤æ–­ä»¥ç»™å®šåå­—æ³¨å†Œçš„beanå®šä¹‰æ˜¯ä¸€ä¸ªsingletonè¿˜æ˜¯ä¸€ä¸ªprototypeã€‚
-     * å¦‚æœä¸ç»™å®šåå­—ç›¸åº”çš„beanå®šä¹‰æ²¡æœ‰è¢«æ‰¾åˆ°ï¼Œå°†ä¼šæŠ›å‡ºä¸€ä¸ªå¼‚å¸¸ï¼ˆNoSuchBeanDefinitionExceptionï¼‰
+     * ÅĞ¶ÏÒÔ¸ø¶¨Ãû×Ö×¢²áµÄbean¶¨ÒåÊÇÒ»¸ösingleton»¹ÊÇÒ»¸öprototype¡£
+     * Èç¹ûÓë¸ø¶¨Ãû×ÖÏàÓ¦µÄbean¶¨ÒåÃ»ÓĞ±»ÕÒµ½£¬½«»áÅ×³öÒ»¸öÒì³££¨NoSuchBeanDefinitionException£©
      * @param name
      * @return boolean
      * @throws org.springframework.beans.factory.NoSuchBeanDefinitionException
@@ -71,7 +71,7 @@ public class SpringContextUtils implements ApplicationContextAware {
 
     /**
      * @param name
-     * @return Class æ³¨å†Œå¯¹è±¡çš„ç±»å‹
+     * @return Class ×¢²á¶ÔÏóµÄÀàĞÍ
      * @throws org.springframework.beans.factory.NoSuchBeanDefinitionException
      *
      */

@@ -11,14 +11,14 @@ import org.slf4j.LoggerFactory;
 /**
  *
  * @author Administrator
- * @date 2017-11-21 ä¸‹åˆ 16:04
+ * @date 2017-11-21 ÏÂÎç 16:04
  */
 public class QuartzJobFactory implements Job {
     public Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        System.out.println("å®šæ—¶ä»»åŠ¡è¿è¡Œä¸­...");
+        System.out.println("¶¨Ê±ÈÎÎñÔËĞĞÖĞ...");
         ScheduleJob scheduleJob = (ScheduleJob) jobExecutionContext.getMergedJobDataMap().get("scheduleJob");
         TaskUtils.invokeMethod(scheduleJob);
     }

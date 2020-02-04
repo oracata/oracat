@@ -2,10 +2,10 @@
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2017/11/25 0020
-  Time: ä¸‹åˆ 18:28
+  Time: ÏÂÎç 18:28
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=GBK" language="java" %>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>å®šæ—¶ä»»åŠ¡</title>
+    <title>¶¨Ê±ÈÎÎñ</title>
     <link rel="stylesheet" href="${basePath}/static/bootstrap-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="${basePath}/static/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="${basePath}/static/css/bootstrap-table.min.css">
@@ -27,16 +27,16 @@
 <div id="rrapp" style="margin: 100px;">
     <div id="showList">
         <div class="grid-btn" style="height:34px;">
-            <a class="btn btn-primary" onclick="update();"><i class="fa fa-pencil-square-o"></i>&nbsp;ä¿®æ”¹</a>
-            <a class="btn btn-primary" onclick="pause();"><i class="fa fa-pause"></i>&nbsp;æš‚åœ</a>
-            <a class="btn btn-primary" onclick="resume();"><i class="fa fa-play"></i>&nbsp;æ¢å¤</a>
-            <a class="btn btn-primary" onclick="add();"><i class="fa fa-pencil-square-o"></i>&nbsp;æ·»åŠ </a>
-            <a class="btn btn-primary" onclick="runOnce();"><i class="fa fa-arrow-circle-right"></i>&nbsp;ç«‹å³æ‰§è¡Œ</a>
+            <a class="btn btn-primary" onclick="update();"><i class="fa fa-pencil-square-o"></i>&nbsp;ĞŞ¸Ä</a>
+            <a class="btn btn-primary" onclick="pause();"><i class="fa fa-pause"></i>&nbsp;ÔİÍ£</a>
+            <a class="btn btn-primary" onclick="resume();"><i class="fa fa-play"></i>&nbsp;»Ö¸´</a>
+            <a class="btn btn-primary" onclick="add();"><i class="fa fa-pencil-square-o"></i>&nbsp;Ìí¼Ó</a>
+            <a class="btn btn-primary" onclick="runOnce();"><i class="fa fa-arrow-circle-right"></i>&nbsp;Á¢¼´Ö´ĞĞ</a>
         </div>
         <table id="table"></table>
     </div>
 
-    <!-- ä¿®æ”¹æ—¶é—´æ¨¡æ€æ¡† -->
+    <!-- ĞŞ¸ÄÊ±¼äÄ£Ì¬¿ò -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -44,11 +44,11 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">ä¿®æ”¹å®šæ—¶ä»»åŠ¡æ—¶é—´</h4>
+                    <h4 class="modal-title" id="myModalLabel">ĞŞ¸Ä¶¨Ê±ÈÎÎñÊ±¼ä</h4>
                 </div>
                 <div class="modal-body">
                     <input type="text" id="modalId" style="display:none"/>
-                    Cronè¡¨è¾¾å¼
+                    Cron±í´ïÊ½
                     <input type="text" class="form-control" id="modalCron">
                 </div>
                 <div class="modal-footer">
@@ -59,7 +59,7 @@
         </div>
     </div>
 
-    <!-- ä¿®æ”¹æ—¶é—´æ¨¡æ€æ¡† -->
+    <!-- ĞŞ¸ÄÊ±¼äÄ£Ì¬¿ò -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -67,14 +67,14 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="addModalLabel">æ·»åŠ å®šæ—¶ä»»åŠ¡</h4>
+                    <h4 class="modal-title" id="addModalLabel">Ìí¼Ó¶¨Ê±ÈÎÎñ</h4>
                 </div>
                 <div class="modal-body">
-                    <a>ä»»åŠ¡å</a> <input type="text" class="form-control" id="jobName"><br>
-                    <a>ä»»åŠ¡ç»„</a> <input type="text" class="form-control" id="jobGroup"><br>
-                    <a>æ–¹æ³•å</a> <input type="text" class="form-control" id="methodName"><br>
-                    <a>æ–¹æ³•è·¯å¾„</a> <input type="text" class="form-control" id="beanClass"><br>
-                    <a>æ—¶é—´</a> <input type="text" class="form-control" id="cronExpression">
+                    <a>ÈÎÎñÃû</a> <input type="text" class="form-control" id="jobName"><br>
+                    <a>ÈÎÎñ×é</a> <input type="text" class="form-control" id="jobGroup"><br>
+                    <a>·½·¨Ãû</a> <input type="text" class="form-control" id="methodName"><br>
+                    <a>·½·¨Â·¾¶</a> <input type="text" class="form-control" id="beanClass"><br>
+                    <a>Ê±¼ä</a> <input type="text" class="form-control" id="cronExpression">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -88,7 +88,7 @@
 
 <script type="text/javascript">
     $(function () {
-        //åˆå§‹åŒ–è¡¨æ ¼
+        //³õÊ¼»¯±í¸ñ
         initTable();
     });
 
@@ -108,7 +108,7 @@
             },
             url: queryUrl,
             success: function (result) {
-                //åˆ·æ–°è¡¨æ ¼
+                //Ë¢ĞÂ±í¸ñ
                 var opt = {
                     url: '${basePath}/scheduleJob/listAllJob.do'
                 };
@@ -120,22 +120,22 @@
     function  add(){
         $('#addModal').modal('toggle');
     }
-    //ä¿®æ”¹æŒ‰é’®
+    //ĞŞ¸Ä°´Å¥
     function update() {
-        //è·å–é€‰ä¸­çš„è¡Œ
+        //»ñÈ¡Ñ¡ÖĞµÄĞĞ
         var a = $("#table").bootstrapTable('getSelections');
         if (a.length == 0) {
-            alert("è¯·å…ˆé€‰ä¸­éœ€è¦ä¿®æ”¹çš„é¡¹");
+            alert("ÇëÏÈÑ¡ÖĞĞèÒªĞŞ¸ÄµÄÏî");
             return false;
         } else if (a.length > 1) {
-            alert("åªèƒ½é€‰æ‹©ä¸€é¡¹");
+            alert("Ö»ÄÜÑ¡ÔñÒ»Ïî");
             return false;
         }
         $("#modalId").val(a[0].id);
         $('#myModal').modal('toggle');
     }
 
-    //æ›´æ–°å®šæ—¶ä»»åŠ¡æ—¶é—´
+    //¸üĞÂ¶¨Ê±ÈÎÎñÊ±¼ä
     function updateCron() {
         $('#myModal').modal('hide');
         var id = $("#modalId").val();
@@ -148,7 +148,7 @@
             },
             url: queryUrl,
             success: function (result) {
-                //åˆ·æ–°è¡¨æ ¼
+                //Ë¢ĞÂ±í¸ñ
                 var opt = {
                     url: '${basePath}/scheduleJob/listAllJob.do'
                 };
@@ -157,33 +157,33 @@
         })
     }
 
-    //æš‚åœä¸€ä¸ªå®šæ—¶ä»»åŠ¡
+    //ÔİÍ£Ò»¸ö¶¨Ê±ÈÎÎñ
     function pause() {
         var queryUrl = '${basePath}/scheduleJob/pauseJob.do';
         commonSubmit(queryUrl);
     }
 
-    //æ¢å¤ä¸€ä¸ªå®šæ—¶ä»»åŠ¡
+    //»Ö¸´Ò»¸ö¶¨Ê±ÈÎÎñ
     function resume() {
         var queryUrl = '${basePath}/scheduleJob/resumeJob.do';
         commonSubmit(queryUrl);
     }
 
-    //ç«‹å³æ‰§è¡Œä¸€ä¸ªå®šæ—¶ä»»åŠ¡
+    //Á¢¼´Ö´ĞĞÒ»¸ö¶¨Ê±ÈÎÎñ
     function runOnce() {
         var queryUrl = "${basePath}/scheduleJob/runOnce.do";
         commonSubmit(queryUrl);
     }
 
-    //æš‚åœã€æ¢å¤ã€ç«‹å³æ‰§è¡Œæäº¤å‡½æ•°
+    //ÔİÍ£¡¢»Ö¸´¡¢Á¢¼´Ö´ĞĞÌá½»º¯Êı
     function commonSubmit(queryUrl) {
-        //è·å–é€‰ä¸­çš„è¡Œ
+        //»ñÈ¡Ñ¡ÖĞµÄĞĞ
         var a = $("#table").bootstrapTable('getSelections');
         if (a.length == 0) {
-            alert("è¯·å…ˆé€‰ä¸­éœ€è¦ä¿®æ”¹çš„é¡¹");
+            alert("ÇëÏÈÑ¡ÖĞĞèÒªĞŞ¸ÄµÄÏî");
             return false;
         } else if (a.length > 1) {
-            alert("åªèƒ½é€‰æ‹©ä¸€é¡¹");
+            alert("Ö»ÄÜÑ¡ÔñÒ»Ïî");
             return false;
         }
         var obj = a[0];
@@ -194,7 +194,7 @@
             },
             url: queryUrl,
             success: function (result) {
-                //åˆ·æ–°è¡¨æ ¼ï¼ŒçŠ¶æ€å˜æ›´
+                //Ë¢ĞÂ±í¸ñ£¬×´Ì¬±ä¸ü
                 var opt = {
                     url: '${basePath}/scheduleJob/listAllJob.do'
                 };
@@ -203,48 +203,48 @@
         });
     }
 
-    //è¡¨æ ¼è¯¦æƒ…
+    //±í¸ñÏêÇé
     function initTable() {
         var queryUrl = '${basePath}/scheduleJob/listAllJob.do';
         $('#table').bootstrapTable({
-            method: 'POST',//è¯·æ±‚æ–¹å¼ï¼ˆ*ï¼‰
-            contentType: "application/x-www-form-urlencoded;charset=UTF-8",//åœ¨æœåŠ¡ç«¯åˆ†é¡µæ—¶å¿…é¡»é…ç½®
+            method: 'POST',//ÇëÇó·½Ê½£¨*£©
+            contentType: "application/x-www-form-urlencoded;charset=UTF-8",//ÔÚ·şÎñ¶Ë·ÖÒ³Ê±±ØĞëÅäÖÃ
             dataType: 'json',
-            //toolbar: '#toolbar',//å·¥å…·æŒ‰é’®ç”¨å“ªä¸ªå®¹å™¨
-            striped: true,//æ˜¯å¦æ˜¾ç¤ºè¡Œé—´éš”è‰²
-            cache: false,//æ˜¯å¦ä½¿ç”¨ç¼“å­˜ï¼Œé»˜è®¤ä¸ºtrueï¼Œæ‰€ä»¥ä¸€èˆ¬æƒ…å†µä¸‹éœ€è¦è®¾ç½®ä¸€ä¸‹è¿™ä¸ªå±æ€§ï¼ˆ*ï¼‰
-            pagination: true,//æ˜¯å¦æ˜¾ç¤ºåˆ†é¡µï¼ˆ*ï¼‰ã€
-            onlyInfoPagination: false,//è®¾ç½®ä¸ºtrueæ—¶åªæ˜¾ç¤ºæ€»æ•°æ®ï¼Œè€Œä¸æ˜¾ç¤ºåˆ†é¡µæŒ‰é’®
+            //toolbar: '#toolbar',//¹¤¾ß°´Å¥ÓÃÄÄ¸öÈİÆ÷
+            striped: true,//ÊÇ·ñÏÔÊ¾ĞĞ¼ä¸ôÉ«
+            cache: false,//ÊÇ·ñÊ¹ÓÃ»º´æ£¬Ä¬ÈÏÎªtrue£¬ËùÒÔÒ»°ãÇé¿öÏÂĞèÒªÉèÖÃÒ»ÏÂÕâ¸öÊôĞÔ£¨*£©
+            pagination: true,//ÊÇ·ñÏÔÊ¾·ÖÒ³£¨*£©¡¢
+            onlyInfoPagination: false,//ÉèÖÃÎªtrueÊ±Ö»ÏÔÊ¾×ÜÊı¾İ£¬¶ø²»ÏÔÊ¾·ÖÒ³°´Å¥
             showPaginationSwitch: false,
-            sortable: true,//æ˜¯å¦å¯ç”¨æ’åº
-            sortOrder: "asc",//æ’åºæ–¹å¼
-            sidePagination: "server",//åˆ†é¡µæ–¹å¼ï¼šclientå®¢æˆ·ç«¯åˆ†é¡µï¼ŒserveræœåŠ¡ç«¯åˆ†é¡µï¼ˆ*ï¼‰
-            pageNumber: 1,//åˆå§‹åŒ–åŠ è½½ç¬¬ä¸€é¡µï¼Œé»˜è®¤ç¬¬ä¸€é¡µ,å¹¶è®°å½•
-            pageSize: 10,//æ¯é¡µçš„è®°å½•è¡Œæ•°ï¼ˆ*ï¼‰
-            pageList: [10, 25, 50, 100],//å¯ä¾›é€‰æ‹©çš„æ¯é¡µçš„è¡Œæ•°ï¼ˆ*ï¼‰
-            url: queryUrl,//è¯·æ±‚åå°çš„URLï¼ˆ*ï¼‰
-            search: false,//æ˜¯å¦æ˜¾ç¤ºè¡¨æ ¼æœç´¢
+            sortable: true,//ÊÇ·ñÆôÓÃÅÅĞò
+            sortOrder: "asc",//ÅÅĞò·½Ê½
+            sidePagination: "server",//·ÖÒ³·½Ê½£ºclient¿Í»§¶Ë·ÖÒ³£¬server·şÎñ¶Ë·ÖÒ³£¨*£©
+            pageNumber: 1,//³õÊ¼»¯¼ÓÔØµÚÒ»Ò³£¬Ä¬ÈÏµÚÒ»Ò³,²¢¼ÇÂ¼
+            pageSize: 10,//Ã¿Ò³µÄ¼ÇÂ¼ĞĞÊı£¨*£©
+            pageList: [10, 25, 50, 100],//¿É¹©Ñ¡ÔñµÄÃ¿Ò³µÄĞĞÊı£¨*£©
+            url: queryUrl,//ÇëÇóºóÌ¨µÄURL£¨*£©
+            search: false,//ÊÇ·ñÏÔÊ¾±í¸ñËÑË÷
             strictSearch: true,
-            showColumns: false,//æ˜¯å¦æ˜¾ç¤ºæ‰€æœ‰çš„åˆ—ï¼ˆé€‰æ‹©æ˜¾ç¤ºçš„åˆ—ï¼‰
-            showRefresh: false,//æ˜¯å¦æ˜¾ç¤ºåˆ·æ–°æŒ‰é’®
-            minimumCountColumns: 1,//æœ€å°‘å…è®¸çš„åˆ—æ•°
-            clickToSelect: true,//æ˜¯å¦å¯ç”¨ç‚¹å‡»é€‰ä¸­è¡Œ
-            //height: 500,                      //è¡Œé«˜ï¼Œå¦‚æœæ²¡æœ‰è®¾ç½®heightå±æ€§ï¼Œè¡¨æ ¼è‡ªåŠ¨æ ¹æ®è®°å½•æ¡æ•°è§‰å¾—è¡¨æ ¼é«˜åº¦
-            uniqueId: "ID",//æ¯ä¸€è¡Œçš„å”¯ä¸€æ ‡è¯†ï¼Œä¸€èˆ¬ä¸ºä¸»é”®åˆ—
-            showToggle: false, //æ˜¯å¦æ˜¾ç¤ºè¯¦ç»†è§†å›¾å’Œåˆ—è¡¨è§†å›¾çš„åˆ‡æ¢æŒ‰é’®
-            cardView: false,//æ˜¯å¦æ˜¾ç¤ºè¯¦ç»†è§†å›¾
-            detailView: false,//æ˜¯å¦æ˜¾ç¤ºçˆ¶å­è¡¨
-            paginationDetailHAlign: "left",//è®¾ç½®é¡µé¢æ¡æ•°ä¿¡æ¯ä½ç½®,é»˜è®¤åœ¨å·¦è¾¹
-            showExport: false,                     //æ˜¯å¦æ˜¾ç¤ºå¯¼å‡º
+            showColumns: false,//ÊÇ·ñÏÔÊ¾ËùÓĞµÄÁĞ£¨Ñ¡ÔñÏÔÊ¾µÄÁĞ£©
+            showRefresh: false,//ÊÇ·ñÏÔÊ¾Ë¢ĞÂ°´Å¥
+            minimumCountColumns: 1,//×îÉÙÔÊĞíµÄÁĞÊı
+            clickToSelect: true,//ÊÇ·ñÆôÓÃµã»÷Ñ¡ÖĞĞĞ
+            //height: 500,                      //ĞĞ¸ß£¬Èç¹ûÃ»ÓĞÉèÖÃheightÊôĞÔ£¬±í¸ñ×Ô¶¯¸ù¾İ¼ÇÂ¼ÌõÊı¾õµÃ±í¸ñ¸ß¶È
+            uniqueId: "ID",//Ã¿Ò»ĞĞµÄÎ¨Ò»±êÊ¶£¬Ò»°ãÎªÖ÷¼üÁĞ
+            showToggle: false, //ÊÇ·ñÏÔÊ¾ÏêÏ¸ÊÓÍ¼ºÍÁĞ±íÊÓÍ¼µÄÇĞ»»°´Å¥
+            cardView: false,//ÊÇ·ñÏÔÊ¾ÏêÏ¸ÊÓÍ¼
+            detailView: false,//ÊÇ·ñÏÔÊ¾¸¸×Ó±í
+            paginationDetailHAlign: "left",//ÉèÖÃÒ³ÃæÌõÊıĞÅÏ¢Î»ÖÃ,Ä¬ÈÏÔÚ×ó±ß
+            showExport: false,                     //ÊÇ·ñÏÔÊ¾µ¼³ö
             exportDataType: "selected",              //basic', 'all', 'selected'.
-            //è·å–æŸ¥è¯¢å‚æ•°
+            //»ñÈ¡²éÑ¯²ÎÊı
             queryParams: function queryParams(params) {
-                //è¿™é‡Œçš„é”®çš„åå­—å’Œæ§åˆ¶å™¨çš„å˜é‡åå¿…é¡»ä¸€è‡´ï¼Œè¿™è¾¹æ”¹åŠ¨ï¼Œæ§åˆ¶å™¨ä¹Ÿéœ€è¦æ”¹æˆä¸€æ ·çš„
+                //ÕâÀïµÄ¼üµÄÃû×ÖºÍ¿ØÖÆÆ÷µÄ±äÁ¿Ãû±ØĞëÒ»ÖÂ£¬Õâ±ß¸Ä¶¯£¬¿ØÖÆÆ÷Ò²ĞèÒª¸Ä³ÉÒ»ÑùµÄ
                 var param = {
-                    pageSize: params.limit,                       //é¡µé¢å¤§å°
-                    pageNumber: (params.offset / params.limit) + 1,   //é¡µç 
-                    menuName: $("#menuNameQuery").val(), //èœå•åç§°
-                    parentName: $("#parentNameQuery").val(),//ä¸Šçº§èœå•åç§°
+                    pageSize: params.limit,                       //Ò³Ãæ´óĞ¡
+                    pageNumber: (params.offset / params.limit) + 1,   //Ò³Âë
+                    menuName: $("#menuNameQuery").val(), //²Ëµ¥Ãû³Æ
+                    parentName: $("#parentNameQuery").val(),//ÉÏ¼¶²Ëµ¥Ãû³Æ
                 };
                 return param;
             },
@@ -260,10 +260,10 @@
                 },
                 {
                     checkbox: true,
-                    visible: true                  //æ˜¯å¦æ˜¾ç¤ºå¤é€‰æ¡†
+                    visible: true                  //ÊÇ·ñÏÔÊ¾¸´Ñ¡¿ò
                 }, {
                     field: 'id',
-                    title: 'ä»»åŠ¡ID',
+                    title: 'ÈÎÎñID',
                     width: 50,
                     align: 'center'
                 }, {
@@ -287,30 +287,30 @@
                     align: 'center'
                 }, {
                     field: 'params',
-                    title: 'å‚æ•°',
+                    title: '²ÎÊı',
                     width: 100,
                     align: 'center'
                 }, {
                     field: 'cronExpression',
-                    title: 'cronè¡¨è¾¾å¼',
+                    title: 'cron±í´ïÊ½',
                     width: 100,
                     align: 'center'
                 }, {
                     field: 'status',
-                    title: 'çŠ¶æ€',
+                    title: '×´Ì¬',
                     width: 50,
                     align: 'center',
                     formatter: function (value, row, index) {
                         if (value == 0) {
-                            return "<a href='javascript:void(0);' class='btn btn-primary btn-xs'>æ­£å¸¸</a>";
+                            return "<a href='javascript:void(0);' class='btn btn-primary btn-xs'>Õı³£</a>";
                         }
                         if (value == 1) {
-                            return "<a href='javascript:void(0);' class='btn btn-danger btn-xs'>æš‚åœ</a>";
+                            return "<a href='javascript:void(0);' class='btn btn-danger btn-xs'>ÔİÍ£</a>";
                         }
                     }
                 }, {
                     field: 'remark',
-                    title: 'å¤‡æ³¨',
+                    title: '±¸×¢',
                     width: 100,
                     align: 'center'
                 }],

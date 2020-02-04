@@ -1,23 +1,23 @@
 package com.demo.common.result;
 
 /**
- * ç»Ÿä¸€è¿”å›ç»“æœç±»
+ * Í³Ò»·µ»Ø½á¹ûÀà
  * @author Administrator
- * @date 2017-11-25 ä¸‹åˆ 20:07
+ * @date 2017-11-25 ÏÂÎç 20:07
  */
 public class BaseResult {
     /**
-     * çŠ¶æ€ç ï¼š1æˆåŠŸï¼Œå…¶ä»–ä¸ºå¤±è´¥
+     * ×´Ì¬Âë£º1³É¹¦£¬ÆäËûÎªÊ§°Ü
      */
     private int code;
 
     /**
-     * æˆåŠŸä¸ºsuccessï¼Œå…¶ä»–ä¸ºå¤±è´¥åŸå› 
+     * ³É¹¦Îªsuccess£¬ÆäËûÎªÊ§°ÜÔ­Òò
      */
     private String message;
 
     /**
-     * æ•°æ®ç»“æœé›†
+     * Êı¾İ½á¹û¼¯
      */
     public Object data;
 

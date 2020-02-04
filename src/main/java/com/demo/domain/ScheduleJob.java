@@ -3,53 +3,53 @@ package com.demo.domain;
 import java.util.Date;
 
 /**
- * å®šæ—¶ä»»åŠ¡å®ä½“ç±»
+ * ¶¨Ê±ÈÎÎñÊµÌåÀà
  * @author admin
- * @date 2017-11-25 ä¸‹åˆ 19:06
+ * @date 2017-11-25 ÏÂÎç 19:06
  */
 public class ScheduleJob {
     /**
-     * ä¸»é”®id
+     * Ö÷¼üid
      */
     private Integer id;
     /**
-     * ä»»åŠ¡å
+     * ÈÎÎñÃû
      */
     private String jobName;
     /**
-     * ä»»åŠ¡ç»„
+     * ÈÎÎñ×é
      */
     private String jobGroup;
     /**
-     * è¦æ‰§è¡Œçš„æ–¹æ³•çš„åç§°
+     * ÒªÖ´ĞĞµÄ·½·¨µÄÃû³Æ
      */
     private String methodName;
     /**
-     * è¦æ‰§è¡Œçš„æ–¹æ³•æ‰€åœ¨çš„classè·¯å¾„
+     * ÒªÖ´ĞĞµÄ·½·¨ËùÔÚµÄclassÂ·¾¶
      */
     private String beanClass;
     /**
-     * å®šæ—¶ä»»åŠ¡çŠ¶æ€ï¼Œ0è¡¨ç¤ºæ­£å¸¸ï¼Œ1è¡¨ç¤ºåœæ­¢
+     * ¶¨Ê±ÈÎÎñ×´Ì¬£¬0±íÊ¾Õı³££¬1±íÊ¾Í£Ö¹
      */
     private Integer status;
     /**
-     * æ—¶é—´è¡¨è¾¾å¼
+     * Ê±¼ä±í´ïÊ½
      */
     private String cronExpression;
     /**
-     * å‚æ•°
+     * ²ÎÊı
      */
     private String params;
     /**
-     * å¤‡æ³¨
+     * ±¸×¢
      */
     private String remark;
     /**
-     * åˆ›å»ºæ—¶é—´
+     * ´´½¨Ê±¼ä
      */
     private Date createTime;
     /**
-     * ä¿®æ”¹æ—¶é—´
+     * ĞŞ¸ÄÊ±¼ä
      */
     private Date modifyTime;
 

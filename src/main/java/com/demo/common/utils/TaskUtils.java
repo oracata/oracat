@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 
 /**
  * @author admin
- * @date 2017-11-21 涓嬪崍 16:07
+ * @date 2017-11-21 下午 16:07
  */
 public class TaskUtils {
     public static Logger log = LoggerFactory.getLogger(TaskUtils.class);
@@ -26,8 +26,8 @@ public class TaskUtils {
             }
         }
         if (object == null) {
-            log.error("浠诲姟鍚嶇О = [" + scheduleJob.getJobName() + "]---------------鏈惎鍔ㄦ垚鍔燂紝璇锋鏌ユ槸鍚﹂厤缃纭紒锛侊紒");
-            System.out.println("浠诲姟鍚嶇О = [" + scheduleJob.getJobName() + "]---------------鏈惎鍔ㄦ垚鍔燂紝璇锋鏌ユ槸鍚﹂厤缃纭紒锛侊紒");
+            log.error("任务名称 = [" + scheduleJob.getJobName() + "]---------------未启动成功，请检查是否配置正确！！！");
+            System.out.println("任务名称 = [" + scheduleJob.getJobName() + "]---------------未启动成功，请检查是否配置正确！！！");
             return;
         }
         clazz = object.getClass();
@@ -35,8 +35,8 @@ public class TaskUtils {
         try {
             method = clazz.getDeclaredMethod(scheduleJob.getMethodName());
         } catch (NoSuchMethodException e) {
-            log.error("浠诲姟鍚嶇О = [" + scheduleJob.getJobName() + "]---------------鏈惎鍔ㄦ垚鍔燂紝鏂规硶鍚嶈缃敊璇紒锛侊紒");
-            System.out.println("浠诲姟鍚嶇О = [" + scheduleJob.getJobName() + "]---------------鏈惎鍔ㄦ垚鍔燂紝鏂规硶鍚嶈缃敊璇紒锛侊紒");
+            log.error("任务名称 = [" + scheduleJob.getJobName() + "]---------------未启动成功，方法名设置错误！！！");
+            System.out.println("任务名称 = [" + scheduleJob.getJobName() + "]---------------未启动成功，方法名设置错误！！！");
         } catch (SecurityException e) {
             e.printStackTrace();
         }
@@ -51,6 +51,6 @@ public class TaskUtils {
                 e.printStackTrace();
             }
         }
-        log.info("浠诲姟鍚嶇О = [" + scheduleJob.getJobName() + "]----------鍚姩鎴愬姛");
+        log.info("任务名称 = [" + scheduleJob.getJobName() + "]----------启动成功");
     }
 }

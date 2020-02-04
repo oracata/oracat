@@ -6,39 +6,39 @@ import com.demo.domain.ScheduleJob;
 import java.util.List;
 
 /**
- * å®šæ—¶ä»»åŠ¡
+ * ¶¨Ê±ÈÎÎñ
  * @author admin
- * @date 2017-11-20 ä¸‹åˆ 15:52
+ * @date 2017-11-20 ÏÂÎç 15:52
  */
 public interface ScheduleJobMapper {
 
     /**
-     * æŸ¥è¯¢æ‰€æœ‰çš„å®šæ—¶ä»»åŠ¡
+     * ²éÑ¯ËùÓĞµÄ¶¨Ê±ÈÎÎñ
      * @return List<ScheduleJob>
      */
     List<ScheduleJob> listAllJob();
 
     /**
-     * æ›´æ–°å®šæ—¶ä»»åŠ¡çŠ¶æ€
+     * ¸üĞÂ¶¨Ê±ÈÎÎñ×´Ì¬
      * @param scheduleJob
      */
     void updateJobStatusById(ScheduleJob scheduleJob);
 
     /**
-     * æ ¹æ®ä¸»é”®æŸ¥è¯¢å®šæ—¶ä»»åŠ¡
+     * ¸ù¾İÖ÷¼ü²éÑ¯¶¨Ê±ÈÎÎñ
      * @param id
      * @return ScheduleJob
      */
     ScheduleJob getScheduleJobByPrimaryKey(int id);
 
     /**
-     * æ›´æ–°æ—¶é—´è¡¨è¾¾å¼
+     * ¸üĞÂÊ±¼ä±í´ïÊ½
      * @param scheduleJob
      */
     void updateJobCronExpressionById(ScheduleJob scheduleJob);
 
     /**
-     * æ·»åŠ å®šæ—¶ä»»åŠ¡
+     * Ìí¼Ó¶¨Ê±ÈÎÎñ
      * @param scheduleJob
      */
     void addScheduleJob(ScheduleJob scheduleJob);

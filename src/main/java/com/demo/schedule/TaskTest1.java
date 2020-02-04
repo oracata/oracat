@@ -9,26 +9,26 @@ import java.util.Map;
 
 /**
  * @author admin
- * @date 2017-11-25 涓嬪崍 20:14
+ * @date 2017-11-25 下午 20:14
  */
 @Component
 public class TaskTest1 {
     public static final Logger LOGGER = LoggerFactory.getLogger(TaskTest1.class);
 
     public void run1(){
-        System.out.println("鎵ц鏂规硶1");
+        System.out.println("执行方法1");
     }
 
     public void run2(){
-        System.out.println("鎵ц鏂规硶2");
+        System.out.println("执行方法2");
     }
 
     public void run3(){
-        System.out.println("鎵ц鏂规硶3");
+        System.out.println("执行方法3");
     }
 
     public void run4(){
-        System.out.println("鎵ц鏂规硶4");
+        System.out.println("执行方法4");
     }
 
 

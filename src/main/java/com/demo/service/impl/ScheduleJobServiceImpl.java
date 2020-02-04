@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * @author Administrator
- * @date 2017-11-21 ä¸Šåˆ 9:36
+ * @date 2017-11-21 ÉÏÎç 9:36
  */
 @Service("scheduleJobService")
 public class ScheduleJobServiceImpl implements ScheduleJobService {
@@ -39,11 +39,11 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
     }
 
     /**
-     * é¡¹ç›®å¯åŠ¨æ—¶åˆå§‹åŒ–å®šæ—¶å™¨
+     * ÏîÄ¿Æô¶¯Ê±³õÊ¼»¯¶¨Ê±Æ÷
      */
     @PostConstruct
     public void init() {
-        //è·å–æ‰€æœ‰çš„å®šæ—¶ä»»åŠ¡
+        //»ñÈ¡ËùÓĞµÄ¶¨Ê±ÈÎÎñ
         List<ScheduleJob> scheduleJobList = scheduleJobMapper.listAllJob();
         if (scheduleJobList.size() != 0) {
             for (ScheduleJob scheduleJob : scheduleJobList) {
@@ -53,16 +53,16 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
     }
 
     /**
-     * æ·»åŠ ä»»åŠ¡
+     * Ìí¼ÓÈÎÎñ
      * @param job
      */
     private void addJob(ScheduleJob job) {
         try {
-            log.info("åˆå§‹åŒ–");
+            log.info("³õÊ¼»¯");
             TriggerKey triggerKey = TriggerKey.triggerKey(job.getJobName(), job.getJobGroup());
             CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
 
-            //ä¸å­˜åœ¨ï¼Œåˆ™åˆ›å»º
+            //²»´æÔÚ£¬Ôò´´½¨
             if (null == trigger) {
                 Class clazz = QuartzJobFactory.class;
                 JobDetail jobDetail = JobBuilder.
@@ -73,34 +73,34 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 
                 CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(job.getCronExpression());
 
-                //withIdentityä¸­å†™jobNameå’ŒgroupName
+                //withIdentityÖĞĞ´jobNameºÍgroupName
                 trigger = TriggerBuilder.
                         newTrigger().
                         withIdentity(job.getJobName(), job.getJobGroup())
                         .withSchedule(scheduleBuilder)
                         .build();
                 scheduler.scheduleJob(jobDetail, trigger);
-                //å¦‚æœå®šæ—¶ä»»åŠ¡æ˜¯æš‚åœçŠ¶æ€
+                //Èç¹û¶¨Ê±ÈÎÎñÊÇÔİÍ£×´Ì¬
                 if(job.getStatus() == Constant.STATUS_NOT_RUNNING){
                     pauseJob(job.getId());
                 }
             } else {
-                // Triggerå·²å­˜åœ¨ï¼Œé‚£ä¹ˆæ›´æ–°ç›¸åº”çš„å®šæ—¶è®¾ç½®
+                // TriggerÒÑ´æÔÚ£¬ÄÇÃ´¸üĞÂÏàÓ¦µÄ¶¨Ê±ÉèÖÃ
                 CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(job.getCronExpression());
 
-                // æŒ‰æ–°çš„cronExpressionè¡¨è¾¾å¼é‡æ–°æ„å»ºtrigger
+                // °´ĞÂµÄcronExpression±í´ïÊ½ÖØĞÂ¹¹½¨trigger
                 trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder).build();
 
-                // æŒ‰æ–°çš„triggeré‡æ–°è®¾ç½®jobæ‰§è¡Œ
+                // °´ĞÂµÄtriggerÖØĞÂÉèÖÃjobÖ´ĞĞ
                 scheduler.rescheduleJob(triggerKey, trigger);
             }
         } catch (Exception e) {
-            log.error("æ·»åŠ ä»»åŠ¡å¤±è´¥", e);
+            log.error("Ìí¼ÓÈÎÎñÊ§°Ü", e);
         }
     }
 
     /**
-     * æŸ¥è¯¢æ‰€æœ‰çš„å®šæ—¶ä»»åŠ¡
+     * ²éÑ¯ËùÓĞµÄ¶¨Ê±ÈÎÎñ
      * @return BootstrapTableResult
      */
     @Override
@@ -114,46 +114,46 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
     }
 
     /**
-     * æš‚åœå®šæ—¶ä»»åŠ¡
+     * ÔİÍ£¶¨Ê±ÈÎÎñ
      * @param jobId
      */
     @Override
     public void pauseJob(int jobId) {
-        //ä¿®æ”¹å®šæ—¶ä»»åŠ¡çŠ¶æ€
+        //ĞŞ¸Ä¶¨Ê±ÈÎÎñ×´Ì¬
         ScheduleJob scheduleJob = getScheduleJobByPrimaryKey(jobId);
         scheduleJob.setId(jobId);
         scheduleJob.setStatus(Constant.STATUS_NOT_RUNNING);
         updateJobStatusById(scheduleJob);
         try {
-            //æš‚åœä¸€ä¸ªjob
+            //ÔİÍ£Ò»¸öjob
             JobKey jobKey = JobKey.jobKey(scheduleJob.getJobName(), scheduleJob.getJobGroup());
             scheduler.pauseJob(jobKey);
         }catch (Exception e){
-            log.error("CatchException:æš‚åœä»»åŠ¡å¤±è´¥",e);
+            log.error("CatchException:ÔİÍ£ÈÎÎñÊ§°Ü",e);
         }
     }
 
     /**
-     * æ¢å¤ä¸€ä¸ªå®šæ—¶ä»»åŠ¡
+     * »Ö¸´Ò»¸ö¶¨Ê±ÈÎÎñ
      * @param jobId
      */
     @Override
     public void resumeJob(int jobId) {
-        //ä¿®æ”¹å®šæ—¶ä»»åŠ¡çŠ¶æ€
+        //ĞŞ¸Ä¶¨Ê±ÈÎÎñ×´Ì¬
         ScheduleJob scheduleJob = getScheduleJobByPrimaryKey(jobId);
         scheduleJob.setStatus(Constant.STATUS_RUNNING);
         updateJobStatusById(scheduleJob);
         try{
-            //æ¢å¤ä¸€ä¸ªå®šæ—¶ä»»åŠ¡
+            //»Ö¸´Ò»¸ö¶¨Ê±ÈÎÎñ
             JobKey jobKey = JobKey.jobKey(scheduleJob.getJobName(), scheduleJob.getJobGroup());
             scheduler.resumeJob(jobKey);
         }catch (Exception e){
-            log.error("CatchException:æ¢å¤å®šæ—¶ä»»åŠ¡å¤±è´¥",e);
+            log.error("CatchException:»Ö¸´¶¨Ê±ÈÎÎñÊ§°Ü",e);
         }
     }
 
     /**
-     * ç«‹å³æ‰§è¡Œä¸€ä¸ªå®šæ—¶ä»»åŠ¡
+     * Á¢¼´Ö´ĞĞÒ»¸ö¶¨Ê±ÈÎÎñ
      * @param jobId
      */
     @Override
@@ -163,12 +163,12 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
             JobKey jobKey = JobKey.jobKey(scheduleJob.getJobName(), scheduleJob.getJobGroup());
             scheduler.triggerJob(jobKey);
         }catch (Exception e){
-            log.error("CatchException:æ¢å¤å®šæ—¶ä»»åŠ¡å¤±è´¥",e);
+            log.error("CatchException:»Ö¸´¶¨Ê±ÈÎÎñÊ§°Ü",e);
         }
     }
 
     /**
-     * æ›´æ–°æ—¶é—´è¡¨è¾¾å¼
+     * ¸üĞÂÊ±¼ä±í´ïÊ½
      * @param id
      * @param cronExpression
      */
@@ -184,13 +184,13 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
             trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder).build();
             scheduler.rescheduleJob(triggerKey,trigger);
         }catch(Exception e){
-            log.error("CatchException:æ›´æ–°æ—¶é—´è¡¨è¾¾å¼å¤±è´¥",e);
+            log.error("CatchException:¸üĞÂÊ±¼ä±í´ïÊ½Ê§°Ü",e);
         }
 
     }
 
     /**
-     * æ·»åŠ å®šæ—¶ä»»åŠ¡
+     * Ìí¼Ó¶¨Ê±ÈÎÎñ
      * @param scheduleJob
      */
     @Override
@@ -199,13 +199,13 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
             scheduleJobMapper.addScheduleJob(scheduleJob);
             addJob(scheduleJob);
         }catch (Exception e){
-            throw new Exception("æ·»åŠ å¤±è´¥");
+            throw new Exception("Ìí¼ÓÊ§°Ü");
         }
 
     }
 
     /**
-     * ä¿®æ”¹å®šæ—¶ä»»åŠ¡çŠ¶æ€
+     * ĞŞ¸Ä¶¨Ê±ÈÎÎñ×´Ì¬
      * @param scheduleJob
      */
     private void updateJobStatusById(ScheduleJob scheduleJob){
@@ -213,14 +213,14 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
     }
 
     /**
-     * ä¿®æ”¹å®šæ—¶ä»»åŠ¡æ—¶é—´
+     * ĞŞ¸Ä¶¨Ê±ÈÎÎñÊ±¼ä
      */
     private void updateJobCronExpressionById(ScheduleJob scheduleJob){
         scheduleJobMapper.updateJobCronExpressionById(scheduleJob);
     }
 
     /**
-     * é€šè¿‡ä¸»é”®idæŸ¥æ‰¾å®šæ—¶ä»»åŠ¡
+     * Í¨¹ıÖ÷¼üid²éÕÒ¶¨Ê±ÈÎÎñ
      * @param id
      * @return ScheduleJob
      */

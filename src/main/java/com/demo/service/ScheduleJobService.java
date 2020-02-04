@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 
 public interface ScheduleJobService {
     /**
-     * æŸ¥è¯¢æ‰€æœ‰çš„å®šæ—¶ä»»åŠ¡
+     * ²éÑ¯ËùÓĞµÄ¶¨Ê±ÈÎÎñ
      * @param pageSize
      * @param pageNumber
      * @return BootstrapTableResult
@@ -23,32 +23,32 @@ public interface ScheduleJobService {
     BootstrapTableResult listAllJob(int pageSize, int pageNumber);
 
     /**
-     * æš‚åœå®šæ—¶ä»»åŠ¡
+     * ÔİÍ£¶¨Ê±ÈÎÎñ
      * @param jobId
      */
     void pauseJob(int jobId);
 
     /**
-     * æ¢å¤ä¸€ä¸ªå®šæ—¶ä»»åŠ¡
+     * »Ö¸´Ò»¸ö¶¨Ê±ÈÎÎñ
      * @param jobId
      */
     void resumeJob(int jobId);
 
     /**
-     * ç«‹å³æ‰§è¡Œä¸€ä¸ªå®šæ—¶ä»»åŠ¡
+     * Á¢¼´Ö´ĞĞÒ»¸ö¶¨Ê±ÈÎÎñ
      * @param jobId
      */
     void runOnce(int jobId);
 
     /**
-     * æ›´æ–°æ—¶é—´è¡¨è¾¾å¼
+     * ¸üĞÂÊ±¼ä±í´ïÊ½
      * @param id
      * @param cronExpression
      */
     void updateCron(int id, String cronExpression);
 
     /**
-     * æ·»åŠ å®šæ—¶ä»»åŠ¡
+     * Ìí¼Ó¶¨Ê±ÈÎÎñ
      * @param scheduleJob
      * @throws Exception
      */

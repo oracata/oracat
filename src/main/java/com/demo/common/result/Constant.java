@@ -1,7 +1,7 @@
 package com.demo.common.result;
 
 /**
- * å¸¸é‡
+ * ³£Á¿
  * @author admin
  * @date 2017-11-25 19:06
  */
@@ -9,15 +9,15 @@ package com.demo.common.result;
 
 public class Constant {
     /**
-     * åˆ†é¡µæ¡æ˜¾ç¤ºé¡µæ•°
+     * ·ÖÒ³ÌõÏÔÊ¾Ò³Êı
      */
     public static final int PAGENUMBER = 5;
     /**
-     * å®šæ—¶ä»»åŠ¡å¯åŠ¨çŠ¶æ€
+     * ¶¨Ê±ÈÎÎñÆô¶¯×´Ì¬
      */
     public static final int STATUS_RUNNING = 0;
     /**
-     * å®šæ—¶ä»»åŠ¡æš‚åœçŠ¶æ€
+     * ¶¨Ê±ÈÎÎñÔİÍ£×´Ì¬
      */
     public static final int STATUS_NOT_RUNNING = 1;
 }

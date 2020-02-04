@@ -3,18 +3,18 @@ package com.demo.common.result;
 import java.util.List;
 
 /**
- * @description bootstrapTable鎵�闇�鐨勭粨鏋滈泦
+ * @description bootstrapTable所需的结果集
  * @author admin
  * @date 2017-11-25 18:59
  */
 
 public class BootstrapTableResult {
     /**
-     * 鎬昏褰曟暟
+     * 总记录数
      */
     private Integer total;
     /**
-     * 缁撴灉闆嗙殑list闆嗗悎
+     * 结果集的list集合
      */
     private List rows;
 

@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Description: mybatis閫嗗悜宸ョ▼
+ * Description: mybatis逆向工程
  * @author admin
- * @date 2017-11-25 涓嬪崍 18:43
+ * @date 2017-11-25 下午 18:43
  */
 public class MybatisGenerator {
     public static void main(String[] args) throws Exception{
@@ -24,5 +24,6 @@ public class MybatisGenerator {
         DefaultShellCallback callback = new DefaultShellCallback(overwrite);
         MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config,callback, warnings);
         myBatisGenerator.generate(null);
+        System.out.println("***************MybatisGenerator************************");
     }
 }

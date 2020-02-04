@@ -122,7 +122,7 @@
 
         $("td[id^='td2_']").each(function(){
             var tdNum=Number($(this).html());
-            if(tdNum<-10){
+            if(tdNum<0){
                 $(this).css("background-color","pink");
             }
         });

@@ -64,6 +64,7 @@
           <element id="library" level="project" name="Maven: org.quartz-scheduler:quartz-jobs:2.2.1" />
           <element id="library" level="project" name="Maven: com.github.pagehelper:pagehelper:5.1.2" />
           <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:1.0" />
+          <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.6" />
         </element>
       </element>
       <element id="directory" name="META-INF">

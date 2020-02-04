@@ -86,5 +86,8 @@ public interface SysConstants  {
      */
     Integer RENT_CAR_TRUE = 1;
     Integer RENT_CAR_FALSE = 0;
+
+
+
 }
 

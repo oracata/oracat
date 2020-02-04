@@ -21,7 +21,14 @@ public class Constants {
 	
 	// 默认每页4条数据
 	public static int PAGE_DEFAULT_SIZE = 15;
-	
-	
-	
+
+
+	/**
+	 * 定时任务启动状态
+	 */
+	public static final int STATUS_RUNNING = 0;
+	/**
+	 * 定时任务暂停状态
+	 */
+	public static final int STATUS_NOT_RUNNING = 1;
 }

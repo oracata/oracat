@@ -1,10 +1,10 @@
 package com.oracat.controller;
 
-import com.oracat.job.HelloJob;
-import com.oracat.job.NewJob;
+
 
 import com.oracat.model.JobandTrigger;
 import com.oracat.model.RealTime;
+import com.oracat.model.ScheduleJob;
 import com.oracat.service.DataService;
 import com.oracat.service.JobService;
 import com.oracat.util.DataGridView;
@@ -37,12 +37,12 @@ public class JobController {
 
     @ResponseBody
     @RequestMapping("/queryjob")
-    public DataGridView queryAll(JobandTrigger jobandTrigger){
+    public DataGridView queryAll(ScheduleJob scheduleJob){
 
 
 
 
-         return jobService.selectAllJobAndTrigger(jobandTrigger);
+         return jobService.selectAllJobAndTrigger(scheduleJob);
 
 
 
@@ -57,7 +57,7 @@ public class JobController {
         return mav;
     }
 
-
+/*
 //注解ResponseBody是把返回结果写到response中
     @RequestMapping("/addJobandTrigger")
     @ResponseBody
@@ -110,6 +110,7 @@ public class JobController {
      * @param 
      * @return
      */
+/*
     @RequestMapping("/deleteBatchJobandTrigger")
     @ResponseBody
     public Result deleteBatchJobandTrigger(JobandTrigger JobandTrigger){
@@ -122,56 +123,8 @@ public class JobController {
         }
     }
 
+    */
     
-    
-    
-    
-    
-    /*******************************************/
-    /**************             ****************/
-    /******************************************/
-
-
-    @ResponseBody
-    @RequestMapping(value="/addjob", method = RequestMethod.POST)
-    public void addjob(@RequestParam(value="jobClassName")String jobClassName) throws Exception
-    {
-        setJob(jobClassName);
-    }
-
-    public static void setJob(String jobClassName) throws Exception
-    {
-        // 通过SchedulerFactory获取一个调度器实例
-        SchedulerFactory sf = new StdSchedulerFactory();
-
-        Scheduler sched = sf.getScheduler();
-
-        // 启动调度器
-        sched.start();
-
-        switch (jobClassName)
-        {
-            case "HelloJob":
-                JobDetail job = JobBuilder.newJob(HelloJob.class).withIdentity("HelloJob", "group1").build();
-                Trigger trigger = TriggerBuilder.newTrigger().withIdentity("HelloJob", "group1").startNow().withSchedule(simpleSchedule()
-                        .withIntervalInSeconds(10)
-                        .repeatForever()).build();
-                sched.scheduleJob(job, trigger);
-                break;
-
-            case "NewJob":
-                JobDetail job2 = JobBuilder.newJob(NewJob.class).withIdentity("NewJob", "group1").build();
-                Trigger trigger2 =  TriggerBuilder.newTrigger().withIdentity("NewJob", "group1").startNow().withSchedule(simpleSchedule()
-                        .withIntervalInSeconds(10)
-                        .repeatForever()).build();
-                sched.scheduleJob(job2, trigger2);
-                break;
-
-            default:
-                break;
-        }
-    }
-
 
 
     //暂停任务

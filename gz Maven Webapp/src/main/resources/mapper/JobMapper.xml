@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oracat.dao.JobDao">
-    <resultMap id="BaseResultMap" type="com.oracat.model.JobandTrigger">
-        <id column="job_name" jdbcType="VARCHAR" property="job_name" />
-        <result column="job_group" jdbcType="VARCHAR" property="job_group" />
-        <result column="job_class_name" jdbcType="VARCHAR" property="job_class_name" />
-        <result column="trigger_name" jdbcType="VARCHAR" property="trigger_name" />
-        <result column="trigger_group" jdbcType="VARCHAR" property="trigger_group" />
-
-        <result column="repeat_interval" jdbcType="INTEGER" property="repeat_interval" />
-        <result column="times_triggered" jdbcType="INTEGER" property="times_triggered" />
+    <resultMap id="BaseResultMap" type="com.oracat.model.ScheduleJob">
+        <id column="id" property="id" />
+        <result column="job_name" property="job_name" />
+        <result column="job_group" property="job_group" />
+        <result column="method_name" property="method_name" />
+        <result column="bean_class" property="bean_class" />
+        <result column="status" property="status" />
+        <result column="cron_expression" property="cron_expression" />
+        <result column="params" property="params" />
+        <result column="remark" property="remark" />
+        <result column="create_time" property="create_time" />
+        <result column="modify_time" property="modify_time" />
     </resultMap>
     <sql id="Base_Column_List">
-job_name,job_group,job_class_name,trigger_name,trigger_group,repeat_interval,times_triggered
+    id, job_name, job_group, method_name, bean_class, status, cron_expression, params,
+    remark, create_time, modify_time
   </sql>
+
+
 
 
 
     <select id="queryAllJob" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"></include>
-        from jobandtrigger
+        from schedule_job
         <where>
             <if test="job_name!=null and job_name!=''">
                 and job_name like concat('%',#{job_name},'%')
@@ -35,6 +41,10 @@ job_name,job_group,job_class_name,trigger_name,trigger_group,repeat_interval,tim
     </select>
 
 
+    <!-- 查询所有的定时任务 -->
+    <select id="listAllJob" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from schedule_job
+    </select>
 
 
 

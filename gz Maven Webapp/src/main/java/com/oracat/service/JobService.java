@@ -1,14 +1,14 @@
 package com.oracat.service;
 
 import com.oracat.model.JobandTrigger;
+import com.oracat.model.ScheduleJob;
 import com.oracat.util.DataGridView;
 
 import java.util.List;
 
 public interface JobService {
     /**调度**/
-    public DataGridView selectAllJobAndTrigger(JobandTrigger jobandTrigger);
-
+    public DataGridView selectAllJobAndTrigger(ScheduleJob scheduleJob);
 
 
 
@@ -17,39 +17,35 @@ public interface JobService {
 
 
     /**
-     * 添加客户
-     * @param
+     * 暂停定时任务
+     * @param jobId
      */
-    void addJobandTrigger(JobandTrigger JobandTrigger);
-
-
-
+    void pauseJob(int jobId);
 
     /**
-     * 批量删除客户
-     * @param
+     * 恢复一个定时任务
+     * @param jobId
      */
-    void deleteJobandTrigger(String identity);
+    void resumeJob(int jobId);
 
     /**
-     * 根据id删除客户
-     * @param
+     * 立即执行一个定时任务
+     * @param jobId
      */
-    void deleteBatchJobandTrigger(String[] identitys);
-
+    void runOnce(int jobId);
 
     /**
-     * 修改客户
-     * @param
+     * 更新时间表达式
+     * @param id
+     * @param cronExpression
      */
-    void updateJobandTrigger(JobandTrigger JobandTrigger);
-
+    void updateCron(int id, String cronExpression);
 
     /**
-     * 根据身份证号查询客户信息
-     * @param
-     * @return
+     * 添加定时任务
+     * @param scheduleJob
+     * @throws Exception
      */
-    JobandTrigger queryJobandTriggerByIdentity(String identity);
+    void addScheduleJob(ScheduleJob scheduleJob) throws Exception;
 
 }

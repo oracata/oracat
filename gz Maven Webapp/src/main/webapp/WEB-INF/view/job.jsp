@@ -89,6 +89,7 @@
 
 
 <div  style="display: none;" id="customerbar" >
+
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
@@ -98,13 +99,19 @@
 </div>
 
 <div  style="display: none;" id="schedulebar" >
-    <a class="layui-btn layui-btn-xs" lay-event="edit">运行</a>
+    <a class="layui-btn layui-btn-xs" lay-event="run">立即执行</a>
 
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">暂停</a>
-    <a class="layui-btn layui-btn-xs" lay-event="edit">恢复</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="pause">暂停</a>
+    <a class="layui-btn layui-btn-xs" lay-event="resume">恢复</a>
 
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">停止</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="stop">停止</a>
 
+
+</div>
+
+
+<div  style="display: none;" id="statubar" >
+    <a class="layui-btn layui-btn-xs" lay-event="statue">状态</a>
 
 </div>
 
@@ -118,6 +125,13 @@
 <div style="display: none;padding: 30px;" id="addOrUpdateDiv" >
     <form class="layui-form" action="" id="dataFrm" lay-filter="dataFrm">
         <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">任务id:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="id"  lay-verify="id" autocomplete="off" class="layui-input" placeholder="请输入任务id">
+                </div>
+            </div>
+
             <div class="layui-inline">
                 <label class="layui-form-label">任务名称:</label>
                 <div class="layui-input-inline">
@@ -186,6 +200,13 @@
 </div>
 <%--添加和修改的弹出层结束--%>
 
+<script type="text/html" id="status">
+    {{#  if(d.status === 1){ }}
+    <a href='javascript:void(0);' class='layui-btn  layui-btn-normal'>正常</a>
+    {{#  } else { }}
+    <a href='javascript:void(0);' class='layui-btn layui-btn-danger '>暂停</a>
+    {{#  } }}
+</script>
 
 
 <!--客户分配菜单的弹出层结束-->
@@ -209,13 +230,19 @@
 
             ,cols: [[   //列表数据
                 {type: 'checkbox', fixed: 'left'}
+                ,{field:'id', title:'任务ID',align:'center',width:'30'}
                 ,{field:'job_name', title:'任务名称',align:'center',width:'180'}
                 ,{field:'job_group', title:'任务组',align:'center',width:'100'}
-                ,{field:'job_class_name', title:'任务类名',align:'center',width:'220'}
-                ,{field:'trigger_name', title:'触发器名称',align:'center',width:'150'}
-                ,{field:'trigger_group', title:'触发器组',align:'center',width:'160'}
-                ,{field:'repeat_interval', title:'间隔时间（豪秒）',align:'center',width:'200' }
-                ,{field:'times_triggered', title:'已处发次数',align:'center',width:'220'}
+                ,{field:'bean_class', title:'任务类名',align:'center',width:'220'}
+                ,{field:'method_name', title:'方法名称',align:'center',width:'150'}
+                ,{field:'status', title:'状态',align:'center',width:'150',templet: '#status'}
+
+                ,{field:'cron_expression', title:'cron表达式',align:'center',width:'200' }
+                ,{field:'params', title:'参数',align:'center',width:'220'}
+                ,{field:'create_time', title:'创建时间',align:'center',width:'220'}
+                ,{field:'modify_time', title:'修改时间',align:'center',width:'220'}
+                ,{field:'remark', title:'备注',align:'center',width:'220'}
+
                 ,{fixed: 'right', title:'编辑', toolbar: '#customerbar', width:180 ,align:'center'}
                 ,{fixed: 'right', title:'控制', toolbar: '#schedulebar', width:250,align:'center'}
             ]],
@@ -403,9 +430,9 @@
                     params+="&ids="+item.identity;
                 }
             });
-            layer.confirm('真的删除选中的这些客户吗', function(index){
+            layer.confirm('真的删除选中的这些任务吗', function(index){
                 //向服务端发送删除指令
-                $.post("${ctx}/customer/deleteBatchCustomer.action",params,function(res){
+                $.post("deleteBatchJobandTrigger.do",params,function(res){
                     layer.msg(res.msg);
                     //刷新数据 表格
                     tableIns.reload();

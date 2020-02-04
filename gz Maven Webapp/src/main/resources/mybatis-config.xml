@@ -9,6 +9,8 @@
     <setting name="logImpl" value="SLF4J"/>
     <setting name="logPrefix" value="dao."/>
      </settings>
+
+
      
         <mappers>
         <mapper resource="/mapper/sql-mapper.xml" /> 

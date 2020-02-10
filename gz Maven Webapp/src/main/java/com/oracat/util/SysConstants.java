@@ -40,6 +40,20 @@ public interface SysConstants  {
     String DISPATCH_SUCCESS="分配成功";
     String DISPATCH_ERROR="分配失败";
 
+
+    String PAUSE_SUCCESS="暂停成功";
+    String PAUSE_ERROR="暂停失败";
+
+    String RESUME_SUCCESS="恢复成功";
+    String RESUME_ERROR="恢复失败";
+
+    String RUN_SUCCESS="执行成功";
+    String RUN_ERROR="执行失败";
+
+    String STOP_SUCCESS="停止成功";
+    String STOP_ERROR="停止失败";
+
+
     Integer CODE_SUCCESS=0;//操作成功
     Integer CODE_ERROR=-1; //操作失败
 

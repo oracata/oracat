@@ -1,8 +1,9 @@
 package com.oracat.model;
 
+import java.io.Serializable;
 import java.util.Date;
-
-public class ScheduleJob {
+ /*必须要用implements Serializable 不然会报无法Serializable的错误 */
+public class ScheduleJob  implements Serializable {
     /**
      * 主键id
      */

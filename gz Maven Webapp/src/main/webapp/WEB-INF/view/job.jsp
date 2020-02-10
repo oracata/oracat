@@ -88,7 +88,7 @@
 </div>
 
 
-<div  style="display: none;" id="customerbar" >
+<div  style="display: none;" id="jobbar" >
 
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 
@@ -202,9 +202,11 @@
 
 <script type="text/html" id="status">
     {{#  if(d.status === 1){ }}
-    <a href='javascript:void(0);' class='layui-btn  layui-btn-normal'>正常</a>
+    <a href='javascript:void(0);' class='layui-btn  layui-btn-normal'>暂停</a>
+    {{#   } else if(d.status === 2){ }}
+    <a href='javascript:void(0);' class='layui-btn  layui-btn-normal'>停止</a>
     {{#  } else { }}
-    <a href='javascript:void(0);' class='layui-btn layui-btn-danger '>暂停</a>
+    <a href='javascript:void(0);' class='layui-btn layui-btn-danger '>运行</a>
     {{#  } }}
 </script>
 
@@ -223,14 +225,14 @@
             elem: '#customerTable'   //渲染的目标对象
             ,url:'queryjob.do' //数据接口
             ,title: '调度表'//数据导出来的标题
-            ,toolbar:"#customerToolBar"   //表格的工具条
+            ,toolbar:"#customerToolBar"  //表格的工具条
 
             ,cellMinWidth:100 //设置列的最小默认宽度
             ,page: true  //是否启用分页
 
             ,cols: [[   //列表数据
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'id', title:'任务ID',align:'center',width:'30'}
+                ,{field:'id', title:'任务ID',align:'center',width:'100'}
                 ,{field:'job_name', title:'任务名称',align:'center',width:'180'}
                 ,{field:'job_group', title:'任务组',align:'center',width:'100'}
                 ,{field:'bean_class', title:'任务类名',align:'center',width:'220'}
@@ -243,7 +245,7 @@
                 ,{field:'modify_time', title:'修改时间',align:'center',width:'220'}
                 ,{field:'remark', title:'备注',align:'center',width:'220'}
 
-                ,{fixed: 'right', title:'编辑', toolbar: '#customerbar', width:180 ,align:'center'}
+                ,{fixed: 'right', title:'编辑', toolbar: '#jobbar', width:180 ,align:'center'}
                 ,{fixed: 'right', title:'控制', toolbar: '#schedulebar', width:250,align:'center'}
             ]],
             done:function(data,curr,count){
@@ -287,12 +289,65 @@
                     break;
             };
         })
-        //监听行工具事件
+
+
+
+
+        //监听行任务操作工具事件
         table.on('tool(customerTable)', function(obj){
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+
+            if(layEvent === 'pause'){ //暂停
+                layer.confirm('真的暂停【'+data.job_name+'】这个任务吗？', function(index){
+                    //向服务端发送暂停指令
+                    $.post("pauseJob.do",{jobId:data.id},function(res){
+                        layer.msg(res.msg);
+                        //刷新数据 表格
+                        tableIns.reload();
+                    })
+                });
+            }
+
+            if(layEvent === 'resume'){ //暂停
+                layer.confirm('真的恢复【'+data.job_name+'】这个任务吗？', function(index){
+                    //向服务端发送恢复指令
+                    $.post("resumeJob.do",{jobId:data.id},function(res){
+                        layer.msg(res.msg);
+                        //刷新数据 表格
+                        tableIns.reload();
+                    })
+                });
+            }
+
+
+
+            if(layEvent === 'run'){ //执行
+                layer.confirm('真的执行【'+data.job_name+'】这个任务吗？', function(index){
+                    //向服务端发送恢复指令
+                    $.post("runJob.do",{jobId:data.id},function(res){
+                        layer.msg(res.msg);
+                        //刷新数据 表格
+                        tableIns.reload();
+                    })
+                });
+            }
+
+
+
+            if(layEvent === 'stop'){ //停止
+                layer.confirm('真的停止【'+data.job_name+'】这个任务吗？', function(index){
+                    //向服务端发送恢复指令
+                    $.post("stopJob.do",{jobId:data.id},function(res){
+                        layer.msg(res.msg);
+                        //刷新数据 表格
+                        tableIns.reload();
+                    })
+                });
+            }
+
             if(layEvent === 'del'){ //删除
-                layer.confirm('真的删除【'+data.custname+'】这个客户吗', function(index){
+                layer.confirm('真的删除【'+data.job_name+'】这个任务吗？', function(index){
                     //向服务端发送删除指令
                     $.post("${ctx}/customer/deleteCustomer.action",{identity:data.identity},function(res){
                         layer.msg(res.msg);
@@ -303,7 +358,9 @@
             } else if(layEvent === 'edit'){ //编辑
                 openUpdateCustomer(data);
             }
+
         });
+
 
         var url;
         var mainIndex;

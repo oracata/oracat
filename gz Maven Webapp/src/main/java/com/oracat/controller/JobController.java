@@ -2,7 +2,7 @@ package com.oracat.controller;
 
 
 
-import com.oracat.model.JobandTrigger;
+
 import com.oracat.model.RealTime;
 import com.oracat.model.ScheduleJob;
 import com.oracat.service.DataService;
@@ -107,7 +107,7 @@ public class JobController {
 
     /**
      * 批量删除
-     * @param 
+     * @param
      * @return
      */
 /*
@@ -124,95 +124,74 @@ public class JobController {
     }
 
     */
-    
 
 
-    //暂停任务
+    /**
+     * 暂停定时任务
+     * @param jobId
+     * @return BaseResult
+     */
+    @RequestMapping(value = "/pauseJob", method = RequestMethod.POST)
     @ResponseBody
-    @RequestMapping(value="/pausejob", method = RequestMethod.POST)
-    public void pausejob(@RequestParam(value="jobClassName")String jobClassName) throws Exception
-    {
-        jobPause(jobClassName);
+    public Result pauseJob(int jobId) {
+        jobService.pauseJob(jobId);
+        return Result.PAUSE_SUCCESS;
     }
 
-    public static void jobPause(String jobClassName) throws Exception
-    {
-        // 通过SchedulerFactory获取一个调度器实例
-        SchedulerFactory sf = new StdSchedulerFactory();
-        Scheduler sched = sf.getScheduler();
-        switch (jobClassName) {
-            case "HelloJob":
-                sched.pauseJob(JobKey.jobKey("HelloJob", "group1"));
-                break;
-
-            case "NewJob":
-                sched.pauseJob(JobKey.jobKey("NewJob", "group1"));
-                break;
-
-            default:
-                break;
-        }
-    }
-
+    /**
+     * 恢复定时任务
+     * @param jobId
+     * @return BaseResult
+     */
+    @RequestMapping(value="/resumeJob",method = RequestMethod.POST)
     @ResponseBody
-    @RequestMapping(value="/resumejob", method = RequestMethod.POST)
-    public void resumejob(@RequestParam(value="jobClassName")String jobClassName) throws Exception
-    {
-        jobresume(jobClassName);
+    public Result resumeJob(int jobId){
+        jobService.resumeJob(jobId);
+        return Result.RESUME_SUCCESS;
     }
 
-    public static void jobresume(String jobClassName) throws Exception
-    {
-        // 通过SchedulerFactory获取一个调度器实例
-        SchedulerFactory sf = new StdSchedulerFactory();
-        Scheduler sched = sf.getScheduler();
-        if(sched != null){
-            switch (jobClassName) {
-                case "HelloJob":
-                    sched.resumeJob(JobKey.jobKey("HelloJob", "group1"));
-                    break;
 
-                case "NewJob":
-                    sched.resumeJob(JobKey.jobKey("NewJob", "group1"));
-                    break;
-
-                default:
-                    break;
-            }
-        }
-    }
-
+    @RequestMapping(value = "/runOnce",method = RequestMethod.POST)
     @ResponseBody
-    @RequestMapping(value="/deletejob", method = RequestMethod.POST)
-    public void deletejob(@RequestParam(value="jobClassName")String jobClassName) throws Exception
-    {
-        jobdelete(jobClassName);
+    public Result runOnce(int jobId){
+        jobService.runOnce(jobId);
+        return Result.RUN_SUCCESS;
     }
 
-    public static void jobdelete(String jobClassName) throws Exception
-    {
-        // 通过SchedulerFactory获取一个调度器实例
-        SchedulerFactory sf = new StdSchedulerFactory();
-        Scheduler sched = sf.getScheduler();
-        switch (jobClassName) {
-            case "HelloJob":
-                sched.pauseTrigger(TriggerKey.triggerKey("HelloJob", "group1"));
-                sched.unscheduleJob(TriggerKey.triggerKey("HelloJob", "group1"));
-                sched.deleteJob(JobKey.jobKey("HelloJob", "group1"));
-                break;
+    @RequestMapping(value = "/runJob",method = RequestMethod.POST)
+    @ResponseBody
+    public Result runJob(int jobId){
+        jobService.runJob(jobId);
+        return Result.RUN_SUCCESS;
+    }
 
-            case "NewJob":
-                sched.pauseTrigger(TriggerKey.triggerKey("NewJob", "group1"));
-                sched.unscheduleJob(TriggerKey.triggerKey("NewJob", "group1"));
-                sched.deleteJob(JobKey.jobKey("NewJob", "group1"));
-                break;
+    @RequestMapping(value = "/stopJob",method = RequestMethod.POST)
+    @ResponseBody
+    public Result stopJob(int jobId){
+        jobService.stopJob(jobId);
+        return Result.STOP_SUCCESS;
+    }
 
-            default:
-                break;
+/*
+    @RequestMapping(value = "/updateCron",method = RequestMethod.POST)
+    @ResponseBody
+    public Result updateCron(int id,String cronExpression){
+        jobService.updateCron(id,cronExpression);
+        return new BaseResult(1, "success", "更新时间表达式成功");
+    }
+
+
+    @RequestMapping(value = "/addScheduleJob",method = RequestMethod.POST)
+    @ResponseBody
+    public Result addScheduleJob(ScheduleJob scheduleJob){
+        try {
+            jobService.addScheduleJob(scheduleJob);
+        }catch (Exception e){
+            return new BaseResult(0, "default", "添加定时任务失败");
         }
 
+        return new BaseResult(1, "success", "添加定时任务成功");
     }
-
-
+ */
 
 }

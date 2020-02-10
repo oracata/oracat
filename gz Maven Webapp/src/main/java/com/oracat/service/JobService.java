@@ -1,6 +1,6 @@
 package com.oracat.service;
 
-import com.oracat.model.JobandTrigger;
+
 import com.oracat.model.ScheduleJob;
 import com.oracat.util.DataGridView;
 
@@ -17,7 +17,7 @@ public interface JobService {
 
 
     /**
-     * 暂停定时任务
+     * 暂停定时任务,重启容器后仍然会执行。
      * @param jobId
      */
     void pauseJob(int jobId);
@@ -33,6 +33,18 @@ public interface JobService {
      * @param jobId
      */
     void runOnce(int jobId);
+
+    /**
+     * 执行一个定时任务
+     * @param jobId
+     */
+    void runJob(int jobId);
+
+    /**
+     * 停止一个定时任务，重启服务也不会执行
+     * @param jobId
+     */
+    void stopJob(int jobId);
 
     /**
      * 更新时间表达式

@@ -31,4 +31,10 @@ public class Constants {
 	 * 定时任务暂停状态
 	 */
 	public static final int STATUS_NOT_RUNNING = 1;
+
+	/**
+	 * 定时任务停止状态
+	 */
+	public static final int STATUS_STOP = 2;
+
 }

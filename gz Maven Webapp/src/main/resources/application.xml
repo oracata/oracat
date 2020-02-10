@@ -104,8 +104,11 @@
 
     </bean>
 
-    <!-- 自动扫描注解的bean -->
-    <context:component-scan base-package="com.oracat.service" />
+    <!-- 自动扫描注解的bean  范围要保证自动装载的注解可以扫描到，不然启动会不执行自动装载的类-->
+    <context:component-scan base-package="com.oracat.*" >
+    <!-- 排除注解为controller的类型 -->
+    <context:exclude-filter type="annotation"  expression="org.springframework.stereotype.Controller" />
+</context:component-scan>
 
    <!-- JDBC事务管理器 -->
      <!-- 	<bean id="transactionManager" -->
@@ -119,16 +122,18 @@
 
 
     <bean id="scheduleReportFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <!--
 
 
+           <!--
               <property name="dataSource">
                   <ref bean="dataSource1"/>
               </property>
-              -->
+
               <property name="startupDelay" value="100"/>
               <property name="applicationContextSchedulerContextKey" value="applicationContextKey"/>
+          -->
               <property name="configLocation" value="classpath:quartz.properties"/>
+
           </bean>
 
 

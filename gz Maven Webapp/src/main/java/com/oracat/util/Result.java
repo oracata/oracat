@@ -30,6 +30,22 @@ public class Result {
     public static final Result STATUS_FALSE=new Result(SysConstants.CODE_ERROR);
 
 
+
+    public static  final Result PAUSE_SUCCESS=new Result(SysConstants.CODE_SUCCESS,SysConstants.PAUSE_SUCCESS);
+    public static  final Result PAUSE_ERROR=new Result(SysConstants.CODE_ERROR,SysConstants.PAUSE_ERROR);
+
+
+    public static  final Result RESUME_SUCCESS=new Result(SysConstants.CODE_SUCCESS,SysConstants.RESUME_SUCCESS);
+    public static  final Result RESUME_ERROR=new Result(SysConstants.CODE_ERROR,SysConstants.RESUME_ERROR);
+
+
+    public static  final Result RUN_SUCCESS=new Result(SysConstants.CODE_SUCCESS,SysConstants.RUN_SUCCESS);
+    public static  final Result RUN_ERROR=new Result(SysConstants.CODE_ERROR,SysConstants.RUN_ERROR);
+
+    public static  final Result STOP_SUCCESS=new Result(SysConstants.CODE_SUCCESS,SysConstants.STOP_SUCCESS);
+    public static  final Result STOP_ERROR=new Result(SysConstants.CODE_ERROR,SysConstants.STOP_ERROR);
+
+
     private Result(Integer code, String msg) {
         this.code = code;
         this.msg = msg;

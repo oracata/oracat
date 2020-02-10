@@ -132,7 +132,9 @@
 
 	<logger name="dao" level="DEBUG"/>
 
- 
+	<logger name="org.quartz.impl.jdbcjobstore.SimpleSemaphore" level="INFO"/>
+	<logger name="org.quartz.core.QuartzSchedulerThread" level="INFO"/>
+	<logger name="org.quartz.core.JobRunShell" level="INFO"/>
 
 	<!-- 以下这些也没用
 

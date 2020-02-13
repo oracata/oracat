@@ -115,6 +115,7 @@
                         <dd><a data-url="goodsforgoods/goodsforgoods" data-id="10" data-title="云中商品对应关系" class="site-demo-active"  href="javascript:;" data-type="tabAdd" >云中商品对应关系</a></dd>
                         <dd><a data-url="erpcustom.do" data-id="11" data-title="无资料终端开单客户" class="site-demo-active"  href="javascript:;" data-type="tabAdd">无资料终端开单客户</a></dd>
                         <dd><a data-url="fgscustom.do" data-id="12" data-title="无资料分公司转总部客户" class="site-demo-active"  href="javascript:;" data-type="tabAdd">无资料分公司转总部客户</a></dd>
+                        <dd><a data-url="classify/classify" data-id="22" data-title="电商分类" class="site-demo-active"  href="javascript:;" data-type="tabAdd">电商分类</a></dd>
                     </dl>
                 </li>
 
@@ -144,7 +145,7 @@
                     </dl>
                 </li>
 
-
+<!--
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="fa fa-vcard fa-lg"></i> <span >连锁系统</span></a>
                     <dl class="layui-nav-child">
@@ -158,7 +159,7 @@
                         <dd><a data-url="machine.do" data-id="21" data-title="服务器主机" class="site-demo-active"  href="javascript:;" data-type="tabAdd" >调度表</a></dd>
                     </dl>
                 </li>
-
+-->
 
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="fa fa-gear fa-lg"></i> <span >系统管理</span></a>

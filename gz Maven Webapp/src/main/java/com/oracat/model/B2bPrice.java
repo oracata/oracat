@@ -12,7 +12,24 @@ public class B2bPrice {
     private double zdxshj          ;
     private double hshj;
 
+    public String getModify_time() {
+        return modify_time;
+    }
 
+    public void setModify_time(String modify_time) {
+        this.modify_time = modify_time;
+    }
+
+    public int getDays() {
+        return days;
+    }
+
+    public void setDays(int days) {
+        this.days = days;
+    }
+
+    private String modify_time;
+   private int  days;
 
     private double xsj;
 

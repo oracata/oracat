@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oracat.dao.ClassifyDao">
+    <resultMap id="BaseResultMap" type="com.oracat.model.Classify">
+        <result column="spid"              property="spid"                />
+        <result column="spbm"              property="spbm"                />
+        <result column="spmch"             property="spmch"               />
+        <result column="spec"              property="spec"                />
+        <result column="manufacturer"      property="manufacturer"        />
+        <result column="approval_number"   property="approval_number"     />
+        <result column="flbm"              property="flbm"                />
+        <result column="fenlei1"           property="fenlei1"             />
+        <result column="fenlei2"           property="fenlei2"             />
+        <result column="fenlei3"           property="fenlei3"             />
+        <result column="fenlei4"           property="fenlei4"             />
+    </resultMap>
+    <sql id="Base_Column_List">
+     spid ,flbm,fenlei1,fenlei2,fenlei3,fenlei4
+  </sql>
+
+
+
+
+
+    <select id="queryAllClassify" resultMap="BaseResultMap">
+        SELECT a.id spid,a.no spbm,a.name spmch,spec,manufacturer,approval_number,b.flbm,fenlei1,fenlei2,fenlei3,fenlei4 FROM OPENQUERY(b2b,'select *from goods ') a LEFT JOIN ds_fenlei b ON a.id=b.spid
+        <where>
+            a.state=1
+
+
+            <if test="spid!=null and spid!=''">
+                and a.id like '%'+#{spid}+'%'
+            </if>
+
+            <if test="spbm!=null and spbm!=''">
+                and a.no like '%'+#{spbm}+'%'
+            </if>
+
+            <if test="spmch!=null and spmch!=''">
+                and a.name like '%'+#{spmch}+'%'
+            </if>
+
+
+
+        </where>
+
+    </select>
+
+
+
+
+
+</mapper>

@@ -66,7 +66,7 @@ public interface ReportRealTimeDao {
                 "\n" +
                 "\t        when a.is_zx='否' then '准备出库'\n" +
                 "\t\t\twhen a.is_zx='是' then '已出库打单'\n" +
-                "\t\t\t WHEN a.djbh IS NULL THEN '支付未开票'\n" +
+                "\t\t\t WHEN c.shenhe='是' AND a.djbh IS NULL AND c.is_zx='否' AND c.wldwid<>'WLD00005953' THEN '支付未开票'\n" +
                 "\t\t\telse ''end)\n" +
                 "\t end as state,\n" +
                 "\t case when a.is_wms='是'\n" +
@@ -85,19 +85,20 @@ public interface ReportRealTimeDao {
                 "\n" +
                 "\t        when a.is_zx='否' then '7'\n" +
                 "\t\t\twhen a.is_zx='是' then '8'\n" +
-                "\t\t\t WHEN a.djbh IS NULL THEN '0'\n" +
+                "\t\t\t WHEN c.shenhe='是' AND a.djbh IS NULL AND c.is_zx='否' AND c.wldwid<>'WLD00005953' THEN '0'\n" +
                 "\t\t\telse ''end)\n" +
                 "\t end as state_code \n" +
                 "\n" +
                 " \n" +
                 "FROM b_gxddhz c  \n" +
                 "LEFT JOIN gxkphz a (nolock) ON c.order_id=a.dsdjbh  \n" +
-                " inner join wldwzl b(nolock) on b.wldwid=a.wldwid\n" +
-                "inner join bmzl e(nolock) on a.bmid=e.bmid\n" +
-                "left join wms_systeminstruct_state x (nolock) on a.djbh=x.instruct_djbh\n" +
-                "where a.djbh like 'XHB%'\n" +
+                "and  a.djbh like 'XHB%'\n" +
                 "and a.is_zx <> '清' and a.jigid='000' AND  a.dsdjbh<>''\n" +
-                ") a\n" +
+                " LEFT join wldwzl b(nolock) on b.wldwid=a.wldwid\n" +
+                "LEFT join bmzl e(nolock) on a.bmid=e.bmid\n" +
+                "left join wms_systeminstruct_state x (nolock) on a.djbh=x.instruct_djbh\n" +
+                "INNER JOIN openquery(b2b,'select * from   order_for_goods') f ON c.order_id=f.id AND f.is_pay=1 AND f.return_state=0 \n" +
+                ") a WHERE  state_code <>''\n" +
                 "GROUP BY state,STATE_code  ORDER BY state_code;\n ")
         List<SaleFlow> selectSaleFlow();
 

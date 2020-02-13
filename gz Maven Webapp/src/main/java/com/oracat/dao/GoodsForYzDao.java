@@ -52,8 +52,8 @@ public interface GoodsForYzDao {
             "where a.date='${date}' and a.STATE=1 AND e.kehulb='1' and e.stock_num>0\n" +
             "and a.id not in (\n" +
             "select jnd_spid from goods_for_yz )\n" +
-            "and a.id not in (\n" +
-            "select jnd_spid from goods_for_yz_nofind\n" +
+         //   "and a.id not in (\n" +
+          //  "select jnd_spid from goods_for_yz_nofind\n" +
             ") order by e.stock_num desc  limit 1\n"  )
     List<Map<String,Map<String,Map<String,String>>>> findGoodsForYzNotin(@Param("date") String date);
 

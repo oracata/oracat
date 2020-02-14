@@ -68,6 +68,26 @@
                 <input type="text"  name="spmch"  autocomplete="off" class="layui-input">
             </div>
         </div>
+<!--
+        <div class="layui-input-block">
+            <input type="checkbox" name="isnull" lay-skin="primary" title="无分类商品"  >
+
+        </div>
+-->
+
+        <div class="layui-inline">
+            <label class="layui-form-label">无分类：</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="isnull" lay-skin="primary" value="1" >
+
+            </div>
+
+            <label class="layui-form-label">已上架：</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="ison" lay-skin="primary" value="1"  checked="true">
+
+            </div>
+        </div>
 
 
     </div>
@@ -92,15 +112,16 @@
 </table>
 
 
-<!--
-<div style="display: none;" id="classifyToolBar">
-<button type="button" class="layui-btn layui-btn-sm" lay-event="add">增加</button>
 
-<button type="button" class="layui-btn layui-btn-danger layui-btn-sm" lay-event="deleteBatch">批量删除</button>
+<div style="display: none;" id="classifyToolBar">
+    <!--
+<button type="button" class="layui-btn layui-btn-sm" lay-event="add">增加</button>
+-->
+<button type="button" class="layui-btn layui-btn-danger layui-btn-sm" lay-event="addBatch">批量设置</button>
 
 </div>
 
--->
+
 
 
 <div  style="display: none;" id="classifybar" >
@@ -128,58 +149,71 @@
     <form class="layui-form" action="" id="dataFrm" lay-filter="dataFrm">
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label class="layui-form-label">任务id:</label>
+                <label class="layui-form-label">商品ID:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="id"  lay-verify="id" autocomplete="off" class="layui-input" placeholder="请输入任务id">
+                    <input type="text" name="spid"  lay-verify="id" autocomplete="off" class="layui-input" placeholder="商品ID" disabled="">
                 </div>
             </div>
 
             <div class="layui-inline">
-                <label class="layui-form-label">任务名称:</label>
+                <label class="layui-form-label">商品编码:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="job_name"  lay-verify="job_name" autocomplete="off" class="layui-input" placeholder="请输入任务名">
+                    <input type="text" name="spbm"  lay-verify="job_name" autocomplete="off" class="layui-input" placeholder="商品编码" disabled="">
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">任务组:</label>
+                <label class="layui-form-label">商品名称:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="job_group"  autocomplete="off" class="layui-input"  lay-verify="job_group"  placeholder="请输任务组">
+                    <input type="text" name="spmch"  autocomplete="off" class="layui-input"  lay-verify="job_group"  placeholder="商品名称" disabled="">
                 </div>
             </div>
 
         </div>
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label class="layui-form-label">任务类名:</label>
+                <label class="layui-form-label">分类编码:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="job_class_name"  autocomplete="off" class="layui-input"  lay-verify="job_class_name"  placeholder="请输任务类名">
+                    <input id="flbm" type="text" name="flbm"  autocomplete="off" class="layui-input"  lay-verify="job_class_name"  placeholder="分类编码" >
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">触发器名称:</label>
+                <label class="layui-form-label">分类1:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="trigger_name"  autocomplete="off" class="layui-input"  lay-verify="trigger_name"  placeholder="请输触发器名称">
+
+
+                        <select name="fenlei1" id="fenlei1"   lay-filter="fenlei1" class="layui-input layui-unselect"  >
+                            <option value=""></option>
+                        </select>
+
+
+
                 </div>
             </div>
         </div>
         <div class="layui-form-item">
 
             <div class="layui-inline">
-                <label class="layui-form-label">触发器组:</label>
+                <label class="layui-form-label">分类2:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="trigger_group"  autocomplete="off" class="layui-input"  lay-verify="trigger_group"  placeholder="请输触发器组">
+                    <select name="fenlei2" id="fenlei2"  >
+                        <option value=""></option>
+                    </select>
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">间隔时间（豪秒）:</label>
+                <label class="layui-form-label">分类3:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="repeat_interval"  autocomplete="off" class="layui-input"  lay-verify="repeat_interval"  placeholder="间隔时间（豪秒）">
+                    <select name="fenlei3" id="fenlei3"  >
+                        <option value=""></option>
+                    </select>
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">已处发次数:</label>
+                <label class="layui-form-label">分类3:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="times_triggered"  autocomplete="off" class="layui-input"  lay-verify="required|number"  placeholder="请输已处发次数">
+                    <select name="fenlei4" id="fenlei4"  >
+                        <option value=""></option>
+                    </select>
                 </div>
             </div>
             <!--
@@ -195,12 +229,21 @@
         <div class="layui-form-item" style="text-align: center;">
             <div class="layui-input-block">
                 <button type="button" class="layui-btn layui-btn-normal layui-btn-sm layui-icon layui-icon-release" lay-filter="doSubmit" lay-submit="">提交</button>
+                <!--
                 <button type="reset" class="layui-btn layui-btn-warm layui-btn-sm layui-icon layui-icon-refresh" >重置</button>
+                -->
             </div>
         </div>
     </form>
 </div>
 <%--添加和修改的弹出层结束--%>
+
+
+
+
+
+
+
 
 <script type="text/html" id="status">
     {{#  if(d.status === 1){ }}
@@ -222,10 +265,12 @@
         var layer = layui.layer;
         var form = layui.form;
         var table = layui.table;
+
+        var params=$("#searchFrm").serialize();
         //渲染数据表格
         tableIns=table.render({
             elem: '#classifyTable'   //渲染的目标对象
-            ,url:'listclassify.do' //数据接口
+            ,url:"listclassify.do?"+params //数据接口
             ,title: '商品分类'//数据导出来的标题
             ,toolbar:"#classifyToolBar"  //表格的工具条
 
@@ -233,22 +278,24 @@
             ,page: true  //是否启用分页
 
             ,cols: [[   //列表数据
-                {type: 'checkbox', fixed: 'left'}
+               {type: 'checkbox', fixed: 'left'}
                 ,{field:'spid', title:'商品ID',align:'center',width:'100'}
-                ,{field:'spbm', title:'商品编码',align:'center',width:'180'}
-                ,{field:'spmch', title:'商品名称',align:'center',width:'100'}
+                ,{field:'spbm', title:'商品编码',align:'center',width:'100'}
+                ,{field:'spmch', title:'商品名称',align:'center',width:'250'}
+
+                ,{field:'flbm', title:'分类编码',align:'center',width:'100'}
+                ,{field:'fenlei1', title:'分类1',align:'center',width:'220'}
+                ,{field:'fenlei2', title:'分类2',align:'center',width:'220'}
+                ,{field:'fenlei3', title:'分类3',align:'center',width:'100'}
+                ,{field:'fenlei4', title:'分类4',align:'center',width:'220'}
                 ,{field:'spec', title:'规格',align:'center',width:'220'}
                 ,{field:'manufacturer', title:'厂家',align:'center',width:'150'}
                 ,{field:'approval_number', title:'批号',align:'center',width:'150' }
-                ,{field:'flbm', title:'分类编码',align:'center',width:'220'}
-                ,{field:'fenlei1', title:'分类1',align:'center',width:'220'}
-                ,{field:'fenlei2', title:'分类2',align:'center',width:'220'}
-                ,{field:'fenlei3', title:'分类3',align:'center',width:'220'}
-                ,{field:'fenlei4', title:'分类4',align:'center',width:'220'}
                 ,{fixed: 'right', title:'编辑', toolbar: '#classifybar', width:80 ,align:'center'}
 
-            ]],
-            done:function(data,curr,count){
+            ]]
+          // ,   where: { type: "all" }
+            ,done:function(data,curr,count){
                 //不是第一页时如果当前返回的的数据为0那么就返回上一页
                 if(data.data.length==0&&curr!=1){
                     tableIns.reload({
@@ -259,6 +306,9 @@
                 }
             }
         })
+
+
+
         //模糊查询
         $("#doSearch").click(function(){
             var params=$("#searchFrm").serialize();
@@ -454,11 +504,102 @@
                 content:$("#addOrUpdateDiv"),
                 area:['800px','450px'],
                 success:function(index){
+
                     form.val("dataFrm",data);
+
                     url="${ctx}/classify/updateclassify.action";
+
+
+
+                    //更新select 下拉框
+                    var fenlei1=$("#fenlei1");
+                    var fenlei1Option=$("<option selected='selected' value='"+data.fenlei1+"'>"+data.fenlei1+"</option>");
+                    fenlei1.append(fenlei1Option);
+
+                    $.ajax({
+                        type : "post",
+                        url : "findFenlei1.do",
+
+                        dataType : "json",
+                        success : function(d) {
+                            var tmp = '<option value="">--请选择--</option>';
+                            //改变医院时第三级下拉框回复原样
+
+                            for ( var i in d) {
+                                fenlei1.append($('<option value="' + d[i].fenlei1 +  '">' + d[i].fenlei1 + '</option>'));
+                            }
+
+                        },
+                        error:function(){
+                            layer.alert('请求失败，稍后再试', {icon: 5});
+                        }
+
+                    });
+
+
+                    var fenlei2=$("#fenlei2");
+                    var fenlei2Option=$("<option selected='selected' value='"+data.fenlei2+"'>"+data.fenlei2+"</option>");
+                    fenlei2.append(fenlei2Option);
+
+                    var fenlei3=$("#fenlei3");
+                    var fenlei3Option=$("<option selected='selected' value='"+data.fenlei3+"'>"+data.fenlei3+"</option>");
+                    fenlei3.append(fenlei3Option);
+
+                    var fenlei4=$("#fenlei4");
+                    var fenlei4Option=$("<option selected='selected' value='"+data.fenlei4+"'>"+data.fenlei4+"</option>");
+                    fenlei4.append(fenlei4Option);
+                    //渲染form，让select 下拉框显示数据
+                    form.render();
+
+
+
+
                 }
+
             });
+
+
         }
+
+        $("#fenlei1").hover(function() {
+
+           alert("sdfadfas");
+
+        })
+
+        // $('#fenlei1').trigger('click');
+//分类select 选择后的事件处理
+        form.on('select(fenlei1)', function(data) {
+
+            var hosid = data.value;
+            alert("hosid");
+            $.ajax({
+                type : "post",
+                url : "${pageContext.request.contextPath}/userManger/getDivision1",
+                data : {hosid:hosid},
+                dataType : "json",
+                success : function(d) {
+                    var tmp = '<option value="">--请选择--</option>';
+                    //改变医院时第三级下拉框回复原样
+                    $("#division2").html(tmp);
+                    for ( var i in d) {
+                        tmp += '<option value="' + d[i].id +  '">' + d[i].divisionName + '</option>';
+                    }
+                    $("#division1").html(tmp);
+                    form.render();
+                },
+                error:function(){
+                    layer.alert('请求失败，稍后再试', {icon: 5});
+                }
+
+            });
+        });
+
+
+
+
+
+
         //保存
         form.on("submit(doSubmit)",function(obj){
             //序列化表单数据

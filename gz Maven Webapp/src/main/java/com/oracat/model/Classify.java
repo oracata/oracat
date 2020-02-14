@@ -10,10 +10,65 @@ public class Classify {
     private String approval_number      ;
     private String flbm                 ;
     private String fenlei1              ;
+    private String fenleibm1              ;
+
+    public String getFenleibm1() {
+        return fenleibm1;
+    }
+
+    public void setFenleibm1(String fenleibm1) {
+        this.fenleibm1 = fenleibm1;
+    }
+
+    public String getFenleibm2() {
+        return fenleibm2;
+    }
+
+    public void setFenleibm2(String fenleibm2) {
+        this.fenleibm2 = fenleibm2;
+    }
+
+    public String getFenleibm3() {
+        return fenleibm3;
+    }
+
+    public void setFenleibm3(String fenleibm3) {
+        this.fenleibm3 = fenleibm3;
+    }
+
+    public String getFenleibm4() {
+        return fenleibm4;
+    }
+
+    public void setFenleibm4(String fenleibm4) {
+        this.fenleibm4 = fenleibm4;
+    }
+
+    private String fenleibm2              ;
+    private String fenleibm3              ;
+    private String fenleibm4              ;
     private String fenlei2              ;
     private String fenlei3              ;
     private String fenlei4              ;
 
+    public String getIson() {
+        return ison;
+    }
+
+    public void setIson(String ison) {
+        this.ison = ison;
+    }
+
+    private String ison ;
+    public String getIsnull() {
+        return isnull;
+    }
+
+    public void setIsnull(String isnull) {
+        this.isnull = isnull;
+    }
+
+    private  String isnull;
     public String getSpid() {
         return spid;
     }

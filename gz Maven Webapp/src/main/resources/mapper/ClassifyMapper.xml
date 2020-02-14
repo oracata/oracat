@@ -13,6 +13,8 @@
         <result column="fenlei2"           property="fenlei2"             />
         <result column="fenlei3"           property="fenlei3"             />
         <result column="fenlei4"           property="fenlei4"             />
+        <result column="isnull"           property="isnull"             />
+        <result column="ison"           property="ison"             />
     </resultMap>
     <sql id="Base_Column_List">
      spid ,flbm,fenlei1,fenlei2,fenlei3,fenlei4
@@ -25,7 +27,17 @@
     <select id="queryAllClassify" resultMap="BaseResultMap">
         SELECT a.id spid,a.no spbm,a.name spmch,spec,manufacturer,approval_number,b.flbm,fenlei1,fenlei2,fenlei3,fenlei4 FROM OPENQUERY(b2b,'select *from goods ') a LEFT JOIN ds_fenlei b ON a.id=b.spid
         <where>
-            a.state=1
+
+
+            <choose>
+                <when test="ison!=null and ison!=''">
+                    and  a.state=1
+                </when>
+
+                <otherwise>
+                   and  a.state!=1
+                </otherwise>
+            </choose>
 
 
             <if test="spid!=null and spid!=''">
@@ -41,12 +53,39 @@
             </if>
 
 
+            <if test="isnull!=null and isnull!=''">
+                and b.spid is null
+            </if>
+
 
         </where>
 
     </select>
 
 
+
+    <select id="queryfenleibybm" resultMap="BaseResultMap">
+        SELECT fenleibm,fenleibm1,fenlei1,fenleibm2,fenlei2,fenleibm3,fenlei3,fenleibm4,fenlei4 FROM ds_flzl
+        <where>
+
+
+
+            <if test="fenleibm!=null and fenleibm!=''">
+                and fenleibm  like '%'+#{fenleibm}+'%'
+            </if>
+
+
+        </where>
+
+    </select>
+
+
+
+    <select id="queryfenlei1" resultMap="BaseResultMap">
+        SELECT distinct  fenlei1 FROM ds_flzl
+
+
+    </select>
 
 
 

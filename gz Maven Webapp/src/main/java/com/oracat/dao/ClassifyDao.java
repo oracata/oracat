@@ -7,4 +7,7 @@ import java.util.List;
 
 public interface ClassifyDao {
     public List<Classify> queryAllClassify(Classify classify);
+    public List<Classify> queryfenleibybm(Classify classify);
+
+    public List<Classify> queryfenlei1(Classify classify);
 }

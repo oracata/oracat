@@ -35,12 +35,27 @@ public class ClassifyController {
    @RequestMapping( "/classify/listclassify" )
     public DataGridView queryAll(Classify classify){
 
-
-
-
         return classifyService.selectClassify(classify);
 
+    }
 
+
+
+    @ResponseBody
+    @RequestMapping( "/classify/findfenleibybm" )
+    public DataGridView findFenleibybm(Classify classify){
+
+        return classifyService.findFenleibybm(classify);
 
     }
+
+
+    @ResponseBody
+    @RequestMapping( "/classify/findFenlei1" )
+    public DataGridView findFenlei1(Classify classify){
+
+        return classifyService.findFenlei1(classify);
+
+    }
+
 }

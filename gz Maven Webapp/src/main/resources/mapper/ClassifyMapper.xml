@@ -84,6 +84,119 @@
     <select id="queryfenlei1" resultMap="BaseResultMap">
         SELECT distinct  fenlei1 FROM ds_flzl
 
+        <where>
+
+
+
+            <if test="fenlei1!=null and fenlei1!=''">
+                and fenlei1 not like '%'+#{fenlei1}+'%'
+            </if>
+
+
+        </where>
+
+
+    </select>
+
+
+    <select id="queryfenlei2" resultMap="BaseResultMap">
+        SELECT distinct  fenlei2 FROM ds_flzl
+        <where>
+
+
+
+            <if test="fenlei1!=null and fenlei1!=''">
+                and fenlei1  like '%'+#{fenlei1}+'%'
+            </if>
+            <if test="fenlei2!=null and fenlei2!=''">
+                and fenlei2  not like '%'+#{fenlei2}+'%'
+            </if>
+
+
+        </where>
+
+    </select>
+
+
+
+    <select id="queryfenlei3" resultMap="BaseResultMap">
+        SELECT distinct  fenlei3 FROM ds_flzl
+        <where>
+
+
+
+            <if test="fenlei1!=null and fenlei1!=''">
+                and fenlei1  like '%'+#{fenlei1}+'%'
+            </if>
+
+            <if test="fenlei2!=null and fenlei2!=''">
+                and fenlei2  like '%'+#{fenlei2}+'%'
+            </if>
+
+            <if test="fenlei3!=null and fenlei3!=''">
+                and fenlei3  not like '%'+#{fenlei3}+'%'
+            </if>
+
+
+        </where>
+
+    </select>
+
+
+
+    <select id="queryfenlei4" resultMap="BaseResultMap">
+        SELECT distinct  fenlei4 FROM ds_flzl
+        <where>
+
+
+
+            <if test="fenlei1!=null and fenlei1!=''">
+                and fenlei1  like '%'+#{fenlei1}+'%'
+            </if>
+
+            <if test="fenlei2!=null and fenlei2!=''">
+                and fenlei2  like '%'+#{fenlei2}+'%'
+            </if>
+
+            <if test="fenlei3!=null and fenlei3!=''">
+                and fenlei3   like '%'+#{fenlei3}+'%'
+            </if>
+
+            <if test="fenlei4!=null and fenlei4!=''">
+                and fenlei4  not like '%'+#{fenlei4}+'%'
+            </if>
+
+        </where>
+
+    </select>
+
+
+
+
+
+    <select id="queryfenleibm" resultMap="BaseResultMap">
+        SELECT distinct  flbm FROM ds_flzl
+        <where>
+
+
+
+            <if test="fenlei1!=null and fenlei1!=''">
+                and fenlei1  like '%'+#{fenlei1}+'%'
+            </if>
+
+            <if test="fenlei2!=null and fenlei2!=''">
+                and fenlei2  like '%'+#{fenlei2}+'%'
+            </if>
+
+            <if test="fenlei3!=null and fenlei3!=''">
+                and fenlei3   like '%'+#{fenlei3}+'%'
+            </if>
+
+            <if test="fenlei4!=null and fenlei4!=''">
+                and fenlei4   like '%'+#{fenlei4}+'%'
+            </if>
+
+        </where>
 
     </select>
 

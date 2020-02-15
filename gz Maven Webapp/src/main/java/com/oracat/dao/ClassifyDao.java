@@ -10,4 +10,10 @@ public interface ClassifyDao {
     public List<Classify> queryfenleibybm(Classify classify);
 
     public List<Classify> queryfenlei1(Classify classify);
+
+    public List<Classify> queryfenlei2(Classify classify);
+    public List<Classify> queryfenlei3(Classify classify);
+    public List<Classify> queryfenlei4(Classify classify);
+
+    public List<Classify> queryfenleibm(Classify classify);
 }

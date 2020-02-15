@@ -68,12 +68,12 @@
                 <input type="text"  name="spmch"  autocomplete="off" class="layui-input">
             </div>
         </div>
-<!--
-        <div class="layui-input-block">
-            <input type="checkbox" name="isnull" lay-skin="primary" title="无分类商品"  >
+        <!--
+                <div class="layui-input-block">
+                    <input type="checkbox" name="isnull" lay-skin="primary" title="无分类商品"  >
 
-        </div>
--->
+                </div>
+        -->
 
         <div class="layui-inline">
             <label class="layui-form-label">无分类：</label>
@@ -117,7 +117,7 @@
     <!--
 <button type="button" class="layui-btn layui-btn-sm" lay-event="add">增加</button>
 -->
-<button type="button" class="layui-btn layui-btn-danger layui-btn-sm" lay-event="addBatch">批量设置</button>
+    <button type="button" class="layui-btn layui-btn-danger layui-btn-sm" lay-event="addBatch">批量设置</button>
 
 </div>
 
@@ -127,9 +127,9 @@
 <div  style="display: none;" id="classifybar" >
 
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-<!--
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-    -->
+    <!--
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        -->
 
 
 
@@ -181,9 +181,9 @@
                 <div class="layui-input-inline">
 
 
-                        <select name="fenlei1" id="fenlei1"   lay-filter="fenlei1" class="layui-input layui-unselect"  >
-                            <option value=""></option>
-                        </select>
+                    <select name="fenlei1" id="fenlei1"   lay-filter="fenlei1" class="layui-input layui-unselect"  >
+                        <option value=""></option>
+                    </select>
 
 
 
@@ -278,7 +278,7 @@
             ,page: true  //是否启用分页
 
             ,cols: [[   //列表数据
-               {type: 'checkbox', fixed: 'left'}
+                {type: 'checkbox', fixed: 'left'}
                 ,{field:'spid', title:'商品ID',align:'center',width:'100'}
                 ,{field:'spbm', title:'商品编码',align:'center',width:'100'}
                 ,{field:'spmch', title:'商品名称',align:'center',width:'250'}
@@ -294,7 +294,7 @@
                 ,{fixed: 'right', title:'编辑', toolbar: '#classifybar', width:80 ,align:'center'}
 
             ]]
-          // ,   where: { type: "all" }
+            // ,   where: { type: "all" }
             ,done:function(data,curr,count){
                 //不是第一页时如果当前返回的的数据为0那么就返回上一页
                 if(data.data.length==0&&curr!=1){
@@ -676,7 +676,7 @@
             //分类3
             var fenlei3=$("#fenlei3");
             fenlei3.empty();
-             params=$("#dataFrm").serialize();
+            params=$("#dataFrm").serialize();
             $.ajax({
                 type : "post",
                 url : "findFenlei3.do?"+params ,

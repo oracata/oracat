@@ -58,4 +58,42 @@ public class ClassifyController {
 
     }
 
+
+    @ResponseBody
+    @RequestMapping( "/classify/findFenlei2" )
+    public DataGridView findFenlei2(Classify classify){
+
+        return classifyService.findFenlei2(classify);
+
+    }
+
+
+    @ResponseBody
+    @RequestMapping( "/classify/findFenlei3" )
+    public DataGridView findFenlei3(Classify classify){
+
+        return classifyService.findFenlei3(classify);
+
+    }
+
+
+
+
+    @ResponseBody
+    @RequestMapping( "/classify/findFenlei4" )
+    public DataGridView findFenlei4(Classify classify){
+
+        return classifyService.findFenlei4(classify);
+
+    }
+
+    @ResponseBody
+    @RequestMapping( "/classify/findFenleibm" )
+    public DataGridView findFenleibm(Classify classify){
+
+        return classifyService.findFenleibm(classify);
+
+    }
+
+
 }

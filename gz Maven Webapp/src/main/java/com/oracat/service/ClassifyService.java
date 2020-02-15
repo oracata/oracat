@@ -9,4 +9,8 @@ public interface ClassifyService {
     public DataGridView selectClassify(Classify classify);
     public DataGridView findFenleibybm(Classify classify);
     public DataGridView findFenlei1(Classify classify);
+    public DataGridView findFenlei2(Classify classify);
+    public DataGridView findFenlei3(Classify classify);
+    public DataGridView findFenlei4(Classify classify);
+    public DataGridView findFenleibm(Classify classify);
 }

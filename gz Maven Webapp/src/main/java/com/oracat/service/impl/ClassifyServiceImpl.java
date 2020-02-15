@@ -59,4 +59,47 @@ public class ClassifyServiceImpl implements ClassifyService {
         return new DataGridView(page.getTotal(),data);
 
     }
+
+    @Override
+    public DataGridView findFenlei2(Classify classify)
+    {
+        DynamicDataSourceHolder.setDataSource("sqlserver");
+        Page<Object> page= PageHelper.startPage(0,999);
+        List<Classify> data=classifyDao.queryfenlei2(classify);
+        return new DataGridView(page.getTotal(),data);
+
+    }
+
+    @Override
+    public DataGridView findFenlei3(Classify classify)
+    {
+        DynamicDataSourceHolder.setDataSource("sqlserver");
+        Page<Object> page= PageHelper.startPage(0,999);
+        List<Classify> data=classifyDao.queryfenlei3(classify);
+        return new DataGridView(page.getTotal(),data);
+
+    }
+
+    @Override
+    public DataGridView findFenlei4(Classify classify)
+    {
+        DynamicDataSourceHolder.setDataSource("sqlserver");
+        Page<Object> page= PageHelper.startPage(0,999);
+        List<Classify> data=classifyDao.queryfenlei4(classify);
+        return new DataGridView(page.getTotal(),data);
+
+    }
+
+
+    @Override
+    public DataGridView findFenleibm(Classify classify)
+    {
+        DynamicDataSourceHolder.setDataSource("sqlserver");
+        Page<Object> page= PageHelper.startPage(0,999);
+        List<Classify> data=classifyDao.queryfenleibm(classify);
+        return new DataGridView(page.getTotal(),data);
+
+    }
+
+
 }

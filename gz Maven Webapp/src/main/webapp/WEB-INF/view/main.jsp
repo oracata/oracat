@@ -115,7 +115,8 @@
                         <dd><a data-url="goodsforgoods/goodsforgoods" data-id="10" data-title="云中商品对应关系" class="site-demo-active"  href="javascript:;" data-type="tabAdd" >云中商品对应关系</a></dd>
                         <dd><a data-url="erpcustom.do" data-id="11" data-title="无资料终端开单客户" class="site-demo-active"  href="javascript:;" data-type="tabAdd">无资料终端开单客户</a></dd>
                         <dd><a data-url="fgscustom.do" data-id="12" data-title="无资料分公司转总部客户" class="site-demo-active"  href="javascript:;" data-type="tabAdd">无资料分公司转总部客户</a></dd>
-                        <dd><a data-url="classify/classify" data-id="22" data-title="电商分类" class="site-demo-active"  href="javascript:;" data-type="tabAdd">电商分类</a></dd>
+                        <dd><a data-url="classify/classify" data-id="22" data-title="商品分类" class="site-demo-active"  href="javascript:;" data-type="tabAdd">商品分类</a></dd>
+                        <dd><a data-url="classify/classify" data-id="23" data-title="分类管理" class="site-demo-active"  href="javascript:;" data-type="tabAdd">分类管理</a></dd>
                     </dl>
                 </li>
 

@@ -151,20 +151,20 @@
             <div class="layui-inline">
                 <label class="layui-form-label">商品ID:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="spid"  lay-verify="id" autocomplete="off" class="layui-input" placeholder="商品ID" disabled="">
+                    <input type="text" name="spid"  lay-verify="spid" autocomplete="off" class="layui-input" placeholder="商品ID" disabled="">
                 </div>
             </div>
 
             <div class="layui-inline">
                 <label class="layui-form-label">商品编码:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="spbm"  lay-verify="job_name" autocomplete="off" class="layui-input" placeholder="商品编码" disabled="">
+                    <input type="text" name="spbm"  lay-verify="spbm" autocomplete="off" class="layui-input" placeholder="商品编码" disabled="">
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label">商品名称:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="spmch"  autocomplete="off" class="layui-input"  lay-verify="job_group"  placeholder="商品名称" disabled="">
+                    <input type="text" name="spmch"  autocomplete="off" class="layui-input"  lay-verify="spmch"  placeholder="商品名称" disabled="">
                 </div>
             </div>
 
@@ -181,7 +181,7 @@
                 <div class="layui-input-inline">
 
 
-                        <select name="fenlei1" id="fenlei1"   lay-filter="fenlei1" class="layui-input layui-unselect"  >
+                        <select name="fenlei1" id="fenlei1"  lay-verify="fenlei1"   lay-filter="fenlei1" class="layui-input layui-unselect"  >
                             <option value=""></option>
                         </select>
 
@@ -195,7 +195,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">分类2:</label>
                 <div class="layui-input-inline">
-                    <select name="fenlei2" id="fenlei2"  lay-filter="fenlei2" >
+                    <select name="fenlei2" id="fenlei2"  lay-filter="fenlei2"   lay-verify="fenlei2"  >
                         <option value=""></option>
                     </select>
                 </div>
@@ -203,7 +203,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">分类3:</label>
                 <div class="layui-input-inline">
-                    <select name="fenlei3" id="fenlei3"  lay-filter="fenlei3">
+                    <select name="fenlei3" id="fenlei3"  lay-filter="fenlei3"  lay-verify="fenlei3" >
                         <option value=""></option>
                     </select>
                 </div>
@@ -211,7 +211,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">分类4:</label>
                 <div class="layui-input-inline">
-                    <select name="fenlei4" id="fenlei4"  lay-filter="fenlei4" >
+                    <select name="fenlei4" id="fenlei4"  lay-filter="fenlei4"  lay-verify="fenlei4"  >
                         <option value=""></option>
                     </select>
                 </div>
@@ -434,53 +434,37 @@
 
         //表单验证
         form.verify({
-            job_name: function(value){
+            flbm: function(value){
 
-                if(value==""){
-                    return '不能为空';
+                if(value==""||value==""){
+                    return '分类编码不能为空';
                 }
             }
-            ,job_group: function(value){
+            ,fenlei1: function(value){
 
                 if(value==""){
-                    return '不能为空';
+                    return '分类1不能为空';
                 }
             }
-            ,job_class_name: function(value){
+            ,fenlei2: function(value){
 
                 if(value==""){
-                    return '不能为空';
+                    return '分类2不能为空';
                 }
             }
-            ,trigger_name: function(value){
+            ,fenlei3: function(value){
 
                 if(value==""){
-                    return '不能为空';
+                    return '分类3不能为空';
                 }
             }
-            ,trigger_group: function(value){
+            ,fenlei4: function(value){
 
                 if(value==""){
-                    return '不能为空';
+                    return '分类4不能为空';
                 }
             }
-            ,repeat_interval: function(value){
 
-                if(value==""){
-                    return '不能为空';
-                }
-                else if(/[^\d.]/.test(value)){
-                    return '必须是数字！';
-                }
-
-            }
-
-            ,times_triggered: function(value){
-
-                if(value==""){
-                    return '不能为空';
-                }
-            }
 
 
             /*
@@ -507,7 +491,7 @@
 
                     form.val("dataFrm",data);
 
-                    url="${ctx}/classify/updateclassify.action";
+                    url="updateandsaveclassify.do";
 
 
 
@@ -850,6 +834,7 @@
 
         //保存
         form.on("submit(doSubmit)",function(obj){
+
             //序列化表单数据
             var params=$("#dataFrm").serialize();
             $.post(url,params,function(obj){

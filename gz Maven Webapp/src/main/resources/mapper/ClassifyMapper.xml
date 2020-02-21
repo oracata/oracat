@@ -202,4 +202,44 @@
 
 
 
+
+
+
+
+    <select id="queryByFlbm" resultMap="BaseResultMap">
+        SELECT distinct  flbm FROM ds_flzl
+        <where>
+
+
+
+            <if test="fenlei1!=null and fenlei1!=''">
+                and flbm=#{fenlei1}
+            </if>
+
+
+
+        </where>
+
+    </select>
+
+
+
+
+
+<update id="updateFenlei" parameterType="com.oracat.model.Classify">
+    update ds_fenlei
+    set flbm = #{flbm},
+      fenlei1 = #{fenlei1},
+      fenlei2 =  #{fenlei2},
+      fenlei3 =  #{fenlei3},
+      fenlei4 =  #{fenlei4},
+    where spid = #{spid}
+  </update>
+
+<insert id="insertFenlei" parameterType="com.oracat.model.Classify">
+    insert into ds_fenlei (spid,flbm,fenlei1,fenlei2,fenlei3,fenlei4)
+    values ( #{spid},#{flbm}, #{fenlei1}, #{fenlei2}, #{fenlei3}, #{fenlei4})
+  </insert>
+
+
 </mapper>

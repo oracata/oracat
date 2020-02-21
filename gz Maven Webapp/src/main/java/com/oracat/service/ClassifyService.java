@@ -13,4 +13,7 @@ public interface ClassifyService {
     public DataGridView findFenlei3(Classify classify);
     public DataGridView findFenlei4(Classify classify);
     public DataGridView findFenleibm(Classify classify);
+
+    public void updateAndSaveClassify(Classify classify);
+    public void updateAndSaveClassify2(Classify classify);
 }

@@ -5,6 +5,7 @@ import com.oracat.model.ScheduleJob;
 import com.oracat.service.ClassifyService;
 import com.oracat.service.JobService;
 import com.oracat.util.DataGridView;
+import com.oracat.util.Result;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -92,6 +93,36 @@ public class ClassifyController {
     public DataGridView findFenleibm(Classify classify){
 
         return classifyService.findFenleibm(classify);
+
+    }
+
+
+
+    @ResponseBody
+    @RequestMapping( "/classify/updateandsaveclassify" )
+    public Result updateAndSaveClassify(Classify classify){
+        try {
+         classifyService.updateAndSaveClassify(classify);
+            return Result.UPDATE_SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.UPDATE_ERROR;
+        }
+
+
+    }
+
+    @ResponseBody
+    @RequestMapping( "/classify/updateandsaveclassify2" )
+    public Result updateAndSaveClassify2(Classify classify){
+
+        try {
+             classifyService.updateAndSaveClassify(classify);
+            return Result.UPDATE_SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.UPDATE_ERROR;
+        }
 
     }
 

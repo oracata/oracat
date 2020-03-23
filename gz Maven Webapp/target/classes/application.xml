@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation=" http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                            http://www.springframework.org/schema/aop
+                            http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+                            http://www.springframework.org/schema/context
+                            http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                            http://www.springframework.org/schema/tx
+                            http://www.springframework.org/schema/tx/spring-tx.xsd
+                          "
+
+       xmlns:tx="http://www.springframework.org/schema/tx"
+
+>
 
 
      <!-- 引入jdbc配置文件 -->  
@@ -15,19 +31,30 @@
 
 
     <!--创建数据源1，连接数据库db1 -->
+
     <bean id="dataSource1" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+
+    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://10.0.0.23:3306/crawl?serverTimezone=GMT%2B8"  />
         <property name="username" value="root" />
         <property name="password" value="1qaz@WSX" />
     </bean>
+
+
+
+
+
     <!--创建数据源2，连接数据库db2 -->
+
     <bean id="dataSource2" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
         <property name="url" value="jdbc:sqlserver://10.0.0.5:36368;DatabaseName=cr_v11_erp" />
         <property name="username" value="sa" />
         <property name="password" value="1a2s3d8180192@" />
     </bean>
+
+
+
 
     <!--创建数据源链锁系统，连接数据库db2 -->
     <bean id="dataSourcels" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource" destroy-method="close">
@@ -103,6 +130,40 @@
 
 
     </bean>
+
+    <!-- 事务相关控制 -->
+
+   <bean id="transactionManager"
+         class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+       <property name="dataSource" ref="dynamicDataSource" />
+   </bean>
+
+
+
+
+
+    <!-- 通知 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- 传播行为 -->
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="insert*" propagation="REQUIRED" />
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="create*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true" />
+            <tx:method name="select*" propagation="SUPPORTS" read-only="true" />
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true" />
+        </tx:attributes>
+    </tx:advice>
+    <!-- 切面 -->
+    <aop:config>
+        <aop:advisor advice-ref="txAdvice"
+                     pointcut="execution(* com.oracat.service.*.*(..))" />
+    </aop:config>
+
+
 
     <!-- 自动扫描注解的bean  范围要保证自动装载的注解可以扫描到，不然启动会不执行自动装载的类-->
     <context:component-scan base-package="com.oracat.*" >

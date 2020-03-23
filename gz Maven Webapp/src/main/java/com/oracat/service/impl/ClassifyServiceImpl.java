@@ -130,8 +130,8 @@ public class ClassifyServiceImpl implements ClassifyService {
         List<Classify> data=classifyDao.queryByFlbm(classify.getFlbm());
         if(data.size()==0){
             classifyDao.insertFenlei(classify);
-            DynamicDataSourceHolder.setDataSource("mysql");
-            classifyDao.insertFenlei(classify);
+          //  DynamicDataSourceHolder.setDataSource("mysql");
+          //  classifyDao.insertFenlei(classify);
         }else{
             classifyDao.updateFenlei(classify);
         }

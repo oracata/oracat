@@ -17,6 +17,7 @@
         <mapper resource="/mapper/overview-mapper.xml" />
             <mapper resource="/mapper/JobMapper.xml" />
             <mapper resource="/mapper/ClassifyMapper.xml" />
+            <mapper resource="/mapper/TaskMapper.xml" />
        </mappers>
 
 

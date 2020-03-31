@@ -99,6 +99,7 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="fa fa-diamond fa-lg"></i> <span >报表</span></a>
                     <dl class="layui-nav-child">
+
                         <dd><a data-url="reportday.do" data-id="7" data-title="日报" class="site-demo-active"  href="javascript:;" data-type="tabAdd">日报</a></dd>
                         <dd><a data-url="reportmonth.do" data-id="8" data-title="月报" class="site-demo-active"  href="javascript:;" data-type="tabAdd">月报</a></dd>
                         <dd><a data-url="reportyear.do" data-id="9" data-title="年报" class="site-demo-active"  href="javascript:;" data-type="tabAdd">年报</a></dd>
@@ -106,6 +107,15 @@
                         <dd><a data-url="top10cust.do" data-id="14" data-title="销售客户TOP10" class="site-demo-active"  href="javascript:;" data-type="tabAdd">销售客户TOP10</a></dd>
                         <dd><a data-url="top10goods.do" data-id="15" data-title="销售品种TOP10" class="site-demo-active"  href="javascript:;" data-type="tabAdd">销售品种TOP10</a></dd>
                         <dd><a data-url="coupon.do" data-id="16" data-title="活动完成情况" class="site-demo-active"  href="javascript:;" data-type="tabAdd">活动完成情况</a></dd>
+
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="fa fa-diamond fa-lg"></i> <span >客户节</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a data-url="khjwork.do" data-id="24" data-title="客户节任务进度" class="site-demo-active"  href="javascript:;" data-type="tabAdd">客户节任务进度</a></dd>
+                        <dd><a data-url="khjtask/task" data-id="25" data-title="任务登记" class="site-demo-active"  href="javascript:;" data-type="tabAdd">任务登记</a></dd>
+
                     </dl>
                 </li>
 
@@ -117,6 +127,7 @@
                         <dd><a data-url="fgscustom.do" data-id="12" data-title="无资料分公司转总部客户" class="site-demo-active"  href="javascript:;" data-type="tabAdd">无资料分公司转总部客户</a></dd>
                         <dd><a data-url="classify/classify" data-id="22" data-title="商品分类" class="site-demo-active"  href="javascript:;" data-type="tabAdd">商品分类</a></dd>
                         <dd><a data-url="classify/classify" data-id="23" data-title="分类管理" class="site-demo-active"  href="javascript:;" data-type="tabAdd">分类管理</a></dd>
+
                     </dl>
                 </li>
 

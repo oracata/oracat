@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oracat.dao.TaskyDao">
+    <resultMap id="BaseResultMap" type="com.oracat.model.KhjTask">
+        <result column="id"              property="id"                />
+        <result column="task_name"              property="task_name"                />
+        <result column="task_owner"             property="task_owner"               />
+        <result column="plan_start"              property="plan_start"                />
+        <result column="plan_end"         property="plan_end"        />
+        <result column="actual_start"   property="actual_start"     />
+        <result column="actual_end"              property="actual_end"                />
+        <result column="delay_start"           property="delay_start"             />
+        <result column="delay_end"           property="delay_end"             />
+    </resultMap>
+    <sql id="Base_Column_List">
+ id ,task_name,task_owner ,plan_start ,plan_end ,actual_start ,actual_end ,delay_start,delay_end
+
+  </sql>
+
+
+
+
+
+    <select id="queryAllTask" resultMap="BaseResultMap">
+        SELECT  id ,task_name,task_owner ,plan_start ,plan_end ,actual_start ,actual_end ,delay_start,delay_end FROM  khj_task
+
+    </select>
+
+
+
+    <select id="queryTaskByid" resultMap="BaseResultMap">
+        SELECT  id ,task_name,task_owner ,plan_start ,plan_end ,actual_start ,actual_end ,delay_start,delay_end FROM  khj_task
+        <where>
+
+
+
+            <if test="id!=null and id!=''">
+                and id  like '%'+#{id}+'%'
+            </if>
+
+
+        </where>
+
+    </select>
+
+
+
+
+
+
+
+
+
+
+<!--
+    <update id="updateFenlei" parameterType="com.oracat.model.Classify">
+    update ds_fenlei
+    set flbm = #{flbm},
+      fenlei1 = #{fenlei1},
+      fenlei2 =  #{fenlei2},
+      fenlei3 =  #{fenlei3},
+      fenlei4 =  #{fenlei4},
+    where spid = #{spid}
+  </update>
+
+    <insert id="insertFenlei" parameterType="com.oracat.model.Classify">
+    insert into ds_fenlei (spid,flbm,fenlei1,fenlei2,fenlei3,fenlei4)
+    values ( #{spid},#{flbm}, #{fenlei1}, #{fenlei2}, #{fenlei3}, #{fenlei4})
+  </insert>
+-->
+
+</mapper>

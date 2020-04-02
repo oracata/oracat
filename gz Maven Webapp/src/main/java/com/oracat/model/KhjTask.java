@@ -19,7 +19,24 @@ public class KhjTask {
     private          String delay_start   ;
     private          String delay_end     ;
 
+    public int getComplete_value() {
+        return complete_value;
+    }
 
+    public void setComplete_value(int complete_value) {
+        this.complete_value = complete_value;
+    }
+
+    public int getPlan_value() {
+        return plan_value;
+    }
+
+    public void setPlan_value(int plan_value) {
+        this.plan_value = plan_value;
+    }
+
+    private       int complete_value;
+   private     int plan_value;
 
     public String getTask_name() {
         return task_name;
@@ -104,4 +121,18 @@ public class KhjTask {
     public void setLimit(Integer limit) {
         this.limit = limit;
     }
+
+    private String[]ids;
+
+    public String[] getIds() {
+        return ids;
+    }
+
+    public void setIds(String[] ids) {
+        this.ids = ids;
+    }
+
+
+
+
 }

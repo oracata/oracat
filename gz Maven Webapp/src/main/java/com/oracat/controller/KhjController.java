@@ -7,6 +7,7 @@ import com.oracat.model.SaleFlow;
 import com.oracat.service.DataService;
 import com.oracat.service.TaskService;
 import com.oracat.util.DataGridView;
+import com.oracat.util.Result;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,9 +24,12 @@ public class KhjController {
 
 
     @RequestMapping("/khjwork")
-    public ModelAndView getKhjWork(){
+    public ModelAndView getKhjWork( ){
 
         ModelAndView mav = new ModelAndView("khjwork");
+        List<KhjTask> task = taskService.selectAllTask();
+
+        mav.addObject("task", task);
 
         return mav;
     }
@@ -58,6 +62,34 @@ public class KhjController {
 
         return taskService.findTaskByid(khjTask);
 
+    }
+
+
+    @ResponseBody
+    @RequestMapping( "/khjtask/updateandsavetask" )
+    public Result updateAndSaveTask(KhjTask khjTask){
+        try {
+            taskService.updateAndSaveTask(khjTask);
+            return Result.UPDATE_SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.UPDATE_ERROR;
+        }
+
+
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/khjtask/deleteBatchTask")
+    public Result deleteBatchTask(KhjTask khjTask){
+        try {
+            taskService.deleteBatchTask(khjTask.getIds());
+            return Result.DELETE_SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.DELETE_ERROR;
+        }
     }
 
 

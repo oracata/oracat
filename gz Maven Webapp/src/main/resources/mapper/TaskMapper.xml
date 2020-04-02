@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.oracat.dao.TaskyDao">
+<mapper namespace="com.oracat.dao.TaskDao">
     <resultMap id="BaseResultMap" type="com.oracat.model.KhjTask">
         <result column="id"              property="id"                />
         <result column="task_name"              property="task_name"                />
@@ -11,9 +11,11 @@
         <result column="actual_end"              property="actual_end"                />
         <result column="delay_start"           property="delay_start"             />
         <result column="delay_end"           property="delay_end"             />
+        <result column="plan_value"           property="plan_value"             />
+        <result column="complete_value"           property="complete_value"             />
     </resultMap>
     <sql id="Base_Column_List">
- id ,task_name,task_owner ,plan_start ,plan_end ,actual_start ,actual_end ,delay_start,delay_end
+ id ,task_name,task_owner ,plan_start ,plan_end ,actual_start ,actual_end ,delay_start,delay_end,plan_value,complete_value
 
   </sql>
 
@@ -22,9 +24,38 @@
 
 
     <select id="queryAllTask" resultMap="BaseResultMap">
-        SELECT  id  FROM  khj_task
+        SELECT  id ,task_name,task_owner ,plan_start ,plan_end ,actual_start ,actual_end ,delay_start,delay_end,plan_value,complete_value FROM  khj_task
+        <where>
+
+
+
+
+
+            <if test="id!=null and id!=''">
+                and id like  concat('%',#{id},'%')
+            </if>
+
+            <if test="task_name!=null and task_name!=''">
+                and task_name                like concat('%',#{task_name},'%')
+            </if>
+
+            <if test="task_owner!=null and task_owner!=''">
+                and task_owner                like concat('%',#{task_owner},'%')
+            </if>
+
+
+
+
+        </where>
+    </select>
+
+
+    <select id="selectAllTask" resultMap="BaseResultMap">
+        SELECT  id ,task_name,task_owner ,plan_start ,plan_end ,actual_start ,actual_end ,delay_start,delay_end,plan_value,complete_value FROM  khj_task
 
     </select>
+
+
 
 
 
@@ -35,8 +66,8 @@
 
 
             <if test="id!=null and id!=''">
-                and id  like '%'+#{id}+'%'
-            </if>
+                and id=#{id}
+                            </if>
 
 
         </where>
@@ -52,21 +83,53 @@
 
 
 
-<!--
-    <update id="updateFenlei" parameterType="com.oracat.model.Classify">
-    update ds_fenlei
-    set flbm = #{flbm},
-      fenlei1 = #{fenlei1},
-      fenlei2 =  #{fenlei2},
-      fenlei3 =  #{fenlei3},
-      fenlei4 =  #{fenlei4},
-    where spid = #{spid}
+
+    <update id="updateTask" parameterType="com.oracat.model.KhjTask">
+    update khj_task
+    set               task_name       =#{task_name}
+             ,task_owner      =#{task_owner}
+             ,plan_start      =#{plan_start}
+             ,plan_end        =#{plan_end}
+             ,actual_start    =#{actual_start}
+             ,actual_end      =#{actual_end}
+             ,delay_start     =#{delay_start}
+             ,delay_end       =#{delay_end}
+             ,plan_value      =#{plan_value}
+             ,complete_value  =#{complete_value}
+
+    where id = #{id}
   </update>
 
-    <insert id="insertFenlei" parameterType="com.oracat.model.Classify">
-    insert into ds_fenlei (spid,flbm,fenlei1,fenlei2,fenlei3,fenlei4)
-    values ( #{spid},#{flbm}, #{fenlei1}, #{fenlei2}, #{fenlei3}, #{fenlei4})
+    <insert id="insertTask" parameterType="com.oracat.model.KhjTask">
+    insert into khj_task (id  ,task_name
+ ,task_owner
+ ,plan_start
+ ,plan_end
+ ,actual_start
+ ,actual_end
+ ,delay_start
+ ,delay_end
+ ,plan_value
+ ,complete_value
+)
+    values (#{id}       ,  #{task_name}       ,
+#{task_owner}      ,
+#{plan_start}      ,
+#{plan_end}        ,
+#{actual_start}    ,
+#{actual_end}      ,
+#{delay_start}     ,
+#{delay_end}       ,
+#{plan_value}      ,
+#{complete_value}
+)
   </insert>
--->
+
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from khj_task
+    where id = #{identity,jdbcType=VARCHAR}
+  </delete>
 
 </mapper>

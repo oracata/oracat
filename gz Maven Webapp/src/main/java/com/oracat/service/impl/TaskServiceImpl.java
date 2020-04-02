@@ -24,6 +24,20 @@ public class TaskServiceImpl implements TaskService {
     @Autowired  //×Ô¶¯×°Åä
     private TaskDao taskDao ;
 
+
+    @Override
+    public List<KhjTask> selectAllTask()
+    {
+        DynamicDataSourceHolder.setDataSource("mysql");
+
+        return taskDao.selectAllTask();
+
+
+    }
+
+
+
+
     @Override
     public DataGridView selectTask(KhjTask khjTask)
     {
@@ -47,6 +61,37 @@ public class TaskServiceImpl implements TaskService {
     }
 
 
+    @Override
+    public void updateAndSaveTask(KhjTask khjTask)
+    {
 
+
+        DynamicDataSourceHolder.setDataSource("mysql");
+
+        List<KhjTask> data=taskDao.queryTaskByid(khjTask);
+        if(data.size()==0){
+            DynamicDataSourceHolder.setDataSource("mysql");
+            taskDao.insertTask(khjTask);
+        }else{
+            DynamicDataSourceHolder.setDataSource("mysql");
+            taskDao.updateTask(khjTask);
+        }
+
+
+    }
+
+
+    @Override
+    public void deleteTask(String identity) {
+        DynamicDataSourceHolder.setDataSource("mysql");
+        taskDao.deleteByPrimaryKey(identity);
+    }
+
+    @Override
+    public void deleteBatchTask(String[] identitys) {
+        for (String identity : identitys) {
+            deleteTask(identity);
+        }
+    }
 
 }

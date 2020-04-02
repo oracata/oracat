@@ -49,13 +49,26 @@
 <form  id="searchFrm" class="layui-form" method="post">
     <div class="layui-form-item" >
         <div class="layui-inline">
-            <label class="layui-form-label">商品id：</label>
+            <label class="layui-form-label">任务id：</label>
             <div class="layui-input-inline">
                 <input type="text"  name="id"  autocomplete="off" class="layui-input">
             </div>
         </div>
 
+        <div class="layui-inline">
+            <label class="layui-form-label">任务名称：</label>
+            <div class="layui-input-inline">
+                <input type="text"  name="task_name"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
 
+
+        <div class="layui-inline">
+            <label class="layui-form-label">负责部门：</label>
+            <div class="layui-input-inline">
+                <input type="text"  name="task_owner"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
 
 
 
@@ -84,10 +97,10 @@
 
 
 <div style="display: none;" id="classifyToolBar">
-    <!--
+
 <button type="button" class="layui-btn layui-btn-sm" lay-event="add">增加</button>
--->
-    <button type="button" class="layui-btn layui-btn-danger layui-btn-sm" lay-event="addBatch">批量设置</button>
+
+    <button type="button" class="layui-btn layui-btn-danger layui-btn-sm" lay-event="deleteBatch">批量删除</button>
 
 </div>
 
@@ -97,10 +110,9 @@
 <div  style="display: none;" id="classifybar" >
 
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <!--
+<!--
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-        -->
-
+-->
 
 
 </div>
@@ -119,89 +131,103 @@
     <form class="layui-form" action="" id="dataFrm" lay-filter="dataFrm">
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label class="layui-form-label">商品ID:</label>
+                <label class="layui-form-label">任务ID:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="spid"  lay-verify="spid" autocomplete="off" class="layui-input" placeholder="商品ID" disabled="">
+                    <input type="text" name="id"  lay-verify="spid" autocomplete="off" class="layui-input" placeholder="任务ID"  >
                 </div>
             </div>
 
             <div class="layui-inline">
-                <label class="layui-form-label">商品编码:</label>
+                <label class="layui-form-label">任务名称:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="spbm"  lay-verify="spbm" autocomplete="off" class="layui-input" placeholder="商品编码" disabled="">
+                    <input type="text" name="task_name"  lay-verify="task_name" autocomplete="off" class="layui-input" placeholder="任务名称"  >
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">商品名称:</label>
+                <label class="layui-form-label">负责部门 :</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="spmch"  autocomplete="off" class="layui-input"  lay-verify="spmch"  placeholder="商品名称" disabled="">
+                    <input type="text" name="task_owner"  autocomplete="off" class="layui-input"  lay-verify="task_owner"  placeholder="负责部门" >
                 </div>
             </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">计划开始时间 :</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="plan_start"  autocomplete="off" class="layui-input"  lay-verify="plan_start"  placeholder="计划开始时间"  >
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">计划结束时间 :</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="plan_end"  autocomplete="off" class="layui-input"  lay-verify="plan_end"  placeholder="计划结束时间"  >
+                </div>
+            </div>
+
+
+            <div class="layui-inline">
+                <label class="layui-form-label">计划量 :</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="plan_value"  autocomplete="off" class="layui-input"  lay-verify="plan_value"  placeholder="计划量"  >
+                </div>
+            </div>
+
+
+            <div class="layui-inline">
+                <label class="layui-form-label">实际开始时间 :</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="actual_start"  autocomplete="off" class="layui-input"  lay-verify="actual_start"  placeholder="实际开始时间"  >
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">实际结束时间 :</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="actual_end"  autocomplete="off" class="layui-input"  lay-verify="actual_end"  placeholder="实际结束时间"  >
+                </div>
+            </div>
+
+
+            <div class="layui-inline">
+                <label class="layui-form-label">完成量 :</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="complete_value"  autocomplete="off" class="layui-input"  lay-verify="complete_value"  placeholder="完成量"  >
+                </div>
+            </div>
+
+
+            <div class="layui-inline">
+                <label class="layui-form-label">超时开始时间 :</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="delay_start"  autocomplete="off" class="layui-input"  lay-verify="delay_start"  placeholder="超时开始时间"  >
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">超时结束时间 :</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="delay_end"  autocomplete="off" class="layui-input"  lay-verify="delay_end"  placeholder="超时结束时间"  >
+                </div>
+            </div>
+
+
+
+
+
+
 
         </div>
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label">分类编码:</label>
-                <div class="layui-input-inline">
-                    <input id="flbm" type="text" name="flbm"  autocomplete="off" class="layui-input"  lay-verify="flbm"  placeholder="分类编码"  disabled="" >
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">分类1:</label>
-                <div class="layui-input-inline">
-
-
-                    <select name="fenlei1" id="fenlei1"  lay-verify="fenlei1"   lay-filter="fenlei1" class="layui-input layui-unselect"  >
-                        <option value=""></option>
-                    </select>
 
 
 
-                </div>
-            </div>
-        </div>
-        <div class="layui-form-item">
 
-            <div class="layui-inline">
-                <label class="layui-form-label">分类2:</label>
-                <div class="layui-input-inline">
-                    <select name="fenlei2" id="fenlei2"  lay-filter="fenlei2"   lay-verify="fenlei2"  >
-                        <option value=""></option>
-                    </select>
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">分类3:</label>
-                <div class="layui-input-inline">
-                    <select name="fenlei3" id="fenlei3"  lay-filter="fenlei3"  lay-verify="fenlei3" >
-                        <option value=""></option>
-                    </select>
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">分类4:</label>
-                <div class="layui-input-inline">
-                    <select name="fenlei4" id="fenlei4"  lay-filter="fenlei4"  lay-verify="fenlei4"  >
-                        <option value=""></option>
-                    </select>
-                </div>
-            </div>
-            <!--
-            <div class="layui-inline">
-                <label class="layui-form-label">性别:</label>
-                <div class="layui-input-inline">
-                    <input type="radio" name="sex" value="1" title="男">
-                    <input type="radio" name="sex" value="0" title="女">
-                </div>
-            </div>
-            -->
-        </div>
+
         <div class="layui-form-item" style="text-align: center;">
             <div class="layui-input-block">
                 <button type="button" class="layui-btn layui-btn-normal layui-btn-sm layui-icon layui-icon-release" lay-filter="doSubmit" lay-submit="">提交</button>
-                <!--
+
                 <button type="reset" class="layui-btn layui-btn-warm layui-btn-sm layui-icon layui-icon-refresh" >重置</button>
-                -->
+
             </div>
         </div>
     </form>
@@ -215,15 +241,6 @@
 
 
 
-<script type="text/html" id="status">
-    {{#  if(d.status === 1){ }}
-    <a href='javascript:void(0);' class='layui-btn  layui-btn-normal'>暂停</a>
-    {{#   } else if(d.status === 2){ }}
-    <a href='javascript:void(0);' class='layui-btn  layui-btn-normal'>停止</a>
-    {{#  } else { }}
-    <a href='javascript:void(0);' class='layui-btn layui-btn-danger '>运行</a>
-    {{#  } }}
-</script>
 
 
 <!--客户分配菜单的弹出层结束-->
@@ -241,7 +258,7 @@
         tableIns=table.render({
             elem: '#classifyTable'   //渲染的目标对象
             ,url:"listtask.do?"+params //数据接口
-            ,title: '商品分类'//数据导出来的标题
+            ,title: '任务'//数据导出来的标题
             ,toolbar:"#classifyToolBar"  //表格的工具条
 
             ,cellMinWidth:100 //设置列的最小默认宽度
@@ -249,7 +266,17 @@
 
             ,cols: [[   //列表数据
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'id', title:'商品ID',align:'center',width:'100'}
+                ,{field:'id', title:'任务ID',align:'center',width:'100'}
+                ,{field:'task_name', title:'任务名称',align:'center',width:'100'}
+                ,{field:'task_owner', title:'负责部门',align:'center',width:'100'}
+                ,{field:'plan_start', title:'计划开始时间',align:'center',width:'100'}
+                ,{field:'plan_end', title:'计划完成时间',align:'center',width:'100'}
+                ,{field:'plan_value', title:'计划量',align:'center',width:'100'}
+                ,{field:'actual_start', title:'实际开始时间',align:'center',width:'100'}
+                ,{field:'actual_end', title:'实际完成时间',align:'center',width:'100'}
+                ,{field:'complete_value', title:'完成量',align:'center',width:'100'}
+                ,{field:'delay_start', title:'超时开始时间',align:'center',width:'100'}
+                ,{field:'delay_end', title:'超时结束时间',align:'center',width:'100'}
 
                 ,{fixed: 'right', title:'编辑', toolbar: '#classifybar', width:80 ,align:'center'}
 
@@ -308,64 +335,7 @@
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
 
-            if(layEvent === 'pause'){ //暂停
-                layer.confirm('真的暂停【'+data.job_name+'】这个任务吗？', function(index){
-                    //向服务端发送暂停指令
-                    $.post("pauseJob.do",{jobId:data.id},function(res){
-                        layer.msg(res.msg);
-                        //刷新数据 表格
-                        tableIns.reload();
-                    })
-                });
-            }
-
-            if(layEvent === 'resume'){ //暂停
-                layer.confirm('真的恢复【'+data.job_name+'】这个任务吗？', function(index){
-                    //向服务端发送恢复指令
-                    $.post("resumeJob.do",{jobId:data.id},function(res){
-                        layer.msg(res.msg);
-                        //刷新数据 表格
-                        tableIns.reload();
-                    })
-                });
-            }
-
-
-
-            if(layEvent === 'run'){ //执行
-                layer.confirm('真的执行【'+data.job_name+'】这个任务吗？', function(index){
-                    //向服务端发送恢复指令
-                    $.post("runJob.do",{jobId:data.id},function(res){
-                        layer.msg(res.msg);
-                        //刷新数据 表格
-                        tableIns.reload();
-                    })
-                });
-            }
-
-
-
-            if(layEvent === 'stop'){ //停止
-                layer.confirm('真的停止【'+data.job_name+'】这个任务吗？', function(index){
-                    //向服务端发送恢复指令
-                    $.post("stopJob.do",{jobId:data.id},function(res){
-                        layer.msg(res.msg);
-                        //刷新数据 表格
-                        tableIns.reload();
-                    })
-                });
-            }
-
-            if(layEvent === 'del'){ //删除
-                layer.confirm('真的删除【'+data.job_name+'】这个任务吗？', function(index){
-                    //向服务端发送删除指令
-                    $.post("${ctx}/classify/deleteclassify.action",{identity:data.identity},function(res){
-                        layer.msg(res.msg);
-                        //刷新数据 表格
-                        tableIns.reload();
-                    })
-                });
-            } else if(layEvent === 'edit'){ //编辑
+         if(layEvent === 'edit'){ //编辑
                 openUpdateclassify(data);
             }
 
@@ -387,43 +357,32 @@
                 success:function(index){
                     //清空表单数据
                     $("#dataFrm")[0].reset();
-                    url="addJobandTrigger.do";
+                    url="updateandsavetask.do";
                 }
             });
         }
 
         //表单验证
         form.verify({
-            flbm: function(value){
+            id: function(value){
 
                 if(value==""||value==""){
-                    return '分类编码不能为空';
+                    return 'id不能为空';
                 }
             }
-            ,fenlei1: function(value){
+            ,task_name: function(value){
 
                 if(value==""){
-                    return '分类1不能为空';
+                    return '任务名不能为空';
                 }
             }
-            ,fenlei2: function(value){
+            ,task_owner: function(value){
 
                 if(value==""){
-                    return '分类2不能为空';
+                    return '负责部门不能为空';
                 }
             }
-            ,fenlei3: function(value){
 
-                if(value==""){
-                    return '分类3不能为空';
-                }
-            }
-            ,fenlei4: function(value){
-
-                if(value==""){
-                    return '分类4不能为空';
-                }
-            }
 
 
 
@@ -451,125 +410,10 @@
 
                     form.val("dataFrm",data);
 
-                    url="updateandsaveclassify.do";
+                    url="updateandsavetask.do";
 
 
 
-                    //更新select 下拉框
-                    var fenlei1=$("#fenlei1");
-                    if(data.fenlei1!=null) {
-                        var fenlei1Option = $("<option selected='selected' value='" + data.fenlei1 + "'>" + data.fenlei1 + "</option>");
-                    }
-                    fenlei1.append(fenlei1Option);
-
-                    //分类1
-                    var params=$("#dataFrm").serialize();
-                    $.ajax({
-                        type : "post",
-                        url : "findFenlei1.do?"+params ,
-                        async: false, //必须改为同步请求，不然接收不到数据
-                        dataType : "json",
-                        success : function(d) {
-
-                            for ( var i in d.data) {
-                                fenlei1.append($('<option value="' + d.data[i]['fenlei1'] +  '">' +  d.data[i]['fenlei1'] +'</option>'));
-                            }
-
-                        },
-                        error:function(){
-                            layer.alert('请求失败，稍后再试', {icon: 5});
-                        }
-
-                    });
-
-
-                    var fenlei2=$("#fenlei2");
-                    if(data.fenlei2!=null) {
-                        var fenlei2Option = $("<option selected='selected' value='" + data.fenlei2 + "'>" + data.fenlei2 + "</option>");
-                    }
-                    fenlei2.append(fenlei2Option);
-
-
-                    //分类2 必须重新置 params  因为此时fenlei2还没有加载
-                    var params=$("#dataFrm").serialize();
-                    $.ajax({
-                        type : "post",
-                        url : "findFenlei2.do?"+params ,
-
-                        async: false, //必须改为同步请求，不然接收不到数据
-                        dataType : "json",
-                        success : function(d) {
-
-                            for ( var i in d.data) {
-                                fenlei2.append($('<option value="' + d.data[i]['fenlei2'] +  '">' +  d.data[i]['fenlei2'] +'</option>'));
-                            }
-
-                        },
-                        error:function(){
-                            layer.alert('请求失败，稍后再试', {icon: 5});
-                        }
-
-                    });
-
-                    var fenlei3=$("#fenlei3");
-                    if(data.fenlei3!=null) {
-                        var fenlei3Option = $("<option selected='selected' value='" + data.fenlei3 + "'>" + data.fenlei3 + "</option>");
-                    }
-                    fenlei3.append(fenlei3Option);
-
-
-
-
-                    //分类3
-                    var params=$("#dataFrm").serialize();
-                    $.ajax({
-                        type : "post",
-                        url : "findFenlei3.do?"+params ,
-
-                        async: false, //必须改为同步请求，不然接收不到数据
-                        dataType : "json",
-                        success : function(d) {
-
-                            for ( var i in d.data) {
-                                fenlei3.append($('<option value="' + d.data[i]['fenlei3'] +  '">' +  d.data[i]['fenlei3'] +'</option>'));
-                            }
-
-                        },
-                        error:function(){
-                            layer.alert('请求失败，稍后再试', {icon: 5});
-                        }
-
-                    });
-
-
-                    var fenlei4=$("#fenlei4");
-                    if(data.fenlei4!=null) {
-                        var fenlei4Option = $("<option selected='selected' value='" + data.fenlei4 + "'>" + data.fenlei4 + "</option>");
-                    }
-                    fenlei4.append(fenlei4Option);
-
-
-
-                    //分类4
-                    var params=$("#dataFrm").serialize();
-                    $.ajax({
-                        type : "post",
-                        url : "findFenlei4.do?"+params ,
-
-                        async: false, //必须改为同步请求，不然接收不到数据
-                        dataType : "json",
-                        success : function(d) {
-
-                            for ( var i in d.data) {
-                                fenlei4.append($('<option value="' + d.data[i]['fenlei4'] +  '">' +  d.data[i]['fenlei4'] +'</option>'));
-                            }
-
-                        },
-                        error:function(){
-                            layer.alert('请求失败，稍后再试', {icon: 5});
-                        }
-
-                    });
 
 
 
@@ -589,211 +433,9 @@
 
 
 
-
-//分类select 选择后的事件处理
-        form.on('select(fenlei1)', function(data) {
-            var fenlei2=$("#fenlei2");
-            fenlei2.empty();
-            //分类2 必须重新置 params  因为此时fenlei2还没有加载
-            var params=$("#dataFrm").serialize();
-            $.ajax({
-                type : "post",
-                url : "findFenlei2.do?"+params ,
-
-                async: false, //必须改为同步请求，不然接收不到数据
-                dataType : "json",
-                success : function(d) {
-
-                    for ( var i in d.data) {
-                        fenlei2.append($('<option value="' + d.data[i]['fenlei2'] +  '">' +  d.data[i]['fenlei2'] +'</option>'));
-                    }
-
-
-                    form.render();
-                },
-                error:function(){
-                    layer.alert('请求失败，稍后再试', {icon: 5});
-                }
-            });
-
-
-            //分类3
-            var fenlei3=$("#fenlei3");
-            fenlei3.empty();
-            params=$("#dataFrm").serialize();
-            $.ajax({
-                type : "post",
-                url : "findFenlei3.do?"+params ,
-
-                async: false, //必须改为同步请求，不然接收不到数据
-                dataType : "json",
-                success : function(d) {
-
-                    for ( var i in d.data) {
-                        fenlei3.append($('<option value="' + d.data[i]['fenlei3'] +  '">' +  d.data[i]['fenlei3'] +'</option>'));
-                    }
-                    form.render();
-                },
-                error:function(){
-                    layer.alert('请求失败，稍后再试', {icon: 5});
-                }
-
-            });
-
-
-            //分类4
-            var fenlei4=$("#fenlei4");
-            fenlei4.empty();
-            params=$("#dataFrm").serialize();
-            $.ajax({
-                type : "post",
-                url : "findFenlei4.do?"+params ,
-
-                async: false, //必须改为同步请求，不然接收不到数据
-                dataType : "json",
-                success : function(d) {
-
-                    for ( var i in d.data) {
-                        fenlei4.append($('<option value="' + d.data[i]['fenlei4'] +  '">' +  d.data[i]['fenlei4'] +'</option>'));
-                    }
-                    form.render();
-                },
-                error:function(){
-                    layer.alert('请求失败，稍后再试', {icon: 5});
-                }
-
-            });
-
-            flashfenleibm(data);
-
-        });
-
-
-
-
-
-//分类select 选择后的事件处理
-        form.on('select(fenlei2)', function(data) {
-            //分类3
-            var fenlei3=$("#fenlei3");
-            fenlei3.empty();
-            params=$("#dataFrm").serialize();
-            $.ajax({
-                type : "post",
-                url : "findFenlei3.do?"+params ,
-
-                async: false, //必须改为同步请求，不然接收不到数据
-                dataType : "json",
-                success : function(d) {
-
-
-                    for ( var i in d.data) {
-                        fenlei3.append($('<option value="' + d.data[i]['fenlei3'] +  '">' +  d.data[i]['fenlei3'] +'</option>'));
-                    }
-                    form.render();
-                },
-                error:function(){
-                    layer.alert('请求失败，稍后再试', {icon: 5});
-                }
-
-            });
-
-
-            //分类4
-            var fenlei4=$("#fenlei4");
-            fenlei4.empty();
-            params=$("#dataFrm").serialize();
-            $.ajax({
-                type : "post",
-                url : "findFenlei4.do?"+params ,
-
-                async: false, //必须改为同步请求，不然接收不到数据
-                dataType : "json",
-                success : function(d) {
-
-                    for ( var i in d.data) {
-                        fenlei4.append($('<option value="' + d.data[i]['fenlei4'] +  '">' +  d.data[i]['fenlei4'] +'</option>'));
-                    }
-                    form.render();
-                },
-                error:function(){
-                    layer.alert('请求失败，稍后再试', {icon: 5});
-                }
-            });
-            flashfenleibm(data);
-        });
-
-
-
-
-
-//分类select 选择后的事件处理
-        form.on('select(fenlei3)', function(data) {
-
-
-
-            //分类4
-            var fenlei4=$("#fenlei4");
-            fenlei4.empty();
-            params=$("#dataFrm").serialize();
-            $.ajax({
-                type : "post",
-                url : "findFenlei4.do?"+params ,
-
-                async: false, //必须改为同步请求，不然接收不到数据
-                dataType : "json",
-                success : function(d) {
-
-                    for ( var i in d.data) {
-                        fenlei4.append($('<option value="' + d.data[i]['fenlei4'] +  '">' +  d.data[i]['fenlei4'] +'</option>'));
-                    }
-                    form.render();
-                },
-                error:function(){
-                    layer.alert('请求失败，稍后再试', {icon: 5});
-                }
-            });
-
-
-            flashfenleibm(data);
-        });
-
-
-
-
-        //分类select 选择后的事件处理
-        form.on('select(fenlei4)', function(data) {
-
-            flashfenleibm(data);
-        });
-
-
-
-
-        function flashfenleibm(data){
-            params=$("#dataFrm").serialize();
-            $.ajax({
-                type : "post",
-                url : "findFenleibm.do?"+params ,
-
-                async: false, //必须改为同步请求，不然接收不到数据
-                dataType : "json",
-                success : function(d) {
-
-                    var flbm=$("#flbm");
-                    flbm.val( d.data[0]['flbm']) ;
-
-                    form.render();
-                },
-                error:function(){
-                    layer.alert('请求失败，稍后再试', {icon: 5});
-                }
-            });
-        }
-
-
         //保存
         form.on("submit(doSubmit)",function(obj){
+
 
             //序列化表单数据
             var params=$("#dataFrm").serialize();
@@ -816,14 +458,14 @@
             var params="";
             $.each(data,function(i,item){
                 if(i==0){
-                    params+="ids="+item.identity;
+                    params+="ids="+item.id;
                 }else{
-                    params+="&ids="+item.identity;
+                    params+="&ids="+item.id;
                 }
             });
             layer.confirm('真的删除选中的这些任务吗', function(index){
                 //向服务端发送删除指令
-                $.post("deleteBatchJobandTrigger.do",params,function(res){
+                $.post("deleteBatchTask.do",params,function(res){
                     layer.msg(res.msg);
                     //刷新数据 表格
                     tableIns.reload();

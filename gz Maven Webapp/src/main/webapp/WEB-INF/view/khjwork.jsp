@@ -601,73 +601,45 @@
 
 
 
-                const dataSource = {
-                    chart: {
-                        dateformat: "dd/mm/yyyy",
-                        caption: "线上客户节工作进度",
-                        subcaption: "Build by gz",
-                        plottooltext: "<b>$label</b><br>Start: <b>$start</b><br>End: <b>$end</b>",
-                        theme: "fusion"
-                    },
-                    legend: {
-                        item: [
-                            {
-                                label: "计划进度",
-                                color: "#0000AA"
-                            },
-                            {
-                                label: "实际进度",
-                                color: "#88D8B0"
-                            },
-                            {
-                                label: "超期进度",
-                                color: "#e44a00"
-                            }
-                        ]
-                    },
+                var str='{\n' +
+                    '    chart: {\n' +
+                '         dateformat: "dd/mm/yyyy",\n' +
+                '       caption: "线上客户节工作进度",\n' +
+                '         subcaption: "Build by gz",\n' +
+                '         plottooltext: "<b>$label</b><br>开始时间: <b>$start</b><br>结束时间: <b>$end</b>",\n' +
+                '         theme: "fusion"\n' +
+                '     },\n' +
+                '    legend: {\n' +
+                '         item: [\n' +
+                '            {\n' +
+                '                label: "计划进度",\n' +
+                '               color: "#0000AA"\n' +
+                '            },\n' +
+                '           {\n' +
+                '                label: "实际进度",\n' +
+                '               color: "#88D8B0"\n' +
+                '            },\n' +
+                '            {\n' +
+                '               label: "超期进度",\n' +
+                '               color: "#e44a00"\n' +
+                '            }\n' +
+                '       ]\n' +
+                '    },\n' +
+                '\n' +
+                '    processes: {\n' +
+                '       headertext: "任务",\n' +
+                '       align: "center",\n' +
+                '      process: [\n' ;
 
-                    processes: {
-                        headertext: "任务",
-                        align: "center",
-                        process: [
+                        var data='';
+
                             {
                                 label: "总条目数",
                                 id: "1",
                                 link:"khjtask/task"
                             },
 
-                            {
-                                label: "Define Specifications",
-                                id: "2"
-                            },
-                            {
-                                label: "Overall Architecture",
-                                id: "3"
-                            },
-                            {
-                                label: "Project Planning",
-                                id: "4"
-                            },
-                            {
-                                label: "Detail Design",
-                                id: "5"
-                            },
-                            {
-                                label: "Software Development",
-                                id: "6"
-                            },
-                            {
-                                label: "Test Plan",
-                                id: "7"
-                            },
-                            {
-                                label: "Testing & QA",
-                                id: "8"
-                            },
-                            {
-                                label: "User Documentation",
-                                id: "9"
-                            }
+
                         ]
                     },
 
@@ -1070,6 +1042,12 @@
                         }
                     ]
                 };
+
+
+
+                //  eval解析复杂json字符串 多层字符串普通的JSON.parse是解析不了的,不能一步到位解析到底的。
+                const dataSource = eval("("+ str +")");
+
 
                 FusionCharts.ready(function() {
                     var myChart = new FusionCharts({

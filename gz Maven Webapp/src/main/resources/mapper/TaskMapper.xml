@@ -22,7 +22,7 @@
 
 
     <select id="queryAllTask" resultMap="BaseResultMap">
-        SELECT  id ,task_name,task_owner ,plan_start ,plan_end ,actual_start ,actual_end ,delay_start,delay_end FROM  khj_task
+        SELECT  id  FROM  khj_task
 
     </select>
 

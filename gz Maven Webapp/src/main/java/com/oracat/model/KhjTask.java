@@ -1,7 +1,15 @@
 package com.oracat.model;
 
 public class KhjTask {
-    private          int id               ;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    private          String id               ;
     private          String task_name     ;
     private          String task_owner    ;
     private          String plan_start    ;
@@ -11,13 +19,7 @@ public class KhjTask {
     private          String delay_start   ;
     private          String delay_end     ;
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getTask_name() {
         return task_name;

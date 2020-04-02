@@ -49,31 +49,13 @@
 <form  id="searchFrm" class="layui-form" method="post">
     <div class="layui-form-item" >
         <div class="layui-inline">
-            <label class="layui-form-label">任务id：</label>
+            <label class="layui-form-label">商品id：</label>
             <div class="layui-input-inline">
                 <input type="text"  name="id"  autocomplete="off" class="layui-input">
             </div>
         </div>
 
-        <div class="layui-inline">
-            <label class="layui-form-label">任务名称：</label>
-            <div class="layui-input-inline">
-                <input type="text"  name="task_name"  autocomplete="off" class="layui-input">
-            </div>
-        </div>
 
-        <div class="layui-inline">
-            <label class="layui-form-label">执行人：</label>
-            <div class="layui-input-inline">
-                <input type="text"  name="task_owner"  autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <!--
-                <div class="layui-input-block">
-                    <input type="checkbox" name="isnull" lay-skin="primary" title="无分类商品"  >
-
-                </div>
-        -->
 
 
 
@@ -95,13 +77,13 @@
 </form>
 <%--搜索条件结束--%>
 <%--数据表格开始--%>
-<table class="layui-hide" id="classifyTable" lay-filter="taskTable">
+<table class="layui-hide" id="classifyTable" lay-filter="classifyTable">
 
 </table>
 
 
 
-<div style="display: none;" id="taskToolBar">
+<div style="display: none;" id="classifyToolBar">
     <!--
 <button type="button" class="layui-btn layui-btn-sm" lay-event="add">增加</button>
 -->
@@ -112,7 +94,7 @@
 
 
 
-<div  style="display: none;" id="taskbar" >
+<div  style="display: none;" id="classifybar" >
 
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <!--
@@ -257,28 +239,19 @@
         var params=$("#searchFrm").serialize();
         //渲染数据表格
         tableIns=table.render({
-            elem: '#taskTable'   //渲染的目标对象
+            elem: '#classifyTable'   //渲染的目标对象
             ,url:"listtask.do?"+params //数据接口
             ,title: '商品分类'//数据导出来的标题
-            ,toolbar:"#taskToolBar"  //表格的工具条
+            ,toolbar:"#classifyToolBar"  //表格的工具条
 
             ,cellMinWidth:100 //设置列的最小默认宽度
             ,page: true  //是否启用分页
 
             ,cols: [[   //列表数据
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'id', title:'任务ID',align:'center',width:'100'}
-                ,{field:'task_name', title:'任务名称',align:'center',width:'100'}
-                ,{field:'task_owner', title:'执行人',align:'center',width:'250'}
+                ,{field:'id', title:'商品ID',align:'center',width:'100'}
 
-                ,{field:'plan_star', title:'计划开始时间',align:'center',width:'100'}
-                ,{field:'plan_end', title:'计划完成时间',align:'center',width:'220'}
-                ,{field:'actual_start', title:'实际开始时间',align:'center',width:'220'}
-                ,{field:'actual_end', title:'实际完成时间',align:'center',width:'100'}
-                ,{field:'delay_start\n', title:'超期开始时间',align:'center',width:'220'}
-                ,{field:'delay_end\n', title:'超期结束时间',align:'center',width:'220'}
-
-                ,{fixed: 'right', title:'编辑', toolbar: '#taskbar', width:80 ,align:'center'}
+                ,{fixed: 'right', title:'编辑', toolbar: '#classifybar', width:80 ,align:'center'}
 
             ]]
             // ,   where: { type: "all" }
@@ -300,7 +273,7 @@
         $("#doSearch").click(function(){
             var params=$("#searchFrm").serialize();
             tableIns.reload({
-                url:"listclassify.do?"+params ,
+                url:"listtask.do?"+params ,
                 page:{
                     curr:1
                 }
@@ -312,7 +285,7 @@
         $("#doExport").click(function(){
             var params=$("#searchFrm").serialize();
             //上传与下载是同步的，所以不用异步请求
-            window.location.href="${ctx}/stat/exportclassify.action?"+params;
+            window.location.href="${ctx}/stat/exporttask.action?"+params;
         });
 
         //监听头部工具栏事件

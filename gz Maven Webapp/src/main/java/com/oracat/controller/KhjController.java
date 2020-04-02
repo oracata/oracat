@@ -54,7 +54,7 @@ public class KhjController {
 
     @ResponseBody
     @RequestMapping( "/khjtask/findtaskbyid" )
-    public DataGridView findFenleibybm(KhjTask khjTask){
+    public DataGridView findTaskByid(KhjTask khjTask){
 
         return taskService.findTaskByid(khjTask);
 

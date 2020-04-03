@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="${ctx}/js/layui_ext/dtree/font/dtreefont.css">
     <script type="text/javascript" src="${ctx}/js/layui/layui.js"></script>
     <script type="text/javascript" src="${ctx}/js/layui_ext/dist/dtree.js"></script>
+    <script type="text/javascript" src="${ctx}/js/layui_ext/dist/layui.js"></script>
 
     <style type="text/css">
         .layer-photos-demo{margin:10px 0;}
@@ -133,7 +134,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">任务ID:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="id"  lay-verify="spid" autocomplete="off" class="layui-input" placeholder="任务ID"  >
+                    <input type="text" name="id"  lay-verify="id" autocomplete="off"  class="layui-input" placeholder="任务ID"  >
                 </div>
             </div>
 
@@ -153,14 +154,19 @@
             <div class="layui-inline">
                 <label class="layui-form-label">计划开始时间 :</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="plan_start"  autocomplete="off" class="layui-input"  lay-verify="plan_start"  placeholder="计划开始时间"  >
+                    <input type="text" name="plan_start"  id="plan_start"  autocomplete="off" class="layui-input"  lay-verify="plan_start"  placeholder="计划开始时间" placeholder="yyyy-MM-dd" >
                 </div>
             </div>
+
+
+
+
+
 
             <div class="layui-inline">
                 <label class="layui-form-label">计划结束时间 :</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="plan_end"  autocomplete="off" class="layui-input"  lay-verify="plan_end"  placeholder="计划结束时间"  >
+                    <input type="text" name="plan_end" id="plan_end"  autocomplete="off" class="layui-input"  lay-verify="plan_end"  placeholder="计划结束时间" placeholder="yyyy-MM-dd" >
                 </div>
             </div>
 
@@ -176,14 +182,14 @@
             <div class="layui-inline">
                 <label class="layui-form-label">实际开始时间 :</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="actual_start"  autocomplete="off" class="layui-input"  lay-verify="actual_start"  placeholder="实际开始时间"  >
+                    <input type="text" name="actual_start"  id="actual_start"  autocomplete="off" class="layui-input"  lay-verify="actual_start"  placeholder="实际开始时间" placeholder="yyyy-MM-dd" >
                 </div>
             </div>
 
             <div class="layui-inline">
                 <label class="layui-form-label">实际结束时间 :</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="actual_end"  autocomplete="off" class="layui-input"  lay-verify="actual_end"  placeholder="实际结束时间"  >
+                    <input type="text" name="actual_end"  id="actual_end"  autocomplete="off" class="layui-input"  lay-verify="actual_end"  placeholder="实际结束时间" placeholder="yyyy-MM-dd" >
                 </div>
             </div>
 
@@ -191,7 +197,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">完成量 :</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="complete_value"  autocomplete="off" class="layui-input"  lay-verify="complete_value"  placeholder="完成量"  >
+                    <input type="text" name="complete_value"   autocomplete="off" class="layui-input"  lay-verify="complete_value"  placeholder="完成量"  >
                 </div>
             </div>
 
@@ -199,17 +205,16 @@
             <div class="layui-inline">
                 <label class="layui-form-label">超时开始时间 :</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="delay_start"  autocomplete="off" class="layui-input"  lay-verify="delay_start"  placeholder="超时开始时间"  >
+                    <input type="text" name="delay_start"   id="delay_start"  autocomplete="off" class="layui-input"  lay-verify="delay_start"  placeholder="超时开始时间" placeholder="yyyy-MM-dd" >
                 </div>
             </div>
 
             <div class="layui-inline">
                 <label class="layui-form-label">超时结束时间 :</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="delay_end"  autocomplete="off" class="layui-input"  lay-verify="delay_end"  placeholder="超时结束时间"  >
+                    <input type="text" name="delay_end"  id="delay_end"  autocomplete="off" class="layui-input"  lay-verify="delay_end"  placeholder="超时结束时间"  placeholder="yyyy-MM-dd" >
                 </div>
             </div>
-
 
 
 
@@ -269,14 +274,14 @@
                 ,{field:'id', title:'任务ID',align:'center',width:'100'}
                 ,{field:'task_name', title:'任务名称',align:'center',width:'100'}
                 ,{field:'task_owner', title:'负责部门',align:'center',width:'100'}
-                ,{field:'plan_start', title:'计划开始时间',align:'center',width:'100'}
-                ,{field:'plan_end', title:'计划完成时间',align:'center',width:'100'}
+                ,{field:'plan_start', title:'计划开始时间',align:'center',width:'200'}
+                ,{field:'plan_end', title:'计划完成时间',align:'center',width:'200'}
                 ,{field:'plan_value', title:'计划量',align:'center',width:'100'}
-                ,{field:'actual_start', title:'实际开始时间',align:'center',width:'100'}
-                ,{field:'actual_end', title:'实际完成时间',align:'center',width:'100'}
+                ,{field:'actual_start', title:'实际开始时间',align:'center',width:'200'}
+                ,{field:'actual_end', title:'实际完成时间',align:'center',width:'200'}
                 ,{field:'complete_value', title:'完成量',align:'center',width:'100'}
-                ,{field:'delay_start', title:'超时开始时间',align:'center',width:'100'}
-                ,{field:'delay_end', title:'超时结束时间',align:'center',width:'100'}
+                ,{field:'delay_start', title:'超时开始时间',align:'center',width:'200'}
+                ,{field:'delay_end', title:'超时结束时间',align:'center',width:'200'}
 
                 ,{fixed: 'right', title:'编辑', toolbar: '#classifybar', width:80 ,align:'center'}
 
@@ -319,7 +324,7 @@
         table.on("toolbar(classifyTable)",function(obj){
             switch(obj.event){
                 case 'add':
-                    openAddclassify();
+                    openAddtask();
                     break;
                 case 'deleteBatch':
                     deleteBatch();
@@ -336,7 +341,7 @@
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
 
          if(layEvent === 'edit'){ //编辑
-                openUpdateclassify(data);
+                openUpdatetask(data);
             }
 
         });
@@ -345,7 +350,7 @@
         var url;
         var mainIndex;
         //打开添加页面
-        function openAddclassify(){
+        function openAddtask(){
             mainIndex=layer.open({
                 type:1,
                 title:'添加任务',
@@ -357,11 +362,19 @@
                 success:function(index){
                     //清空表单数据
                     $("#dataFrm")[0].reset();
-                    url="updateandsavetask.do";
+                    url="savetask.do";
                 }
             });
         }
-
+        //表单默认值
+        /*
+        form.val(
+           {
+                plan_value:0
+                ,complete_value:0
+            }
+        );
+  */
         //表单验证
         form.verify({
             id: function(value){
@@ -383,6 +396,19 @@
                 }
             }
 
+            ,plan_value: function(value){
+
+                if(value==""){
+                    return '计划值不能为空';
+                }
+            }
+
+            ,complete_value: function(value){
+
+                if(value==""){
+                    return '完成值不能为空';
+                }
+            }
 
 
 
@@ -399,8 +425,10 @@
             //    ,email: [/^[a-z0-9._%-]+@([a-z0-9-]+\.)+[a-z]{2,4}$|^1[3|4|5|7|8]\d{9}$/, '邮箱格式不对']
         });
 
+
+
         //打开修改页面
-        function openUpdateclassify(data){
+        function openUpdatetask(data){
             mainIndex=layer.open({
                 type:1,
                 title:'修改分类',
@@ -410,7 +438,7 @@
 
                     form.val("dataFrm",data);
 
-                    url="updateandsavetask.do";
+                    url="updatetask.do";
 
 
 
@@ -475,5 +503,45 @@
     });
 
 </script>
+
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+
+
+        laydate.render({
+            elem: '#plan_start'
+        });
+
+        laydate.render({
+            elem: '#plan_end'
+        });
+
+        laydate.render({
+            elem: '#actual_start'
+        });
+
+        laydate.render({
+            elem: '#actual_end'
+        });
+
+
+
+        laydate.render({
+            elem: '#delay_start'
+        });
+
+        laydate.render({
+            elem: '#delay_end'
+        });
+
+
+
+
+
+    });
+</script>
+
 </body>
 </html>

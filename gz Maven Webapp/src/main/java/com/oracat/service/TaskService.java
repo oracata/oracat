@@ -10,7 +10,9 @@ public interface TaskService {
     public DataGridView selectTask(KhjTask khjTask);
     public List<KhjTask> selectAllTask();
     public DataGridView findTaskByid(KhjTask khjTask);
-    public void updateAndSaveTask(KhjTask khjTask);
+    public void updateTask(KhjTask khjTask);
+    public void saveTask(KhjTask khjTask);
+
 
     void deleteTask(String identity);
 

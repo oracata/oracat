@@ -51,7 +51,7 @@
 
 
     <select id="selectAllTask" resultMap="BaseResultMap">
-        SELECT  id ,task_name,task_owner ,plan_start ,plan_end ,actual_start ,actual_end ,delay_start,delay_end,plan_value,complete_value FROM  khj_task
+        SELECT  id ,task_name,task_owner ,plan_start ,plan_end ,actual_start ,actual_end ,delay_start,delay_end,plan_value,complete_value FROM  khj_task order by task_owner ,plan_start
 
     </select>
 

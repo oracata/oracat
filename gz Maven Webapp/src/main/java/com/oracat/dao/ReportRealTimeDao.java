@@ -149,7 +149,7 @@ public interface ReportRealTimeDao {
             "inner join bmzl e(nolock) on a.bmid=e.bmid\n" +
             "left join wms_systeminstruct_state x (nolock) on a.djbh=x.instruct_djbh\n" +
             "where a.djbh like 'XHB%'\n" +
-            "and a.is_zx <> '清' and a.jigid='000'  \n" +
+            "and a.is_zx <> '清' and a.jigid='000'  AND a.bmname IN ('电商事业部','终端普药事业部')\n" +
             ") a\n" +
             "GROUP BY state,STATE_code  ORDER BY state_code;\n ")
         List<SaleFlow> selectSaleFlowErp();

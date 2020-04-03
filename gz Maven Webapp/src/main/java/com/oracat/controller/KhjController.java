@@ -66,10 +66,10 @@ public class KhjController {
 
 
     @ResponseBody
-    @RequestMapping( "/khjtask/updateandsavetask" )
-    public Result updateAndSaveTask(KhjTask khjTask){
+    @RequestMapping( "/khjtask/savetask" )
+    public Result saveTask(KhjTask khjTask){
         try {
-            taskService.updateAndSaveTask(khjTask);
+            taskService.saveTask(khjTask);
             return Result.UPDATE_SUCCESS;
         }catch (Exception e){
             e.printStackTrace();
@@ -78,6 +78,22 @@ public class KhjController {
 
 
     }
+
+
+    @ResponseBody
+    @RequestMapping( "/khjtask/updatetask" )
+    public Result updateTask(KhjTask khjTask){
+        try {
+            taskService.updateTask(khjTask);
+            return Result.UPDATE_SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.UPDATE_ERROR;
+        }
+
+
+    }
+
 
 
     @ResponseBody

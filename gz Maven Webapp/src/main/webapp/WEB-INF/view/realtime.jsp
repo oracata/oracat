@@ -212,27 +212,48 @@
 
                     "      {                                   \n" +
                     "        'minvalue': '0',               \n" +
-                    "        'maxvalue': '1000',              \n" +
-                    "        'displayvalue': '0 - 1000', \n" +
+                    "        'maxvalue': '0',              \n" +
+                    "        'displayvalue': '0', \n" +
                     "        'code': '#4FCAF6'                   \n" +
                     "      },                                  \n" +
                     "      {                                   \n" +
-                    "        'minvalue': '1000',              \n" +
-                    "        'maxvalue': '50000',              \n" +
-                    "        'displayvalue': '1000 - 50000',\n" +
-                    "        'code': '#EF5350'                   \n" +
+                    "        'minvalue': '600',              \n" +
+                    "        'maxvalue': '5000',              \n" +
+                    "        'displayvalue': '600 - 5000',\n" +
+                    "        'code': '#C7D631'                   \n" +
                     "      },                                  \n" +
+                    "      {                                   \n" +
+                    "        'minvalue': '5000',              \n" +
+                    "        'maxvalue': '10000',              \n" +
+                    "        'displayvalue': '5000 - 10000',\n" +
+                    "        'code': '#FFC533'                   \n" +
+                    "      },                                  \n" +
+                    "      {                                   \n" +
+                    "        'minvalue': '10000',              \n" +
+                    "        'maxvalue': '20000',              \n" +
+                    "        'displayvalue': '10000 - 20000',\n" +
+                    "        'code': '#F2726F'                   \n" +
+                    "      },                                  \n" +
+                    "      {                                   \n" +
+                    "        'minvalue': '20000',              \n" +
+                    "        'maxvalue': '50000',              \n" +
+                    "        'displayvalue': '20000 - 50000',\n" +
+                    "        'code': '#BC95DF'                   \n" +
+                    "      },                                  \n" +
+
+
+
                     "      {                                   \n" +
                     "        'minvalue': '50000',              \n" +
                     "        'maxvalue': '100000',              \n" +
                     "        'displayvalue': '50000 - 100000',\n" +
-                    "        'code': '#D60100'                   \n" +
+                    "        'code': '#C62828'                   \n" +
                     "      },                                  \n" +
                     "      {                                   \n" +
                     "        'minvalue': '100000',              \n" +
                     "        'maxvalue': '200000',              \n" +
                     "        'displayvalue': '> 200000',        \n" +
-                    "        'code': '#C62828'                   \n" +
+                    "        'code': '#E10100'                   \n" +
                     "      }                                   \n" +
                     "    ]                                     \n" +
                     "  },    ");

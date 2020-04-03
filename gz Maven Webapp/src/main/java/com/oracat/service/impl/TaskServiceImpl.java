@@ -62,7 +62,26 @@ public class TaskServiceImpl implements TaskService {
 
 
     @Override
-    public void updateAndSaveTask(KhjTask khjTask)
+    public void updateTask(KhjTask khjTask)
+    {
+
+
+        DynamicDataSourceHolder.setDataSource("mysql");
+
+        List<KhjTask> data=taskDao.queryTaskByid(khjTask);
+        if(data.size()>0) {
+
+            DynamicDataSourceHolder.setDataSource("mysql");
+            taskDao.updateTask(khjTask);
+        }
+
+
+    }
+
+
+
+    @Override
+    public void saveTask(KhjTask khjTask)
     {
 
 
@@ -72,13 +91,12 @@ public class TaskServiceImpl implements TaskService {
         if(data.size()==0){
             DynamicDataSourceHolder.setDataSource("mysql");
             taskDao.insertTask(khjTask);
-        }else{
-            DynamicDataSourceHolder.setDataSource("mysql");
-            taskDao.updateTask(khjTask);
         }
 
 
     }
+
+
 
 
     @Override

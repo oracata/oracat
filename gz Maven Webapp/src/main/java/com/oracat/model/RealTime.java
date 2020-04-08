@@ -10,7 +10,7 @@ public class RealTime {
     private String wldwbh;
     private String wldwname;
     private String ywfzrname;
-    private String custom_num;
+    private int custom_num;
     private Integer login_pay_custom           ;
     private Integer login_nopay_custom         ;
     private Integer order_pay_custom           ;
@@ -19,6 +19,25 @@ public class RealTime {
     private Double order_nopay_price          ;
     private Integer shopping_cart_custom       ;
     private Double shopping_cart_price        ;
+
+    public double getLogin_rate() {
+        return login_rate;
+    }
+
+    public void setLogin_rate(double login_rate) {
+        this.login_rate = login_rate;
+    }
+
+    public int getLogin_num() {
+        return login_num;
+    }
+
+    public void setLogin_num(int login_num) {
+        this.login_num = login_num;
+    }
+
+    private double login_rate;
+    private int login_num;
 
 
 
@@ -67,11 +86,11 @@ public class RealTime {
         this.ywfzrname = ywfzrname;
     }
 
-    public String getCustom_num() {
+    public int getCustom_num() {
         return custom_num;
     }
 
-    public void setCustom_num(String custom_num) {
+    public void setCustom_num(int custom_num) {
         this.custom_num = custom_num;
     }
 

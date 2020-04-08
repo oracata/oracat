@@ -38,6 +38,14 @@ public interface DataService {
 
 	List<RealTime> selectRealTime();
 	List<RealTime> selectArea();
+	List<RealTime> selectActiveLogin(String begin_date,String end_date);
+	List<RealTime> selectActiveArea();
+	List<Order> selectOrder();
+
+
+
+
+
 	List<SaleFlow> selectSaleFlow();
 	List<SaleFlow> selectSaleFlowErp();
 

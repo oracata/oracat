@@ -403,6 +403,36 @@ public class DataServiceImpl implements DataService{
 
 	}
 
+
+	@Override
+	public List<RealTime> selectActiveArea()
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+		return reportRealTimeDao.selectActiveArea();
+
+	}
+
+
+	@Override
+	public List<RealTime> selectActiveLogin(String begin_date,String end_date)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return  reportRealTimeDao.selectActiveLogin(begin_date,end_date);
+
+	}
+
+	@Override
+	public List<Order> selectOrder()
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return  reportRealTimeDao.selectOrderNum();
+
+	}
+
+
+
 	//ÊµÊ±Í¼±í
 
 	@Override

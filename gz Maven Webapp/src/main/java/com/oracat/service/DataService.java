@@ -40,7 +40,13 @@ public interface DataService {
 	List<RealTime> selectArea();
 	List<RealTime> selectActiveLogin(String begin_date,String end_date);
 	List<RealTime> selectActiveArea();
-	List<Order> selectOrder();
+	List<Order> selectOrder(String begin_date,String end_date);
+	List<Order> selectOrderTop10(String begin_date,String end_date);
+    List<Order> selectOrderMs(String begin_date,String end_date);
+	List<Order> selectOrderLine(String begin_date,String end_date);
+	List<Sp> selectSp(String begin_date,String end_date);
+	List<Sp> selectSpMs(String begin_date,String end_date);
+    List<Sp> selectSpMsTop10(String begin_date,String end_date);
 
 
 

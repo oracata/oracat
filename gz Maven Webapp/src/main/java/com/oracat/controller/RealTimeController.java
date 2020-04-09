@@ -1,9 +1,6 @@
 package com.oracat.controller;
 
-import com.oracat.model.Order;
-import com.oracat.model.OverViewCatagory;
-import com.oracat.model.RealTime;
-import com.oracat.model.SaleFlow;
+import com.oracat.model.*;
 import com.oracat.service.DataService;
 import com.oracat.service.OverViewCatagoryService;
 import com.oracat.util.tools;
@@ -77,9 +74,32 @@ public class RealTimeController {
     public ModelAndView getKhjorder(){
 
         ModelAndView mav = new ModelAndView("khjorder");
-        List<Order> order = dataService.selectOrder();
-
+        List<Order> order = dataService.selectOrder(tools.getTimeDay(0),tools.getTimeDay(0));
+        List<Order> top10 = dataService.selectOrderTop10(tools.getTimeDay(0),tools.getTimeDay(0));
+        List<Order> ms = dataService.selectOrderMs(tools.getTimeDay(0),tools.getTimeDay(0));
+        List<Order> line = dataService.selectOrderLine(tools.getTimeDay(0),tools.getTimeDay(0));
         mav.addObject("order", order);
+        mav.addObject("top10", top10);
+        mav.addObject("ms", ms);
+        mav.addObject("line", line);
+        return mav;
+
+
+    }
+
+
+
+    @RequestMapping("/khjgoods")
+    public ModelAndView getKhjGoods(){
+
+        ModelAndView mav = new ModelAndView("khjgoods");
+
+        List<Sp> sp = dataService.selectSp(tools.getTimeDay(0),tools.getTimeDay(0));
+        List<Sp> spms = dataService.selectSpMs(tools.getTimeDay(0),tools.getTimeDay(0));
+        List<Sp> spmstop10 = dataService.selectSpMsTop10(tools.getTimeDay(0),tools.getTimeDay(0));
+        mav.addObject("sp", sp);
+        mav.addObject("spms", spms);
+        mav.addObject("spmstop10", spmstop10);
         return mav;
 
 

@@ -130,131 +130,7 @@
 
 
 
-<table><tr><td>
-    <!-- 柱图 -->
-
-    <div id="chart5" align="center"></div>
-    <%
-        // store chart config name-config value pair
-        Map<String, String> chartConfig = new HashMap<String, String>();
-        chartConfig.put("caption", "线下线上订单占比");
-        chartConfig.put("yaxisname", "销售金额");
-        chartConfig.put("subcaption", "实时");
-        chartConfig.put("showhovereffect", "1");
-        chartConfig.put("numbersuffix", "元");
-        chartConfig.put("drawcrossline", "1");
-        chartConfig.put("basefontsize", "14");
-        chartConfig.put("showvalues", "1");
-        chartConfig.put("theme", "fusion");
-
-
-
-        //store label-value pair
-        //LinkedHashMap 保证数据顺序
-        Map<String, Double[]> dataValuePair = new LinkedHashMap<String, Double[]>();
-
-
-        //遍历List
-        Object re = request.getAttribute("order");
-        List<Order> ol= (List)re;
-        for(int i=0;i<ol.size();i++){
-            Order      ov = ol.get(i);
-
-
-            Double[] dt = { ov.getOffline_price(),ov.getOnline_price()};
-
-            dataValuePair.put("" + ov.getChengshi() + "", dt);
-
-        }
-        StringBuilder jsonData5 = new StringBuilder();
-        StringBuilder data7 = new StringBuilder();
-
-        // json data to use as chart data source
-        jsonData5.append("{'chart':{");
-        for(Map.Entry conf7:chartConfig.entrySet())
-        {
-            jsonData5.append("'" + conf7.getKey()+"':'"+conf7.getValue() + "',");
-        }
-
-        jsonData5.replace(jsonData5.length() - 1, jsonData5.length() ,"},\n");
-
-
-
-        data7.append("'categories':[  {                  \n" +
-                "     'category': [  \n");
-
-        for(Map.Entry pair:dataValuePair.entrySet())
-        {
-            data7.append("{'label':'" + pair.getKey() + "'},");
-        }
-
-        data7.replace(data7.length() - 1, data7.length(),"  ] } ],\n");
-
-        data7.append("  'dataset': [\n" +
-                "    {\n" +
-                "      'seriesname': '线下',\n" +
-                "      'data': [\n");
-
-
-
-
-        for(Map.Entry pair7:dataValuePair.entrySet())
-        {
-            Double[]  val=(Double[])pair7.getValue();
-            data7.append("{'value':'" +val[0] +"'},");
-
-        }
-
-
-
-
-        data7.replace(data7.length() - 1, data7.length(),"] },");
-
-
-
-
-
-        data7.append(" {\n" +
-                "      'seriesname': '线上',\n" +
-                "      'data': [\n");
-
-        for(Map.Entry pair7:dataValuePair.entrySet())
-        {
-            Double[]  val=(Double[])pair7.getValue();
-            data7.append("{'value':'" +val[1] +"'},");
-
-        }
-        data7.replace(data7.length() - 1, data7.length() ,"         ]  \n" +
-                "        }    \n" +
-                "    ]  ");
-
-
-
-
-
-        jsonData5.append(data7.toString());
-        jsonData5.append("}");
-
-        System.out.println( jsonData5.toString());
-
-
-        // Create chart instance
-        // charttype, chartID, width, height,containerid, data format, data
-        FusionCharts firstChart5 = new FusionCharts(
-                "stackedcolumn3d",
-                "first_chart5",
-                "1000",
-                "500",
-                "chart5",
-                "json",
-                jsonData5.toString()
-        );
-    %>
-    <%= firstChart5.render() %>
-
-
-</td>
-
+<table><tr>
 
 
     <td>
@@ -264,7 +140,7 @@
         <%
             // store chart config name-config value pair
             Map<String, String> chartConfig2 = new HashMap<String, String>();
-            chartConfig2.put("caption", "秒杀订单占比");
+            chartConfig2.put("caption", "秒杀商品占比");
             chartConfig2.put("subcaption", "线上订单");
             chartConfig2.put("showvalues", "1");
             chartConfig2.put("numbersuffix", "元");
@@ -281,10 +157,10 @@
 
 
             //遍历List
-            Object re2 = request.getAttribute("ms");
-            List<Order> ol2= (List)re2;
+            Object re2 = request.getAttribute("spms");
+            List<Sp> ol2= (List)re2;
             for(int i=0;i<ol2.size();i++){
-                Order      ov2 = ol2.get(i);
+                Sp      ov2 = ol2.get(i);
 
 
 
@@ -355,9 +231,9 @@
         <%
             // store chart config name-config value pair
             Map<String, String> chartConfig3 = new HashMap<String, String>();
-            chartConfig3.put("caption", "客户排名");
+            chartConfig3.put("caption", "商品排名");
             chartConfig3.put("yaxisname", "销售金额");
-            chartConfig3.put("subcaption", "实时");
+            chartConfig3.put("subcaption", "前10");
             chartConfig3.put("showhovereffect", "1");
             chartConfig3.put("numbersuffix", "元");
             chartConfig3.put("drawcrossline", "1");
@@ -373,15 +249,15 @@
 
 
             //遍历List
-            Object re3 = request.getAttribute("top10");
-            List<Order> ol3= (List)re3;
+            Object re3 = request.getAttribute("sp");
+            List<Sp> ol3= (List)re3;
             for(int i=0;i<ol3.size();i++){
-                Order      ov3 = ol3.get(i);
+                Sp      ov3 = ol3.get(i);
 
 
                 Double[] dt3 = { ov3.getOrder_pay_price()};
 
-                dataValuePair3.put("" + ov3.getWldwname() + "", dt3);
+                dataValuePair3.put("" + ov3.getSpmch()+ "", dt3);
 
             }
             StringBuilder jsonData3 = new StringBuilder();
@@ -457,90 +333,116 @@
 
     </td>
 
-
     <td>
-        <!-- 线上线下饼图 -->
+        <!-- 柱图 -->
 
-        <div id="chart6" align="center"></div>
+        <div id="chart5" align="center"></div>
         <%
             // store chart config name-config value pair
-            Map<String, String> chartConfig6 = new HashMap<String, String>();
-            chartConfig6.put("caption", "线上占比");
-            chartConfig6.put("subcaption", "订单");
-            chartConfig6.put("showvalues", "1");
-            chartConfig6.put("numbersuffix", "元");
-            chartConfig6.put("showpercentintooltip", "0");
-            chartConfig6.put("enablemultislicing", "1");
-            chartConfig6.put("basefontsize", "18");
-            chartConfig6.put("theme", "fusion");
+            Map<String, String> chartConfig5 = new HashMap<String, String>();
+            chartConfig5.put("caption", "秒杀商品排名");
+            chartConfig5.put("yaxisname", "销售金额");
+            chartConfig5.put("subcaption", "前10");
+            chartConfig5.put("showhovereffect", "1");
+            chartConfig5.put("numbersuffix", "元");
+            chartConfig5.put("drawcrossline", "1");
+            chartConfig5.put("basefontsize", "14");
+            chartConfig5.put("showvalues", "1");
+            chartConfig5.put("theme", "fusion");
 
 
 
             //store label-value pair
             //LinkedHashMap 保证数据顺序
-            Map<String, Double> dataValuePair6 = new LinkedHashMap<String, Double>();
+            Map<String, Double[]> dataValuePair5 = new LinkedHashMap<String, Double[]>();
 
 
             //遍历List
-            Object re6 = request.getAttribute("line");
-            List<Order> ol6= (List)re6;
-            for(int i=0;i<ol6.size();i++){
-                Order      ov6 = ol6.get(i);
+            Object re5 = request.getAttribute("spmstop10");
+            List<Sp> ol5= (List)re5;
+            for(int i=0;i<ol5.size();i++){
+                Sp      ov5 = ol5.get(i);
 
 
+                Double[] dt5 = { ov5.getOrder_pay_price()};
 
-
-                dataValuePair6.put("" + ov6.getLine() + "", ov6.getOrder_pay_price());
+                dataValuePair5.put("" + ov5.getSpmch()+ "", dt5);
 
             }
-            StringBuilder jsonData6 = new StringBuilder();
-            StringBuilder data8 = new StringBuilder();
+            StringBuilder jsonData5 = new StringBuilder();
+            StringBuilder data7 = new StringBuilder();
 
             // json data to use as chart data source
-            jsonData6.append("{'chart':{");
-            for(Map.Entry conf1:chartConfig6.entrySet())
+            jsonData5.append("{'chart':{");
+            for(Map.Entry conf7:chartConfig5.entrySet())
             {
-                jsonData6.append("'" + conf1.getKey()+"':'"+conf1.getValue() + "',");
+                jsonData5.append("'" + conf7.getKey()+"':'"+conf7.getValue() + "',");
             }
 
-            jsonData6.replace(jsonData6.length() - 1, jsonData6.length() ,"},\n");
+            jsonData5.replace(jsonData5.length() - 1, jsonData5.length() ,"},\n");
 
 
-            data8.append("'data':[");
 
-            for(Map.Entry pair:dataValuePair6.entrySet())
+            data7.append("'categories':[  {                  \n" +
+                    "     'category': [  \n");
+
+            for(Map.Entry pair:dataValuePair5.entrySet())
             {
-                data8.append("{'label':'" + pair.getKey() + "','value':'" + pair.getValue() +"'},");
+                data7.append("{'label':'" + pair.getKey() + "'},");
             }
-            data8.replace(data8.length() - 1, data8.length(),"]");
 
-            jsonData6.append(data8.toString());
-            jsonData6.append("}");
+            data7.replace(data7.length() - 1, data7.length(),"  ] } ],\n");
+
+            data7.append("  'dataset': [\n" +
+                    "    {\n" +
+                    "      'seriesname': '线上',\n" +
+                    "      'data': [\n");
+
+
+
+
+            for(Map.Entry pair7:dataValuePair5.entrySet())
+            {
+                Double[]  val=(Double[])pair7.getValue();
+                data7.append("{'value':'" +val[0] +"'},");
+
+            }
+
+
+
+
+            data7.replace(data7.length() - 1, data7.length() ,"         ]  \n" +
+                    "        }    \n" +
+                    "    ]  ");
 
 
 
 
 
+            jsonData5.append(data7.toString());
+            jsonData5.append("}");
 
-            System.out.println( jsonData6.toString());
+            System.out.println( jsonData5.toString());
 
 
             // Create chart instance
             // charttype, chartID, width, height,containerid, data format, data
-            FusionCharts firstChart6 = new FusionCharts(
-                    "pie3d",
-                    "first_chart6",
-                    "700",
+            FusionCharts firstChart5 = new FusionCharts(
+                    "stackedcolumn2d",
+                    "first_chart5",
                     "800",
-                    "chart6",
+                    "500",
+                    "chart5",
                     "json",
-                    jsonData6.toString()
+                    jsonData5.toString()
             );
         %>
-        <%= firstChart6.render() %>
+        <%= firstChart5.render() %>
 
 
     </td>
+
+
 </tr></table>
 
 

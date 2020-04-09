@@ -423,13 +423,72 @@ public class DataServiceImpl implements DataService{
 	}
 
 	@Override
-	public List<Order> selectOrder()
+	public List<Order> selectOrder(String begin_date,String end_date)
 	{
 		DynamicDataSourceHolder.setDataSource("sqlserver");
 
-		return  reportRealTimeDao.selectOrderNum();
+		return  reportRealTimeDao.selectOrderNum(begin_date,end_date);
 
 	}
+
+	@Override
+	public List<Order> selectOrderTop10(String begin_date,String end_date)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return  reportRealTimeDao.selectOrderTop10(begin_date,end_date);
+
+	}
+
+	@Override
+	public List<Order> selectOrderMs(String begin_date,String end_date)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return  reportRealTimeDao.selectOrderMs(begin_date,end_date);
+
+	}
+
+	@Override
+	public List<Order> selectOrderLine(String begin_date,String end_date)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return  reportRealTimeDao.selectOrderLine(begin_date,end_date);
+
+	}
+
+
+	@Override
+	public List<Sp> selectSp(String begin_date,String end_date)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return  reportRealTimeDao.selectSp(begin_date,end_date);
+
+	}
+
+	@Override
+	public List<Sp> selectSpMs(String begin_date,String end_date)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return  reportRealTimeDao.selectSpMs(begin_date,end_date);
+
+	}
+
+
+
+	@Override
+	public List<Sp> selectSpMsTop10(String begin_date,String end_date)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return  reportRealTimeDao.selectSpMsTop10(begin_date,end_date);
+
+	}
+
+
 
 
 

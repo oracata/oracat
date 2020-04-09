@@ -3,6 +3,7 @@ package com.oracat.dao;
 import com.oracat.model.Order;
 import com.oracat.model.RealTime;
 import com.oracat.model.SaleFlow;
+import com.oracat.model.Sp;
 import com.oracat.util.DynamicDataSourceHolder;
 import com.oracat.util.tools;
 import org.apache.ibatis.annotations.Param;
@@ -206,16 +207,66 @@ public interface ReportRealTimeDao {
 
 
 
-    @Select("SELECT chengshi,sum(CASE WHEN b.order_id IS NULL THEN 1 ELSE 0 END  ) offline,SUM(CASE WHEN b.order_id IS not NULL   AND  b.is_zx <> '清' THEN 1 ELSE 0 END) ONLINE,\n" +
-            "sum(CASE WHEN b.order_id IS NULL THEN a.hsje ELSE 0 END  ) offlineprice,SUM(CASE WHEN b.order_id IS not NULL   AND  b.is_zx <> '清' THEN a.hsje ELSE 0 END) onlineprice\n" +
-            " FROM  wldwzl c INNER JOIN  \n" +
-            "       gxkphz (nolock) a ON c.wldwid=a.wldwid\n" +
-            " LEFT    JOIN b_gxddhz b(nolock)  on a.dsdjbh=b.order_id\n" +
-            "WHERE a.rq='2020-04-08'\n" +
-            "AND      a.is_zx <> '清'\n" +
-            "and a.jigid='000'AND   a.bmname IN ('电商事业部','终端普药事业部') AND  a.djbh like 'XHB%'\n" +
-            "GROUP BY chengshi\n  ")
-    List<Order> selectOrderNum();
+    @Select("   SELECT  chengshi, SUM(case when order_type=1 then order_pay_price ELSE 0 END ) offline_price, SUM(case when order_type=0 then order_pay_price ELSE 0 END ) online_price FROM report_b2b_order_detail  WHERE  \n" +
+            "           rq between  '${begin_date}' and '${end_date}' and   order_type IN (1,0) AND shengfen='云南省' GROUP BY  chengshi    ORDER BY   SUM(case when order_type=0 then order_pay_price ELSE 0 END ) DESC \n  ")
+    List<Order> selectOrderNum(@Param("begin_date") String begin_date,
+                               @Param("end_date") String end_date);
+
+
+
+    @Select("    SELECT top 10 wldwname  ,SUM(order_pay_price) order_pay_price \n" +
+            "           FROM report_b2b_order_detail  WHERE  rq between  '${begin_date}' and '${end_date}'\n" +
+            "            and order_type IN (0) AND shengfen='云南省'  GROUP BY  wldwname  ORDER BY order_pay_price DESC  \n  ")
+    List<Order> selectOrderTop10(@Param("begin_date") String begin_date,
+                               @Param("end_date") String end_date);
+
+
+    @Select("SELECT    case when ms_flag=1 THEN '含有秒杀商品' ELSE  '不含秒杀商品' end  ms ,SUM(order_pay_price) order_pay_price \n" +
+            "FROM report_b2b_order_detail WHERE rq   between  '${begin_date}' and '${end_date}'\n" +
+            "and order_type IN (0) AND shengfen='云南省' GROUP BY  case when ms_flag=1 THEN '含有秒杀商品' ELSE  '不含秒杀商品' end  ORDER BY order_pay_price DESC \n  ")
+    List<Order> selectOrderMs(@Param("begin_date") String begin_date,
+                              @Param("end_date") String end_date);
+
+
+    @Select("SELECT    case when order_type=0 THEN '线上' ELSE  '线下' end  line ,SUM(order_pay_price) order_pay_price \n" +
+            "FROM report_b2b_order_detail WHERE rq   between  '${begin_date}' and '${end_date}'\n" +
+            "and order_type IN (0,1) AND shengfen='云南省' GROUP BY   case when order_type=0 THEN '线上' ELSE  '线下' end   ORDER BY order_pay_price DESC  ")
+    List<Order> selectOrderLine(@Param("begin_date") String begin_date,
+                              @Param("end_date") String end_date);
+
+
+
+
+    @Select( "SELECT top 10    b.spmch+'|'+b.shpgg+'|'+b.shengccj  spmch \n" +
+            ",SUM(order_pay_price) order_pay_price FROM report_b2b_goods_detail a INNER JOIN spzl b  ON a.spid=b.spid "+
+            "WHERE  "+
+            "         a.rq BETWEEN '${begin_date}' AND '${end_date}'\n" +
+            "GROUP BY\n" +
+            "      b.spmch+'|'+b.shpgg+'|'+b.shengccj     \n" +
+            "ORDER BY  SUM(order_pay_price)  DESC "  )
+    List<Sp> selectSp(@Param("begin_date") String begin_date,
+                           @Param("end_date") String end_date);
+
+    @Select("SELECT    case when ms_flag=1 THEN '秒杀商品' ELSE  '非秒杀商品' end  ms ,SUM(order_pay_price) order_pay_price \n" +
+            ",SUM(order_pay_price) order_pay_price FROM report_b2b_goods_detail a "+
+            "WHERE  "+
+            "         a.rq BETWEEN '${begin_date}' AND '${end_date}'\n" +
+            "GROUP BY\n" +
+            "    case when ms_flag=1 THEN '秒杀商品' ELSE  '非秒杀商品' end     \n" +
+            "ORDER BY  SUM(order_pay_price)  DESC "  )
+    List<Sp> selectSpMs(@Param("begin_date") String begin_date,
+                      @Param("end_date") String end_date);
+
+
+    @Select( "SELECT top 10    b.spmch+'|'+b.shpgg+'|'+b.shengccj  spmch \n" +
+            ",SUM(order_pay_price) order_pay_price FROM report_b2b_goods_detail a INNER JOIN spzl b  ON a.spid=b.spid "+
+            "WHERE  "+
+            "         a.rq BETWEEN '${begin_date}' AND '${end_date}'  AND a.ms_flag=1\n" +
+            "GROUP BY\n" +
+            "      b.spmch+'|'+b.shpgg+'|'+b.shengccj     \n" +
+            "ORDER BY  SUM(order_pay_price)  DESC "  )
+    List<Sp> selectSpMsTop10(@Param("begin_date") String begin_date,
+                      @Param("end_date") String end_date);
 
 
 

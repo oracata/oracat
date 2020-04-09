@@ -118,13 +118,17 @@
 
                         <dd><a data-url="khjactive.do" data-id="26" data-title="活跃分析" class="site-demo-active"  href="javascript:;" data-type="tabAdd">活跃分析</a></dd>
                         <dd><a data-url="khjorder.do" data-id="27" data-title="订单分析" class="site-demo-active"  href="javascript:;" data-type="tabAdd">订单分析</a></dd>
+                        <!--
                         <dd><a data-url="reportyear.do" data-id="28" data-title="区域分析" class="site-demo-active"  href="javascript:;" data-type="tabAdd">区域分析</a></dd>
-                        <dd><a data-url="realtime.do" data-id="29" data-title="品种分析" class="site-demo-active"  href="javascript:;" data-type="tabAdd">品种分析</a></dd>
+                        -->
+                        <dd><a data-url="khjgoods.do" data-id="29" data-title="品种分析" class="site-demo-active"  href="javascript:;" data-type="tabAdd">品种分析</a></dd>
+                        <!--
                         <dd><a data-url="top10cust.do" data-id="30" data-title="客户新增" class="site-demo-active"  href="javascript:;" data-type="tabAdd">客户新增</a></dd>
                         <dd><a data-url="top10goods.do" data-id="31" data-title="存量客户分析" class="site-demo-active"  href="javascript:;" data-type="tabAdd">存量客户分析</a></dd>
                         <dd><a data-url="coupon.do" data-id="32" data-title="客户区域分析" class="site-demo-active"  href="javascript:;" data-type="tabAdd">客户区域分析</a></dd>
                         <dd><a data-url="coupon.do" data-id="33" data-title="商品动态" class="site-demo-active"  href="javascript:;" data-type="tabAdd">商品动态</a></dd>
                         <dd><a data-url="coupon.do" data-id="33" data-title="策划分析" class="site-demo-active"  href="javascript:;" data-type="tabAdd">策划分析</a></dd>
+                        -->
                     </dl>
 
 

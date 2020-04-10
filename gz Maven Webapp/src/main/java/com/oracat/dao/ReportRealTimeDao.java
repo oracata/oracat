@@ -1,9 +1,6 @@
 package com.oracat.dao;
 
-import com.oracat.model.Order;
-import com.oracat.model.RealTime;
-import com.oracat.model.SaleFlow;
-import com.oracat.model.Sp;
+import com.oracat.model.*;
 import com.oracat.util.DynamicDataSourceHolder;
 import com.oracat.util.tools;
 import org.apache.ibatis.annotations.Param;
@@ -268,6 +265,129 @@ public interface ReportRealTimeDao {
     List<Sp> selectSpMsTop10(@Param("begin_date") String begin_date,
                       @Param("end_date") String end_date);
 
+
+
+
+
+
+    @Select( "SELECT  \n" +
+            "   \n" +
+            "    CASE WHEN b.state=1 AND  b.stock_num>0 THEN 1\n" +
+            "              WHEN b.state=1 AND  b.stock_num=0 THEN 2\n" +
+            "              WHEN b.state IN(2,3,4) AND  b.stock_num>0 THEN 3\n" +
+            "              WHEN b.state IN(2,3,4) AND  b.stock_num=0 THEN 4\n" +
+            "                 WHEN b.id IS NULL    THEN 5\n" +
+            "               ELSE 6 END id ,\n" +
+            "   CASE WHEN b.state=1 AND  b.stock_num>0 THEN '已上架有库存' \n" +
+            "              WHEN b.state=1 AND  b.stock_num=0 THEN '已上架无库存' \n" +
+            "              WHEN b.state IN(2,3,4) AND  b.stock_num>0 THEN '未上架有库存' \n" +
+            "              WHEN b.state IN(2,3,4) AND  b.stock_num=0 THEN '未上架无库存' \n" +
+            "                 WHEN b.id IS NULL    THEN '冻结' \n" +
+            "               ELSE '其它' END  TYPE ,COUNT(*) num FROM ds_spml_mx (NOLOCK) a  LEFT JOIN (\n" +
+            "   SELECT a.id,a.state,b.stock_num FROM openquery(b2b,'select * from   goods') a inner JOIN  openquery(b2b,'select * from   mv_khlb_kc_hshj')b ON a.id=b.id \n" +
+            "   WHERE    kehulb='1'   \n" +
+            "   ) b  ON a.spid=b.id\n" +
+            "   GROUP BY    CASE WHEN b.state=1 AND  b.stock_num>0 THEN '已上架有库存' \n" +
+            "              WHEN b.state=1 AND  b.stock_num=0 THEN '已上架无库存' \n" +
+            "              WHEN b.state IN(2,3,4) AND  b.stock_num>0 THEN '未上架有库存' \n" +
+            "              WHEN b.state IN(2,3,4) AND  b.stock_num=0 THEN '未上架无库存' \n" +
+            "                 WHEN b.id IS NULL    THEN '冻结' \n" +
+            "               ELSE '其它' END ,\n" +
+            "                  \n" +
+            "    CASE WHEN b.state=1 AND  b.stock_num>0 THEN 1\n" +
+            "              WHEN b.state=1 AND  b.stock_num=0 THEN 2\n" +
+            "              WHEN b.state IN(2,3,4) AND  b.stock_num>0 THEN 3\n" +
+            "              WHEN b.state IN(2,3,4) AND  b.stock_num=0 THEN 4\n" +
+            "                 WHEN b.id IS NULL    THEN 5\n" +
+            "               ELSE 6 END          \n" +
+            "               \n" +
+            "   ORDER BY   CASE WHEN b.state=1 AND  b.stock_num>0 THEN 1\n" +
+            "              WHEN b.state=1 AND  b.stock_num=0 THEN 2\n" +
+            "              WHEN b.state IN(2,3,4) AND  b.stock_num>0 THEN 3\n" +
+            "              WHEN b.state IN(2,3,4) AND  b.stock_num=0 THEN 4\n" +
+            "                 WHEN b.id IS NULL    THEN 5\n" +
+            "               ELSE 6 END"  )
+    List<Spml> selectSpml();
+
+
+
+
+
+
+    @Select( "   SELECT *FROM (\n" +
+            "   SELECT  \n" +
+            "   CASE WHEN a.image_list IS NULL  THEN '已上架无图片' \n" +
+            "              WHEN a.pfpj IS NULL  THEN '已上架无价格' \n" +
+            "               ELSE '其它' END  TYPE ,COUNT(*) num FROM  \n" +
+            "   openquery(b2b,'select * from   goods') a  \n" +
+            "   WHERE    state=1 \n" +
+            " \n" +
+            "   GROUP BY       CASE WHEN a.image_list IS NULL  THEN '已上架无图片' \n" +
+            "              WHEN a.pfpj IS NULL  THEN '已上架无价格' \n" +
+            "               ELSE '其它' END   \n" +
+            "   ) a WHERE TYPE<>'其它'"  )
+    List<Spml> selectSpmlMiss();
+
+    @Select( "  select CASE WHEN b.image_list IS NULL THEN '无图片'\n" +
+            "         WHEN b.pfpj is NULL THEN '无价格' \n" +
+            "       ELSE '正常' END  TYPE ,\n" +
+            "COUNT(*) num \n" +
+            "FROM ds_spml_mx (NOLOCK) a LEFT JOIN ( SELECT a.id,a.state,a.image_list,a.pfpj,b.stock_num FROM openquery(b2b,'select * from goods') a \n" +
+            "inner JOIN openquery(b2b,'select * from mv_khlb_kc_hshj')b ON a.id=b.id WHERE kehulb='1' ) b \n" +
+            "ON a.spid=b.id \n" +
+            "WHERE b.state IN(2,3,4) AND b.stock_num>0  \n" +
+            "GROUP BY  CASE WHEN b.image_list IS NULL THEN '无图片'\n" +
+            "         WHEN b.pfpj is NULL THEN '无价格' \n" +
+            "       ELSE '正常' END"  )
+    List<Spml> selectSpmlStock();
+
+
+
+
+    @Select( "select \n" +
+            "CASE WHEN b.image_list IS NULL THEN '无图片'\n" +
+            "         WHEN b.pfpj is NULL THEN '无价格' \n" +
+            "       ELSE '正常' END  TYPE ,\n" +
+            " COUNT(*) num \n" +
+            "FROM ds_spml_mx (NOLOCK) a LEFT JOIN ( SELECT a.id,a.state,a.image_list,a.pfpj,b.stock_num FROM openquery(b2b,'select * from goods') a \n" +
+            "inner JOIN openquery(b2b,'select * from mv_khlb_kc_hshj')b ON a.id=b.id WHERE kehulb='1' ) b \n" +
+            "ON a.spid=b.id \n" +
+            "WHERE b.state IN(2,3,4) AND b.stock_num=0\n" +
+            "GROUP BY  CASE WHEN b.image_list IS NULL THEN '无图片'\n" +
+            "         WHEN b.pfpj is NULL THEN '无价格' \n" +
+            "       ELSE '正常' END"  )
+    List<Spml> selectSpmlNoStock();
+
+
+
+
+
+
+    @Select( "SELECT  a.rq,a.num allnum,isnull(b.num,0) num FROM  \n" +
+            "   (\n" +
+            "   SELECT rq ,count(*) num FROM report_b2b_data_detail where rq BETWEEN '${begin_date}' AND '${end_date}'\n" +
+            "   GROUP BY  rq ) a LEFT JOIN \n" +
+            "   (\n" +
+            "   SELECT substring(convert(varchar(100),request_time ,20),1,10) rq,COUNT(*) num \n" +
+            "   FROM openquery(b2b,'select * from enterprise_custom') \n" +
+            "   WHERE STATE=2 AND convert(varchar(100),request_time ,20) BETWEEN '${begin_date} 00:00:00' AND '${end_date} 23:59:59' \n" +
+            "   GROUP BY substring(convert(varchar(100),request_time ,20),1,10) \n" +
+            "   ) b   ON a.rq=b.rq\n" +
+            "   ORDER BY a.rq " )
+    List<Cust> selectCustAdd(@Param("begin_date") String begin_date,
+                             @Param("end_date") String end_date);
+
+
+    @Select( "  SELECT CASE WHEN b.enterprise_id IS NOT NULL  THEN '新增客户订单' ELSE '存量客户订单' END  type ,COUNT(*) num FROM openquery(b2b,'select * from order_for_goods') a\n" +
+            "   LEFT JOIN \n" +
+            "   ( SELECT  distinct enterprise_id\n" +
+            "   FROM openquery(b2b,'select * from enterprise_custom') \n" +
+            "   WHERE STATE=2 AND convert(varchar(100),request_time ,20) BETWEEN '${begin_date} 00:00:00' AND '${end_date} 23:59:59' ) b\n" +
+            "   ON a.enterprise_id=b.enterprise_id\n" +
+            "   WHERE a.is_pay=1 AND a.pay_time  BETWEEN '${begin_date} 00:00:00' AND '${end_date} 23:59:59'\n" +
+            "   group by CASE WHEN b.enterprise_id IS NOT NULL  THEN '新增客户订单' ELSE '存量客户订单' END" )
+    List<Cust> selectCustAddOrder(@Param("begin_date") String begin_date,
+                             @Param("end_date") String end_date);
 
 
 }

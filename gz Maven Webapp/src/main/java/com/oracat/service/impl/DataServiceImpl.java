@@ -488,7 +488,59 @@ public class DataServiceImpl implements DataService{
 
 	}
 
+    @Override
+    public List<Spml> selectSpml()
+    {
+        DynamicDataSourceHolder.setDataSource("sqlserver");
+        return reportRealTimeDao.selectSpml();
 
+    }
+
+	@Override
+	public List<Spml> selectSpmlMiss()
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+		return reportRealTimeDao.selectSpmlMiss();
+
+	}
+
+	@Override
+	public List<Spml> selectSpmlStock()
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+		return reportRealTimeDao.selectSpmlStock();
+
+	}
+
+
+	@Override
+	public List<Spml> selectSpmlNoStock()
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+		return reportRealTimeDao.selectSpmlNoStock();
+
+	}
+
+
+
+
+	@Override
+	public List<Cust> selectCustAdd(String begin_date,String end_date)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return  reportRealTimeDao.selectCustAdd(begin_date,end_date);
+
+	}
+
+    @Override
+    public List<Cust> selectCustAddOrder(String begin_date,String end_date)
+    {
+        DynamicDataSourceHolder.setDataSource("sqlserver");
+
+        return  reportRealTimeDao.selectCustAddOrder(begin_date,end_date);
+
+    }
 
 
 

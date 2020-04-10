@@ -47,7 +47,12 @@ public interface DataService {
 	List<Sp> selectSp(String begin_date,String end_date);
 	List<Sp> selectSpMs(String begin_date,String end_date);
     List<Sp> selectSpMsTop10(String begin_date,String end_date);
-
+	List<Spml> selectSpml();
+	List<Spml> selectSpmlMiss();
+	List<Spml> selectSpmlStock();
+	List<Spml> selectSpmlNoStock();
+    List<Cust> selectCustAdd(String begin_date,String end_date);
+	List<Cust> selectCustAddOrder(String begin_date,String end_date);
 
 
 

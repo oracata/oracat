@@ -106,4 +106,41 @@ public class RealTimeController {
     }
 
 
+
+
+    @RequestMapping("/khjspml")
+    public ModelAndView getKhjSpml(){
+
+        ModelAndView mav = new ModelAndView("khjspml");
+
+        List<Spml> spml = dataService.selectSpml();
+        List<Spml> spmlmiss = dataService.selectSpmlMiss();
+        List<Spml> spmlstock = dataService.selectSpmlStock();
+        List<Spml> spmlnostock = dataService.selectSpmlNoStock();
+
+        mav.addObject("spml", spml);
+        mav.addObject("spmlmiss", spmlmiss);
+        mav.addObject("spmlstock", spmlstock);
+        mav.addObject("spmlnostock", spmlnostock);
+
+        return mav;
+
+
+    }
+
+
+    @RequestMapping("/khjcust")
+    public ModelAndView getKhjCust(){
+
+        ModelAndView mav = new ModelAndView("khjcust");
+
+        List<Cust>  custadd= dataService.selectCustAdd(tools.getTimeDay(-15),tools.getTimeDay(0));
+        List<Cust>  custaddorder= dataService.selectCustAddOrder(tools.getTimeDay(0),tools.getTimeDay(0));
+        mav.addObject("custadd", custadd);
+        mav.addObject("custaddorder", custaddorder);
+        return mav;
+
+
+    }
+
 }

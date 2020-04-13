@@ -79,6 +79,11 @@
     <script src="/public/js/mixpanel.js"></script>
 
 
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="./css/pager.css" type="text/css" rel="stylesheet" />
 
 
 
@@ -231,7 +236,7 @@
         <%
             // store chart config name-config value pair
             Map<String, String> chartConfig3 = new HashMap<String, String>();
-            chartConfig3.put("caption", "商品排名");
+            chartConfig3.put("caption", "非秒杀商品排名");
             chartConfig3.put("yaxisname", "销售金额");
             chartConfig3.put("subcaption", "前10");
             chartConfig3.put("showhovereffect", "1");
@@ -445,7 +450,82 @@
 
 </tr></table>
 
+<table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
+    <tr>
+        <td class="fftd">
+            <form name="dcform" method="post" id="form" action="khjgoods.do">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="font3">
+                            开始日期：<input type="text" id="begin_date" name="begin_date" value="${goods_con.begin_date}"  />
+                            结束日期：<input type="text" id="end_date"   name="end_date" value="${goods_con.end_date}" />
+                            <input type="submit" value="查询"/>
 
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </td>
+    </tr>
+</table>
+<script >
+    $(function () {
+        $("#end_date").datepicker();
+        $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+    });
+    jQuery(function ($) {
+        $.datepicker.regional['zh-CN'] = {
+            closeText: '关闭',
+            prevText: '<上月',
+            nextText: '下月>',
+            currentText: '今天',
+            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+                '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            monthNamesShort: ['一', '二', '三', '四', '五', '六',
+                '七', '八', '九', '十', '十一', '十二'],
+            dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+            dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+            weekHeader: '周',
+            dateFormat: 'yy-mm-dd',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: true,
+            yearSuffix: '年'
+        };
+        $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+    });
+</script>
+
+
+<script  >
+    $(function () {
+        $("#begin_date").datepicker();
+        $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+    });
+    jQuery(function ($) {
+        $.datepicker.regional['zh-CN'] = {
+            closeText: '关闭',
+            prevText: '<上月',
+            nextText: '下月>',
+            currentText: '今天',
+            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+                '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            monthNamesShort: ['一', '二', '三', '四', '五', '六',
+                '七', '八', '九', '十', '十一', '十二'],
+            dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+            dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+            weekHeader: '周',
+            dateFormat: 'yy-mm-dd',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: true,
+            yearSuffix: '年'
+        };
+        $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+    });
+</script>
 
 
 

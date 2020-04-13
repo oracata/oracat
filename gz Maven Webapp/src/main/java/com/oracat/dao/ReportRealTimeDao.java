@@ -237,7 +237,7 @@ public interface ReportRealTimeDao {
     @Select( "SELECT top 10    b.spmch+'|'+b.shpgg+'|'+b.shengccj  spmch \n" +
             ",SUM(order_pay_price) order_pay_price FROM report_b2b_goods_detail a INNER JOIN spzl b  ON a.spid=b.spid "+
             "WHERE  "+
-            "         a.rq BETWEEN '${begin_date}' AND '${end_date}'\n" +
+            "         a.rq BETWEEN '${begin_date}' AND '${end_date}' and  ms_flag<>1\n" +
             "GROUP BY\n" +
             "      b.spmch+'|'+b.shpgg+'|'+b.shengccj     \n" +
             "ORDER BY  SUM(order_pay_price)  DESC "  )

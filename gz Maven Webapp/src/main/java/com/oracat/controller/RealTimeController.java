@@ -5,6 +5,8 @@ import com.oracat.service.DataService;
 import com.oracat.service.OverViewCatagoryService;
 import com.oracat.util.tools;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -71,17 +73,19 @@ public class RealTimeController {
 
 
     @RequestMapping("/khjorder")
-    public ModelAndView getKhjorder(){
+    public ModelAndView getKhjorder(Model model, @ModelAttribute Order v_order){
 
         ModelAndView mav = new ModelAndView("khjorder");
-        List<Order> order = dataService.selectOrder(tools.getTimeDay(0),tools.getTimeDay(0));
-        List<Order> top10 = dataService.selectOrderTop10(tools.getTimeDay(0),tools.getTimeDay(0));
-        List<Order> ms = dataService.selectOrderMs(tools.getTimeDay(0),tools.getTimeDay(0));
-        List<Order> line = dataService.selectOrderLine(tools.getTimeDay(0),tools.getTimeDay(0));
+        List<Order> order = dataService.selectOrder(v_order.getBegin_date(),v_order.getEnd_date());
+        List<Order> top10 = dataService.selectOrderTop10(v_order.getBegin_date(),v_order.getEnd_date());
+        List<Order> ms = dataService.selectOrderMs(v_order.getBegin_date(),v_order.getEnd_date());
+        List<Order> line = dataService.selectOrderLine(v_order.getBegin_date(),v_order.getEnd_date());
         mav.addObject("order", order);
         mav.addObject("top10", top10);
         mav.addObject("ms", ms);
         mav.addObject("line", line);
+
+        mav.addObject("order_con", v_order);   //回写查询条件
         return mav;
 
 
@@ -90,16 +94,17 @@ public class RealTimeController {
 
 
     @RequestMapping("/khjgoods")
-    public ModelAndView getKhjGoods(){
+    public ModelAndView getKhjGoods(Model model, @ModelAttribute Sp v_goods){
 
         ModelAndView mav = new ModelAndView("khjgoods");
 
-        List<Sp> sp = dataService.selectSp(tools.getTimeDay(0),tools.getTimeDay(0));
-        List<Sp> spms = dataService.selectSpMs(tools.getTimeDay(0),tools.getTimeDay(0));
-        List<Sp> spmstop10 = dataService.selectSpMsTop10(tools.getTimeDay(0),tools.getTimeDay(0));
+        List<Sp> sp = dataService.selectSp(v_goods.getBegin_date(),v_goods.getEnd_date());
+        List<Sp> spms = dataService.selectSpMs(v_goods.getBegin_date(),v_goods.getEnd_date());
+        List<Sp> spmstop10 = dataService.selectSpMsTop10(v_goods.getBegin_date(),v_goods.getEnd_date());
         mav.addObject("sp", sp);
         mav.addObject("spms", spms);
         mav.addObject("spmstop10", spmstop10);
+        mav.addObject("goods_con", v_goods);   //回写查询条件
         return mav;
 
 

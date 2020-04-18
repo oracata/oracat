@@ -50,7 +50,9 @@
 <html>
 
 <head>
+    <!--
     <meta http-equiv="refresh" content="300" />
+    -->
 
     <title>FusionCharts | My First Chart</title>
 
@@ -272,10 +274,12 @@
             chartConfig2.put("subcaption", "线上订单");
             chartConfig2.put("showvalues", "1");
             chartConfig2.put("numbersuffix", "元");
-            chartConfig2.put("showpercentintooltip", "0");
+            chartConfig2.put("showpercentintooltip", "1");
             chartConfig2.put("enablemultislicing", "1");
             chartConfig2.put("basefontsize", "14");
             chartConfig2.put("theme", "fusion");
+            chartConfig2.put("showNames", "1");
+            chartConfig2.put("showPercentValues", "0");
 
 
 
@@ -473,10 +477,12 @@
             chartConfig6.put("subcaption", "订单");
             chartConfig6.put("showvalues", "1");
             chartConfig6.put("numbersuffix", "元");
-            chartConfig6.put("showpercentintooltip", "0");
+            chartConfig6.put("showpercentintooltip", "1");
             chartConfig6.put("enablemultislicing", "1");
             chartConfig6.put("basefontsize", "18");
             chartConfig6.put("theme", "fusion");
+            chartConfig6.put("showNames", "1");
+            chartConfig6.put("showPercentValues", "0");
 
 
 

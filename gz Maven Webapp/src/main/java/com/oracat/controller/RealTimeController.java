@@ -134,6 +134,23 @@ public class RealTimeController {
     }
 
 
+    @RequestMapping("/khjxnspml")
+    public ModelAndView getKhjXnSpml(){
+
+        ModelAndView mav = new ModelAndView("khjxnspml");
+
+        List<Spml> xnspml = dataService.selectXnSpml();
+
+        mav.addObject("xnspml", xnspml);
+
+
+        return mav;
+
+
+    }
+
+
+
     @RequestMapping("/khjcust")
     public ModelAndView getKhjCust(){
 
@@ -145,6 +162,36 @@ public class RealTimeController {
         mav.addObject("custaddorder", custaddorder);
         return mav;
 
+
+    }
+
+
+    @RequestMapping("/khjsankey")
+    public ModelAndView getKhjSanKey(Model model, @ModelAttribute Order v_flow){
+
+        ModelAndView mav = new ModelAndView("khjsankey");
+        List<Flow> flow = dataService.selectFlow(v_flow.getBegin_date(),v_flow.getEnd_date());
+        mav.addObject("flow", flow);
+        mav.addObject("flow_con", v_flow);   //回写查询条件
+        return mav;
+
+       }
+
+
+
+    @RequestMapping("/khjsearch")
+    public ModelAndView getKhjSearch(Model model, @ModelAttribute Order v_search){
+
+        ModelAndView mav = new ModelAndView("khjsearch");
+        List<Search> searchtop5 = dataService.selectSearchTop5(v_search.getBegin_date(),v_search.getEnd_date());
+        List<Search> searchbingo = dataService.selectSearchBingo(v_search.getBegin_date(),v_search.getEnd_date());
+        List<Search> searchno = dataService.selectSearchno(v_search.getBegin_date(),v_search.getEnd_date());
+        mav.addObject("searchtop5", searchtop5);
+        mav.addObject("searchbingo", searchbingo);
+        mav.addObject("searchno", searchno);
+        mav.addObject("search_con", v_search);   //回写查询条件
+
+        return mav;
 
     }
 

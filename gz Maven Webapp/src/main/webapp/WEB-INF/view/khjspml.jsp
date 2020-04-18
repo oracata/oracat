@@ -140,18 +140,18 @@
         <%
             // store chart config name-config value pair
             Map<String, String> chartConfig2 = new HashMap<String, String>();
-            chartConfig2.put("caption", "商品状态");
+            chartConfig2.put("caption", "商品分布");
             chartConfig2.put("subcaption", "");
             chartConfig2.put("showvalues", "1");
             chartConfig2.put("numbersuffix", "个");
-            chartConfig2.put("showpercentintooltip", "0");
+            chartConfig2.put("showpercentintooltip", "1");
          //   chartConfig2.put("enablemultislicing", "1");
             chartConfig2.put("formatNumberScale", "0");
             chartConfig2.put("basefontsize", "18");
             chartConfig2.put("theme", "fusion");
 
-
-
+            chartConfig2.put("showNames", "1");
+            chartConfig2.put("showPercentValues", "0");
 
 
             //store label-value pair
@@ -244,7 +244,8 @@
             chartConfig6.put("basefontsize", "18");
             chartConfig6.put("theme", "fusion");
 
-
+            chartConfig6.put("showNames", "1");
+            chartConfig6.put("showPercentValues", "0");
 
 
 
@@ -333,7 +334,8 @@
             chartConfig3.put("basefontsize", "15");
             chartConfig3.put("theme", "fusion");
 
-
+            chartConfig3.put("showNames", "1");
+            chartConfig3.put("showPercentValues", "0");
 
 
 
@@ -413,7 +415,7 @@
         <%
             // store chart config name-config value pair
             Map<String, String> chartConfig7 = new HashMap<String, String>();
-            chartConfig7.put("caption", "未上加无库存");
+            chartConfig7.put("caption", "未上架无库存");
             chartConfig7.put("subcaption", "");
             chartConfig7.put("showvalues", "1");
             chartConfig7.put("numbersuffix", "个");
@@ -423,7 +425,8 @@
             chartConfig7.put("basefontsize", "19");
             chartConfig7.put("theme", "fusion");
 
-
+            chartConfig7.put("showNames", "1");
+            chartConfig7.put("showPercentValues", "0");
 
 
 

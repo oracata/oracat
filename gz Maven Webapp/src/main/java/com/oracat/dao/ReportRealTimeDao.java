@@ -270,43 +270,49 @@ public interface ReportRealTimeDao {
 
 
 
-    @Select( "SELECT  \n" +
-            "   \n" +
-            "    CASE WHEN b.state=1 AND  b.stock_num>0 THEN 1\n" +
-            "              WHEN b.state=1 AND  b.stock_num=0 THEN 2\n" +
-            "              WHEN b.state IN(2,3,4) AND  b.stock_num>0 THEN 3\n" +
-            "              WHEN b.state IN(2,3,4) AND  b.stock_num=0 THEN 4\n" +
-            "                 WHEN b.id IS NULL    THEN 5\n" +
-            "               ELSE 6 END id ,\n" +
-            "   CASE WHEN b.state=1 AND  b.stock_num>0 THEN '已上架有库存' \n" +
-            "              WHEN b.state=1 AND  b.stock_num=0 THEN '已上架无库存' \n" +
-            "              WHEN b.state IN(2,3,4) AND  b.stock_num>0 THEN '未上架有库存' \n" +
-            "              WHEN b.state IN(2,3,4) AND  b.stock_num=0 THEN '未上架无库存' \n" +
-            "                 WHEN b.id IS NULL    THEN '冻结' \n" +
-            "               ELSE '其它' END  TYPE ,COUNT(*) num FROM ds_spml_mx (NOLOCK) a  LEFT JOIN (\n" +
-            "   SELECT a.id,a.state,b.stock_num FROM openquery(b2b,'select * from   goods') a inner JOIN  openquery(b2b,'select * from   mv_khlb_kc_hshj')b ON a.id=b.id \n" +
-            "   WHERE    kehulb='1'   \n" +
-            "   ) b  ON a.spid=b.id\n" +
-            "   GROUP BY    CASE WHEN b.state=1 AND  b.stock_num>0 THEN '已上架有库存' \n" +
-            "              WHEN b.state=1 AND  b.stock_num=0 THEN '已上架无库存' \n" +
-            "              WHEN b.state IN(2,3,4) AND  b.stock_num>0 THEN '未上架有库存' \n" +
-            "              WHEN b.state IN(2,3,4) AND  b.stock_num=0 THEN '未上架无库存' \n" +
-            "                 WHEN b.id IS NULL    THEN '冻结' \n" +
-            "               ELSE '其它' END ,\n" +
-            "                  \n" +
-            "    CASE WHEN b.state=1 AND  b.stock_num>0 THEN 1\n" +
-            "              WHEN b.state=1 AND  b.stock_num=0 THEN 2\n" +
-            "              WHEN b.state IN(2,3,4) AND  b.stock_num>0 THEN 3\n" +
-            "              WHEN b.state IN(2,3,4) AND  b.stock_num=0 THEN 4\n" +
-            "                 WHEN b.id IS NULL    THEN 5\n" +
-            "               ELSE 6 END          \n" +
-            "               \n" +
-            "   ORDER BY   CASE WHEN b.state=1 AND  b.stock_num>0 THEN 1\n" +
-            "              WHEN b.state=1 AND  b.stock_num=0 THEN 2\n" +
-            "              WHEN b.state IN(2,3,4) AND  b.stock_num>0 THEN 3\n" +
-            "              WHEN b.state IN(2,3,4) AND  b.stock_num=0 THEN 4\n" +
-            "                 WHEN b.id IS NULL    THEN 5\n" +
-            "               ELSE 6 END"  )
+    @Select( " SELECT   \n" +
+            "                CASE \n" +
+            "                WHEN b.state=1 AND  b.stock_num=99999 THEN 0 \n" +
+            "                WHEN b.state=1 AND  b.stock_num>0 and  b.stock_num<>99999 THEN 1 \n" +
+            "                          WHEN b.state=1 AND  b.stock_num=0 THEN 2 \n" +
+            "                          WHEN b.state IN(2,3,4) AND  b.stock_num>0 THEN 3 \n" +
+            "                          WHEN b.state IN(2,3,4) AND  b.stock_num=0 THEN 4 \n" +
+            "                             WHEN b.id IS NULL    THEN 5 \n" +
+            "                           ELSE 6 END id , \n" +
+            "               CASE \n" +
+            "                WHEN b.state=1 AND    b.stock_num=99999 THEN '已上架虚拟库存'  \n" +
+            "               WHEN b.state=1 AND  b.stock_num>0 and  b.stock_num<>99999 THEN '已上架有库存'  \n" +
+            "                          WHEN b.state=1 AND  b.stock_num=0 THEN '已上架无库存'  \n" +
+            "                          WHEN b.state IN(2,3,4) AND  b.stock_num>0 THEN '未上架有库存'  \n" +
+            "                          WHEN b.state IN(2,3,4) AND  b.stock_num=0 THEN '未上架无库存'  \n" +
+            "                             WHEN b.id IS NULL    THEN '冻结'  \n" +
+            "                           ELSE '其它' END  TYPE ,COUNT(*) num FROM ds_spml_mx (NOLOCK) a  LEFT JOIN ( \n" +
+            "               SELECT a.id,a.state,b.stock_num FROM openquery(b2b,'select * from   goods') a inner JOIN  openquery(b2b,'select * from   mv_khlb_kc_hshj')b ON a.id=b.id  \n" +
+            "               WHERE    kehulb='1'    \n" +
+            "               ) b  ON a.spid=b.id \n" +
+            "               GROUP BY  case  WHEN b.state=1 AND    b.stock_num=99999 THEN '已上架虚拟库存'  \n" +
+            "                        WHEN b.state=1 AND  b.stock_num>0 and  b.stock_num<>99999 THEN '已上架有库存'  \n" +
+            "                          WHEN b.state=1 AND  b.stock_num=0 THEN '已上架无库存'  \n" +
+            "                          WHEN b.state IN(2,3,4) AND  b.stock_num>0 THEN '未上架有库存'  \n" +
+            "                          WHEN b.state IN(2,3,4) AND  b.stock_num=0 THEN '未上架无库存'  \n" +
+            "                             WHEN b.id IS NULL    THEN '冻结'  \n" +
+            "                           ELSE '其它' END , \n" +
+            "                               \n" +
+            "                CASE      WHEN b.state=1 AND  b.stock_num=99999 THEN 0 \n" +
+            "                WHEN b.state=1 AND  b.stock_num>0 and  b.stock_num<>99999 THEN 1 \n" +
+            "                          WHEN b.state=1 AND  b.stock_num=0 THEN 2 \n" +
+            "                          WHEN b.state IN(2,3,4) AND  b.stock_num>0 THEN 3 \n" +
+            "                          WHEN b.state IN(2,3,4) AND  b.stock_num=0 THEN 4 \n" +
+            "                             WHEN b.id IS NULL    THEN 5 \n" +
+            "                           ELSE 6 END           \n" +
+            "                            \n" +
+            "               ORDER BY  case     WHEN b.state=1 AND  b.stock_num=99999 THEN 0 \n" +
+            "                WHEN b.state=1 AND  b.stock_num>0 and  b.stock_num<>99999 THEN 1 \n" +
+            "                          WHEN b.state=1 AND  b.stock_num=0 THEN 2 \n" +
+            "                          WHEN b.state IN(2,3,4) AND  b.stock_num>0 THEN 3 \n" +
+            "                          WHEN b.state IN(2,3,4) AND  b.stock_num=0 THEN 4 \n" +
+            "                             WHEN b.id IS NULL    THEN 5 \n" +
+            "                           ELSE 6 END  "  )
     List<Spml> selectSpml();
 
 
@@ -359,6 +365,12 @@ public interface ReportRealTimeDao {
     List<Spml> selectSpmlNoStock();
 
 
+    @Select( "SELECT case when b.spid is not null THEN '虚拟库存商品' ELSE '非虚拟库存商品'  end TYPE ,COUNT(*) num FROM  openquery(b2b,'select * from goods')a left JOIN \n" +
+            " zkspkc_xs_v_wsdd b   ON a.id=b.spid   AND  kxkcshl=99999 AND rwkc=99999  AND erpkc=99999\n" +
+            "WHERE a.state=1 \n" +
+            "GROUP BY case when b.spid is not null THEN '虚拟库存商品' ELSE '非虚拟库存商品' END ;"  )
+    List<Spml> selectXnSpml();
+
 
 
 
@@ -388,6 +400,141 @@ public interface ReportRealTimeDao {
             "   group by CASE WHEN b.enterprise_id IS NOT NULL  THEN '新增客户订单' ELSE '存量客户订单' END" )
     List<Cust> selectCustAddOrder(@Param("begin_date") String begin_date,
                              @Param("end_date") String end_date);
+
+
+
+    @Select(   "SELECT *  FROM (\n" +
+            " SELECT  1 id,\n" +
+            "'线下订单' AS begin_name  ,sum(a.hsje-isnull(b.coupon_price,0)) 已开票\n" +
+            " FROM      wldwzl c  INNER join    gxkphz a(nolock)   ON a.wldwid=c.wldwid \n" +
+            " LEFT    JOIN b_gxddhz b(nolock)  on a.dsdjbh=b.order_id\n" +
+            "WHERE a.rq between  '${begin_date}' AND '${end_date}'\n" +
+            "AND      a.is_zx <> '清'  AND a.shenhe='是'\n" +
+            "and a.jigid='000'AND   a.bmname IN ('电商事业部','终端普药事业部') AND  a.djbh like 'XHB%'\n" +
+            "AND  c.is_fzjg='否'  AND  b.order_id IS NULL \n" +
+            ")a\n" +
+            " unpivot \n" +
+            "(   \n" +
+            "     value FOR end_name IN ( 已开票)     \n" +
+            ") t\n" +
+            " WHERE VALUE>0\n" +
+            "UNION ALL \n" +
+            " SELECT * FROM (\n" +
+            "SELECT --sum(hsje) hsje,\n" +
+            "1 id,\n" +
+            "'线上订单' AS begin_name,CAST(SUM(kphsje)AS DECIMAL) 已开票,CAST(SUM(EXCEPT_price) AS DECIMAL) 差异开票,CAST(SUM(nokp_price)  AS DECIMAL) 未开票 FROM (\n" +
+            "SELECT \n" +
+            "order_pay_price hsje ,a.id,isnull(b.hsje,0) kphsje ,order_pay_price- (case when b.hsje IS NOT NULL THEN  b.hsje ELSE order_pay_price END  ) EXCEPT_price\n" +
+            ",  (case when b.hsje IS NULL THEN  order_pay_price ELSE 0 END  ) nokp_price\n" +
+            "FROM   openquery(b2b,'select * from order_for_goods ') a LEFT JOIN \n" +
+            "( SELECT dsdjbh,(a.hsje-isnull(b.coupon_price,0)) hsje FROM  gxkphz  (nolock) a INNER join b_gxddhz b(NOLOCK) ON    a.dsdjbh=b.order_id AND    a.is_zx <> '清' AND  a.shenhe='是' AND a.djbs='XHB') b   ON a.id=b.dsdjbh\n" +
+            "WHERE  is_pay = 1 and pay_time BETWEEN   '${begin_date} 00:00:00' AND '${end_date} 23:59:59'\n" +
+            ")a\n" +
+            ")a\n" +
+            "unpivot \n" +
+            "(   \n" +
+            "     value FOR end_name IN ( 已开票, 差异开票,未开票)     \n" +
+            ") t  WHERE VALUE>0" +
+            "UNION ALL \n" +
+            "SELECT *  FROM (\n" +
+            " SELECT  2 id,\n" +
+            "'已开票' AS begin_name  ,sum(case when  handle<>9  then 0 ELSE a.hsje END ) 已分配批号,sum(case when handle<>9  then a.hsje ELSE 0 END ) 未分配批号\n" +
+            " FROM      wldwzl c  INNER join    gxkphz a(nolock)   ON a.wldwid=c.wldwid \n" +
+            "WHERE a.rq between  '${begin_date}' AND '${end_date}'\n" +
+            "AND      a.is_zx <> '清'  AND a.shenhe='是'\n" +
+            "and a.jigid='000'AND   a.bmname IN ('电商事业部','终端普药事业部') AND  a.djbs='XHB'\n" +
+            "AND  c.is_fzjg='否'   \n" +
+            ")a\n" +
+            " unpivot \n" +
+            "(   \n" +
+            "     value FOR end_name IN ( 已分配批号,未分配批号)     \n" +
+            ") t\n" +
+            " WHERE VALUE>0"+
+            "UNION ALL \n" +
+            "          SELECT *  FROM (\n" +
+            "             SELECT  3 id,\n" +
+            "            '已分配批号' AS begin_name  ,sum(case when g.djbh is not null    then isnull(g.hsje,0) ELSE 0 END ) 已出库,sum(ISNULL(b.COUPON_PRICE,0) ) 优惠金额,\n" +
+            "           SUM(a.hsje)- sum(case when g.djbh is not null    then isnull(g.hsje,0) ELSE 0 END )-sum(ISNULL(b.COUPON_PRICE,0) ) 出库差异\n" +
+            "             FROM      wldwzl c  INNER join    gxkphz a(nolock)   ON a.wldwid=c.wldwid \n" +
+            "              LEFT    JOIN b_gxddhz b(nolock)  on a.dsdjbh=b.order_id\n" +
+            "             LEFT JOIN (\n" +
+            "             SELECT b.xgdjbh djbh ,sum(b.hsje) hsje  FROM gxywhz(NOLOCK) a INNER JOIN gxywmx b  ON a.djbh=b.djbh  WHERE   djbs='XHC'  \n" +
+            "             GROUP BY b.xgdjbh\n" +
+            "             ) g  ON a.djbh=g.djbh\n" +
+            "            WHERE a.rq between   '${begin_date}' AND '${end_date}'\n" +
+            "            AND      a.is_zx <> '清'  AND a.shenhe='是' \n" +
+            "            and a.jigid='000'AND   a.bmname IN ('电商事业部','终端普药事业部') AND  a.djbs='XHB'\n" +
+            "            AND  c.is_fzjg='否'  AND g.djbh IS NOT NULL  \n" +
+            "            )a\n" +
+            "             unpivot \n" +
+            "            (   \n" +
+            "                 value FOR end_name IN ( 已出库,优惠金额,出库差异)     \n" +
+            "            ) t\n" +
+            "             WHERE VALUE>0      "
+
+          )
+    List<Flow> selectFlow(@Param("begin_date") String begin_date,
+                                  @Param("end_date") String end_date);
+
+    @Select(   "SELECT top 5 search_key,COUNT(*) n FROM openquery(b2b,'select * from goods_search ') a \n" +
+            " inner join openquery(b2b,'select * from enterprise_custom ') c  on \n" +
+            "a.custom_id=c.custom_id AND c.state=2\n" +
+            "WHERE a.search_time BETWEEN '${begin_date} 00:00:00' AND '${end_date} 23:59:59' AND len(rtrim(a.search_key))>=2\n" +
+            "and  c.enterprise_id<>'WLD00005953' \n" +
+            "GROUP BY search_key ORDER BY n DESC  "
+
+    )
+    List<Search> selectSearchTop5(@Param("begin_date") String begin_date,
+                          @Param("end_date") String end_date);
+
+
+    @Select(   "SELECT *  FROM (\n" +
+            "SELECT round(SUM(ok)*0.001*1000*100/COUNT(*),2) 找到,round(SUM(nook)*0.001*1000*100/COUNT(*),2) 找到无库存,round(SUM(no)*0.001*1000*100/COUNT(*),2) 未找到 FROM (\n" +
+            "SELECT DISTINCT \n" +
+            "c.enterprise_id,\n" +
+            "x.wldwname,\n" +
+            "a.search_key,\n" +
+            "CASE WHEN y.stock_num>0 THEN 1 ELSE 0 END AS ok ,-- 有库存\n" +
+            "CASE WHEN y.stock_num=0 THEN 1 ELSE 0 END AS nook ,--有商品无库存\n" +
+            "CASE WHEN y.stock_num is null THEN 1 ELSE 0 END AS no --无商品\n" +
+            " from openquery(b2b,'select * from goods_search ') a  \n" +
+            " inner join openquery(b2b,'select * from enterprise_custom ') c  on \n" +
+            "a.custom_id=c.custom_id AND c.state=2\n" +
+            "INNER JOIN wldwzl x ON x.wldwid=c.enterprise_id\n" +
+            "LEFT JOIN report_b2b_searchin_detail  y ON a.id=y.ID  AND y.rq between '${begin_date}' and '${end_date}'  \n" +
+            "WHERE   a.search_time BETWEEN '${begin_date} 00:00:00' AND '${end_date} 23:59:59'  and  c.enterprise_id<>'WLD00005953'\n" +
+            ")a \n" +
+            ")a\n" +
+            "unpivot \n" +
+            "(   \n" +
+            "     value FOR type IN ( 找到无库存, 找到,未找到)     \n" +
+            ") t\n\n "
+
+    )
+    List<Search> selectSearchBingo(@Param("begin_date") String begin_date,
+                                @Param("end_date") String end_date);
+
+
+
+    @Select(   "SELECT top 5 search_key,count(*) n FROM report_b2b_searno_detail WHERE rq between '${begin_date}' and '${end_date}' and enterprise_id<>'WLD00005953' GROUP BY search_key ORDER BY n DESC  \n "
+
+    )
+    List<Search> selectSearchno(@Param("begin_date") String begin_date,
+                                 @Param("end_date") String end_date);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

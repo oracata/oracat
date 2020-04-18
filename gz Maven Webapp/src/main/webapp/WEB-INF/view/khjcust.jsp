@@ -266,7 +266,7 @@
                 FusionCharts firstChart5 = new FusionCharts(
                         "msline",
                         "first_chart5",
-                        "1300",
+                        "800",
                         "400",
                         "chart5",
                         "json",
@@ -275,8 +275,7 @@
             %>
             <%= firstChart5.render() %>
         </td>
-    </tr>
-<tr>     <td>
+     <td>
     <div id="chart2"  ></div>
     <%
         // store chart config name-config value pair
@@ -419,7 +418,7 @@
         <%
             // store chart config name-config value pair
             Map<String, String> chartConfig6 = new HashMap<String, String>();
-            chartConfig6.put("caption", "新增客户订单数");
+            chartConfig6.put("caption", "客户订单数");
             chartConfig6.put("subcaption", "");
             chartConfig6.put("showvalues", "1");
             chartConfig6.put("numbersuffix", "个");

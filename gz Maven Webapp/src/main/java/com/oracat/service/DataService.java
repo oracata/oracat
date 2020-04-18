@@ -51,8 +51,13 @@ public interface DataService {
 	List<Spml> selectSpmlMiss();
 	List<Spml> selectSpmlStock();
 	List<Spml> selectSpmlNoStock();
+	List<Spml> selectXnSpml();
     List<Cust> selectCustAdd(String begin_date,String end_date);
 	List<Cust> selectCustAddOrder(String begin_date,String end_date);
+	List<Flow> selectFlow(String begin_date,String end_date);
+	List<Search> selectSearchTop5(String begin_date,String end_date);
+	List<Search> selectSearchBingo(String begin_date,String end_date);
+	List<Search> selectSearchno(String begin_date,String end_date);
 
 
 

@@ -132,11 +132,19 @@
                                                                  -->
 
                       <dd><a data-url="khjspml.do" data-id="33" data-title="商品上架分析" class="site-demo-active"  href="javascript:;" data-type="tabAdd">商品上架分析</a></dd>
-                        <!--
-                         <dd><a data-url="coupon.do" data-id="33" data-title="策划分析" class="site-demo-active"  href="javascript:;" data-type="tabAdd">策划分析</a></dd>
-                               <dd><a data-url="coupon.do" data-id="34" data-title="未支付订单分析" class="site-demo-active"  href="javascript:;" data-type="tabAdd">未支付订单分析</a></dd>
-                                     <dd><a data-url="coupon.do" data-id="35" data-title="购物车分析" class="site-demo-active"  href="javascript:;" data-type="tabAdd">购物车分析</a></dd>
-                         -->
+
+                                                <dd><a data-url="khjxnspml.do" data-id="36" data-title="虚拟订单流程分析" class="site-demo-active"  href="javascript:;" data-type="tabAdd">虚拟订单流程分析</a></dd>
+
+
+                                                <dd><a data-url="khjsankey.do" data-id="37" data-title="流程损耗分析" class="site-demo-active"  href="javascript:;" data-type="tabAdd">流程损耗分析</a></dd>
+
+                                                <dd><a data-url="khjsearch.do" data-id="38" data-title="搜索关键词分析" class="site-demo-active"  href="javascript:;" data-type="tabAdd">搜索关键词分析</a></dd>
+                                                <!--
+                                                 <dd><a data-url="coupon.do" data-id="33" data-title="策划分析" class="site-demo-active"  href="javascript:;" data-type="tabAdd">策划分析</a></dd>
+                                                       <dd><a data-url="coupon.do" data-id="34" data-title="未支付订单分析" class="site-demo-active"  href="javascript:;" data-type="tabAdd">未支付订单分析</a></dd>
+                                                             <dd><a data-url="coupon.do" data-id="35" data-title="购物车分析" class="site-demo-active"  href="javascript:;" data-type="tabAdd">购物车分析</a></dd>
+
+                                                 -->
                     </dl>
 
 

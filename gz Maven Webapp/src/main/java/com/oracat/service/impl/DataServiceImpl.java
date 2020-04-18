@@ -522,6 +522,14 @@ public class DataServiceImpl implements DataService{
 	}
 
 
+	@Override
+	public List<Spml> selectXnSpml()
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+		return reportRealTimeDao.selectXnSpml();
+
+	}
+
 
 
 	@Override
@@ -541,6 +549,48 @@ public class DataServiceImpl implements DataService{
         return  reportRealTimeDao.selectCustAddOrder(begin_date,end_date);
 
     }
+
+
+    @Override
+    public List<Flow> selectFlow(String begin_date,String end_date)
+    {
+        DynamicDataSourceHolder.setDataSource("sqlserver");
+
+        return  reportRealTimeDao.selectFlow(begin_date,end_date);
+
+    }
+
+
+	@Override
+	public List<Search> selectSearchTop5(String begin_date,String end_date)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return  reportRealTimeDao.selectSearchTop5(begin_date,end_date);
+
+	}
+
+
+	@Override
+	public List<Search> selectSearchBingo(String begin_date,String end_date)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return  reportRealTimeDao.selectSearchBingo(begin_date,end_date);
+
+	}
+
+
+	@Override
+	public List<Search> selectSearchno(String begin_date,String end_date)
+	{
+		DynamicDataSourceHolder.setDataSource("sqlserver");
+
+		return  reportRealTimeDao.selectSearchno(begin_date,end_date);
+
+	}
+
+
 
 
 

@@ -53,14 +53,14 @@
     <!--
 <meta http-equiv="refresh" content="300" />
 -->
-<title>FusionCharts | My First Chart</title>
+    <title>FusionCharts | My First Chart</title>
 
-<!--
-    <script src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <!--
+        <script src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
 
 
-    <script src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
--->
+        <script src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+    -->
 
 
     <script src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
@@ -146,10 +146,10 @@
         <%
             // store chart config name-config value pair
             Map<String, String> chartConfig2 = new HashMap<String, String>();
-            chartConfig2.put("caption", "秒杀商品占比");
+            chartConfig2.put("caption", "搜索命中率");
             chartConfig2.put("subcaption", "线上订单");
             chartConfig2.put("showvalues", "1");
-            chartConfig2.put("numbersuffix", "元");
+            chartConfig2.put("numbersuffix", "%");
             chartConfig2.put("showpercentintooltip", "0");
             chartConfig2.put("enablemultislicing", "1");
             chartConfig2.put("basefontsize", "14");
@@ -164,15 +164,15 @@
 
 
             //遍历List
-            Object re2 = request.getAttribute("spms");
-            List<Sp> ol2= (List)re2;
+            Object re2 = request.getAttribute("searchbingo");
+            List<Search> ol2= (List)re2;
             for(int i=0;i<ol2.size();i++){
-                Sp      ov2 = ol2.get(i);
+                Search      ov2 = ol2.get(i);
 
 
 
 
-                dataValuePair2.put("" + ov2.getMs() + "", ov2.getOrder_pay_price());
+                dataValuePair2.put("" + ov2.getType()+ "", ov2.getValue());
 
             }
             StringBuilder jsonData2 = new StringBuilder();
@@ -238,11 +238,11 @@
         <%
             // store chart config name-config value pair
             Map<String, String> chartConfig3 = new HashMap<String, String>();
-            chartConfig3.put("caption", "非秒杀商品排名");
-            chartConfig3.put("yaxisname", "销售金额");
-            chartConfig3.put("subcaption", "前10");
+            chartConfig3.put("caption", "搜索关键词排名");
+            chartConfig3.put("yaxisname", "次数");
+            chartConfig3.put("subcaption", "前5");
             chartConfig3.put("showhovereffect", "1");
-            chartConfig3.put("numbersuffix", "元");
+            chartConfig3.put("numbersuffix", "次");
             chartConfig3.put("drawcrossline", "1");
             chartConfig3.put("basefontsize", "14");
             chartConfig3.put("showvalues", "1");
@@ -252,19 +252,19 @@
 
             //store label-value pair
             //LinkedHashMap 保证数据顺序
-            Map<String, Double[]> dataValuePair3 = new LinkedHashMap<String, Double[]>();
+            Map<String, Integer[]> dataValuePair3 = new LinkedHashMap<String, Integer[]>();
 
 
             //遍历List
-            Object re3 = request.getAttribute("sp");
-            List<Sp> ol3= (List)re3;
+            Object re3 = request.getAttribute("searchtop5");
+            List<Search> ol3= (List)re3;
             for(int i=0;i<ol3.size();i++){
-                Sp      ov3 = ol3.get(i);
+                Search      ov3 = ol3.get(i);
 
 
-                Double[] dt3 = { ov3.getOrder_pay_price()};
+                Integer[] dt3 = { ov3.getN()};
 
-                dataValuePair3.put("" + ov3.getSpmch()+ "", dt3);
+                dataValuePair3.put("" + ov3.getSearch_key()+ "", dt3);
 
             }
             StringBuilder jsonData3 = new StringBuilder();
@@ -293,7 +293,7 @@
 
             data1.append("  'dataset': [\n" +
                     "    {\n" +
-                    "      'seriesname': '线上',\n" +
+                    "      'seriesname': '关键词',\n" +
                     "      'data': [\n");
 
 
@@ -301,7 +301,7 @@
 
             for(Map.Entry pair1:dataValuePair3.entrySet())
             {
-                Double[]  val=(Double[])pair1.getValue();
+                Integer[]  val=(Integer[])pair1.getValue();
                 data1.append("{'value':'" +val[0] +"'},");
 
             }
@@ -328,8 +328,8 @@
             FusionCharts firstChart3 = new FusionCharts(
                     "stackedcolumn2d",
                     "first_chart3",
-                    "1000",
-                    "500",
+                    "800",
+                    "400",
                     "chart3",
                     "json",
                     jsonData3.toString()
@@ -347,11 +347,11 @@
         <%
             // store chart config name-config value pair
             Map<String, String> chartConfig5 = new HashMap<String, String>();
-            chartConfig5.put("caption", "秒杀商品排名");
-            chartConfig5.put("yaxisname", "销售金额");
-            chartConfig5.put("subcaption", "前10");
+            chartConfig5.put("caption", "未命中关键词排名");
+            chartConfig5.put("yaxisname", "");
+            chartConfig5.put("subcaption", "前5");
             chartConfig5.put("showhovereffect", "1");
-            chartConfig5.put("numbersuffix", "元");
+            chartConfig5.put("numbersuffix", "个");
             chartConfig5.put("drawcrossline", "1");
             chartConfig5.put("basefontsize", "14");
             chartConfig5.put("showvalues", "1");
@@ -361,19 +361,19 @@
 
             //store label-value pair
             //LinkedHashMap 保证数据顺序
-            Map<String, Double[]> dataValuePair5 = new LinkedHashMap<String, Double[]>();
+            Map<String, Integer[]> dataValuePair5 = new LinkedHashMap<String, Integer[]>();
 
 
             //遍历List
-            Object re5 = request.getAttribute("spmstop10");
-            List<Sp> ol5= (List)re5;
+            Object re5 = request.getAttribute("searchno");
+            List<Search> ol5= (List)re5;
             for(int i=0;i<ol5.size();i++){
-                Sp      ov5 = ol5.get(i);
+                Search      ov5 = ol5.get(i);
 
 
-                Double[] dt5 = { ov5.getOrder_pay_price()};
+                Integer[] dt5 = { ov5.getN()};
 
-                dataValuePair5.put("" + ov5.getSpmch()+ "", dt5);
+                dataValuePair5.put("" + ov5.getSearch_key()+ "", dt5);
 
             }
             StringBuilder jsonData5 = new StringBuilder();
@@ -402,7 +402,7 @@
 
             data7.append("  'dataset': [\n" +
                     "    {\n" +
-                    "      'seriesname': '线上',\n" +
+                    "      'seriesname': '关键词',\n" +
                     "      'data': [\n");
 
 
@@ -410,7 +410,7 @@
 
             for(Map.Entry pair7:dataValuePair5.entrySet())
             {
-                Double[]  val=(Double[])pair7.getValue();
+                Integer[]  val=(Integer[])pair7.getValue();
                 data7.append("{'value':'" +val[0] +"'},");
 
             }
@@ -438,7 +438,7 @@
                     "stackedcolumn2d",
                     "first_chart5",
                     "800",
-                    "500",
+                    "400",
                     "chart5",
                     "json",
                     jsonData5.toString()
@@ -455,12 +455,12 @@
 <table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
     <tr>
         <td class="fftd">
-            <form name="dcform" method="post" id="form" action="khjgoods.do">
+            <form name="dcform" method="post" id="form" action="khjsearch.do">
                 <table width="100%" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                         <td class="font3">
-                            开始日期：<input type="text" id="begin_date" name="begin_date" value="${goods_con.begin_date}"  />
-                            结束日期：<input type="text" id="end_date"   name="end_date" value="${goods_con.end_date}" />
+                            开始日期：<input type="text" id="begin_date" name="begin_date" value="${search_con.begin_date}"  />
+                            结束日期：<input type="text" id="end_date"   name="end_date" value="${search_con.end_date}" />
                             <input type="submit" value="查询"/>
 
                         </td>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oracat.dao.ClassifyDao">
+    <resultMap id="BaseResultMap" type="com.oracat.model.Classify">
+        <result column="spid"              property="spid"                />
+        <result column="spbm"              property="spbm"                />
+        <result column="spmch"             property="spmch"               />
+        <result column="spec"              property="spec"                />
+        <result column="manufacturer"      property="manufacturer"        />
+        <result column="approval_number"   property="approval_number"     />
+        <result column="flbm"              property="flbm"                />
+        <result column="fenlei1"           property="fenlei1"             />
+        <result column="fenlei2"           property="fenlei2"             />
+        <result column="fenlei3"           property="fenlei3"             />
+        <result column="fenlei4"           property="fenlei4"             />
+        <result column="isnull"           property="isnull"             />
+        <result column="ison"           property="ison"             />
+    </resultMap>
+    <sql id="Base_Column_List">
+     spid ,flbm,fenlei1,fenlei2,fenlei3,fenlei4
+  </sql>
+
+
+
+
+
+    <select id="queryAllClassify" resultMap="BaseResultMap">
+        SELECT a.id spid,a.no spbm,a.name spmch,spec,manufacturer,approval_number,b.flbm,fenlei1,fenlei2,fenlei3,fenlei4 FROM OPENQUERY(b2b,'select *from goods ') a LEFT JOIN ds_fenlei b ON a.id=b.spid
+        <where>
+
+
+            <choose>
+                <when test="ison!=null and ison!=''">
+                    and  a.state=1
+                </when>
+
+                <otherwise>
+                   and  a.state!=1
+                </otherwise>
+            </choose>
+
+
+            <if test="spid!=null and spid!=''">
+                and a.id like '%'+#{spid}+'%'
+            </if>
+
+            <if test="spbm!=null and spbm!=''">
+                and a.no like '%'+#{spbm}+'%'
+            </if>
+
+            <if test="spmch!=null and spmch!=''">
+                and a.name like '%'+#{spmch}+'%'
+            </if>
+
+
+            <if test="isnull!=null and isnull!=''">
+                and b.spid is null
+            </if>
+
+
+        </where>
+
+    </select>
+
+
+
+    <select id="queryfenleibybm" resultMap="BaseResultMap">
+        SELECT fenleibm,fenleibm1,fenlei1,fenleibm2,fenlei2,fenleibm3,fenlei3,fenleibm4,fenlei4 FROM ds_flzl
+        <where>
+
+
+
+            <if test="fenleibm!=null and fenleibm!=''">
+                and fenleibm  like '%'+#{fenleibm}+'%'
+            </if>
+
+
+        </where>
+
+    </select>
+
+
+
+    <select id="queryfenlei1" resultMap="BaseResultMap">
+        SELECT distinct  fenlei1 FROM ds_flzl
+
+        <where>
+
+
+
+            <if test="fenlei1!=null and fenlei1!=''">
+                and fenlei1 not like '%'+#{fenlei1}+'%'
+            </if>
+
+
+        </where>
+
+
+    </select>
+
+
+    <select id="queryfenlei2" resultMap="BaseResultMap">
+        SELECT distinct  fenlei2 FROM ds_flzl
+        <where>
+
+
+
+            <if test="fenlei1!=null and fenlei1!=''">
+                and fenlei1  like '%'+#{fenlei1}+'%'
+            </if>
+            <if test="fenlei2!=null and fenlei2!=''">
+                and fenlei2  not like '%'+#{fenlei2}+'%'
+            </if>
+
+
+        </where>
+
+    </select>
+
+
+
+    <select id="queryfenlei3" resultMap="BaseResultMap">
+        SELECT distinct  fenlei3 FROM ds_flzl
+        <where>
+
+
+
+            <if test="fenlei1!=null and fenlei1!=''">
+                and fenlei1  like '%'+#{fenlei1}+'%'
+            </if>
+
+            <if test="fenlei2!=null and fenlei2!=''">
+                and fenlei2  like '%'+#{fenlei2}+'%'
+            </if>
+
+            <if test="fenlei3!=null and fenlei3!=''">
+                and fenlei3  not like '%'+#{fenlei3}+'%'
+            </if>
+
+
+        </where>
+
+    </select>
+
+
+
+    <select id="queryfenlei4" resultMap="BaseResultMap">
+        SELECT distinct  fenlei4 FROM ds_flzl
+        <where>
+
+
+
+            <if test="fenlei1!=null and fenlei1!=''">
+                and fenlei1  like '%'+#{fenlei1}+'%'
+            </if>
+
+            <if test="fenlei2!=null and fenlei2!=''">
+                and fenlei2  like '%'+#{fenlei2}+'%'
+            </if>
+
+            <if test="fenlei3!=null and fenlei3!=''">
+                and fenlei3   like '%'+#{fenlei3}+'%'
+            </if>
+
+            <if test="fenlei4!=null and fenlei4!=''">
+                and fenlei4  not like '%'+#{fenlei4}+'%'
+            </if>
+
+        </where>
+
+    </select>
+
+
+
+
+
+    <select id="queryfenleibm" resultMap="BaseResultMap">
+        SELECT distinct  flbm FROM ds_flzl
+        <where>
+
+
+
+            <if test="fenlei1!=null and fenlei1!=''">
+                and fenlei1  like '%'+#{fenlei1}+'%'
+            </if>
+
+            <if test="fenlei2!=null and fenlei2!=''">
+                and fenlei2  like '%'+#{fenlei2}+'%'
+            </if>
+
+            <if test="fenlei3!=null and fenlei3!=''">
+                and fenlei3   like '%'+#{fenlei3}+'%'
+            </if>
+
+            <if test="fenlei4!=null and fenlei4!=''">
+                and fenlei4   like '%'+#{fenlei4}+'%'
+            </if>
+
+        </where>
+
+    </select>
+
+
+
+
+
+
+
+    <select id="queryByFlbm" resultMap="BaseResultMap">
+        SELECT distinct  flbm FROM ds_flzl
+        <where>
+
+
+
+            <if test="fenlei1!=null and fenlei1!=''">
+                and flbm=#{fenlei1}
+            </if>
+
+
+
+        </where>
+
+    </select>
+
+
+
+
+
+<update id="updateFenlei" parameterType="com.oracat.model.Classify">
+    update ds_fenlei
+    set flbm = #{flbm},
+      fenlei1 = #{fenlei1},
+      fenlei2 =  #{fenlei2},
+      fenlei3 =  #{fenlei3},
+      fenlei4 =  #{fenlei4},
+    where spid = #{spid}
+  </update>
+
+<insert id="insertFenlei" parameterType="com.oracat.model.Classify">
+    insert into ds_fenlei (spid,flbm,fenlei1,fenlei2,fenlei3,fenlei4)
+    values ( #{spid},#{flbm}, #{fenlei1}, #{fenlei2}, #{fenlei3}, #{fenlei4})
+  </insert>
+
+
+</mapper>

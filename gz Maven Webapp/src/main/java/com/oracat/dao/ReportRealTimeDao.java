@@ -390,14 +390,17 @@ public interface ReportRealTimeDao {
                              @Param("end_date") String end_date);
 
 
-    @Select( "  SELECT CASE WHEN b.enterprise_id IS NOT NULL  THEN '新增客户订单' ELSE '存量客户订单' END  type ,COUNT(*) num FROM openquery(b2b,'select * from order_for_goods') a\n" +
-            "   LEFT JOIN \n" +
-            "   ( SELECT  distinct enterprise_id\n" +
-            "   FROM openquery(b2b,'select * from enterprise_custom') \n" +
-            "   WHERE STATE=2 AND convert(varchar(100),request_time ,20) BETWEEN '${begin_date} 00:00:00' AND '${end_date} 23:59:59' ) b\n" +
-            "   ON a.enterprise_id=b.enterprise_id\n" +
-            "   WHERE a.is_pay=1 AND a.pay_time  BETWEEN '${begin_date} 00:00:00' AND '${end_date} 23:59:59'\n" +
-            "   group by CASE WHEN b.enterprise_id IS NOT NULL  THEN '新增客户订单' ELSE '存量客户订单' END" )
+    @Select( " SELECT * FROM (\n" +
+            "SELECT sum(CASE WHEN active_flag=1 THEN ISNULL(order_pay_price,0)  ELSE 0 END )  活跃客户订单 ,\n" +
+            "       SUM(CASE WHEN first_order_flag=1  THEN ISNULL(order_pay_price,0)  ELSE 0 END)  首单订单,\n" +
+            "          SUM(CASE WHEN new_flag=1  THEN ISNULL(order_pay_price,0)  ELSE 0 END)  当天增客户订单 ,\n" +
+            "              SUM(CASE WHEN IN_date>=CONVERT(VARCHAR(10), dateadd(day, -6,  '${end_date}'),20)  THEN ISNULL(order_pay_price,0)  ELSE 0 END)  近7天增客户订单 \n" +
+            "        FROM report_b2b_data_detail   WHERE rq='${end_date}'\n" +
+            "        )a\n" +
+            " unpivot \n" +
+            "(   \n" +
+            "     value FOR type IN ( 活跃客户订单, 首单订单,当天增客户订单,近7天增客户订单)     \n" +
+            ") t     " )
     List<Cust> selectCustAddOrder(@Param("begin_date") String begin_date,
                              @Param("end_date") String end_date);
 
@@ -450,10 +453,27 @@ public interface ReportRealTimeDao {
             "     value FOR end_name IN ( 已分配批号,未分配批号)     \n" +
             ") t\n" +
             " WHERE VALUE>0"+
+            "    UNION ALL \n" +
+            "                   SELECT *  FROM (\n" +
+            "             SELECT  3 id,\n" +
+            "            '已分配批号' AS begin_name   ,sum(case when x.instruct_state=3  then a.hsje ELSE 0 END ) 已打印出库 ,sum(case when  x.instruct_state in (0)   then a.hsje ELSE 0  END ) 等待波次\n" +
+            "    ,sum(case when  x.instruct_state in (1,2)   then a.hsje ELSE 0  END ) 正在拣货出库"+
+            "             FROM      wldwzl c  INNER join    gxkphz a(nolock)   ON a.wldwid=c.wldwid \n" +
+            "                left join wms_systeminstruct_state x (nolock) on a.djbh=x.instruct_djbh\n" +
+            "            WHERE a.rq between  '${begin_date}' AND '${end_date}'\n" +
+            "            AND      a.is_zx <> '清'  AND a.shenhe='是' AND a.handle=9\n" +
+            "            and a.jigid='000'AND   a.bmname IN ('电商事业部','终端普药事业部') AND  a.djbs='XHB'\n" +
+            "            AND  c.is_fzjg='否'   \n" +
+            "            )a\n" +
+            "            unpivot \n" +
+            "(   \n" +
+            "     value FOR end_name IN (  已打印出库,正在拣货出库,等待波次)     \n" +
+            ") t\n" +
+            "      WHERE VALUE>0"+
             "UNION ALL \n" +
             "          SELECT *  FROM (\n" +
-            "             SELECT  3 id,\n" +
-            "            '已分配批号' AS begin_name  ,sum(case when g.djbh is not null    then isnull(g.hsje,0) ELSE 0 END ) 已出库,sum(ISNULL(b.COUPON_PRICE,0) ) 优惠金额,\n" +
+            "             SELECT  4 id,\n" +
+            "            '已打印出库' AS begin_name  ,sum(case when g.djbh is not null    then isnull(g.hsje,0) ELSE 0 END ) 已出库,sum(ISNULL(b.COUPON_PRICE,0) ) 优惠金额,\n" +
             "           SUM(a.hsje)- sum(case when g.djbh is not null    then isnull(g.hsje,0) ELSE 0 END )-sum(ISNULL(b.COUPON_PRICE,0) ) 出库差异\n" +
             "             FROM      wldwzl c  INNER join    gxkphz a(nolock)   ON a.wldwid=c.wldwid \n" +
             "              LEFT    JOIN b_gxddhz b(nolock)  on a.dsdjbh=b.order_id\n" +
@@ -470,7 +490,30 @@ public interface ReportRealTimeDao {
             "            (   \n" +
             "                 value FOR end_name IN ( 已出库,优惠金额,出库差异)     \n" +
             "            ) t\n" +
-            "             WHERE VALUE>0      "
+            "             WHERE VALUE>0      \n"+
+            "   UNION ALL \n" +
+            "   SELECT *  FROM (\n" +
+            "             SELECT  5 id,\n" +
+            "            '已出库' AS begin_name   , sum(CASE WHEN h.djbh IS NOT NULL AND h.is_zx='是'   \t  THEN h.hsje else 0 END ) 已运输 , sum(CASE WHEN h.djbh IS NOT NULL AND h.is_zx<>'是'     THEN h.hsje else 0 END ) 待运输\n" +
+            "  FROM      wldwzl c  INNER join    gxkphz a(nolock)   ON a.wldwid=c.wldwid \n" +
+            "                      \n" +
+            "                         inner JOIN (\n" +
+            "                         SELECT b.xgdjbh djbh ,a.djbh bh ,sum(b.hsje) hsje  FROM gxywhz(NOLOCK) a INNER JOIN gxywmx b  ON a.djbh=b.djbh  WHERE   djbs='XHC'  \n" +
+            "                         GROUP BY b.xgdjbh,a.djbh\n" +
+            "                         ) g  ON a.djbh=g.djbh\n" +
+            "                         LEFT JOIN ( SELECT xgdjbh djbh,a.is_zx,SUM(b.hsje) hsje\n" +
+            "\tfrom cr_v11_wms.dbo.wms_shtzhz a(nolock) INNER JOIN   cr_v11_wms.dbo.wms_shtzmx b(nolock) ON a.djbh=b.djbh\n" +
+            "\twhere   a.is_zx<>'清'   GROUP BY xgdjbh,a.is_zx ) h ON g.bh=h.djbh\n" +
+            "                         WHERE a.rq between   '${begin_date}' AND '${end_date}'\n" +
+            "                        AND      a.is_zx <> '清'  AND a.shenhe='是' \n" +
+            "                        and a.jigid='000'AND   a.bmname IN ('电商事业部','终端普药事业部') AND  a.djbs='XHB'\n" +
+            "                        AND  c.is_fzjg='否'  \n" +
+            "                        )a\n" +
+            "                                    unpivot \n" +
+            "(   \n" +
+            "     value FOR end_name IN (   已运输,待运输)     \n" +
+            ") t\n" +
+            "      WHERE VALUE>0"
 
           )
     List<Flow> selectFlow(@Param("begin_date") String begin_date,

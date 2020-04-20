@@ -412,91 +412,114 @@
 </td>
 </tr><tr>
     <td>
-        <!-- 饼图 -->
+        <!-- 柱图 -->
 
-        <div id="chart6" align="center"></div>
+        <div id="chart3" align="center"></div>
         <%
             // store chart config name-config value pair
-            Map<String, String> chartConfig6 = new HashMap<String, String>();
-            chartConfig6.put("caption", "客户订单数");
-            chartConfig6.put("subcaption", "");
-            chartConfig6.put("showvalues", "1");
-            chartConfig6.put("numbersuffix", "个");
-            chartConfig6.put("showpercentintooltip", "0");
-            //   chartConfig6.put("enablemultislicing", "1");
-            chartConfig6.put("formatNumberScale", "0");
-            chartConfig6.put("basefontsize", "18");
-            chartConfig6.put("theme", "fusion");
-
-
+            Map<String, String> chartConfig3 = new HashMap<String, String>();
+            chartConfig3.put("caption", "客户订单分析");
+            chartConfig3.put("yaxisname", "订单金额");
+            chartConfig3.put("subcaption", "");
+            chartConfig3.put("showhovereffect", "1");
+            chartConfig3.put("numbersuffix", "元");
+            chartConfig3.put("drawcrossline", "1");
+            chartConfig3.put("basefontsize", "14");
+            chartConfig3.put("showvalues", "1");
+            chartConfig3.put("theme", "fusion");
 
 
 
             //store label-value pair
             //LinkedHashMap 保证数据顺序
-            Map<String, Integer> dataValuePair6 = new LinkedHashMap<String, Integer>();
+            Map<String, Double[]> dataValuePair3 = new LinkedHashMap<String, Double[]>();
 
 
             //遍历List
-            Object re6 = request.getAttribute("custaddorder");
-            List<Cust> ol6= (List)re6;
-            for(int i=0;i<ol6.size();i++){
-                Cust      ov6 = ol6.get(i);
+            Object re3 = request.getAttribute("custaddorder");
+            List<Cust> ol3= (List)re3;
+            for(int i=0;i<ol3.size();i++){
+                Cust      ov3 = ol3.get(i);
 
 
+                Double[] dt3 = { ov3.getValue()};
 
-
-                dataValuePair6.put("" + ov6.getType() + "", ov6.getNum());
+                dataValuePair3.put("" + ov3.getType()+ "", dt3);
 
             }
-            StringBuilder jsonData6 = new StringBuilder();
-            StringBuilder data8 = new StringBuilder();
+            StringBuilder jsonData3 = new StringBuilder();
+            StringBuilder data1 = new StringBuilder();
 
             // json data to use as chart data source
-            jsonData6.append("{'chart':{");
-            for(Map.Entry conf1:chartConfig6.entrySet())
+            jsonData3.append("{'chart':{");
+            for(Map.Entry conf1:chartConfig3.entrySet())
             {
-                jsonData6.append("'" + conf1.getKey()+"':'"+conf1.getValue() + "',");
+                jsonData3.append("'" + conf1.getKey()+"':'"+conf1.getValue() + "',");
             }
 
-            jsonData6.replace(jsonData6.length() - 1, jsonData6.length() ,"},\n");
+            jsonData3.replace(jsonData3.length() - 1, jsonData3.length() ,"},\n");
 
 
-            data8.append("'data':[");
 
-            for(Map.Entry pair:dataValuePair6.entrySet())
+            data1.append("'categories':[  {                  \n" +
+                    "     'category': [  \n");
+
+            for(Map.Entry pair:dataValuePair3.entrySet())
             {
-                data8.append("{'label':'" + pair.getKey() + "','value':'" + pair.getValue() +"'},");
+                data1.append("{'label':'" + pair.getKey() + "'},");
             }
-            data8.replace(data8.length() - 1, data8.length(),"]");
 
-            jsonData6.append(data8.toString());
-            jsonData6.append("}");
+            data1.replace(data1.length() - 1, data1.length(),"  ] } ],\n");
+
+            data1.append("  'dataset': [\n" +
+                    "    {\n" +
+                    "      'seriesname': '线上',\n" +
+                    "      'data': [\n");
+
+
+
+
+            for(Map.Entry pair1:dataValuePair3.entrySet())
+            {
+                Double[]  val=(Double[])pair1.getValue();
+                data1.append("{'value':'" +val[0] +"'},");
+
+            }
+
+
+
+
+            data1.replace(data1.length() - 1, data1.length() ,"         ]  \n" +
+                    "        }    \n" +
+                    "    ]  ");
 
 
 
 
 
+            jsonData3.append(data1.toString());
+            jsonData3.append("}");
 
-            System.out.println( jsonData6.toString());
+            System.out.println( jsonData3.toString());
 
 
             // Create chart instance
             // charttype, chartID, width, height,containerid, data format, data
-            FusionCharts firstChart6 = new FusionCharts(
-                    "doughnut2d",
-                    "first_chart6",
-                    "800",
-                    "400",
-                    "chart6",
+            FusionCharts firstChart3 = new FusionCharts(
+                    "stackedcolumn2d",
+                    "first_chart3",
+                    "1000",
+                    "500",
+                    "chart3",
                     "json",
-                    jsonData6.toString()
+                    jsonData3.toString()
             );
         %>
-        <%= firstChart6.render() %>
+        <%= firstChart3.render() %>
 
 
     </td>
+
 
 </tr>
 

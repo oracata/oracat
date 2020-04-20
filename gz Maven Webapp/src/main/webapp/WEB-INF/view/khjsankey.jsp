@@ -60,59 +60,13 @@
 </head>
 <body>
 
-<!--
-
-        <script >
-
-        const dataSource = {
-        chart: {
-        caption: "Bilateral Trade Volume, 2013",
-        subcaption:
-        "A Horizontal Sankey with options to configure the flow representation",
-        theme: "fusion",
-        orientation: "horizontal",
-        linkalpha: 30,
-        linkhoveralpha: 60,
-        nodelabelposition: "start"
-        },
-        nodes: [
-        {
-        label: "Netherlands"
-        },
-            {
-                label: "European Union"
-            }
-        ],
-        links: [
-        {
-        from: "Netherlands",
-        to: "European Union",
-        value: 798744
-        }
-        ]
-        };
-
-        FusionCharts.ready(function() {
-        var myChart = new FusionCharts({
-        type: "sankey",
-        renderAt: "chart-container",
-        width: "1300",
-        height: "800",
-        dataFormat: "json",
-        dataSource
-        }).render();
-        });
-</script>
-        <div id="chart-container"></div>
-
--->
         <div id="chart5"></div>
 
 
         <%
             // store chart config name-config value pair
             Map<String, String> chartConfig = new HashMap<String, String>();
-            chartConfig.put("caption", "订单流程损耗");
+            chartConfig.put("caption", "订单流程效率");
             chartConfig.put("subcaption", "线上线下");
             chartConfig.put("showvalues", "1");
             chartConfig.put("orientation", "horizontal");

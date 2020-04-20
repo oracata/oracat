@@ -351,7 +351,7 @@
             chartConfig5.put("yaxisname", "");
             chartConfig5.put("subcaption", "前5");
             chartConfig5.put("showhovereffect", "1");
-            chartConfig5.put("numbersuffix", "个");
+            chartConfig5.put("numbersuffix", "次");
             chartConfig5.put("drawcrossline", "1");
             chartConfig5.put("basefontsize", "14");
             chartConfig5.put("showvalues", "1");

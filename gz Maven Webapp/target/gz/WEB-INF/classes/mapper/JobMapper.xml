@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oracat.dao.JobDao">
+    <resultMap id="BaseResultMap" type="com.oracat.model.ScheduleJob">
+        <id column="id" property="id" />
+        <result column="job_name" property="job_name" />
+        <result column="job_group" property="job_group" />
+        <result column="method_name" property="method_name" />
+        <result column="bean_class" property="bean_class" />
+        <result column="status" property="status" />
+        <result column="cron_expression" property="cron_expression" />
+        <result column="params" property="params" />
+        <result column="remark" property="remark" />
+        <result column="create_time" property="create_time" />
+        <result column="modify_time" property="modify_time" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, job_name, job_group, method_name, bean_class, status, cron_expression, params,
+    remark, create_time, modify_time
+  </sql>
+
+
+
+
+
+    <select id="queryAllJob" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include>
+        from schedule_job
+        <where>
+            <if test="job_name!=null and job_name!=''">
+                and job_name like concat('%',#{job_name},'%')
+            </if>
+
+            <if test="job_group!=null and job_group!=''">
+                and job_group like concat('%',#{job_group},'%')
+            </if>
+
+
+        </where>
+
+    </select>
+
+
+    <!-- 查询所有的定时任务 -->
+    <select id="listAllJob" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from schedule_job
+    </select>
+
+
+    <!-- 更新定时任务状态 -->
+    <update id="updateJobStatusById" parameterType="com.oracat.model.ScheduleJob">
+        update schedule_job SET status = #{status} where id = #{id}
+    </update>
+
+    <!-- 根据主键查询定时任务 -->
+    <select id = "getScheduleJobByPrimaryKey" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" /> from schedule_job WHERE id = #{id}
+    </select>
+
+
+
+</mapper>

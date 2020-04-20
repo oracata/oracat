@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation=" http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                            http://www.springframework.org/schema/aop
+                            http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+                            http://www.springframework.org/schema/context
+                            http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                            http://www.springframework.org/schema/tx
+                            http://www.springframework.org/schema/tx/spring-tx.xsd
+                          "
+
+       xmlns:tx="http://www.springframework.org/schema/tx"
+
+>
+
+
+     <!-- 引入jdbc配置文件 -->  
+     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+               <value>classpath:properties/*.properties</value>
+                <!--要是有多个配置文件，只需在这里继续添加即可 -->
+            </list>
+        </property>
+    </bean>
+
+
+
+    <!--创建数据源1，连接数据库db1 -->
+
+    <bean id="dataSource1" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource" destroy-method="close">
+
+    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://10.0.0.23:3306/crawl?serverTimezone=GMT%2B8"  />
+        <property name="username" value="root" />
+        <property name="password" value="1qaz@WSX" />
+    </bean>
+
+
+
+
+
+    <!--创建数据源2，连接数据库db2 -->
+
+    <bean id="dataSource2" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+        <property name="url" value="jdbc:sqlserver://10.0.0.5:36368;DatabaseName=cr_v11_erp" />
+        <property name="username" value="sa" />
+        <property name="password" value="1a2s3d8180192@" />
+    </bean>
+
+
+
+
+    <!--创建数据源链锁系统，连接数据库db2 -->
+    <bean id="dataSourcels" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+        <property name="url" value="jdbc:sqlserver://47.112.123.95,9204;DatabaseName=cr_ypls11_ynjndls" />
+        <property name="username" value="cr_ww" />
+        <property name="password" value="crtech_ww" />
+    </bean>
+
+
+    <bean id="dynamicDataSource" class="com.oracat.util.DynamicDataSource">
+        <property name="targetDataSources">
+            <map key-type="java.lang.String">
+                <!-- 指定lookupKey和与之对应的数据源 -->
+                <entry key="mysql" value-ref="dataSource1"></entry>
+                <entry key="sqlserver" value-ref="dataSource2"></entry>
+                <entry key="sqlserverls" value-ref="dataSourcels"></entry>
+
+            </map>
+        </property>
+        <!-- 这里可以指定默认的数据源 -->
+        <property name="defaultTargetDataSource" ref="dataSource1" />
+        </bean>
+
+
+
+    <!-- 配置数据源 -->
+    <!--
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">     -->
+        <!-- 不使用properties来配置 -->
+    <!--     <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" /> -->
+       <!--  <property name="url" value="jdbc:mysql://10.0.0.23:3306/crawl?serverTimezone=GMT%2B8" />  -->
+       <!--   <property name="username" value="root" /> -->
+      <!--    <property name="password" value="1qaz@WSX" /> -->
+
+    <!--   </bean> -->
+
+
+    <!-- 自动扫描了所有的XxxxMapper.xml对应的mapper接口文件，这样就不用一个一个手动配置Mpper的映射了，只要Mapper接口类和Mapper映射文件对应起来就可以了。 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.oracat.dao" />
+    </bean>
+
+    <!-- 配置Mybatis的文件 ，mapperLocations配置**Mapper.xml文件位置，configLocation配置mybatis-config文件位置-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+
+     <!--   <property name="dataSource" ref="dataSource" />  -->
+
+        <property name="dataSource" ref="dynamicDataSource" />
+      <!--  <property name="mapperLocations" value="classpath:sql-mapper.xml"/>    -->
+        <property name="configLocation" value="classpath:mybatis-config.xml" />
+        <!-- <property name="typeAliasesPackage" value="com.tiantian.ckeditor.model" /> -->
+
+        <!-- 插件 -->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+
+                        <props>
+                           <!--
+                            <prop key="helperDialect">mysql</prop>
+
+                            <prop key="reasonable">true</prop>
+                            -->
+                        </props>
+
+
+                    </property>
+                </bean>
+            </array>
+        </property>
+
+
+    </bean>
+
+    <!-- 事务相关控制 -->
+
+   <bean id="transactionManager"
+         class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+       <property name="dataSource" ref="dynamicDataSource" />
+   </bean>
+
+
+
+
+
+    <!-- 通知 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- 传播行为 -->
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="insert*" propagation="REQUIRED" />
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="create*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true" />
+            <tx:method name="query*" propagation="SUPPORTS" read-only="true" />
+            <tx:method name="select*" propagation="SUPPORTS" read-only="true" />
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true" />
+        </tx:attributes>
+    </tx:advice>
+    <!-- 切面 -->
+    <aop:config>
+        <aop:advisor advice-ref="txAdvice"
+                     pointcut="execution(* com.oracat.service.*.*(..))" />
+    </aop:config>
+
+
+
+    <!-- 自动扫描注解的bean  范围要保证自动装载的注解可以扫描到，不然启动会不执行自动装载的类-->
+    <context:component-scan base-package="com.oracat.*" >
+    <!-- 排除注解为controller的类型 -->
+    <context:exclude-filter type="annotation"  expression="org.springframework.stereotype.Controller" />
+</context:component-scan>
+
+   <!-- JDBC事务管理器 -->
+     <!-- 	<bean id="transactionManager" -->
+     <!-- 	class="org.springframework.jdbc.datasource.DataSourceTransactionManager"-->
+     <!-- 	<property name="dataSource" ref="dataSource"></property>	-->
+      <!--    </bean> -->
+
+	<!-- 启用支持annotation注解方式事务管理 -->
+     <!-- 	<tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+
+
+    <bean id="scheduleReportFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+
+
+           <!--
+              <property name="dataSource">
+                  <ref bean="dataSource1"/>
+              </property>
+
+              <property name="startupDelay" value="100"/>
+              <property name="applicationContextSchedulerContextKey" value="applicationContextKey"/>
+          -->
+              <property name="configLocation" value="classpath:quartz.properties"/>
+
+          </bean>
+
+
+      </beans>
